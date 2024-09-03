@@ -1,39 +1,50 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <title>{% block title %}{% endblock title %}</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
-        <style>
-        .center {
-            margin: 0 auto;
-        }
-        nav {
-            position: absolute;
-        }
-        main {
-            padding-top: 3em;
-        }
-        </style>
-    </head>
-    <body>
-        <nav class="demo">
-        <a href="/" class="brand">
-            <span>My Site</span>
-        </a>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}{% endblock title %}</title>
+    <meta
+      name="description"
+      content="Generative Networks"
+    />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="/custom.css" />
+  </head>
 
-        <!-- responsive-->
-        <input id="bmenub" type="checkbox" class="show">
-        <label for="bmenub" class="burger pseudo button">&#9776;</label>
+  <body>
+   <!-- Hero -->
+   <div class="hero" data-theme="dark">
+    <nav class="container-fluid">
+      <ul>
+        <li>
+          <a href="/" class="contrast"><strong>GN</strong></a>
+        </li>
+      </ul>
+      <ul>
+        <li><a href="/blog/" class="contrast">Blog</a></li>
+        <li>
+          <details role="list" dir="rtl">
+            <summary aria-haspopup="listbox" role="link" class="contrast">Theme</summary>
+            <ul role="listbox">
+              <li><a href="#" data-theme-switcher="light">Light</a></li>
+              <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </nav>
 
-        <div class="menu">
-            <a href="/blog" class="pseudo button icon-picture">Blog</a>
-        </div>
-        </nav>
+    {% block content %}{% endblock content %}
 
-        <main class="flex five">
-        {% block content %}{% endblock content %}
-        </main>
-    </body>
+    <!-- Footer -->
+    <footer class="container">
+      <small>Generative Networks, Calle de Goya, 36, Salamanca, 28001 Madrid</small>
+    </footer>
+    <!-- ./ Footer -->
+
+    <!-- Minimal theme switcher -->
+    <script src="/minimal-theme-switcher.js"></script>
+  </body>
 </html>

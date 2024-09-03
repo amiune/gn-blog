@@ -3,7 +3,23 @@
 {% block title %}{{ page.title }}{% endblock title %}
 
 {% block content %}
-<article class="four-fifth center">
-    {{ page.content | safe }}
-</article>
+<header class="container">
+    <hgroup>
+      <h1>Generative Networks Blog</h1>
+      <p>{{ page.title }}</p>
+    </hgroup>
+  </header>
+</div>
+<!-- ./ Hero -->
+
+<!-- Main -->
+<main class="container">
+    <section>
+        <article class="four-fifth center">
+            {{ page.content | safe }}
+        </article>
+    </section>
+</main>
+<!-- ./ Main -->
+
 {% endblock content %}
