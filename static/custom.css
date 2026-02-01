@@ -2,7 +2,7 @@
 :root {
   --spacing-company: 3rem;
   --font-weight: 400;
-  --border-radius: 0;
+  --border-radius: 0.5rem;
 }
 
 /* Typography */
@@ -16,7 +16,7 @@ small {
   color: var(--muted-color);
 }
 
-/* Header */
+/* Header / Hero */
 .hero {
   background-color: #394046;
   background-image: url("/background.jpg");
@@ -26,20 +26,119 @@ small {
 
 header {
   padding: var(--spacing-company) 0;
+  text-align: center;
 }
 
-header hgroup> :last-child {
-  color: var(--h3-color);
+header h1 {
+  margin-bottom: 0;
+  font-size: 3rem;
+}
+
+header .subtitle {
+  font-size: 1.5rem;
+  font-weight: 200;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+header .slogan {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: var(--muted-color);
+  margin-bottom: 2rem;
 }
 
 header hgroup {
-  margin-bottom: var(--spacing-company);
+  margin-bottom: 1rem;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-ctas a {
+  min-width: 140px;
+}
+
+@media (max-width: 576px) {
+  header h1 {
+    font-size: 2.25rem;
+  }
+  
+  header .subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .hero-ctas {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-ctas a {
+    width: 100%;
+    max-width: 280px;
+  }
 }
 
 /* Nav */
 summary[role="link"].contrast:is([aria-current], :hover, :active, :focus) {
   background-color: transparent;
   color: var(--contrast-hover);
+}
+
+/* Service Sections */
+.service-section {
+  padding: var(--spacing-company) 0;
+}
+
+.service-section article {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.service-section hgroup {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.service-section hgroup h2 {
+  margin-bottom: 0.5rem;
+}
+
+.service-section p {
+  line-height: 1.7;
+}
+
+.service-section a[role="button"] {
+  display: block;
+  width: fit-content;
+  margin: 2rem auto 0;
+}
+
+/* Contact Form */
+#contact article {
+  padding: 2rem;
+}
+
+#contact form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* About Section */
+#about {
+  padding: 2rem 0 var(--spacing-company);
+  text-align: center;
+}
+
+.about-text {
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--muted-color);
+  line-height: 1.7;
 }
 
 /* Main */
@@ -62,4 +161,11 @@ aside img {
 aside p {
   margin-bottom: var(--spacing-company);
   line-height: 1.25;
+}
+
+/* Footer */
+footer {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  text-align: center;
 }
