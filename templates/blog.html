@@ -2,33 +2,41 @@
 {% block title %}Generative Networks Blog{% endblock title %}
 
 {% block content %}
+<!-- Blog Hero -->
+<section class="blog-hero">
+  <div class="blog-hero-bg"></div>
+  <div class="section-container">
+    <div class="blog-header">
+      <span class="section-label">Knowledge Base</span>
+      <h1 class="section-title">Learn AI</h1>
+      <p class="section-description">
+        Practical articles and guides to help you understand artificial intelligence
+      </p>
+    </div>
+  </div>
+</section>
 
-
-<header class="container">
-  <hgroup>
-    <h1>Generative Networks Blog</h1>
-    <p>Deployments and Research</p>
-  </hgroup>
-</header>
-</div>
-<!-- ./ Hero -->
-
-<!-- Main -->
-<main class="container">
-  <section class="four-fifth center">
+<!-- Blog Posts -->
+<main class="blog-main">
+  <div class="section-container">
+    <div class="blog-grid">
       {% for page in section.pages %}
-        <article class="card">
-            <div align="right">Published on: {{ page.date | date(format="%d/%m/%Y") }}&nbsp;</div>
-            <section class="center">{{ page.summary | safe }}</section>
-          <footer>
-          <a href="{{ page.permalink | safe }}#continue-reading" class= "button">Read More</a>
-          </footer>
-        </article>
-    
+      <article class="blog-card">
+        <div class="blog-card-content">
+          <div class="blog-card-meta">
+            <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+          </div>
+          <div class="blog-card-body">
+            {{ page.summary | safe }}
+          </div>
+          <a href="{{ page.permalink | safe }}#continue-reading" class="card-link">
+            <span>Read article</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </article>
       {% endfor %}
-  </section>
+    </div>
+  </div>
 </main>
-<!-- ./ Main -->
-
-
 {% endblock content %}

@@ -3,99 +3,224 @@
 {% block title %}Generative Networks - of people{% endblock title %}
 
 {% block content %}
-<header class="container">
-    <hgroup>
-      <h1>Generative Networks</h1>
-      <p class="subtitle">of people</p>
-    </hgroup>
-    <p class="slogan">Putting AI at the service of people</p>
-    <div class="hero-ctas">
-      <a href="#apps" role="button">iOS Apps</a>
-      <a href="#courses" role="button" class="secondary">Courses</a>
-      <a href="#contact" role="button" class="contrast">Consulting</a>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">AI for Everyone</div>
+    <h1 class="hero-title">
+      <span class="title-main">Generative Networks</span>
+      <span class="title-accent">of people</span>
+    </h1>
+    <p class="hero-tagline">Putting AI at the service of people</p>
+    <p class="hero-description">
+      We build intelligent solutions that empower individuals, not corporations. 
+      Custom apps, practical education, and expert guidance.
+    </p>
+    <div class="hero-actions">
+      <a href="#apps" class="btn btn-primary">
+        <span>Explore Solutions</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+      <a href="#contact" class="btn btn-secondary">Get in Touch</a>
     </div>
-  </header>
-</div>
-<!-- ./ Hero -->
-
-<!-- iOS Apps Section -->
-<section id="apps" class="container service-section">
-  <article>
-    <hgroup>
-      <h2>Custom iOS Apps</h2>
-      <p>Own your software, stop renting it</p>
-    </hgroup>
-    <p>
-      Tired of paying monthly subscriptions for apps you use every day? We build custom iOS applications tailored to your specific needs. One-time development, lifetime ownership. No recurring fees, no feature locks, no data harvesting.
-    </p>
-    <p>
-      Our apps are designed with simplicity and privacy in mind, using AI to deliver powerful functionality without the bloat of commercial alternatives.
-    </p>
-    <a href="#contact" role="button" class="outline">Get Your Custom App</a>
-  </article>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll to explore</span>
+    <div class="scroll-indicator"></div>
+  </div>
 </section>
-<!-- ./ iOS Apps Section -->
 
-<!-- Courses Section -->
-<section id="courses" class="container service-section">
-  <article>
-    <hgroup>
-      <h2>Learn AI</h2>
-      <p>Understand how it really works</p>
-    </hgroup>
-    <p>
-      Artificial Intelligence doesn't have to be a black box. We break down complex concepts into understandable pieces, helping you grasp the fundamentals of machine learning, neural networks, and generative AI.
-    </p>
-    <p>
-      Whether you're a business leader making AI decisions or a curious mind wanting to understand the technology shaping our world, our resources will guide you.
-    </p>
-    <a href="/blog/" role="button" class="outline">Explore Our Articles</a>
-  </article>
-</section>
-<!-- ./ Courses Section -->
+<!-- Services Section -->
+<section id="apps" class="services">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-label">What We Offer</span>
+      <h2 class="section-title">Solutions Built for You</h2>
+      <p class="section-description">
+        Three ways we put AI at your service
+      </p>
+    </div>
+    
+    <div class="services-grid">
+      <!-- iOS Apps Card -->
+      <div class="service-card">
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+        </div>
+        <h3 class="card-title">Custom iOS Apps</h3>
+        <p class="card-subtitle">Own your software, stop renting it</p>
+        <p class="card-description">
+          Tired of subscriptions? We build custom iOS applications tailored to your needs. 
+          One-time development, lifetime ownership. No recurring fees, no data harvesting.
+        </p>
+        <ul class="card-features">
+          <li>Privacy-first design</li>
+          <li>AI-powered features</li>
+          <li>No subscriptions ever</li>
+        </ul>
+        <a href="#contact" class="card-link">
+          <span>Request a quote</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
 
-<!-- Contact Section -->
-<section id="contact" class="container service-section" aria-label="Contact Us">
-  <article>
-    <hgroup>
-      <h2>Let's Talk</h2>
-      <p>Tell us about your project</p>
-    </hgroup>
-    <form action="https://formspree.io/f/xwkglvnl" method="POST">
-      <input
-        type="text"
-        id="firstname"
-        name="firstname"
-        placeholder="Name"
-        aria-label="Name"
-        required
-      />
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="Email"
-        aria-label="Email"
-        required
-      />
-      <textarea
-        id="message"
-        name="message"
-        placeholder="Tell us about your project or question..."
-        aria-label="Message"
-        required
-      ></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </article>
+      <!-- Learning Card -->
+      <div class="service-card featured">
+        <div class="card-badge">Popular</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        </div>
+        <h3 class="card-title">Learn AI</h3>
+        <p class="card-subtitle">Understand how it really works</p>
+        <p class="card-description">
+          AI doesn't have to be a black box. We break down complex concepts into 
+          understandable pieces through practical articles and guides.
+        </p>
+        <ul class="card-features">
+          <li>Beginner-friendly content</li>
+          <li>Real-world examples</li>
+          <li>Free resources</li>
+        </ul>
+        <a href="/blog/" class="card-link">
+          <span>Start learning</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- Consulting Card -->
+      <div class="service-card">
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <h3 class="card-title">Consulting</h3>
+        <p class="card-subtitle">Expert guidance for your projects</p>
+        <p class="card-description">
+          Need help navigating the AI landscape? Our team brings decades of experience 
+          in machine learning, data science, and software development.
+        </p>
+        <ul class="card-features">
+          <li>Strategy development</li>
+          <li>Technical guidance</li>
+          <li>Implementation support</li>
+        </ul>
+        <a href="#contact" class="card-link">
+          <span>Book a call</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- ./ Contact Section -->
 
 <!-- About Section -->
-<section id="about" class="container">
-  <p class="about-text">
-    <strong>Generative Networks</strong> is a team of AI specialists with over twenty years of combined experience in software development, machine learning, and data science. We believe technology should empower people, not exploit them.
-  </p>
+<section id="learn" class="about">
+  <div class="section-container">
+    <div class="about-content">
+      <div class="about-text">
+        <span class="section-label">Our Philosophy</span>
+        <h2 class="section-title">Technology Should Empower, Not Exploit</h2>
+        <p>
+          We're a team of AI specialists with over twenty years of combined experience. 
+          We've seen how technology can be used to extract value from people. We chose 
+          a different path.
+        </p>
+        <p>
+          Every solution we build starts with a simple question: <em>How does this 
+          make someone's life better?</em> If we can't answer that clearly, we don't build it.
+        </p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number">20+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Privacy Focused</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Subscriptions</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="visual-grid">
+          <div class="visual-item v1"></div>
+          <div class="visual-item v2"></div>
+          <div class="visual-item v3"></div>
+          <div class="visual-item v4"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- ./ About Section -->
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+  <div class="section-container">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <span class="section-label">Get Started</span>
+        <h2 class="section-title">Let's Build Something Together</h2>
+        <p>
+          Have a project in mind? Want to learn more about AI? Just curious? 
+          We'd love to hear from you.
+        </p>
+        <div class="contact-features">
+          <div class="contact-feature">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Free initial consultation</span>
+          </div>
+          <div class="contact-feature">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Response within 24 hours</span>
+          </div>
+          <div class="contact-feature">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>No strings attached</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-wrapper">
+        <form action="https://formspree.io/f/xwkglvnl" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="firstname">Name</label>
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              placeholder="Your name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Tell us about your project or question..."
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <span>Send Message</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock content %}
