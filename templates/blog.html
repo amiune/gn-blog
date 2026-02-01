@@ -1,39 +1,36 @@
 {% extends "base.html" %}
-{% block title %}Generative Networks Blog{% endblock title %}
+{% block title %}Blog — Generative Networks{% endblock title %}
 
 {% block content %}
-<!-- Blog Hero -->
-<section class="blog-hero">
-  <div class="blog-hero-bg"></div>
-  <div class="section-container">
-    <div class="blog-header">
-      <span class="section-label">Knowledge Base</span>
-      <h1 class="section-title">Learn AI</h1>
-      <p class="section-description">
-        Practical articles and guides to help you understand artificial intelligence
-      </p>
-    </div>
+<!-- Blog Header -->
+<header class="blog-header">
+  <div class="container">
+    <span class="section-label">Knowledge Base</span>
+    <h1>Learn AI</h1>
+    <p class="lead">Practical articles and guides to help you understand artificial intelligence—beyond the hype.</p>
   </div>
-</section>
+</header>
 
 <!-- Blog Posts -->
-<main class="blog-main">
-  <div class="section-container">
-    <div class="blog-grid">
+<main class="blog-list">
+  <div class="container">
+    <div class="blog-posts">
       {% for page in section.pages %}
-      <article class="blog-card">
-        <div class="blog-card-content">
-          <div class="blog-card-meta">
-            <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
-          </div>
-          <div class="blog-card-body">
-            {{ page.summary | safe }}
-          </div>
-          <a href="{{ page.permalink | safe }}#continue-reading" class="card-link">
-            <span>Read article</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
+      <article class="blog-post-card">
+        <div class="post-meta">
+          <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
         </div>
+        <h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
+        <div class="post-excerpt">
+          {{ page.summary | safe }}
+        </div>
+        <a href="{{ page.permalink | safe }}" class="read-more">
+          Read article
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
       </article>
       {% endfor %}
     </div>

@@ -1,31 +1,33 @@
 {% extends "base.html" %}
 
-{% block title %}{{ page.title }}{% endblock title %}
+{% block title %}{{ page.title }} — Generative Networks{% endblock title %}
 
 {% block content %}
-<!-- Article Hero -->
-<section class="blog-hero">
-  <div class="blog-hero-bg"></div>
-  <div class="section-container">
-    <div class="blog-header">
-      <a href="/blog/" class="back-link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <span>Back to articles</span>
-      </a>
-      <h1 class="article-title">{{ page.title }}</h1>
-      {% if page.date %}
-      <time class="article-date" datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
-      {% endif %}
+<!-- Article Header -->
+<header class="article-header">
+  <div class="container">
+    <a href="/blog/" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to articles
+    </a>
+    <h1>{{ page.title }}</h1>
+    {% if page.date %}
+    <div class="article-meta">
+      <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
     </div>
+    {% endif %}
   </div>
-</section>
+</header>
 
 <!-- Article Content -->
-<main class="article-main">
-  <div class="section-container">
-    <article class="article-content">
+<main class="article-content">
+  <div class="container">
+    <div class="article-body">
       {{ page.content | safe }}
-    </article>
+    </div>
   </div>
 </main>
 {% endblock content %}
