@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Diary - Small Business Daily Journal</title>
+  <meta name="description" content="Track your small business journey with daily entries, mood tracking, and financial insights. 100% private, all data stored locally on your device.">
+  <style>
+    :root {
+      --primary: #CC735A;
+      --primary-dark: #B85E45;
+      --accent: #407366;
+      --bg: #FFFDF8;
+      --text: #2C2C2C;
+      --text-secondary: #666;
+      --text-tertiary: #999;
+      --card: #fff;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1A1A1E;
+        --text: #F5F5F5;
+        --text-secondary: #999;
+        --text-tertiary: #777;
+        --card: #242428;
+      }
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 80px 20px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      background: var(--card);
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      margin: 0 auto 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    .hero h1 {
+      color: white;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .hero .tagline {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.3rem;
+      margin-bottom: 32px;
+    }
+    
+    .hero .subtitle {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+    
+    .app-store-btn {
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .app-store-btn:hover {
+      transform: translateY(-3px);
+    }
+    
+    .app-store-btn img {
+      height: 54px;
+    }
+    
+    /* Features Section */
+    .features {
+      padding: 80px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.2rem;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    
+    .section-title p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .feature-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    
+    .feature-card h3 {
+      font-size: 1.25rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    /* Screenshots Section */
+    .screenshots {
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(204, 115, 90, 0.05) 100%);
+      padding: 80px 20px;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .screenshots {
+        background: linear-gradient(180deg, var(--bg) 0%, rgba(204, 115, 90, 0.1) 100%);
+      }
+    }
+    
+    .screenshots-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .screenshots-scroll {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding: 20px 0 40px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .screenshots-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .screenshots-scroll::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.05);
+      border-radius: 4px;
+    }
+    
+    .screenshots-scroll::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+    
+    .screenshot-item {
+      flex-shrink: 0;
+      scroll-snap-align: center;
+      text-align: center;
+    }
+    
+    .screenshot-frame {
+      width: 260px;
+      height: 520px;
+      background: var(--card);
+      border-radius: 36px;
+      padding: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    
+    .screenshot-inner {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+    
+    .screenshot-inner .icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    
+    .screenshot-inner h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    
+    .screenshot-inner p {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+    
+    .screenshot-label {
+      margin-top: 16px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    /* Privacy Section */
+    .privacy {
+      padding: 80px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .privacy-card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 48px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    
+    @media (max-width: 768px) {
+      .privacy-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+      }
+    }
+    
+    .privacy-icon {
+      font-size: 5rem;
+      flex-shrink: 0;
+    }
+    
+    .privacy-content h2 {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    
+    .privacy-content p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+    }
+    
+    .privacy-badges {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    @media (max-width: 768px) {
+      .privacy-badges {
+        justify-content: center;
+      }
+    }
+    
+    .privacy-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(64, 115, 102, 0.1);
+      color: var(--accent);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at bottom, rgba(255,255,255,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .cta h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    
+    .cta p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.15rem;
+      margin-bottom: 32px;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--card);
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(128,128,128,0.1);
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+    
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 0.85rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero .tagline {
+        font-size: 1.1rem;
+      }
+      
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+      
+      .cta h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="app-icon">📔</div>
+      <h1>SB Diary</h1>
+      <p class="tagline">Small Business Daily Journal</p>
+      <p class="subtitle">Track your business journey with daily entries, mood tracking, and financial insights. Your story, your data, your device.</p>
+      <a href="https://apps.apple.com/app/sb-diary" class="app-store-btn">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+      </a>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="features">
+    <div class="section-title">
+      <h2>Everything You Need</h2>
+      <p>Simple tools to capture your entrepreneurial journey</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Daily Entries</h3>
+        <p>Capture wins, challenges, and learnings every day. Build a searchable archive of your business journey.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">😊</div>
+        <h3>Mood Tracking</h3>
+        <p>Log how your business day felt. Spot patterns and understand what drives your best days.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🏷️</div>
+        <h3>Categories & Tags</h3>
+        <p>Organize entries by Sales, Marketing, Product, Finance, and more. Find what you need instantly.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Financial Tracking</h3>
+        <p>Record daily revenue and expenses alongside your notes. See the full picture of each day.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Insights & Stats</h3>
+        <p>Visualize mood trends, financial summaries, and activity patterns over time.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🔥</div>
+        <h3>Streaks & Habits</h3>
+        <p>Build consistency with daily streaks. Stay motivated to document your progress.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Screenshots Section -->
+  <section class="screenshots">
+    <div class="screenshots-container">
+      <div class="section-title">
+        <h2>Beautiful & Intuitive</h2>
+        <p>A joy to use every day</p>
+      </div>
+      
+      <div class="screenshots-scroll">
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <div class="screenshot-inner">
+              <div class="icon">🏠</div>
+              <h4>Home Feed</h4>
+              <p>See today's stats and recent entries at a glance</p>
+            </div>
+          </div>
+          <p class="screenshot-label">Dashboard</p>
+        </div>
+        
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <div class="screenshot-inner">
+              <div class="icon">✏️</div>
+              <h4>Quick Entry</h4>
+              <p>Log your day in seconds with mood and categories</p>
+            </div>
+          </div>
+          <p class="screenshot-label">New Entry</p>
+        </div>
+        
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <div class="screenshot-inner">
+              <div class="icon">📅</div>
+              <h4>Calendar View</h4>
+              <p>Browse entries by date and see mood history</p>
+            </div>
+          </div>
+          <p class="screenshot-label">Calendar</p>
+        </div>
+        
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <div class="screenshot-inner">
+              <div class="icon">📈</div>
+              <h4>Analytics</h4>
+              <p>Track trends in mood and finances over time</p>
+            </div>
+          </div>
+          <p class="screenshot-label">Insights</p>
+        </div>
+        
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <div class="screenshot-inner">
+              <div class="icon">🔍</div>
+              <h4>Search</h4>
+              <p>Find any entry by keyword, tag, or date</p>
+            </div>
+          </div>
+          <p class="screenshot-label">Search</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Privacy Section -->
+  <section class="privacy">
+    <div class="privacy-card">
+      <div class="privacy-icon">🔒</div>
+      <div class="privacy-content">
+        <h2>Your Data Stays Yours</h2>
+        <p>SB Diary stores everything locally on your device. No cloud, no accounts, no tracking. Your business journal is 100% private.</p>
+        <div class="privacy-badges">
+          <span class="privacy-badge">📱 Local Storage</span>
+          <span class="privacy-badge">🚫 No Analytics</span>
+          <span class="privacy-badge">🔐 Device Encrypted</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-content">
+      <h2>Start Your Journal Today</h2>
+      <p>Join thousands of entrepreneurs documenting their journey, one day at a time.</p>
+      <a href="https://apps.apple.com/app/sb-diary" class="app-store-btn">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+      </a>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="mailto:hernan.amiune@icloud.com">Contact Support</a>
+    </div>
+    <p>&copy; 2026 SB Diary. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Orders — App Icon</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      background: #FAFBFF;
+      color: #1E293B;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+    p { color: #475569; margin-bottom: 2rem; font-size: 0.95rem; }
+    .icon-wrap { margin-bottom: 2rem; filter: drop-shadow(0 8px 24px rgba(37,99,235,0.25)); }
+    .icon-wrap svg { display: block; width: 256px; height: 256px; }
+    .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+    button {
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    .btn-primary { background: #2563EB; color: #fff; }
+    .btn-secondary { background: #E2E8F0; color: #1E293B; }
+  </style>
+</head>
+<body>
+  <h1>SB Orders</h1>
+  <p>App Icon</p>
+
+  <div class="icon-wrap">
+    <svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#3B82F6"/>
+          <stop offset="100%" stop-color="#1D4ED8"/>
+        </linearGradient>
+        <clipPath id="iosClip">
+          <rect width="1024" height="1024" rx="224" ry="224"/>
+        </clipPath>
+      </defs>
+
+      <g clip-path="url(#iosClip)">
+        <!-- Background -->
+        <rect width="1024" height="1024" fill="url(#bg)"/>
+
+        <!-- Clipboard board -->
+        <rect x="260" y="230" width="504" height="604" rx="40" fill="#fff"/>
+
+        <!-- Clipboard clip -->
+        <rect x="400" y="190" width="224" height="80" rx="40" fill="#6366F1"/>
+        <rect x="440" y="210" width="144" height="40" rx="20" fill="#3B82F6"/>
+
+        <!-- Row 1 — checked -->
+        <rect x="330" y="370" width="44" height="44" rx="10" fill="#6366F1"/>
+        <polyline points="340,394 350,406 372,380" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="410" y="378" width="280" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+
+        <!-- Row 2 — checked -->
+        <rect x="330" y="460" width="44" height="44" rx="10" fill="#6366F1"/>
+        <polyline points="340,484 350,496 372,470" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="410" y="468" width="240" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+
+        <!-- Row 3 — unchecked -->
+        <rect x="330" y="550" width="44" height="44" rx="10" fill="none" stroke="#6366F1" stroke-width="6"/>
+        <rect x="410" y="558" width="300" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+
+        <!-- Row 4 — unchecked -->
+        <rect x="330" y="640" width="44" height="44" rx="10" fill="none" stroke="#6366F1" stroke-width="6"/>
+        <rect x="410" y="648" width="220" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+
+        <!-- Row 5 — unchecked -->
+        <rect x="330" y="730" width="44" height="44" rx="10" fill="none" stroke="#6366F1" stroke-width="6"/>
+        <rect x="410" y="738" width="260" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" onclick="downloadSVG()">Download SVG</button>
+    <button class="btn-secondary" onclick="downloadPNG(1024)">Download PNG 1024px</button>
+  </div>
+
+  <script>
+    function downloadSVG() {
+      const svg = document.getElementById('app-icon').outerHTML;
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'sborders-icon.svg';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function downloadPNG(size) {
+      const svg = document.getElementById('app-icon');
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0, size, size);
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = 'sborders-icon-' + size + '.png';
+        a.click();
+      };
+      img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Diary — App Icon</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      background: #FFFDF8;
+      color: #2C2C2C;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+    p { color: #5A5A5A; margin-bottom: 2rem; font-size: 0.95rem; }
+    .icon-wrap { margin-bottom: 2rem; filter: drop-shadow(0 8px 24px rgba(204,115,90,0.25)); }
+    .icon-wrap svg { display: block; width: 256px; height: 256px; }
+    .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+    button {
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    .btn-primary { background: #CC735A; color: #fff; }
+    .btn-secondary { background: #E8E2DA; color: #2C2C2C; }
+  </style>
+</head>
+<body>
+  <h1>SB Diary</h1>
+  <p>App Icon</p>
+
+  <div class="icon-wrap">
+    <svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#D98B76"/>
+          <stop offset="100%" stop-color="#B85E45"/>
+        </linearGradient>
+        <clipPath id="iosClip">
+          <rect width="1024" height="1024" rx="224" ry="224"/>
+        </clipPath>
+      </defs>
+
+      <g clip-path="url(#iosClip)">
+        <!-- Background -->
+        <rect width="1024" height="1024" fill="url(#bg)"/>
+
+        <!-- Book body -->
+        <rect x="280" y="200" width="464" height="624" rx="24" fill="#fff"/>
+
+        <!-- Spine accent -->
+        <rect x="280" y="200" width="56" height="624" rx="24" fill="#407366"/>
+        <rect x="308" y="200" width="28" height="624" fill="#407366"/>
+
+        <!-- Page lines -->
+        <rect x="380" y="340" width="310" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+        <rect x="380" y="400" width="260" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+        <rect x="380" y="460" width="290" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+        <rect x="380" y="520" width="230" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+        <rect x="380" y="580" width="270" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+        <rect x="380" y="640" width="200" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+
+        <!-- Bookmark ribbon -->
+        <polygon points="620,200 670,200 670,370 645,330 620,370" fill="#407366" opacity="0.85"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" onclick="downloadSVG()">Download SVG</button>
+    <button class="btn-secondary" onclick="downloadPNG(1024)">Download PNG 1024px</button>
+  </div>
+
+  <script>
+    function downloadSVG() {
+      const svg = document.getElementById('app-icon').outerHTML;
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'sbdiary-icon.svg';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function downloadPNG(size) {
+      const svg = document.getElementById('app-icon');
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0, size, size);
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = 'sbdiary-icon-' + size + '.png';
+        a.click();
+      };
+      img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Diary - App Store Screenshots Generator</title>
+  <style>
+    :root {
+      --primary: #CC735A;
+      --primary-dark: #B85E45;
+      --accent: #407366;
+      --bg-app: #FAF8F5;
+      --card: #FFFFFF;
+      --text: #2C2C2C;
+      --text-secondary: #666666;
+      --text-tertiary: #999999;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f0f12 0%, #1a1a22 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #E8C87A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(204, 115, 90, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(204, 115, 90, 0.5);
+    }
+    
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+    
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+    
+    /* App Store Screenshot Frame: 1290 x 2796 for 6.7" */
+    .screenshot {
+      width: 430px;
+      height: 932px;
+      background: linear-gradient(180deg, #CC735A 0%, #B85E45 50%, #9A4D3A 100%);
+      border-radius: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .headline {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      z-index: 1;
+    }
+    
+    .subheadline {
+      color: rgba(255,255,255,0.85);
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 24px;
+      z-index: 1;
+    }
+    
+    /* iPhone Frame */
+    .phone-frame {
+      width: 340px;
+      height: 700px;
+      background: #1c1c1e;
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow: 
+        0 50px 100px rgba(0,0,0,0.5),
+        inset 0 0 0 2px rgba(255,255,255,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-app);
+      border-radius: 32px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Dynamic Island */
+    .dynamic-island {
+      width: 120px;
+      height: 34px;
+      background: #1c1c1e;
+      border-radius: 20px;
+      margin: 12px auto 8px;
+    }
+    
+    /* App Screen Content */
+    .app-content {
+      flex: 1;
+      padding: 8px 16px 16px;
+      overflow: hidden;
+    }
+    
+    /* Home Screen Styles */
+    .date-header {
+      margin-bottom: 12px;
+    }
+    
+    .date-header .day {
+      font-size: 0.65rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+    
+    .date-header .date {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    
+    .stat-cards {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    
+    .stat-card {
+      flex: 1;
+      background: var(--card);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .stat-card .icon {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+    
+    .stat-card .value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    
+    .stat-card .label {
+      font-size: 0.6rem;
+      color: var(--text-secondary);
+    }
+    
+    .section-label {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    
+    .entry-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    
+    .entry-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .entry-mood {
+      font-size: 1.3rem;
+    }
+    
+    .entry-preview {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .entry-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    
+    .entry-tag {
+      font-size: 0.6rem;
+      padding: 4px 8px;
+      background: rgba(204, 115, 90, 0.1);
+      color: var(--primary);
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    
+    .entry-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .entry-revenue {
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .entry-time {
+      font-size: 0.65rem;
+      color: var(--text-tertiary);
+    }
+    
+    /* Stats Screen */
+    .period-picker {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    
+    .period-btn {
+      font-size: 0.65rem;
+      padding: 6px 12px;
+      background: var(--card);
+      border-radius: 20px;
+      color: var(--text-secondary);
+    }
+    
+    .period-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .overview-cards {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    
+    .overview-card {
+      flex: 1;
+      background: var(--card);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .overview-card .ov-icon {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+    
+    .overview-card .ov-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    
+    .overview-card .ov-label {
+      font-size: 0.6rem;
+      color: var(--text-secondary);
+    }
+    
+    .stats-section {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .stats-section-title {
+      font-size: 0.6rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    
+    .mood-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    
+    .mood-bar .emoji {
+      font-size: 1rem;
+    }
+    
+    .mood-bar .bar-track {
+      flex: 1;
+      height: 6px;
+      background: #f0f0f0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .mood-bar .bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 3px;
+    }
+    
+    .mood-bar .count {
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      width: 20px;
+      text-align: right;
+    }
+    
+    .financial-row {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .financial-card {
+      flex: 1;
+      padding: 10px;
+    }
+    
+    .financial-card .fin-icon {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    
+    .financial-card .fin-value {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    
+    .financial-card .fin-label {
+      font-size: 0.6rem;
+      color: var(--text-secondary);
+    }
+    
+    /* New Entry Screen */
+    .form-section {
+      margin-bottom: 16px;
+    }
+    
+    .form-label {
+      font-size: 0.6rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    
+    .form-input {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 0.85rem;
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .form-input.placeholder {
+      color: var(--text-tertiary);
+    }
+    
+    .mood-selector {
+      display: flex;
+      gap: 6px;
+    }
+    
+    .mood-option {
+      flex: 1;
+      background: var(--card);
+      border-radius: 12px;
+      padding: 10px 4px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .mood-option.selected {
+      background: rgba(204, 115, 90, 0.15);
+      box-shadow: inset 0 0 0 2px var(--primary);
+    }
+    
+    .mood-option .mo-emoji {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 2px;
+    }
+    
+    .mood-option .mo-label {
+      font-size: 0.5rem;
+      color: var(--text-secondary);
+    }
+    
+    .mood-option.selected .mo-label {
+      color: var(--primary);
+    }
+    
+    .category-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    
+    .category-chip {
+      font-size: 0.6rem;
+      padding: 6px 10px;
+      background: var(--card);
+      border-radius: 20px;
+      color: var(--text-secondary);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    
+    .category-chip.selected {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    .textarea-input {
+      height: 100px;
+    }
+    
+    /* Tab Bar */
+    .tab-bar {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 20px;
+      background: var(--card);
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .tab-item {
+      text-align: center;
+    }
+    
+    .tab-item .tab-icon {
+      font-size: 1.3rem;
+      color: var(--text-tertiary);
+    }
+    
+    .tab-item.active .tab-icon {
+      color: var(--primary);
+    }
+    
+    .tab-item .tab-label {
+      font-size: 0.55rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+    
+    .tab-item.active .tab-label {
+      color: var(--primary);
+    }
+    
+    /* FAB */
+    .fab {
+      position: absolute;
+      bottom: 90px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(204, 115, 90, 0.5);
+    }
+    
+    .fab span {
+      font-size: 1.8rem;
+      color: white;
+      line-height: 1;
+    }
+    
+    /* Nav bar */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0 12px;
+    }
+    
+    .nav-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .nav-action {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    
+    .nav-action.primary {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    /* Canvas for export */
+    canvas {
+      display: none;
+    }
+    
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .instructions h3 {
+      color: #E8C87A;
+      margin-bottom: 12px;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+    
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📱 App Store Screenshots</h1>
+    <p>Generate beautiful screenshots for SB Diary</p>
+  </div>
+  
+  <div class="controls">
+    <button onclick="downloadAll()">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Screenshot 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Screenshot 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
+  </div>
+  
+  <div class="screenshots">
+    
+    <!-- Screenshot 1: Home View -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline">Track Your<br>Business Journey</div>
+        <div class="subheadline">Daily entries to capture wins & learnings</div>
+        
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="dynamic-island"></div>
+            <div class="app-content" style="position: relative;">
+              <div class="date-header">
+                <div class="day">Wednesday</div>
+                <div class="date">January 22</div>
+              </div>
+              
+              <div class="stat-cards">
+                <div class="stat-card">
+                  <div class="icon">🔥</div>
+                  <div class="value">7</div>
+                  <div class="label">Day Streak</div>
+                </div>
+                <div class="stat-card">
+                  <div class="icon" style="color: var(--accent);">📝</div>
+                  <div class="value">12</div>
+                  <div class="label">This Month</div>
+                </div>
+                <div class="stat-card">
+                  <div class="icon" style="color: var(--primary);">💵</div>
+                  <div class="value">$4.2K</div>
+                  <div class="label">Revenue</div>
+                </div>
+              </div>
+              
+              <div class="section-label">Today</div>
+              
+              <div class="entry-card">
+                <div class="entry-header">
+                  <div class="entry-title">Landed new client! 🎉</div>
+                  <div class="entry-mood">😊</div>
+                </div>
+                <div class="entry-preview">Finally closed the deal with Acme Corp after 3 weeks of negotiations. They signed a 12-month contract!</div>
+                <div class="entry-tags">
+                  <span class="entry-tag">💼 Sales</span>
+                  <span class="entry-tag">🎯 Milestone</span>
+                </div>
+                <div class="entry-meta">
+                  <span class="entry-revenue">+$2,400</span>
+                  <span class="entry-time">2 hours ago</span>
+                </div>
+              </div>
+              
+              <div class="section-label">Yesterday</div>
+              
+              <div class="entry-card">
+                <div class="entry-header">
+                  <div class="entry-title">Product launch prep</div>
+                  <div class="entry-mood">😐</div>
+                </div>
+                <div class="entry-preview">Busy day preparing marketing materials for next week's launch. Website updates are done.</div>
+                <div class="entry-tags">
+                  <span class="entry-tag">📣 Marketing</span>
+                  <span class="entry-tag">📦 Product</span>
+                </div>
+              </div>
+              
+              <div class="fab"><span>+</span></div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab-item active">
+                <div class="tab-icon">🏠</div>
+                <div class="tab-label">Home</div>
+              </div>
+              <div class="tab-item">
+                <div class="tab-icon">📅</div>
+                <div class="tab-label">Calendar</div>
+              </div>
+              <div class="tab-item">
+                <div class="tab-icon">🔍</div>
+                <div class="tab-label">Search</div>
+              </div>
+              <div class="tab-item">
+                <div class="tab-icon">📊</div>
+                <div class="tab-label">Insights</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">1. Home Feed</div>
+    </div>
+    
+    <!-- Screenshot 2: New Entry -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline">Log Your Day<br>in Seconds</div>
+        <div class="subheadline">Mood, categories, notes & finances</div>
+        
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="dynamic-island"></div>
+            <div class="app-content" style="overflow-y: auto;">
+              <div class="nav-bar">
+                <div class="nav-action">Cancel</div>
+                <div class="nav-title">New Entry</div>
+                <div class="nav-action primary">Save</div>
+              </div>
+              
+              <div class="form-section">
+                <div class="form-label">Date</div>
+                <div class="form-input">Wednesday, January 22</div>
+              </div>
+              
+              <div class="form-section">
+                <div class="form-label">Title</div>
+                <div class="form-input">Great meeting with investors</div>
+              </div>
+              
+              <div class="form-section">
+                <div class="form-label">How was today?</div>
+                <div class="mood-selector">
+                  <div class="mood-option">
+                    <span class="mo-emoji">🤩</span>
+                    <span class="mo-label">Excellent</span>
+                  </div>
+                  <div class="mood-option selected">
+                    <span class="mo-emoji">😊</span>
+                    <span class="mo-label">Good</span>
+                  </div>
+                  <div class="mood-option">
+                    <span class="mo-emoji">😐</span>
+                    <span class="mo-label">Neutral</span>
+                  </div>
+                  <div class="mood-option">
+                    <span class="mo-emoji">😓</span>
+                    <span class="mo-label">Hard</span>
+                  </div>
+                  <div class="mood-option">
+                    <span class="mo-emoji">😫</span>
+                    <span class="mo-label">Tough</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-section">
+                <div class="form-label">Categories</div>
+                <div class="category-chips">
+                  <span class="category-chip selected">💼 Sales</span>
+                  <span class="category-chip">📣 Marketing</span>
+                  <span class="category-chip selected">🤝 Meetings</span>
+                  <span class="category-chip">💰 Finance</span>
+                  <span class="category-chip">👥 Team</span>
+                  <span class="category-chip">📦 Product</span>
+                </div>
+              </div>
+              
+              <div class="form-section">
+                <div class="form-label">Notes</div>
+                <div class="form-input textarea-input">Pitched our Q2 roadmap to potential investors. They loved the product demo and want to follow up next week...</div>
+              </div>
+              
+              <div class="form-section">
+                <div class="form-label">Financials (Optional)</div>
+                <div style="display: flex; gap: 12px;">
+                  <div style="flex: 1;">
+                    <div class="form-input">$ 1,500</div>
+                    <div style="font-size: 0.6rem; color: var(--text-tertiary); margin-top: 4px;">Revenue</div>
+                  </div>
+                  <div style="flex: 1;">
+                    <div class="form-input">$ 200</div>
+                    <div style="font-size: 0.6rem; color: var(--text-tertiary); margin-top: 4px;">Expenses</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">2. New Entry</div>
+    </div>
+    
+    <!-- Screenshot 3: Stats/Insights -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline">Powerful<br>Business Insights</div>
+        <div class="subheadline">Visualize trends, moods & financials</div>
+        
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="dynamic-island"></div>
+            <div class="app-content" style="overflow-y: auto;">
+              <div class="nav-bar" style="justify-content: center;">
+                <div class="nav-title">Insights</div>
+              </div>
+              
+              <div class="period-picker">
+                <div class="period-btn">Week</div>
+                <div class="period-btn active">Month</div>
+                <div class="period-btn">Year</div>
+                <div class="period-btn">All</div>
+              </div>
+              
+              <div class="form-label">Overview</div>
+              <div class="overview-cards">
+                <div class="overview-card">
+                  <div class="ov-icon" style="color: var(--primary);">📝</div>
+                  <div class="ov-value">28</div>
+                  <div class="ov-label">Entries</div>
+                </div>
+                <div class="overview-card">
+                  <div class="ov-icon" style="color: var(--accent);">📅</div>
+                  <div class="ov-value">22</div>
+                  <div class="ov-label">Active Days</div>
+                </div>
+                <div class="overview-card">
+                  <div class="ov-value" style="font-size: 1.8rem;">😊</div>
+                  <div class="ov-label">Avg Mood</div>
+                </div>
+              </div>
+              
+              <div class="stats-section">
+                <div class="stats-section-title">Mood Distribution</div>
+                <div class="mood-bar">
+                  <span class="emoji">🤩</span>
+                  <div class="bar-track"><div class="bar-fill" style="width: 25%;"></div></div>
+                  <span class="count">7</span>
+                </div>
+                <div class="mood-bar">
+                  <span class="emoji">😊</span>
+                  <div class="bar-track"><div class="bar-fill" style="width: 45%;"></div></div>
+                  <span class="count">12</span>
+                </div>
+                <div class="mood-bar">
+                  <span class="emoji">😐</span>
+                  <div class="bar-track"><div class="bar-fill" style="width: 20%;"></div></div>
+                  <span class="count">6</span>
+                </div>
+                <div class="mood-bar">
+                  <span class="emoji">😓</span>
+                  <div class="bar-track"><div class="bar-fill" style="width: 8%;"></div></div>
+                  <span class="count">2</span>
+                </div>
+                <div class="mood-bar">
+                  <span class="emoji">😫</span>
+                  <div class="bar-track"><div class="bar-fill" style="width: 4%;"></div></div>
+                  <span class="count">1</span>
+                </div>
+              </div>
+              
+              <div class="stats-section">
+                <div class="stats-section-title">Financials</div>
+                <div class="financial-row">
+                  <div class="financial-card">
+                    <div class="fin-icon" style="color: var(--accent);">↑</div>
+                    <div class="fin-value">$12,450</div>
+                    <div class="fin-label">Revenue</div>
+                  </div>
+                  <div class="financial-card">
+                    <div class="fin-icon" style="color: orange;">↓</div>
+                    <div class="fin-value">$3,200</div>
+                    <div class="fin-label">Expenses</div>
+                  </div>
+                </div>
+                <div style="padding: 10px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f0f0; margin-top: 8px;">
+                  <div>
+                    <div style="font-size: 0.6rem; color: var(--text-secondary);">Net Profit</div>
+                    <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent);">$9,250</div>
+                  </div>
+                  <div style="font-size: 1.8rem; color: var(--accent);">↗️</div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab-item">
+                <div class="tab-icon">🏠</div>
+                <div class="tab-label">Home</div>
+              </div>
+              <div class="tab-item">
+                <div class="tab-icon">📅</div>
+                <div class="tab-label">Calendar</div>
+              </div>
+              <div class="tab-item">
+                <div class="tab-icon">🔍</div>
+                <div class="tab-label">Search</div>
+              </div>
+              <div class="tab-item active">
+                <div class="tab-icon">📊</div>
+                <div class="tab-label">Insights</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">3. Insights</div>
+    </div>
+    
+    <!-- Screenshot 4: Feature Highlights -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4" style="justify-content: center; gap: 30px;">
+        <div class="headline" style="font-size: 2.2rem;">Your Business<br>Story, Captured</div>
+        <div class="subheadline" style="font-size: 1.1rem; max-width: 320px;">
+          Everything you need to track your small business journey in one beautiful app.
+          <br/>
+          Save your learnings and insights for future reference for you and your employees.
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 20px; z-index: 1;">
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">📔</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;">Daily Entries</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;">Capture every day</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">😊</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;">Mood Tracking</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;">How's business?</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">💰</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;">Financials</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;">Revenue & expenses</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">📊</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;">Insights</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;">Trends & stats</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; gap: 24px; z-index: 1; margin-top: 20px;">
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: white;">🔒</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 4px;">100% Private</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: white;">📱</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 4px;">Local Storage</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: white;">✨</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 4px;">Beautiful UI</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">4. Features</div>
+    </div>
+    
+  </div>
+  
+  <div class="instructions">
+    <h3>📸 Screenshot Export Guide</h3>
+    <ol>
+      <li>Click <strong>Download All Screenshots</strong> to get all 4 images</li>
+      <li>Screenshots are exported at <code>1290 × 2796px</code> (6.7" display)</li>
+      <li>In App Store Connect, upload to the <strong>6.7" iPhone</strong> section</li>
+      <li>App Store Connect will auto-generate other sizes from these</li>
+    </ol>
+  </div>
+  
+  <canvas id="canvas"></canvas>
+  
+  <script>
+    async function captureScreenshot(element) {
+      // Using html2canvas-like approach with native canvas
+      const scale = 3; // For high resolution
+      const width = 430;
+      const height = 932;
+      
+      const canvas = document.getElementById('canvas');
+      canvas.width = 1290;
+      canvas.height = 2796;
+      const ctx = canvas.getContext('2d');
+      
+      // Draw to canvas using foreignObject in SVG
+      const svgData = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="${1290}" height="${2796}">
+          <foreignObject width="100%" height="100%">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="transform: scale(3); transform-origin: top left;">
+              ${element.outerHTML}
+            </div>
+          </foreignObject>
+        </svg>
+      `;
+      
+      const img = new Image();
+      const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(svgBlob);
+      
+      return new Promise((resolve, reject) => {
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0);
+          URL.revokeObjectURL(url);
+          resolve(canvas.toDataURL('image/png'));
+        };
+        img.onerror = reject;
+        img.src = url;
+      });
+    }
+    
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+    
+    async function downloadCurrent(num) {
+      const element = document.getElementById(`screenshot${num}`);
+      
+      // Use html-to-image approach
+      try {
+        const dataUrl = await htmlToImage(element);
+        downloadDataUrl(dataUrl, `SBDiary-Screenshot-${num}.png`);
+      } catch (e) {
+        console.error('Screenshot failed, using fallback', e);
+        alert('Please right-click on the screenshot and choose "Save Image As..." to download.');
+      }
+    }
+    
+    async function downloadAll() {
+      for (let i = 1; i <= 4; i++) {
+        await downloadCurrent(i);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+    
+    // Simple html-to-image implementation
+    function htmlToImage(element) {
+      return new Promise((resolve, reject) => {
+        const clone = element.cloneNode(true);
+        clone.style.transform = 'scale(3)';
+        clone.style.transformOrigin = 'top left';
+        
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'fixed';
+        wrapper.style.left = '-9999px';
+        wrapper.style.width = '1290px';
+        wrapper.style.height = '2796px';
+        wrapper.appendChild(clone);
+        document.body.appendChild(wrapper);
+        
+        const svgString = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="1290" height="2796">
+            <style>
+              ${Array.from(document.styleSheets)
+                .filter(sheet => !sheet.href || sheet.href.startsWith(window.location.origin))
+                .map(sheet => {
+                  try {
+                    return Array.from(sheet.cssRules).map(rule => rule.cssText).join('\n');
+                  } catch (e) {
+                    return '';
+                  }
+                }).join('\n')}
+            </style>
+            <foreignObject width="1290" height="2796">
+              ${new XMLSerializer().serializeToString(clone)}
+            </foreignObject>
+          </svg>
+        `;
+        
+        document.body.removeChild(wrapper);
+        
+        const canvas = document.createElement('canvas');
+        canvas.width = 1290;
+        canvas.height = 2796;
+        const ctx = canvas.getContext('2d');
+        
+        const img = new Image();
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0);
+          resolve(canvas.toDataURL('image/png'));
+        };
+        img.onerror = () => reject(new Error('Failed to load SVG'));
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
+      });
+    }
+  </script>
+</body>
+</html>

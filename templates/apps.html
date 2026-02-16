@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Apps Gallery — Generative Networks{% endblock title %}
+
+{% block content %}
+<!-- Apps Gallery Header -->
+<header class="apps-gallery-header">
+  <div class="container">
+    <span class="section-label">Apps Gallery</span>
+    <h1>Our Apps</h1>
+    <p class="lead">Privacy-first iOS applications built to replace your subscription tools. Pay once, own forever.</p>
+  </div>
+</header>
+
+<!-- Apps Gallery -->
+<main class="apps-gallery">
+  <div class="container">
+    <div class="gallery-grid">
+      {% for app in section.extra.apps %}
+      <article class="gallery-app-card">
+        <div class="gallery-app-icon">
+          <div class="app-icon-placeholder" style="background: {{ app.icon_color }};">
+            <span>{{ app.icon_letter }}</span>
+          </div>
+        </div>
+        <div class="gallery-app-info">
+          <h2><a href="{{ app.url }}">{{ app.title }}</a></h2>
+          <p class="app-tagline">{{ app.tagline }}</p>
+          <div class="gallery-app-meta">
+            <span class="app-platform">{{ app.platform }}</span>
+            <span class="app-price">{{ app.price }}</span>
+          </div>
+          <div class="gallery-app-excerpt">
+            <p>{{ app.description }}</p>
+          </div>
+          <a href="{{ app.url }}" class="card-link">
+            Learn more
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+{% endblock content %}

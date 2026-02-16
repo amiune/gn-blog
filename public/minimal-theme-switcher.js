@@ -3,21 +3,20 @@
  *
  * Pico.css - https://picocss.com
  * Copyright 2019-2023 - Licensed under MIT
+ * Modified for Generative Networks
  */
 
 const themeSwitcher = {
   // Config
   _scheme: "auto",
-  menuTarget: "details[role='list']",
-  buttonsTarget: "a[data-theme-switcher]",
-  buttonAttribute: "data-theme-switcher",
+  buttonTarget: ".theme-toggle",
   rootAttribute: "data-theme",
   localStorageKey: "picoPreferredColorScheme",
 
   // Init
   init() {
     this.scheme = this.schemeFromLocalStorage;
-    this.initSwitchers();
+    this.initSwitcher();
   },
 
   // Get color scheme from local storage
@@ -35,22 +34,20 @@ const themeSwitcher = {
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   },
 
-  // Init switchers
-  initSwitchers() {
-    const buttons = document.querySelectorAll(this.buttonsTarget);
-    buttons.forEach((button) => {
+  // Init switcher
+  initSwitcher() {
+    const button = document.querySelector(this.buttonTarget);
+    if (button) {
       button.addEventListener(
         "click",
         (event) => {
           event.preventDefault();
-          // Set scheme
-          this.scheme = button.getAttribute(this.buttonAttribute);
-          // Close dropdown
-          document.querySelector(this.menuTarget).removeAttribute("open");
+          // Toggle between light and dark
+          this.scheme = this._scheme === "dark" ? "light" : "dark";
         },
         false
       );
-    });
+    }
   },
 
   // Set scheme

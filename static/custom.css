@@ -1350,3 +1350,233 @@ a {
 .article-body em {
   font-style: italic;
 }
+
+/* ============================================
+   Apps Gallery CTA (Home Page)
+   ============================================ */
+.apps-gallery-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* ============================================
+   Apps Gallery Page
+   ============================================ */
+.apps-gallery-header {
+  padding: 8rem 0 4rem;
+  background: var(--bg-alt);
+}
+
+.apps-gallery-header .container {
+  max-width: 800px;
+}
+
+.apps-gallery-header h1 {
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.apps-gallery-header .lead {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.apps-gallery {
+  padding: var(--section-spacing) 0;
+}
+
+.apps-gallery .container {
+  max-width: 900px;
+}
+
+.gallery-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.gallery-app-card {
+  display: flex;
+  gap: 2rem;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition-base);
+}
+
+.gallery-app-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.gallery-app-icon {
+  flex-shrink: 0;
+}
+
+.app-icon-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(80, 70, 229, 0.3);
+}
+
+.app-icon-placeholder span {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+}
+
+.app-icon-placeholder.large {
+  width: 6rem;
+  height: 6rem;
+}
+
+.app-icon-placeholder.large span {
+  font-size: 1.5rem;
+}
+
+.gallery-app-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.gallery-app-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+.gallery-app-info h2 a {
+  color: var(--text);
+  transition: color var(--transition-fast);
+}
+
+.gallery-app-info h2 a:hover {
+  color: var(--accent);
+}
+
+.app-tagline {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.gallery-app-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.app-platform {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+}
+
+.app-price {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: var(--radius-full);
+}
+
+.gallery-app-excerpt {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.gallery-app-excerpt p {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .gallery-app-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ============================================
+   App Detail Page
+   ============================================ */
+.app-detail-header {
+  padding: 8rem 0 3rem;
+  background: var(--bg-alt);
+}
+
+.app-detail-header .container {
+  max-width: 800px;
+}
+
+.app-detail-header .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  transition: color var(--transition-fast);
+}
+
+.app-detail-header .back-link:hover {
+  color: var(--accent);
+}
+
+.app-detail-top {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.app-detail-intro h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.app-detail-intro .app-tagline {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.app-detail-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.app-detail-content {
+  padding: var(--section-spacing) 0;
+}
+
+.app-detail-content .container {
+  max-width: 720px;
+}
+
+@media (max-width: 600px) {
+  .app-detail-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
