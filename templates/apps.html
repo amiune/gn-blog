@@ -18,9 +18,13 @@
       {% for app in section.extra.apps %}
       <article class="gallery-app-card">
         <div class="gallery-app-icon">
+          {% if app.icon_image %}
+          <img class="app-icon-img" src="{{ app.icon_image }}" alt="{{ app.title }} icon">
+          {% else %}
           <div class="app-icon-placeholder" style="background: {{ app.icon_color }};">
             <span>{{ app.icon_letter }}</span>
           </div>
+          {% endif %}
         </div>
         <div class="gallery-app-info">
           <h2><a href="{{ app.url }}">{{ app.title }}</a></h2>
