@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Diary - Privacy Policy</title>
+  <style>
+    :root {
+      --primary: #CC735A;
+      --primary-dark: #B85E45;
+      --accent: #407366;
+      --bg: #FFFDF8;
+      --card: #FFFFFF;
+      --text: #2C2C2C;
+      --text-secondary: #666;
+      --text-tertiary: #999;
+      --border: #E8E0D8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1A1A1E;
+        --card: #242428;
+        --text: #F5F5F5;
+        --text-secondary: #999;
+        --text-tertiary: #666;
+        --border: #333338;
+      }
+
+      .header {
+        background: rgba(26, 26, 30, 0.85) !important;
+        border-bottom-color: var(--border) !important;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      background: rgba(255, 253, 248, 0.85);
+    }
+
+    .header-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .header-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .header-link:hover {
+      background: rgba(204, 115, 90, 0.08);
+    }
+
+    /* Main Content */
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .page-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .effective-date {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .intro {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .section {
+      margin-bottom: 36px;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      margin-bottom: 14px;
+      padding-top: 8px;
+    }
+
+    .section p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+
+    .section ul {
+      padding-left: 24px;
+      margin-bottom: 12px;
+    }
+
+    .section li {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    .section li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(204, 115, 90, 0.06), rgba(64, 115, 102, 0.08));
+      border: 1px solid rgba(204, 115, 90, 0.15);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .highlight-box p {
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 40px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .contact-card h2 {
+      margin-bottom: 12px;
+    }
+
+    .contact-card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .page-title {
+        font-size: 28px;
+      }
+      .content {
+        padding: 32px 20px 60px;
+      }
+      .section h2 {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon" style="background:none;padding:0;overflow:hidden;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="36" height="36">
+            <defs>
+              <linearGradient id="sbicon-bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#D98B76"/>
+                <stop offset="100%" stop-color="#B85E45"/>
+              </linearGradient>
+              <clipPath id="sbicon-clip">
+                <rect width="1024" height="1024" rx="224" ry="224"/>
+              </clipPath>
+            </defs>
+            <g clip-path="url(#sbicon-clip)">
+              <rect width="1024" height="1024" fill="url(#sbicon-bg)"/>
+              <rect x="280" y="200" width="464" height="624" rx="24" fill="#fff"/>
+              <rect x="280" y="200" width="56" height="624" rx="24" fill="#407366"/>
+              <rect x="308" y="200" width="28" height="624" fill="#407366"/>
+              <rect x="380" y="340" width="310" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+              <rect x="380" y="400" width="260" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+              <rect x="380" y="460" width="290" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+              <rect x="380" y="520" width="230" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+              <rect x="380" y="580" width="270" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+              <rect x="380" y="640" width="200" height="14" rx="7" fill="#CC735A" opacity="0.3"/>
+              <polygon points="620,200 670,200 670,370 645,330 620,370" fill="#407366" opacity="0.85"/>
+            </g>
+          </svg>
+        </div>
+        <span class="logo-text">SB Diary</span>
+      </a>
+      <a href="index.html" class="header-link">Back to Home</a>
+    </div>
+  </header>
+
+  <main class="content">
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="effective-date">Effective date: January 22, 2026</p>
+
+    <p class="intro">
+      SB Diary ("we", "our", or "the app") is committed to protecting your privacy.
+      This Privacy Policy explains how we handle information when you use our Small Business Daily Journal application.
+    </p>
+
+    <div class="highlight-box">
+      <p>In Short: SB Diary stores your data locally on your device, with optional iCloud sync through Apple's CloudKit. We do not collect, transmit to our own servers, or have access to any of your personal information or journal entries.</p>
+    </div>
+
+    <div class="section">
+      <h2>1. Data Storage</h2>
+      <p>
+        All your diary entries, business data, financial records, and preferences are stored on your device using Apple's SwiftData framework. You can optionally enable iCloud sync to keep your data in sync across your devices.
+      </p>
+      <ul>
+        <li><strong>Local Storage:</strong> Data is always stored on-device first using SwiftData.</li>
+        <li><strong>Optional iCloud Sync:</strong> If enabled, your data is synced securely across your devices through Apple's CloudKit infrastructure. This data resides in your private iCloud account — we do not operate our own servers and have no access to it.</li>
+        <li><strong>No Account Required:</strong> SB Diary does not require you to create an account or provide any personal information beyond what is inherently part of your Apple ID if you choose to enable iCloud sync.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>2. Information We Collect</h2>
+      <p><strong>We collect absolutely no information.</strong> Specifically:</p>
+      <ul>
+        <li>No personal identification information</li>
+        <li>No usage analytics or tracking</li>
+        <li>No crash reports sent to us</li>
+        <li>No advertising identifiers</li>
+        <li>No location data</li>
+        <li>No device information</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>3. Information You Store</h2>
+      <p>The app allows you to store the following information locally on your device:</p>
+      <ul>
+        <li>Daily journal entries and notes</li>
+        <li>Business mood and sentiment tracking</li>
+        <li>Business category tags</li>
+        <li>Revenue and expense records</li>
+        <li>Entry dates and timestamps</li>
+      </ul>
+      <p>This information is stored on your device and, if iCloud sync is enabled, in your private iCloud account. It is not accessible to us or any third parties.</p>
+    </div>
+
+    <div class="section">
+      <h2>4. Data Security</h2>
+      <p>Your data is protected by:</p>
+      <ul>
+        <li><strong>Device Security:</strong> Your data is protected by your device's passcode, Face ID, or Touch ID.</li>
+        <li><strong>iOS Encryption:</strong> iOS provides hardware-level encryption for all data stored on your device.</li>
+        <li><strong>App Sandbox:</strong> The app operates in iOS's secure sandbox environment, isolated from other apps.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>5. Data Deletion</h2>
+      <p>You have complete control over your data:</p>
+      <ul>
+        <li>Delete individual entries at any time from within the app.</li>
+        <li>Uninstalling the app will permanently delete all local data.</li>
+        <li>To delete iCloud data, you can remove the app's associated iCloud data through your Apple ID settings.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>6. Third-Party Services</h2>
+      <p>
+        SB Diary does not use any third-party analytics, advertising, or tracking services.
+        The only third-party service used is Apple's iCloud (CloudKit) for optional data storage and synchronization.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>7. Children's Privacy</h2>
+      <p>
+        SB Diary does not knowingly collect information from children under 13.
+        The app does not collect any information from anyone, regardless of age.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>8. Your Rights</h2>
+      <p>
+        Since we don't collect any data, there is no personal data to access, correct, or delete from our systems.
+        All your data remains exclusively on your device under your complete control.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>9. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated effective date.
+        We encourage you to review this page periodically.
+      </p>
+    </div>
+
+    <div class="section contact-card">
+      <h2>10. Contact Us</h2>
+      <p>
+        If you have any questions about this Privacy Policy or our privacy practices, please contact us at:
+      </p>
+      <p><a href="mailto:hernan.amiune@icloud.com">hernan.amiune@icloud.com</a></p>
+    </div>
+
+    <div class="highlight-box" style="margin-top: 40px;">
+      <p>Your privacy is paramount to us. SB Diary is designed from the ground up to keep your business journal completely private. We do not operate our own servers — your data stays on your device and, if you choose, in your private iCloud account.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 SB Diary. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
