@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SB Diary - Small Business Daily Journal</title>
-  <meta name="description" content="Track your small business journey with daily entries, mood tracking, and financial insights. 100% private, all data stored locally on your device.">
+  <title>SB Diary – Small Business Journal App for iPhone | Track Revenue, Mood & Daily Progress</title>
+  <meta name="description" content="SB Diary is the #1 private journal app for US small business owners and entrepreneurs. Track daily revenue, expenses, mood, and progress — 100% offline, no accounts, no cloud. Free on the App Store.">
+  <link rel="canonical" href="https://hernanamiune.com/apps/sbdiary/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SB Diary – The Private Journal App for Small Business Owners">
+  <meta property="og:description" content="Track daily revenue, expenses, mood, and entrepreneurial progress. 100% private, all data stays on your iPhone. Free on the App Store.">
+  <meta property="og:url" content="https://hernanamiune.com/apps/sbdiary/">
+  <meta property="og:site_name" content="SB Diary">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SB Diary – Small Business Journal App for iPhone">
+  <meta name="twitter:description" content="The private daily journal for entrepreneurs. Track revenue, mood, and business progress — all stored locally on your device.">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SB Diary",
+    "alternateName": "SB Diary - Small Business Journal",
+    "description": "A private daily journal app for small business owners and entrepreneurs to track revenue, expenses, mood, and daily progress. All data stored locally on your device.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "iOS",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "url": "https://hernanamiune.com/apps/sbdiary/",
+    "downloadUrl": "https://apps.apple.com/app/sb-diary/id6758238482",
+    "featureList": [
+      "Daily business journal entries",
+      "Mood tracking for entrepreneurs",
+      "Revenue and expense tracking",
+      "Category tagging and organization",
+      "Insights and trend visualization",
+      "Streak tracking for daily habits",
+      "Export all data as zipped CSV"
+    ],
+    "screenshot": [],
+    "author": {
+      "@type": "Organization",
+      "name": "SB Diary"
+    }
+  }
+  </script>
+
   <style>
     :root {
       --primary: #CC735A;
@@ -516,6 +566,7 @@
     .fi-finance { background: linear-gradient(135deg, #FFFBEB, #FEF3C7); }
     .fi-insights { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
     .fi-streaks { background: linear-gradient(135deg, #FFF7ED, #FED7AA); }
+    .fi-export { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); }
 
     @media (prefers-color-scheme: dark) {
       .fi-entries { background: linear-gradient(135deg, rgba(255,247,237,0.1), rgba(255,237,213,0.08)); }
@@ -524,6 +575,11 @@
       .fi-finance { background: linear-gradient(135deg, rgba(255,251,235,0.1), rgba(254,243,199,0.08)); }
       .fi-insights { background: linear-gradient(135deg, rgba(239,246,255,0.1), rgba(219,234,254,0.08)); }
       .fi-streaks { background: linear-gradient(135deg, rgba(255,247,237,0.1), rgba(254,215,170,0.08)); }
+      .fi-export { background: linear-gradient(135deg, rgba(250,245,255,0.1), rgba(243,232,255,0.08)); }
+    }
+
+    .features-grid .feature-card:last-child:nth-child(3n + 1) {
+      grid-column: 2;
     }
 
     .feature-card h3 {
@@ -879,6 +935,68 @@
       }
     }
 
+    /* ========== FAQ ========== */
+    .faq {
+      padding: 0 24px 100px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-list {
+      margin-top: 48px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 24px 0;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: inherit;
+      line-height: 1.4;
+    }
+
+    .faq-question:hover {
+      color: var(--primary);
+    }
+
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s;
+      stroke: var(--text-tertiary);
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 0 0 24px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
     /* ========== ANIMATIONS ========== */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -902,9 +1020,9 @@
 <body>
 
   <!-- NAV -->
-  <nav class="nav" id="nav">
+  <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="#" class="logo">
+      <a href="#" class="logo" aria-label="SB Diary – Small Business Journal App">
         <div class="logo-icon" style="background:none;box-shadow:none;padding:0;overflow:hidden;">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="38" height="38">
             <defs>
@@ -936,10 +1054,13 @@
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
-        <a href="#download" class="nav-cta">Download</a>
+        <a href="#faq">FAQ</a>
+        <a href="#download" class="nav-cta">Download Free</a>
       </div>
     </div>
   </nav>
+
+  <main>
 
   <!-- HERO -->
   <section class="hero">
@@ -949,15 +1070,15 @@
       </span>
       Available on the App Store
     </div>
-    <h1>Your business story,<br><span>one day at a time</span></h1>
+    <h1>The daily journal built for<br><span>small business owners</span></h1>
     <p class="hero-sub">
-      Track your entrepreneurial journey with daily entries, mood tracking,
-      and financial insights. 100% private, all data stays on your device.
+      Track revenue, expenses, mood, and daily wins as an entrepreneur.
+      Build a private, searchable archive of your business journey — 100% offline, no accounts needed.
     </p>
     <div class="hero-actions">
-      <a href="https://apps.apple.com/app/sb-diary/id6758238482" class="btn-primary">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on the App Store
+      <a href="https://apps.apple.com/app/sb-diary/id6758238482" class="btn-primary" rel="noopener" target="_blank" aria-label="Download SB Diary free on the App Store">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download Free on the App Store
       </a>
       <a href="#features" class="btn-secondary">Learn More</a>
     </div>
@@ -1025,23 +1146,23 @@
   <!-- FEATURES -->
   <section class="features" id="features">
     <div class="section-label">Features</div>
-    <h2 class="section-title">Everything you need to<br>capture your journey</h2>
-    <p class="section-sub">Simple, powerful tools designed for entrepreneurs who want to reflect, track, and grow every single day.</p>
+    <h2 class="section-title">Everything your small business<br>needs to journal and grow</h2>
+    <p class="section-sub">Simple, powerful tools designed for US entrepreneurs and small business owners who want to reflect, track finances, and grow every day.</p>
 
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon fi-entries">
           <span>📝</span>
         </div>
-        <h3>Daily Entries</h3>
-        <p>Capture wins, challenges, and learnings every day. Build a searchable archive of your business journey.</p>
+        <h3>Daily Business Journal Entries</h3>
+        <p>Capture wins, challenges, and learnings every day. Build a searchable archive of your entrepreneurial journey.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-mood">
           <span>😊</span>
         </div>
-        <h3>Mood Tracking</h3>
-        <p>Log how your business day felt. Spot patterns and understand what drives your best days.</p>
+        <h3>Entrepreneur Mood Tracking</h3>
+        <p>Log how your business day felt. Spot patterns between your mindset and revenue to understand what drives your best days.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-tags">
@@ -1054,22 +1175,29 @@
         <div class="feature-icon fi-finance">
           <span>💰</span>
         </div>
-        <h3>Financial Tracking</h3>
-        <p>Record daily revenue and expenses alongside your notes. See the full picture of each day.</p>
+        <h3>Revenue & Expense Tracking</h3>
+        <p>Record daily revenue and expenses alongside your journal entries. See the full financial picture of each business day in dollars.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-insights">
           <span>📊</span>
         </div>
-        <h3>Insights & Stats</h3>
-        <p>Visualize mood trends, financial summaries, and activity patterns over time.</p>
+        <h3>Business Insights & Analytics</h3>
+        <p>Visualize mood trends, financial summaries, and activity patterns over weeks and months to make smarter business decisions.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-streaks">
           <span>🔥</span>
         </div>
-        <h3>Streaks & Habits</h3>
-        <p>Build consistency with daily streaks. Stay motivated to document your progress.</p>
+        <h3>Daily Streaks & Habit Building</h3>
+        <p>Build consistency with daily journaling streaks. Stay motivated to document your small business progress every single day.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-export">
+          <span>📤</span>
+        </div>
+        <h3>Export All Your Data</h3>
+        <p>Download your entire journal as a zipped CSV file from Settings. Take your data anywhere — perfect for spreadsheets, backups, or tax time.</p>
       </div>
     </div>
   </section>
@@ -1078,8 +1206,8 @@
   <section class="how-it-works" id="how-it-works">
     <div class="how-inner">
       <div class="section-label">How It Works</div>
-      <h2 class="section-title">Build your journal habit</h2>
-      <p class="section-sub">Three simple steps to start documenting your business journey.</p>
+      <h2 class="section-title">Start your small business journal in 3 steps</h2>
+      <p class="section-sub">Three simple steps to start documenting your entrepreneurial journey today.</p>
 
       <div class="steps">
         <div class="step">
@@ -1134,22 +1262,150 @@
           <span class="privacy-badge">📱 Local Storage</span>
           <span class="privacy-badge">🚫 No Analytics</span>
           <span class="privacy-badge">🔐 Device Encrypted</span>
+          <span class="privacy-badge">📤 CSV Export</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Frequently asked questions</h2>
+    <p class="section-sub">Everything US small business owners want to know about SB Diary.</p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is SB Diary and who is it for?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">SB Diary is a private daily journal app designed specifically for small business owners, solopreneurs, and entrepreneurs in the United States. It lets you capture daily wins, challenges, revenue, expenses, and your mood — all in one place on your iPhone. Think of it as your personal business diary that helps you reflect and grow.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is SB Diary really free? Are there hidden costs?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">SB Diary is free to download from the App Store. There are no hidden fees, no subscriptions required to start journaling, and no ads. You can start documenting your business journey right away without spending a dime.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is my business data private and secure?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Absolutely. SB Diary stores all your data locally on your iPhone. There are no cloud servers, no user accounts, and no third-party analytics. Your business journal entries, financial data, and mood logs never leave your device. Your data is protected by your device's built-in encryption.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Can I track revenue and expenses for my small business?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes! Every journal entry lets you log daily revenue and expenses in US dollars. Over time, SB Diary shows you financial trends and summaries so you can see how your business is performing week over week and month over month — right alongside your journal notes.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How is SB Diary different from a regular journal or notes app?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Unlike generic journal or notes apps, SB Diary is purpose-built for business owners. It combines daily journaling with mood tracking, revenue/expense logging, category tagging (Sales, Marketing, Product, etc.), streak tracking, and business-specific insights — all in one streamlined interface designed for entrepreneurs.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Does SB Diary work offline without an internet connection?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes, SB Diary works 100% offline. Since all data is stored locally on your device, you don't need an internet connection to write entries, track finances, or review your insights. Perfect for busy entrepreneurs on the go.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Can I export my journal data?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes! Go to Settings and tap "Export All Data" to download your entire journal as a CSV file bundled in a ZIP archive. You can open it in Excel, Google Sheets, or any spreadsheet app. It's great for backups, tax preparation, or transferring your records.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is SB Diary and who is it for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SB Diary is a private daily journal app designed specifically for small business owners, solopreneurs, and entrepreneurs in the United States. It lets you capture daily wins, challenges, revenue, expenses, and your mood — all in one place on your iPhone."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is SB Diary really free? Are there hidden costs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SB Diary is free to download from the App Store. There are no hidden fees, no subscriptions required to start journaling, and no ads. You can start documenting your business journey right away without spending a dime."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my business data private and secure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. SB Diary stores all your data locally on your iPhone. There are no cloud servers, no user accounts, and no third-party analytics. Your business journal entries, financial data, and mood logs never leave your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I track revenue and expenses for my small business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Every journal entry lets you log daily revenue and expenses in US dollars. Over time, SB Diary shows you financial trends and summaries so you can see how your business is performing week over week and month over month."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is SB Diary different from a regular journal or notes app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Unlike generic journal or notes apps, SB Diary is purpose-built for business owners. It combines daily journaling with mood tracking, revenue/expense logging, category tagging, streak tracking, and business-specific insights."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does SB Diary work offline without an internet connection?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, SB Diary works 100% offline. Since all data is stored locally on your device, you don't need an internet connection to write entries, track finances, or review your insights."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I export my journal data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Go to Settings and tap Export All Data to download your entire journal as a CSV file bundled in a ZIP archive. You can open it in Excel, Google Sheets, or any spreadsheet app."
+        }
+      }
+    ]
+  }
+  </script>
+
   <!-- CTA -->
   <section class="cta-section" id="download">
     <div class="cta-card">
-      <h2>Start your journal today</h2>
-      <p>Join thousands of entrepreneurs documenting their journey, one day at a time.</p>
-      <a href="https://apps.apple.com/app/sb-diary/id6758238482" class="btn-white">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on the App Store
+      <h2>Start your small business journal today</h2>
+      <p>Join thousands of US entrepreneurs documenting their journey, one day at a time.</p>
+      <a href="https://apps.apple.com/app/sb-diary/id6758238482" class="btn-white" rel="noopener" target="_blank" aria-label="Download SB Diary free on the App Store">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download Free on the App Store
       </a>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -1197,6 +1453,24 @@
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.faq-answer').style.maxHeight = null;
+          el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
   </script>
 
