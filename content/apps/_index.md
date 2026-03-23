@@ -27,6 +27,17 @@ icon_image = "/apps/sborders/icon.svg"
 url = "/apps/sborders/"
 
 [[extra.apps]]
+title = "SB Shopping List"
+tagline = "Smart Grocery Shopping"
+description = "A beautifully simple shopping list with smart suggestions, price tracking, and archive history. Stay organized every trip."
+platform = "iOS"
+price = "Free and without ads"
+icon_color = "linear-gradient(135deg, #16A34A 0%, #059669 100%)"
+icon_letter = "SL"
+icon_image = "/apps/sbshoppinglist/icon.svg"
+url = "/apps/sbshoppinglist/"
+
+[[extra.apps]]
 title = "Get Your Custom App"
 tagline = "Stop paying subscriptions for apps that aren't tailored for you and sell your data"
 description = "We build native tailored iOS apps to replace your expensive subscription software. One purchase, lifetime ownership. Tailored for your needs. You own your app and your data. Ask about our partnership contracts if you think your app can be sold on the App Store."
