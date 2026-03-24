@@ -38,6 +38,17 @@ icon_image = "/apps/sbshoppinglist/icon.svg"
 url = "/apps/sbshoppinglist/"
 
 [[extra.apps]]
+title = "SB Field Service"
+tagline = "Manage jobs, grow your business"
+description = "A beautifully simple app to track jobs from start to delivery. Built for small businesses that care about staying organized."
+platform = "iOS"
+price = "$9.99 — one-time purchase. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)"
+icon_letter = "O"
+icon_image = "/apps/sborders/icon.svg"
+url = "/apps/sbfieldservice/"
+
+[[extra.apps]]
 title = "Get Your Custom App"
 tagline = "Stop paying subscriptions for apps that aren't tailored for you and sell your data"
 description = "We build native tailored iOS apps to replace your expensive subscription software. One purchase, lifetime ownership. Tailored for your needs. You own your app and your data. Ask about our partnership contracts if you think your app can be sold on the App Store."
