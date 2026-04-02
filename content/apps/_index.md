@@ -27,7 +27,7 @@ icon_image = "/apps/sborders/icon.svg"
 url = "/apps/sborders/"
 
 [[extra.apps]]
-title = "SB Shopping List"
+title = "Smart & Simple Shopping List"
 tagline = "Smart Grocery Shopping"
 description = "A beautifully simple shopping list with smart suggestions, price tracking, and archive history. Stay organized every trip."
 platform = "iOS"
@@ -36,6 +36,17 @@ icon_color = "linear-gradient(135deg, #16A34A 0%, #059669 100%)"
 icon_letter = "SL"
 icon_image = "/apps/sbshoppinglist/icon.svg"
 url = "/apps/sbshoppinglist/"
+
+[[extra.apps]]
+title = "Collaborative Shopping List"
+tagline = "Smart Grocery Shopping"
+description = "Share a list with your partner or family and see updates as they happen. Add items, check them off, and track your total—together."
+platform = "iOS"
+price = "$2.99 — one-time purchase. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #16A34A 0%, #059669 100%)"
+icon_letter = "SL"
+icon_image = "/apps/sbshoppinglist/icon.svg"
+url = "/apps/sbcolabshoppinglist/"
 
 [[extra.apps]]
 title = "SB Field Service"
