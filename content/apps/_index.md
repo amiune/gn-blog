@@ -5,7 +5,7 @@ template = "apps.html"
 [extra]
 
 [[extra.apps]]
-title = "Work Order & Sales Tracker"
+title = "Custom Order Tracker"
 tagline = "Manage orders, grow your business"
 description = "A beautifully simple app to track orders from start to delivery. Built for small businesses that care about staying organized."
 platform = "iOS"
