@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trade Job Tracker - Instagram Stories Generator</title>
+  <meta name="description" content="Generate promotional Instagram Stories for Trade Job Tracker — field service job management for small businesses.">
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #1D4ED8;
+      --accent: #3B82F6;
+      --orange: #F97316;
+      --blue: #3B82F6;
+      --green: #22C55E;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f0f12 0%, #1a1a22 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #60A5FA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(37, 99, 235, 0.5);
+    }
+    
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+    
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+    
+    /* Instagram Story Frame: 1080 x 1920 (9:16) */
+    /* Preview at 1/3 scale: 360 x 640 */
+    .story {
+      width: 360px;
+      height: 640px;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story.gradient-blue {
+      background: linear-gradient(180deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
+    }
+
+    .story.gradient-dark {
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .story.gradient-vibrant {
+      background: linear-gradient(160deg, #1E40AF 0%, #3B82F6 40%, #2563EB 100%);
+    }
+
+    .story.gradient-warm {
+      background: linear-gradient(180deg, #1a1020 0%, #2d1b3e 40%, #1a1020 100%);
+    }
+    
+    .story::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .story-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .story-top-spacer {
+      height: 60px;
+      flex-shrink: 0;
+    }
+
+    .story-headline {
+      color: white;
+      font-size: 1.9rem;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 6px;
+      padding: 0 20px;
+    }
+    
+    .story-subheadline {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 16px;
+      padding: 0 20px;
+    }
+
+    .story-cta {
+      margin-top: auto;
+      margin-bottom: 40px;
+      background: white;
+      color: var(--primary-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 40px;
+      border-radius: 30px;
+      text-align: center;
+      letter-spacing: 0.02em;
+      pointer-events: none;
+    }
+
+    .story-app-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: auto;
+      margin-bottom: 36px;
+      z-index: 1;
+    }
+
+    .story-app-badge .app-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+
+    .story-app-badge .app-info {
+      text-align: left;
+    }
+
+    .story-app-badge .app-name {
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .story-app-badge .app-tagline {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.75rem;
+    }
+
+    .deco-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      pointer-events: none;
+    }
+
+    .swipe-up {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: auto;
+      margin-bottom: 24px;
+      z-index: 1;
+    }
+
+    .swipe-up .chevron {
+      width: 24px;
+      height: 24px;
+      border-left: 3px solid rgba(255,255,255,0.8);
+      border-top: 3px solid rgba(255,255,255,0.8);
+      transform: rotate(45deg);
+    }
+
+    .swipe-up .swipe-text {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Story hook: pain-point rows */
+    .pain-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+    }
+
+    .pain-row .pain-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    .pain-row .pain-text {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .hook-headline {
+      color: white;
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.15;
+      padding: 0 20px;
+      z-index: 1;
+    }
+
+    .hook-target {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      text-align: center;
+      padding: 0 24px;
+      line-height: 1.4;
+      z-index: 1;
+    }
+
+    .keep-watching {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      margin-bottom: 32px;
+      z-index: 1;
+    }
+
+    .keep-watching span {
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .keep-watching .arrows {
+      display: flex;
+      gap: 2px;
+    }
+
+    .keep-watching .arrow {
+      width: 12px;
+      height: 12px;
+      border-right: 3px solid white;
+      border-bottom: 3px solid white;
+      transform: rotate(-45deg);
+      opacity: 0.5;
+    }
+
+    .keep-watching .arrow:nth-child(2) { opacity: 0.7; }
+    .keep-watching .arrow:nth-child(3) { opacity: 1; }
+
+    /* Feature pills for story 4 */
+    .feature-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 16px 20px;
+      width: 100%;
+    }
+
+    .feature-pill .pill-emoji {
+      font-size: 1.8rem;
+    }
+
+    .feature-pill .pill-content {
+      flex: 1;
+    }
+
+    .feature-pill .pill-title {
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .feature-pill .pill-desc {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.8rem;
+    }
+
+    /* ===== Mini App Mockup ===== */
+    .app-mockup {
+      width: 290px;
+      background: #F8FAFC;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      z-index: 1;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #1E293B;
+    }
+
+    .mockup-statusbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 16px;
+      background: white;
+      font-size: 8px;
+      font-weight: 600;
+      color: #1E293B;
+    }
+
+    .mockup-statusbar .time { font-size: 9px; font-weight: 700; }
+
+    .mockup-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: white;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .mockup-nav-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1E293B;
+    }
+
+    .mockup-nav-icon {
+      width: 18px;
+      height: 18px;
+      background: #EFF6FF;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+    }
+
+    /* Mini Kanban */
+    .mini-kanban {
+      display: flex;
+      gap: 6px;
+      padding: 10px 8px;
+      overflow: hidden;
+    }
+
+    .mini-col {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mini-col-header {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 6px;
+      font-size: 7px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .mini-col-header .mini-count {
+      font-size: 7px;
+      font-weight: 700;
+      background: rgba(0,0,0,0.06);
+      color: #64748B;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .mini-col.col-pending .mini-col-header { color: var(--orange); }
+    .mini-col.col-prepared .mini-col-header { color: var(--blue); }
+    .mini-col.col-delivered .mini-col-header { color: var(--green); }
+
+    .mini-card {
+      background: white;
+      border-radius: 8px;
+      padding: 7px 8px;
+      margin-bottom: 5px;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .mini-card-tag {
+      display: inline-block;
+      font-size: 6px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-bottom: 3px;
+    }
+
+    .mini-tag-pending { background: #FFF7ED; color: #EA580C; }
+    .mini-tag-prepared { background: #EFF6FF; color: #2563EB; }
+    .mini-tag-delivered { background: #F0FDF4; color: #16A34A; }
+
+    .mini-card-title {
+      font-size: 8px;
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 1px;
+    }
+
+    .mini-card-client {
+      font-size: 7px;
+      color: #94A3B8;
+      margin-bottom: 3px;
+    }
+
+    .mini-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mini-card-date {
+      font-size: 6px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+
+    .mini-card-amount {
+      font-size: 7px;
+      font-weight: 700;
+      color: #1E293B;
+    }
+
+    /* Mini job detail */
+    .mini-detail {
+      padding: 10px 12px;
+    }
+
+    .mini-detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .mini-detail-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1E293B;
+    }
+
+    .mini-detail-status {
+      font-size: 7px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #FFF7ED;
+      color: #EA580C;
+    }
+
+    .mini-detail-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .mini-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .mini-detail-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .mini-detail-label {
+      font-size: 7px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+
+    .mini-detail-value {
+      font-size: 9px;
+      color: #1E293B;
+      font-weight: 600;
+    }
+
+    /* Mini Stats */
+    .mini-stats {
+      padding: 10px 12px;
+    }
+
+    .mini-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .mini-stat-card {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #E2E8F0;
+    }
+
+    .mini-stat-label {
+      font-size: 7px;
+      color: #94A3B8;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .mini-stat-value {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .mini-stat-value.blue { color: var(--primary); }
+    .mini-stat-value.green { color: var(--green); }
+    .mini-stat-value.orange { color: var(--orange); }
+
+    .mini-stat-change {
+      font-size: 6px;
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    .mini-chart {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #E2E8F0;
+    }
+
+    .mini-chart-title {
+      font-size: 8px;
+      font-weight: 700;
+      color: #1E293B;
+      margin-bottom: 8px;
+    }
+
+    .mini-chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 50px;
+    }
+
+    .mini-chart-bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      min-height: 4px;
+    }
+
+    .mini-chart-labels {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .mini-chart-label {
+      flex: 1;
+      text-align: center;
+      font-size: 5.5px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+
+    /* Tab bar */
+    .mockup-tabbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 6px 0 8px;
+      background: white;
+      border-top: 1px solid #E2E8F0;
+    }
+
+    .mockup-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 6px;
+      font-weight: 500;
+      color: #94A3B8;
+    }
+
+    .mockup-tab.active {
+      color: var(--primary);
+    }
+
+    .mockup-tab-icon {
+      font-size: 11px;
+    }
+
+    canvas {
+      display: none;
+    }
+    
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .instructions h3 {
+      color: #60A5FA;
+      margin-bottom: 12px;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+    
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📸 Instagram Stories</h1>
+    <p>Generate promotional stories for Trade Job Tracker — field service job management for small businesses</p>
+  </div>
+  
+  <div class="controls">
+    <button onclick="downloadAll()">Download All Stories</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Story 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Story 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Story 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Story 4</button>
+    <button class="secondary" onclick="downloadCurrent(5)">Story 5</button>
+  </div>
+  
+  <div class="screenshots">
+    
+    <!-- Story 1: Hook / Problem statement -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-vibrant" id="story1">
+        <div class="deco-circle" style="width: 350px; height: 350px; top: -120px; left: -120px;"></div>
+        <div class="deco-circle" style="width: 250px; height: 250px; bottom: -80px; right: -80px; background: rgba(239,68,68,0.08);"></div>
+        <div class="story-content" style="justify-content: center; padding: 80px 24px; gap: 24px;">
+          
+          <div class="hook-headline">Field jobs<br>all over the place?</div>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px; width: 100%; z-index: 1;">
+            <div class="pain-row">
+              <div class="pain-icon">🤯</div>
+              <div class="pain-text">Dispatch texts<br>& calls everywhere</div>
+            </div>
+            <div class="pain-row">
+              <div class="pain-icon">🤯</div>
+              <div class="pain-text">Missed or double-<br>booked appointments</div>
+            </div>
+            <div class="pain-row">
+              <div class="pain-icon">🤯</div>
+              <div class="pain-text">Paperwork & photos<br>scattered across apps</div>
+            </div>
+          </div>
+          
+          <div class="hook-target">For HVAC, plumbing, electrical<br>& small field service teams</div>
+          
+          <div class="keep-watching">
+            <span>Keep watching</span>
+            <div class="arrows">
+              <div class="arrow"></div>
+              <div class="arrow"></div>
+              <div class="arrow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">1. Hook</div>
+    </div>
+    
+    <!-- Story 2: Hero with Kanban mockup -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-blue" id="story2">
+        <div class="deco-circle" style="width: 300px; height: 300px; top: -80px; right: -100px;"></div>
+        <div class="deco-circle" style="width: 200px; height: 200px; bottom: 60px; left: -60px;"></div>
+        <div class="story-content">
+          <div class="story-top-spacer"></div>
+          <div class="story-headline">Manage jobs,<br>grow your business</div>
+          <div class="story-subheadline">Track field service jobs from scheduling through completion — built for small teams</div>
+          
+          <!-- Mini Kanban Board Mockup -->
+          <div class="app-mockup">
+            <div class="mockup-statusbar">
+              <span class="time">9:41</span>
+              <span>⚡ 📶</span>
+            </div>
+            <div class="mockup-nav">
+              <div class="mockup-nav-icon">📋</div>
+              <div class="mockup-nav-title">My Jobs</div>
+              <div class="mockup-nav-icon">＋</div>
+            </div>
+            <div class="mini-kanban">
+              <!-- Pending -->
+              <div class="mini-col col-pending">
+                <div class="mini-col-header">
+                  <span>Pending</span>
+                  <span class="mini-count">3</span>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-pending">Instagram</span>
+                  <div class="mini-card-title">AC tune-up</div>
+                  <div class="mini-card-client">Maria Rodriguez</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 18</span>
+                    <span class="mini-card-amount">$85</span>
+                  </div>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-pending">WhatsApp</span>
+                  <div class="mini-card-title">Commercial plumbing</div>
+                  <div class="mini-card-client">James Wilson</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 20</span>
+                    <span class="mini-card-amount">$240</span>
+                  </div>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-pending">Website</span>
+                  <div class="mini-card-title">Generator inspection</div>
+                  <div class="mini-card-client">Ana Lopez</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 21</span>
+                    <span class="mini-card-amount">$45</span>
+                  </div>
+                </div>
+              </div>
+              <!-- In Progress -->
+              <div class="mini-col col-prepared">
+                <div class="mini-col-header">
+                  <span>In Prog.</span>
+                  <span class="mini-count">2</span>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-prepared">Store</span>
+                  <div class="mini-card-title">Panel upgrade</div>
+                  <div class="mini-card-client">Sofia Chen</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 16</span>
+                    <span class="mini-card-amount">$60</span>
+                  </div>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-prepared">Instagram</span>
+                  <div class="mini-card-title">Smart thermostat</div>
+                  <div class="mini-card-client">Emily Park</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 17</span>
+                    <span class="mini-card-amount">$55</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Completed -->
+              <div class="mini-col col-delivered">
+                <div class="mini-col-header">
+                  <span>Done</span>
+                  <span class="mini-count">2</span>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-delivered">WhatsApp</span>
+                  <div class="mini-card-title">Leak repair</div>
+                  <div class="mini-card-client">Robert Kim</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 14</span>
+                    <span class="mini-card-amount">$120</span>
+                  </div>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-delivered">Store</span>
+                  <div class="mini-card-title">Seasonal maint.</div>
+                  <div class="mini-card-client">Lisa Brown</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 13</span>
+                    <span class="mini-card-amount">$95</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-tabbar">
+              <div class="mockup-tab active">
+                <div class="mockup-tab-icon">📋</div>
+                <span>Jobs</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">📅</div>
+                <span>Calendar</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">📊</div>
+                <span>Stats</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">⚙️</div>
+                <span>Settings</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="swipe-up">
+            <div class="chevron"></div>
+            <div class="swipe-text">Download on the App Store</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">2. Hero</div>
+    </div>
+    
+    <!-- Story 3: Job detail mockup -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-vibrant" id="story3">
+        <div class="deco-circle" style="width: 250px; height: 250px; top: -60px; left: -80px;"></div>
+        <div class="story-content">
+          <div class="story-top-spacer"></div>
+          <div class="story-headline">Share Jobs<br>With Your Crew</div>
+          <div class="story-subheadline">Team collaboration in real time with iCloud</div>
+          
+          <!-- Mini Job Detail Mockup -->
+          <div class="app-mockup">
+            <div class="mockup-statusbar">
+              <span class="time">9:41</span>
+              <span>⚡ 📶</span>
+            </div>
+            <div class="mockup-nav">
+              <div style="font-size: 10px; color: var(--primary); font-weight: 600;">← Back</div>
+              <div class="mockup-nav-title">Job Details</div>
+              <div style="font-size: 10px; color: var(--primary); font-weight: 600;">Share</div>
+            </div>
+            <div class="mini-detail">
+              <div class="mini-detail-header">
+                <div class="mini-detail-title">AC tune-up</div>
+                <div class="mini-detail-status">Pending</div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #EFF6FF;">👤</div>
+                <div>
+                  <div class="mini-detail-label">Client</div>
+                  <div class="mini-detail-value">Maria Rodriguez</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #FFF7ED;">📸</div>
+                <div>
+                  <div class="mini-detail-label">Source</div>
+                  <div class="mini-detail-value">Instagram</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #F0FDF4;">📅</div>
+                <div>
+                  <div class="mini-detail-label">Service date</div>
+                  <div class="mini-detail-value">Feb 18, 2:00 PM</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #FAF5FF;">💰</div>
+                <div>
+                  <div class="mini-detail-label">Job amount</div>
+                  <div class="mini-detail-value">$85.00</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #EFF6FF;">💳</div>
+                <div>
+                  <div class="mini-detail-label">Payment</div>
+                  <div class="mini-detail-value" style="color: var(--orange);">Pending</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #F0F9FF;">📝</div>
+                <div>
+                  <div class="mini-detail-label">Notes</div>
+                  <div class="mini-detail-value">Check filter & refrigerant</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 10px;">
+                <div style="flex: 1; background: var(--primary); color: white; font-size: 8px; font-weight: 700; text-align: center; padding: 8px; border-radius: 8px;">Start job</div>
+                <div style="flex: 1; background: #F1F5F9; color: #64748B; font-size: 8px; font-weight: 700; text-align: center; padding: 8px; border-radius: 8px;">Edit job</div>
+              </div>
+            </div>
+            <div class="mockup-tabbar">
+              <div class="mockup-tab active">
+                <div class="mockup-tab-icon">📋</div>
+                <span>Jobs</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">📅</div>
+                <span>Calendar</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">📊</div>
+                <span>Stats</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">⚙️</div>
+                <span>Settings</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="swipe-up">
+            <div class="chevron"></div>
+            <div class="swipe-text">Download on the App Store</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">3. Detail</div>
+    </div>
+    
+    <!-- Story 4: Features list (no mockup needed) -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-dark" id="story4">
+        <div class="deco-circle" style="width: 400px; height: 400px; top: -150px; right: -150px; background: rgba(37,99,235,0.15);"></div>
+        <div class="deco-circle" style="width: 200px; height: 200px; bottom: -50px; left: -50px; background: rgba(59,130,246,0.1);"></div>
+        <div class="story-content" style="justify-content: center; padding: 40px 24px; gap: 20px;">
+          <div class="story-headline" style="font-size: 2rem;">Why Trade Job Tracker?</div>
+          
+          <div style="display: flex; flex-direction: column; gap: 14px; width: 100%; z-index: 1;">
+            <div class="feature-pill">
+              <div class="pill-emoji">📋</div>
+              <div class="pill-content">
+                <div class="pill-title">Kanban board</div>
+                <div class="pill-desc">Pending → In Progress → Completed</div>
+              </div>
+            </div>
+            <div class="feature-pill">
+              <div class="pill-emoji">📅</div>
+              <div class="pill-content">
+                <div class="pill-title">Calendar view</div>
+                <div class="pill-desc">See jobs on a monthly calendar</div>
+              </div>
+            </div>
+            <div class="feature-pill">
+              <div class="pill-emoji">📊</div>
+              <div class="pill-content">
+                <div class="pill-title">Revenue statistics</div>
+                <div class="pill-desc">Trends by week, month, or year</div>
+              </div>
+            </div>
+            <div class="feature-pill">
+              <div class="pill-emoji">👥</div>
+              <div class="pill-content">
+                <div class="pill-title">Team sharing</div>
+                <div class="pill-desc">Real-time collaboration via iCloud</div>
+              </div>
+            </div>
+            <div class="feature-pill">
+              <div class="pill-emoji">📎</div>
+              <div class="pill-content">
+                <div class="pill-title">Attachments & sync</div>
+                <div class="pill-desc">Photos & PDFs on every Apple device</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="swipe-up" style="margin-top: 20px;">
+            <div class="chevron"></div>
+            <div class="swipe-text">Download on the App Store</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">4. Features</div>
+    </div>
+    
+    <!-- Story 5: CTA / closing with Stats mockup -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-blue" id="story5">
+        <div class="deco-circle" style="width: 350px; height: 350px; bottom: -100px; right: -100px;"></div>
+        <div class="story-content">
+          <div class="story-top-spacer"></div>
+          
+          <!-- Mini Stats Mockup -->
+          <div class="app-mockup" style="margin-bottom: 16px;">
+            <div class="mockup-statusbar">
+              <span class="time">9:41</span>
+              <span>⚡ 📶</span>
+            </div>
+            <div class="mockup-nav">
+              <div class="mockup-nav-icon">📊</div>
+              <div class="mockup-nav-title">Statistics</div>
+              <div style="font-size: 8px; color: var(--primary); font-weight: 600;">This Month</div>
+            </div>
+            <div class="mini-stats">
+              <div class="mini-stats-grid">
+                <div class="mini-stat-card">
+                  <div class="mini-stat-label">Total Revenue</div>
+                  <div class="mini-stat-value blue">$2,450</div>
+                  <div class="mini-stat-change">↑ 18% vs last month</div>
+                </div>
+                <div class="mini-stat-card">
+                  <div class="mini-stat-label">Jobs</div>
+                  <div class="mini-stat-value green">34</div>
+                  <div class="mini-stat-change">↑ 12% vs last month</div>
+                </div>
+                <div class="mini-stat-card">
+                  <div class="mini-stat-label">Avg. job</div>
+                  <div class="mini-stat-value blue">$72</div>
+                  <div class="mini-stat-change">↑ 5% vs last month</div>
+                </div>
+                <div class="mini-stat-card">
+                  <div class="mini-stat-label">Pending</div>
+                  <div class="mini-stat-value orange">8</div>
+                  <div style="font-size: 6px; font-weight: 600; color: #94A3B8;">Due this week</div>
+                </div>
+              </div>
+              <div class="mini-chart">
+                <div class="mini-chart-title">Weekly Revenue</div>
+                <div class="mini-chart-bars">
+                  <div class="mini-chart-bar" style="height: 55%; background: #BFDBFE;"></div>
+                  <div class="mini-chart-bar" style="height: 70%; background: #93C5FD;"></div>
+                  <div class="mini-chart-bar" style="height: 45%; background: #BFDBFE;"></div>
+                  <div class="mini-chart-bar" style="height: 85%; background: #60A5FA;"></div>
+                  <div class="mini-chart-bar" style="height: 65%; background: #93C5FD;"></div>
+                  <div class="mini-chart-bar" style="height: 90%; background: #3B82F6;"></div>
+                  <div class="mini-chart-bar" style="height: 100%; background: var(--primary);"></div>
+                </div>
+                <div class="mini-chart-labels">
+                  <div class="mini-chart-label">W1</div>
+                  <div class="mini-chart-label">W2</div>
+                  <div class="mini-chart-label">W3</div>
+                  <div class="mini-chart-label">W4</div>
+                  <div class="mini-chart-label">W5</div>
+                  <div class="mini-chart-label">W6</div>
+                  <div class="mini-chart-label">W7</div>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-tabbar">
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">📋</div>
+                <span>Jobs</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">📅</div>
+                <span>Calendar</span>
+              </div>
+              <div class="mockup-tab active">
+                <div class="mockup-tab-icon">📊</div>
+                <span>Stats</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">⚙️</div>
+                <span>Settings</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="story-headline" style="font-size: 1.7rem;">Field Service Jobs<br>Under Control</div>
+          <div class="story-subheadline" style="padding: 0 30px;">Track scheduling, progress, and revenue — built for how field teams actually work.</div>
+          
+          <div class="story-app-badge">
+            <div class="app-icon">🔧</div>
+            <div class="app-info">
+              <div class="app-name">Trade Job Tracker</div>
+              <div class="app-tagline">Available on the App Store</div>
+            </div>
+          </div>
+          
+          <div class="swipe-up" style="margin-top: 0;">
+            <div class="chevron"></div>
+            <div class="swipe-text">Get it now</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">5. CTA</div>
+    </div>
+    
+  </div>
+  
+  <div class="instructions">
+    <h3>📸 Instagram Stories Export Guide</h3>
+    <ol>
+      <li>Click <strong>Download All Stories</strong> to export all 5 images for Trade Job Tracker promos</li>
+      <li>Stories are exported at <code>1080 × 1920px</code> (9:16 ratio — Instagram Stories standard)</li>
+      <li>All stories are self-contained — no screenshots needed</li>
+      <li>Upload directly to Instagram Stories, Reels, or use in ads</li>
+    </ol>
+  </div>
+  
+  <canvas id="canvas"></canvas>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    const EXPORT_WIDTH = 1080;
+    const EXPORT_HEIGHT = 1920;
+    const PREVIEW_WIDTH = 360;
+    const PREVIEW_HEIGHT = 640;
+    const SCALE = EXPORT_WIDTH / PREVIEW_WIDTH;
+    
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+    
+    async function downloadCurrent(num) {
+      const element = document.getElementById(`story${num}`);
+      
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: null,
+          width: PREVIEW_WIDTH,
+          height: PREVIEW_HEIGHT
+        });
+        
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+        
+        ctx.fillStyle = '#1D4ED8';
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        
+        downloadDataUrl(finalCanvas.toDataURL('image/png'), `TradeJobTracker-IGStory-${num}.png`);
+      } catch (e) {
+        console.error('Export failed:', e);
+        alert('Export failed. Please try again.');
+      }
+    }
+    
+    async function downloadAll() {
+      for (let i = 1; i <= 5; i++) {
+        await downloadCurrent(i);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+  </script>
+</body>
+</html>
