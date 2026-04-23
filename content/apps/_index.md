@@ -48,6 +48,17 @@ icon_image = "/apps/sborders/icon.svg"
 url = "/apps/sbfieldservice/"
 
 [[extra.apps]]
+title = "Collaborative Shopping List"
+tagline = "Shared Grocery Shopping"
+description = "A beautifully simple collaborative shopping list with smart suggestions, price tracking, and archive history."
+platform = "iOS"
+price = "$2.99 — one-time purchase. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #16A34A 0%, #059669 100%)"
+icon_letter = "CSL"
+icon_image = "/apps/sbcolabshoppinglist/icon.svg"
+url = "/apps/sbcolabshoppinglist/"
+
+[[extra.apps]]
 title = "SB Diary"
 tagline = "Small Business Daily Journal"
 description = "Track your business journey with daily entries, mood tracking, and financial insights. Your story, your data, your device."
