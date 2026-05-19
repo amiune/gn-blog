@@ -24,7 +24,7 @@ price = "$9.99 — one-time purchase. No subscription. No ads."
 icon_color = "linear-gradient(135deg,rgb(37, 202, 235) 0%,rgb(80, 173, 119) 100%)"
 icon_letter = "I"
 icon_image = "/apps/sbinventory/icon.svg"
-url = "/apps/sborders/"
+url = "/apps/sbinventory/"
 
 [[extra.apps]]
 title = "Get Your Custom App"
