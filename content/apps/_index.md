@@ -16,6 +16,17 @@ icon_image = "/apps/sborders/icon.svg"
 url = "/apps/sborders/"
 
 [[extra.apps]]
+title = "Inventory 4 Makers"
+tagline = "Manage orders, grow your business"
+description = "A lightweight tracker for Etsy sellers, crafters, and small product businesses—products, size and color variants, optional materials, low-stock alerts, CSV export, and team sharing with other iOS users."
+platform = "iOS"
+price = "$9.99 — one-time purchase. No subscription. No ads."
+icon_color = "linear-gradient(135deg,rgb(37, 202, 235) 0%,rgb(80, 173, 119) 100%)"
+icon_letter = "I"
+icon_image = "/apps/sbinventory/icon.svg"
+url = "/apps/sborders/"
+
+[[extra.apps]]
 title = "Get Your Custom App"
 tagline = "Stop paying subscriptions for apps that aren't tailored for you and sell your data"
 description = "We build native tailored iOS apps to replace your expensive subscription software. One purchase, lifetime ownership. Tailored for your needs. You own your app and your data. Ask about our partnership contracts if you think your app can be sold on the App Store."
