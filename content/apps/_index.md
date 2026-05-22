@@ -17,7 +17,7 @@ url = "/apps/sborders/"
 
 [[extra.apps]]
 title = "Inventory 4 Makers"
-tagline = "Manage orders, grow your business"
+tagline = "Manage Inventory, grow your business"
 description = "A lightweight tracker for Etsy sellers, crafters, and small product businesses—products, size and color variants, optional materials, low-stock alerts, CSV export, and team sharing with other iOS users."
 platform = "iOS"
 price = "$9.99 — one-time purchase. No subscription. No ads."
@@ -25,6 +25,17 @@ icon_color = "linear-gradient(135deg,rgb(37, 202, 235) 0%,rgb(80, 173, 119) 100%
 icon_letter = "I"
 icon_image = "/apps/sbinventory/icon.svg"
 url = "/apps/sbinventory/"
+
+[[extra.apps]]
+title = "Clean Job Tracker"
+tagline = "Manage Jobs and Clients, grow your business"
+description = "A lightweight manager for solo cleaners and tiny cleaning businesses—clients, recurring schedules, checklists, before/after photos, and payments. Offline-first with your data in private iCloud. No servers."
+platform = "iOS"
+price = "$9.99 — one-time purchase. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)"
+icon_letter = "O"
+icon_image = "/apps/sbcleaning/icon.svg"
+url = "/apps/sbcleaning/"
 
 [[extra.apps]]
 title = "Get Your Custom App"
