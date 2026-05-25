@@ -59,7 +59,7 @@ icon_image = "/apps/sbshoppinglist/icon.svg"
 url = "/apps/sbshoppinglist/"
 
 [[extra.apps]]
-title = "Trade Job Tracker"
+title = "Field Service Job Tracker"
 tagline = "Manage jobs, grow your business"
 description = "A beautifully simple app to track jobs from start to delivery. Built for small businesses that care about staying organized."
 platform = "iOS"

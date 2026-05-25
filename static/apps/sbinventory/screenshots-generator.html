@@ -226,6 +226,7 @@
     <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
     <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
     <button class="secondary" onclick="downloadCurrent(5)">Screenshot 5</button>
+    <button class="secondary" onclick="downloadCurrent(6)">Screenshot 6</button>
   </div>
 
   <div class="screenshots">
@@ -334,13 +335,41 @@
       <div class="screenshot-label">5. Features</div>
     </div>
 
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot6" style="justify-content: center; gap: 28px; padding-top: 48px;">
+        <div class="headline" style="font-size: 2.5rem;">One purchase.<br>No tricks.</div>
+        <div class="subheadline" style="font-size: 1.15rem; max-width: 360px; margin-bottom: 8px;">
+          Simple &amp; straightforward
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px; z-index: 1; width: 100%; max-width: 390px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">🚫</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;">No subscription</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">📵</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;">No Ads</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">🔄</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;">Free Updates</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(52,199,89,0.35); border: 2px solid rgba(255,255,255,0.25); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">⭐</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;">Amazing Support</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">6. No subscription · No ads</div>
+    </div>
+
   </div>
 
   <div class="instructions">
     <h3>📸 Screenshot export guide</h3>
     <ol>
       <li><strong>Add captures:</strong> Click a placeholder or paste (Cmd+V) with the Simulator or device screenshot</li>
-      <li>Click <strong>Download All Screenshots</strong> for all five PNGs</li>
+      <li>Click <strong>Download All Screenshots</strong> for all six PNGs (5–6 are marketing-only)</li>
       <li>Exports at <code>1284 × 2778px</code> (6.5&Prime; display)</li>
       <li>No alpha channel (App Store compliant)</li>
       <li>In App Store Connect, use the <strong>6.5&Prime; iPhone</strong> slot; other sizes can derive from these</li>
@@ -445,7 +474,7 @@
     }
 
     async function downloadAll() {
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 6; i++) {
         await downloadCurrent(i);
         await new Promise(r => setTimeout(r, 500));
       }
