@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory 4 Makers — Lightweight inventory for crafters & Etsy sellers</title>
+  <meta name="description" content="Replace spreadsheets with a fast iPhone and iPad workflow. Track products, variants, materials, low-stock alerts, CSV export, and share inventory with other iOS users via iCloud.">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MPH3H835');</script>
+  <!-- End Google Tag Manager -->
+  <style>
+    :root {
+      --primary: #3C6E84;
+      --primary-dark: #2A5565;
+      --primary-light: #4A8899;
+      --accent: #0D9488;
+      --bg: #F4FAF9;
+      --card: #FFFFFF;
+      --text: #1E293B;
+      --text-secondary: #475569;
+      --text-tertiary: #94A3B8;
+      --border: #E2E8F0;
+      --amber: #F59E0B;
+      --teal: #0D9488;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(244,250,249,0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(226,232,240,0.6);
+      transition: box-shadow 0.3s;
+    }
+
+    .nav.scrolled {
+      box-shadow: 0 1px 16px rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-text {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(60,110,132,0.08);
+    }
+
+    .nav-cta {
+      background: var(--primary) !important;
+      color: white !important;
+      font-weight: 600 !important;
+      padding: 8px 20px !important;
+      box-shadow: 0 2px 8px rgba(60, 110, 132, 0.25);
+      transition: all 0.2s !important;
+      border-radius: 10px !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-dark) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(60, 110, 132, 0.35) !important;
+    }
+
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(60,110,132,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 18px 6px 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    .hero-badge-dot {
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, var(--teal), #0F766E);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-badge-dot svg {
+      width: 12px;
+      height: 12px;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 5.5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(60, 110, 132, 0.3);
+      transition: all 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(60, 110, 132, 0.35);
+    }
+
+    .btn-primary svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .hero-preview {
+      max-width: 920px;
+      margin: 64px auto 0;
+      position: relative;
+    }
+
+    .preview-window {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    .preview-titlebar {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #FF5F57; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #28CA41; }
+
+    .preview-content {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      min-height: 380px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .preview-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-stat {
+      background: #F1F5F9;
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: left;
+    }
+
+    .mini-stat .v {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .mini-stat .l {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-top: 4px;
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .plist-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: #FAFAFA;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .plist-row .name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .plist-row .meta {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    .plist-row .qty {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .plist-row.warn .qty {
+      color: var(--amber);
+    }
+
+    .plist-row .tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: #C2410C;
+      background: #FFEDD5;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-left: 8px;
+    }
+
+    .features {
+      padding: 100px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .section-sub {
+      text-align: center;
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin: 0 auto 56px;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+      border-color: rgba(60,110,132,0.2);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .fi-a { background: linear-gradient(135deg, #ECFEFF, #CCFBF1); }
+    .fi-b { background: linear-gradient(135deg, #F0FDFA, #BBF7D0); }
+    .fi-c { background: linear-gradient(135deg, #FFFBEB, #FDE68A); }
+    .fi-d { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+    .fi-e { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); }
+    .fi-f { background: linear-gradient(135deg, #F8FAFC, #E2E8F0); }
+    .fi-g { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .how-it-works {
+      padding: 80px 24px 100px;
+      background: white;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .how-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-top: 56px;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.66% + 24px);
+      right: calc(16.66% + 24px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      opacity: 0.25;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      font-size: 28px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 16px rgba(60,110,132,0.2);
+    }
+
+    .step h3 {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .step p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .stats-banner {
+      padding: 80px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .stat-value {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    .cta-section {
+      padding: 80px 24px 100px;
+    }
+
+    .cta-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 28px;
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(60,110,132,0.25);
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .cta-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .cta-card h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-card p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      color: var(--primary-dark);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: all 0.25s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .btn-white svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    @media (max-width: 900px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .steps::before { display: none; }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+      .hero {
+        padding: 120px 20px 60px;
+      }
+      .preview-content {
+        padding: 16px;
+      }
+      .cta-card {
+        padding: 48px 28px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1, .hero-sub, .hero-actions, .hero-badge {
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    .hero-badge { animation-delay: 0s; }
+    .hero h1 { animation-delay: 0.1s; }
+    .hero-sub { animation-delay: 0.2s; }
+    .hero-actions { animation-delay: 0.3s; }
+
+    .hero-preview {
+      animation: fadeInUp 0.8s ease-out 0.4s backwards;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon" style="background:none;box-shadow:none;padding:0;overflow:hidden;width:38px;height:38px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="38" height="38">
+            <defs>
+              <linearGradient id="nav-bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#4A8899"/>
+                <stop offset="100%" stop-color="#2A5565"/>
+              </linearGradient>
+              <clipPath id="nav-clip"><rect width="1024" height="1024" rx="224" ry="224"/></clipPath>
+            </defs>
+            <g clip-path="url(#nav-clip)">
+              <rect width="1024" height="1024" fill="url(#nav-bg)"/>
+              <g fill-rule="nonzero">
+                <path d="M512 268 L788 428 L512 588 L236 428 Z" fill="#F8FCFD"/>
+                <path d="M236 428 L512 588 L512 820 L236 660 Z" fill="#E2EEF2"/>
+                <path d="M512 588 L788 428 L788 660 L512 820 Z" fill="#C5D9E0"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <span class="logo-text">Inventory 4 Makers</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="https://apps.apple.com/app/id6768944391" class="nav-cta" target="_blank" rel="noopener">Download</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="hero-badge-dot">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </span>
+      For iPhone &amp; iPad
+    </div>
+    <h1>Inventory that<br><span>keeps up with makers</span></h1>
+    <p class="hero-sub">
+      A lightweight tracker for Etsy sellers, crafters, and small product businesses—products, size and color variants, optional materials, low-stock alerts, CSV export, and team sharing with other iOS users. Your data stays in your private iCloud.
+    </p>
+    <div class="hero-actions">
+      <a href="https://apps.apple.com/app/id6768944391" class="btn-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
+      </a>
+      <a href="#features" class="btn-secondary">Learn more</a>
+    </div>
+
+    <div class="hero-preview">
+      <div class="preview-window">
+        <div class="preview-titlebar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="preview-content">
+          <div>
+            <div class="section-label" style="text-align:left;margin-bottom:8px;">Overview</div>
+            <div class="stat-grid">
+              <div class="mini-stat">
+                <div class="v">4</div>
+                <div class="l">Products</div>
+              </div>
+              <div class="mini-stat">
+                <div class="v">18</div>
+                <div class="l">Variants</div>
+              </div>
+              <div class="mini-stat">
+                <div class="v">216</div>
+                <div class="l">Stock</div>
+              </div>
+              <div class="mini-stat">
+                <div class="v">5</div>
+                <div class="l">Materials</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-list">
+            <div class="plist-row">
+              <div>
+                <div class="name">Hand-poured Soy Candles</div>
+                <div class="meta">CNDL-SOY-240 · Candles · 3 variants</div>
+              </div>
+              <div class="qty">51</div>
+            </div>
+            <div class="plist-row warn">
+              <div>
+                <div class="name">Speckled Stoneware Mug<span class="tag">Low stock</span></div>
+                <div class="meta">CER-MUG-441 · Ceramics</div>
+              </div>
+              <div class="qty">57</div>
+            </div>
+            <div class="plist-row">
+              <div>
+                <div class="name">Slim Card Wallet</div>
+                <div class="meta">LTH-WALT-019 · Leather</div>
+              </div>
+              <div class="qty">39</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Spreadsheets, minus the friction</h2>
+    <p class="section-sub">Built for how small shops actually work—fast entry, clear variants, optional materials, iCloud team sharing, and exports you can open anywhere.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon fi-a"><span>📦</span></div>
+        <h3>Products &amp; SKUs</h3>
+        <p>Name, SKU, category, and notes so every line in your shop maps cleanly to stock.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-b"><span>🎨</span></div>
+        <h3>Variant tracking</h3>
+        <p>Size, color, and material combinations with their own quantities—perfect for made-to-order listings.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-c"><span>🔔</span></div>
+        <h3>Low-stock alerts</h3>
+        <p>Set thresholds per variant and material. Warning states stay visible across Inventory and Alerts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-d"><span>📋</span></div>
+        <h3>Materials (optional)</h3>
+        <p>Track supplies with units and supplier—link your raw stock to what you actually reorder.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-e"><span>📤</span></div>
+        <h3>CSV export</h3>
+        <p>Export products, variants, materials, or the full inventory for accounting or backup.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-f"><span>☁️</span></div>
+        <h3>iCloud (private)</h3>
+        <p>Sync across your iPhone and iPad with CloudKit private database—no multi-tenant warehouse mode, just your workspace.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-g"><span>👥</span></div>
+        <h3>Team sharing</h3>
+        <p>Invite other iOS users to view and edit your inventory through iCloud—ideal for partners, assistants, or co-makers on the same shop.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how-it-works">
+    <div class="how-inner">
+      <div class="section-label">How it works</div>
+      <h2 class="section-title">Up and running in seconds</h2>
+      <p class="section-sub">Three steps from empty list to useful inventory.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Add a product</h3>
+          <p>Create a product with SKU and category; optional notes for your future self.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Define variants</h3>
+          <p>Split stock by size, color, or material. Adjust counts as you make or sell.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Export or expand</h3>
+          <p>Turn on materials when you need supplier-level tracking; pull a CSV whenever you need a spreadsheet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-banner">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-value">15s</div>
+        <div class="stat-label">Target time to add a product</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Marketplace integrations</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">CSV</div>
+        <div class="stat-label">Portable exports</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">Private</div>
+        <div class="stat-label">Your iCloud container</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="download">
+    <div class="cta-card">
+      <h2>Ship with confidence</h2>
+      <p>Inventory 4 Makers is designed for solo shops and tiny teams—no warehouse stack, no accounting module, just stock you can trust.</p>
+      <a href="https://apps.apple.com/app/id6768944391" class="btn-white" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-copy">&copy; 2026 Inventory 4 Makers. Bundle ID <code style="font-size:12px;background:#f1f5f9;padding:2px 6px;border-radius:4px;">com.sbmakers.inventory</code></span>
+      </div>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="mailto:amiune@gmail.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPH3H835"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+</body>
+</html>

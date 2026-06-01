@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Orders - iPad App Store Screenshots Generator</title>
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #1D4ED8;
+      --accent: #3B82F6;
+      --bg-app: #F8FAFC;
+      --card: #FFFFFF;
+      --text: #1E293B;
+      --text-secondary: #64748B;
+      --text-tertiary: #94A3B8;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f0f12 0%, #1a1a22 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #60A5FA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(37, 99, 235, 0.5);
+    }
+    
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+    
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+    
+    /* iPad App Store Screenshot Frame: 2048 x 2732 for 13" iPad */
+    /* No border-radius - App Store screenshots must be rectangular with no transparency */
+    .screenshot {
+      width: 512px;
+      height: 683px;
+      background: linear-gradient(180deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .headline {
+      color: white;
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.25;
+      margin-bottom: 4px;
+      z-index: 1;
+    }
+    
+    .subheadline {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 10px;
+      z-index: 1;
+    }
+    
+    /* Screenshot Placeholder - matches 2048 × 2732 aspect ratio */
+    .screenshot-placeholder {
+      width: 400px;
+      height: 534px;
+      background: rgba(255,255,255,0.1);
+      border: 3px dashed rgba(255,255,255,0.4);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .screenshot-placeholder .placeholder-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .screenshot-placeholder .placeholder-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      opacity: 0.6;
+    }
+    
+    .screenshot-placeholder .placeholder-hint {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 8px;
+    }
+    
+    /* For pasted images */
+    .screenshot-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 13px;
+    }
+    
+    /* Canvas for export */
+    canvas {
+      display: none;
+    }
+    
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .instructions h3 {
+      color: #60A5FA;
+      margin-bottom: 12px;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+    
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📱 iPad App Store Screenshots</h1>
+    <p>Generate beautiful iPad screenshots for SB Orders (13-inch display)</p>
+  </div>
+  
+  <div class="controls">
+    <button onclick="downloadAll()">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Screenshot 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Screenshot 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
+    <button class="secondary" onclick="downloadCurrent(5)">Screenshot 5</button>
+  </div>
+  
+  <div class="screenshots">
+    
+    <!-- Screenshot 1: Kanban Board -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline">Organize Orders<br>Visually</div>
+        <div class="subheadline">Drag & drop Kanban board for easy tracking</div>
+        
+        <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">1. Kanban Board</div>
+    </div>
+    
+    <!-- Screenshot 2: Order Details -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline">Share Orders<br>With Your Team</div>
+        <div class="subheadline">Collaborate in real time via iCloud sharing</div>
+        
+        <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">2. Order Details</div>
+    </div>
+    
+    <!-- Screenshot 3: Stats/Insights -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline">Track Revenue<br>& Performance</div>
+        <div class="subheadline">See order status, payments & trends at a glance</div>
+        
+        <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">3. Statistics</div>
+    </div>
+    
+    <!-- Screenshot 4: Feature Highlights -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4" style="justify-content: center; gap: 24px;">
+        <div class="headline" style="font-size: 2.6rem;">Order Management<br>Made Simple</div>
+        <div class="subheadline" style="font-size: 1.15rem; max-width: 440px;">
+          Everything you need to manage orders for your small business.
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; z-index: 1; width: 100%; max-width: 470px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">☁️</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">iCloud Sync</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Access orders on all your devices</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">👥</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">Team Sharing</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Collaborate with your team</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">💰</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">No Subscription</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Pay once, use forever</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔒</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">Private & Secure</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Your data stays on your devices</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">4. Features</div>
+    </div>
+    
+    <!-- Screenshot 5: One Purchase, No Tricks -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot5" style="justify-content: center; gap: 24px;">
+        <div class="headline" style="font-size: 2.6rem;">One purchase.<br>No tricks.</div>
+        <div class="subheadline" style="font-size: 1.15rem; max-width: 440px;">
+          Simple &amp; straightforward
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; z-index: 1; width: 100%; max-width: 470px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">💎</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">No Subscription</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">One-time purchase, yours forever</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🚫</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">No Ads</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Clean, distraction-free experience</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔄</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">Free Updates</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">All future features included</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">💬</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">Amazing Support</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">We're here to help, fast</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">5. One Purchase</div>
+    </div>
+    
+  </div>
+  
+  <div class="instructions">
+    <h3>📸 iPad Screenshot Export Guide</h3>
+    <ol>
+      <li><strong>Add your screenshots:</strong> Click on a placeholder or paste (Cmd+V) to add your app screenshots</li>
+      <li>Click <strong>Download All Screenshots</strong> to get all 4 images</li>
+      <li>Screenshots are exported at <code>2048 × 2732px</code> (13" iPad)</li>
+      <li>No alpha channel/transparency (App Store compliant)</li>
+      <li>In App Store Connect, upload to the <strong>12.9" iPad Pro</strong> section</li>
+      <li>App Store Connect will auto-generate other iPad sizes</li>
+    </ol>
+  </div>
+  
+  <!-- Hidden file inputs -->
+  <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
+  <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
+  <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  
+  <canvas id="canvas"></canvas>
+  
+  <!-- html2canvas library for proper image capture -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    // Export dimensions for 13" iPad: 2048 x 2732
+    const EXPORT_WIDTH = 2048;
+    const EXPORT_HEIGHT = 2732;
+    const SCALE = 4;
+    
+    function triggerUpload(num) {
+      document.getElementById(`fileInput${num}`).click();
+    }
+    
+    function handleFileSelect(event, num) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPlaceholderImage(num, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    
+    function setPlaceholderImage(num, src) {
+      const placeholder = document.getElementById(`placeholder${num}`);
+      placeholder.innerHTML = `<img src="${src}" alt="Screenshot ${num}">`;
+      placeholder.style.border = 'none';
+      placeholder.style.background = 'transparent';
+    }
+    
+    // Handle paste events
+    document.addEventListener('paste', function(e) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            // Find the first empty placeholder or use placeholder 1
+            let targetNum = 1;
+            for (let j = 1; j <= 3; j++) {
+              const placeholder = document.getElementById(`placeholder${j}`);
+              if (placeholder && !placeholder.querySelector('img')) {
+                targetNum = j;
+                break;
+              }
+            }
+            setPlaceholderImage(targetNum, event.target.result);
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+    
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+    
+    async function downloadCurrent(num) {
+      const element = document.getElementById(`screenshot${num}`);
+      
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#1D4ED8',
+          width: 512,
+          height: 683
+        });
+        
+        // Create final canvas at export size
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+        
+        // Fill background (no alpha)
+        ctx.fillStyle = '#1D4ED8';
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        
+        // Draw captured content
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        
+        downloadDataUrl(finalCanvas.toDataURL('image/png'), `SBOrders-iPad-Screenshot-${num}.png`);
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
+      }
+    }
+    
+    async function downloadAll() {
+      for (let i = 1; i <= 5; i++) {
+        await downloadCurrent(i);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+  </script>
+</body>
+</html>

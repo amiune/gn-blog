@@ -1,0 +1,53 @@
+<svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#3DBEA0"/>
+          <stop offset="100%" stop-color="#1A7A65"/>
+        </linearGradient>
+        <linearGradient id="bagGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+          <stop offset="0%" stop-color="#FFFFFF"/>
+          <stop offset="100%" stop-color="#F0F4F3"/>
+        </linearGradient>
+        <clipPath id="iosClip">
+          <rect width="1024" height="1024" rx="224" ry="224"/>
+        </clipPath>
+      </defs>
+
+      <g clip-path="url(#iosClip)">
+        <!-- Background -->
+        <rect width="1024" height="1024" fill="url(#bg)"/>
+
+        <!-- Subtle pattern circles for depth -->
+        <circle cx="180" cy="180" r="260" fill="#fff" opacity="0.04"/>
+        <circle cx="880" cy="850" r="300" fill="#000" opacity="0.06"/>
+
+        <!-- Shopping bag body -->
+        <path d="M280,420 L280,780 Q280,830 330,830 L694,830 Q744,830 744,780 L744,420 Z" fill="url(#bagGrad)" opacity="0.95"/>
+
+        <!-- Bag opening / rim -->
+        <rect x="260" y="400" width="504" height="50" rx="16" fill="#fff"/>
+
+        <!-- Bag handles -->
+        <path d="M390,400 L390,300 Q390,240 450,240 L574,240 Q634,240 634,300 L634,400" fill="none" stroke="#fff" stroke-width="36" stroke-linecap="round"/>
+
+        <!-- Checklist inside the bag -->
+
+        <!-- Row 1 — checked -->
+        <rect x="350" y="500" width="40" height="40" rx="10" fill="#2D9B83"/>
+        <polyline points="359,522 369,534 389,506" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="420" y="508" width="240" height="14" rx="7" fill="#2D9B83" opacity="0.25"/>
+
+        <!-- Row 2 — checked -->
+        <rect x="350" y="580" width="40" height="40" rx="10" fill="#2D9B83"/>
+        <polyline points="359,602 369,614 389,586" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="420" y="588" width="200" height="14" rx="7" fill="#2D9B83" opacity="0.25"/>
+
+        <!-- Row 3 — unchecked -->
+        <rect x="350" y="660" width="40" height="40" rx="10" fill="none" stroke="#2D9B83" stroke-width="5" opacity="0.5"/>
+        <rect x="420" y="668" width="260" height="14" rx="7" fill="#2D9B83" opacity="0.15"/>
+
+        <!-- Row 4 — unchecked -->
+        <rect x="350" y="740" width="40" height="40" rx="10" fill="none" stroke="#2D9B83" stroke-width="5" opacity="0.5"/>
+        <rect x="420" y="748" width="180" height="14" rx="7" fill="#2D9B83" opacity="0.15"/>
+      </g>
+    </svg>

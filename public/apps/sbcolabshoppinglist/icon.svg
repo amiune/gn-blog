@@ -1,0 +1,60 @@
+<svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#3DBEA0"/>
+          <stop offset="100%" stop-color="#1A7A65"/>
+        </linearGradient>
+        <linearGradient id="bagGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+          <stop offset="0%" stop-color="#FFFFFF"/>
+          <stop offset="100%" stop-color="#F0F4F3"/>
+        </linearGradient>
+        <clipPath id="iosClip">
+          <rect width="1024" height="1024" rx="224" ry="224"/>
+        </clipPath>
+      </defs>
+
+      <g clip-path="url(#iosClip)">
+        <!-- Background -->
+        <rect width="1024" height="1024" fill="url(#bg)"/>
+
+        <!-- Subtle pattern circles for depth -->
+        <circle cx="180" cy="180" r="260" fill="#fff" opacity="0.04"/>
+        <circle cx="880" cy="850" r="300" fill="#000" opacity="0.06"/>
+
+        <!-- Left person -->
+        <g opacity="1" transform="translate(-20 -20)">
+          <circle cx="302" cy="262" r="66" fill="#fff" opacity="0.95"/>
+          <path d="M190,520 L190,410 Q190,338 262,338 L342,338 Q414,338 414,410 L414,520 Z" fill="#fff" opacity="0.95"/>
+        </g>
+
+        <!-- Right person -->
+        <g opacity="1" transform="translate(20 -20)">
+          <circle cx="722" cy="262" r="66" fill="#fff" opacity="0.95"/>
+          <path d="M610,520 L610,410 Q610,338 682,338 L762,338 Q834,338 834,410 L834,520 Z" fill="#fff" opacity="0.95"/>
+        </g>
+
+        <!-- Shared shopping bag -->
+        <path d="M344,548 L344,832 Q344,872 384,872 L640,872 Q680,872 680,832 L680,548 Z" fill="url(#bagGrad)" opacity="0.97"/>
+
+        <!-- Bag opening / rim -->
+        <rect x="328" y="532" width="368" height="42" rx="14" fill="#fff"/>
+
+        <!-- Bag handles -->
+        <path d="M430,532 L430,474 Q430,430 474,430 L550,430 Q594,430 594,474 L594,532" fill="none" stroke="#fff" stroke-width="30" stroke-linecap="round"/>
+
+        <!-- Checklist inside the bag -->
+        <rect x="392" y="612" width="30" height="30" rx="8" fill="#2D9B83"/>
+        <polyline points="399,628 407,637 421,616" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="442" y="619" width="176" height="11" rx="6" fill="#2D9B83" opacity="0.25"/>
+
+        <rect x="392" y="674" width="30" height="30" rx="8" fill="#2D9B83"/>
+        <polyline points="399,690 407,699 421,678" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="442" y="681" width="146" height="11" rx="6" fill="#2D9B83" opacity="0.25"/>
+
+        <rect x="392" y="736" width="30" height="30" rx="8" fill="none" stroke="#2D9B83" stroke-width="4" opacity="0.5"/>
+        <rect x="442" y="743" width="188" height="11" rx="6" fill="#2D9B83" opacity="0.15"/>
+
+        <rect x="392" y="798" width="30" height="30" rx="8" fill="none" stroke="#2D9B83" stroke-width="4" opacity="0.5"/>
+        <rect x="442" y="805" width="132" height="11" rx="6" fill="#2D9B83" opacity="0.15"/>
+      </g>
+    </svg>
