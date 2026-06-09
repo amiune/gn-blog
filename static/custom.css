@@ -617,6 +617,78 @@ a {
 }
 
 /* ============================================
+   Research Section
+   ============================================ */
+.section-research {
+  padding: var(--section-spacing) 0;
+  background: var(--bg-alt);
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .research-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.research-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  padding: 2rem;
+  transition: all var(--transition-base);
+}
+
+.research-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-4px);
+}
+
+.research-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+}
+
+.research-card h3 {
+  margin-bottom: 0.75rem;
+}
+
+.research-card > p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.research-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.research-repo {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.research-repo:hover {
+  color: var(--accent);
+}
+
+/* ============================================
    Learn Section
    ============================================ */
 .section-learn {

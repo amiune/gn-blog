@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% block title %}Generative Networks{% endblock title %}</title>
+    <title>MokuML: Local ML Predictions Without a Pipeline — Generative Networks</title>
     <meta name="description" content="Generative Networks - Custom iOS apps, AI education, and consulting. Putting AI at the service of people." />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,62 @@
       </div>
     </nav>
 
-    {% block content %}{% endblock content %}
+    
+<!-- Article Header -->
+<header class="article-header">
+  <div class="container">
+    <a href="/blog/" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to articles
+    </a>
+    <h1>MokuML: Local ML Predictions Without a Pipeline</h1>
+    
+    <div class="article-meta">
+      <time datetime="2026-06-09">June 09, 2026</time>
+    </div>
+    
+  </div>
+</header>
+
+<!-- Article Content -->
+<main class="article-content">
+  <div class="container">
+    <div class="article-body">
+      <h1 id="mokuml-local-ml-predictions-without-a-pipeline">MokuML: Local ML Predictions Without a Pipeline</h1>
+<p><em>Proof-of-concept research — <a href="https://github.com/amiune/MokuML">github.com/amiune/MokuML</a></em></p>
+<p>What if a small business could connect Postgres, describe a prediction in plain English, and get results on their Mac — no data science team, no cloud ML stack, no Kumo-style subscription?</p>
+<p>That's what we're exploring with <strong>MokuML</strong>. Think lightweight <a href="https://kumo.ai">Kumo.ai</a>: connect a database, ask for predictions, get answers. But everything runs locally.</p>
+<span id="continue-reading"></span><h2 id="the-idea">The idea</h2>
+<ol>
+<li>Connect to your Postgres database.</li>
+<li>Describe what you want to predict ("which customers will churn?", "which invoices will be paid late?").</li>
+<li>A <strong>local LLM</strong> reads your schema — table names, columns, keys — and writes a safe <code>SELECT</code> query. It never sees your actual rows.</li>
+<li>The query runs on your machine in a read-only transaction.</li>
+<li><strong>TabPFN-3</strong> trains and predicts on that table, also locally.</li>
+</ol>
+<p>No feature engineering pipeline. No model tuning UI. No sending customer data to an API.</p>
+<h2 id="privacy-is-the-product-rule">Privacy is the product rule</h2>
+<p>The LLM gets schema metadata and your prompt. That's it — no cell values, no previews, no passwords. SQL is validated with an AST parser before execution. Mutations, DDL, and multi-statement tricks get rejected.</p>
+<p>Optional remote LLM mode exists, but the same boundary applies: schema only.</p>
+<h2 id="stack">Stack</h2>
+<ul>
+<li><strong>SwiftUI</strong> macOS app</li>
+<li><strong>Python worker</strong> on <code>127.0.0.1</code> for DB access, SQL validation, TabPFN inference</li>
+<li><strong>Ollama</strong> (or OpenAI-compatible API) for text-to-SQL</li>
+<li>Local run history in <code>~/Library/Application Support/MokuML/runs/</code></li>
+</ul>
+<h2 id="honest-limitations">Honest limitations</h2>
+<p>It can't predict the future from thin air — you need historical labels or a derivable target in the schema. TabPFN has row/feature limits. And check the TabPFN license before commercial use.</p>
+<p>Still early, but the direction feels right: local LLMs + tabular foundation models could make useful ML cheap and private for small businesses.</p>
+<p><strong>Repo:</strong> <a href="https://github.com/amiune/MokuML">github.com/amiune/MokuML</a></p>
+
+    </div>
+  </div>
+</main>
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -64,7 +119,6 @@
           </div>
           <nav class="footer-nav">
             <a href="/apps/">Apps Gallery</a>
-            <a href="/#research">Research</a>
             <a href="/#about">About</a>
             <a href="/#contact">Contact</a>
             <a href="/blog/">Blog</a>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% block title %}Generative Networks{% endblock title %}</title>
+    <title>BlackBoxApproach: Building Apps When AI Keeps Breaking Things — Generative Networks</title>
     <meta name="description" content="Generative Networks - Custom iOS apps, AI education, and consulting. Putting AI at the service of people." />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,49 @@
       </div>
     </nav>
 
-    {% block content %}{% endblock content %}
+    
+<!-- Article Header -->
+<header class="article-header">
+  <div class="container">
+    <a href="/blog/" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to articles
+    </a>
+    <h1>BlackBoxApproach: Building Apps When AI Keeps Breaking Things</h1>
+    
+    <div class="article-meta">
+      <time datetime="2026-06-09">June 09, 2026</time>
+    </div>
+    
+  </div>
+</header>
+
+<!-- Article Content -->
+<main class="article-content">
+  <div class="container">
+    <div class="article-body">
+      <h1 id="blackboxapproach-building-apps-when-ai-keeps-breaking-things">BlackBoxApproach: Building Apps When AI Keeps Breaking Things</h1>
+<p><em>Proof-of-concept research — <a href="https://github.com/amiune/theblackboxapproach">github.com/amiune/theblackboxapproach</a></em></p>
+<p>AI is great at generating code. It's also great at rewriting your entire project when you asked it to tweak one button. <strong>BlackBoxApproach</strong> is our experiment in fixing that.</p>
+<span id="continue-reading"></span><h2 id="what-it-tries-to-solve">What it tries to solve</h2>
+<p><strong>Human vs AI decisions.</strong> Every box and data field tracks provenance: <code>human_defined</code>, <code>ai_defined</code>, or <code>mixed</code>. Once you confirm something, AI can't downgrade it back to a guess.</p>
+<p><strong>Pseudocode as a middle layer.</strong> Boxes use hybrid pseudocode (<code>CALL</code>, <code>IF</code>, natural language) — enough structure to decompose a system, not enough to drown in implementation details until you're ready.</p>
+<p><strong>Modular boundaries.</strong> Refine one black box at a time. Ancestors are read-only context; only the selected subtree can change. The visualizer generates prompts that enforce this, so "fix the payment flow" doesn't rewrite your auth layer.</p>
+<p><strong>A human-readable view.</strong> A native macOS visualizer shows the box tree, provenance badges, and contracts — a simpler picture than dozens of scattered spec files.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Each app project gets a <code>blackboxes/</code> folder: YAML boxes, shared data structures, a skill file the LLM follows when explicitly invoked, and a provenance log. ChatGPT (or similar) returns structured file updates; the app writes them, tracks git diff, and blocks new AI edits while you have uncommitted changes.</p>
+<p>Not low-code. Not "natural language programming." Recursive black-box decomposition with contracts, intent, and audit trail.</p>
+<h2 id="status">Status</h2>
+<p>Early POC. macOS app + project template. The method matters more than the UI — the goal is disciplined AI-assisted development that stays understandable to humans.</p>
+<p><strong>Repo:</strong> <a href="https://github.com/amiune/theblackboxapproach">github.com/amiune/theblackboxapproach</a></p>
+
+    </div>
+  </div>
+</main>
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -64,7 +106,6 @@
           </div>
           <nav class="footer-nav">
             <a href="/apps/">Apps Gallery</a>
-            <a href="/#research">Research</a>
             <a href="/#about">About</a>
             <a href="/#contact">Contact</a>
             <a href="/blog/">Blog</a>
