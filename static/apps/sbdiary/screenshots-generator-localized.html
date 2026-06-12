@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Diary - App Store Screenshots (DE · FR · IT · PT · ES)</title>
+  <style>
+    :root {
+      --primary: #CC735A;
+      --primary-dark: #B85E45;
+      --accent: #407366;
+      --bg-app: #FAF8F5;
+      --card: #FFFFFF;
+      --text: #2C2C2C;
+      --text-secondary: #666666;
+      --text-tertiary: #999999;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f0f12 0%, #1a1a22 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #E8C87A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: -18px auto 24px;
+      flex-wrap: wrap;
+    }
+
+    .lang-bar label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .lang-bar input { display: none; }
+
+    .lang-bar label:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(204, 115, 90, 0.22);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(204, 115, 90, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(204, 115, 90, 0.5);
+    }
+    
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+    
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+    
+    .screenshot {
+      width: 414px;
+      height: 896px;
+      background: linear-gradient(180deg, #CC735A 0%, #B85E45 50%, #9A4D3A 100%);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .headline {
+      color: white;
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      z-index: 1;
+    }
+    
+    .subheadline {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.3rem;
+      text-align: center;
+      margin-bottom: 24px;
+      z-index: 1;
+    }
+    
+    .screenshot-placeholder {
+      width: 327px;
+      height: 708px;
+      background: rgba(255,255,255,0.1);
+      border: 3px dashed rgba(255,255,255,0.4);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .screenshot-placeholder .placeholder-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .screenshot-placeholder .placeholder-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      opacity: 0.6;
+    }
+    
+    .screenshot-placeholder .placeholder-hint {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 8px;
+    }
+    
+    .screenshot-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 13px;
+    }
+    
+    canvas {
+      display: none;
+    }
+    
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .instructions h3 {
+      color: #E8C87A;
+      margin-bottom: 12px;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+    
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📱 App Store Screenshots</h1>
+    <p data-i18n="ui.subtitle">Generate beautiful screenshots for SB Diary</p>
+  </div>
+
+  <div class="lang-bar" role="radiogroup" aria-label="Language">
+    <label>
+      <input type="radio" name="lang" value="de" checked>
+      Deutsch
+    </label>
+    <label>
+      <input type="radio" name="lang" value="fr">
+      Français
+    </label>
+    <label>
+      <input type="radio" name="lang" value="it">
+      Italiano
+    </label>
+    <label>
+      <input type="radio" name="lang" value="pt">
+      Português
+    </label>
+    <label>
+      <input type="radio" name="lang" value="es">
+      Español
+    </label>
+  </div>
+  
+  <div class="controls">
+    <button onclick="downloadAll()" data-i18n="ui.downloadAll">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadAllLanguages()" data-i18n="ui.downloadAllLangs">Download All Languages</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Screenshot 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Screenshot 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
+  </div>
+  
+  <div class="screenshots">
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline" data-i18n="s1.headline">Track Your<br>Business Journey</div>
+        <div class="subheadline" data-i18n="s1.subheadline">Daily entries to capture wins & learnings</div>
+        
+        <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="ui.placeholderText">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 1242 × 2688px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s1">1. Home Feed</div>
+    </div>
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline" data-i18n="s2.headline">Log Your Day<br>in Seconds</div>
+        <div class="subheadline" data-i18n="s2.subheadline">Mood, categories, notes & finances</div>
+        
+        <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="ui.placeholderText">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 1242 × 2688px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s2">2. New Entry</div>
+    </div>
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline" data-i18n="s3.headline">Powerful<br>Business Insights</div>
+        <div class="subheadline" data-i18n="s3.subheadline">Visualize trends, moods & financials</div>
+        
+        <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="ui.placeholderText">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 1242 × 2688px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s3">3. Insights</div>
+    </div>
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4" style="justify-content: center; gap: 30px;">
+        <div class="headline" style="font-size: 2.8rem;" data-i18n="s4.headline">Your Business<br>Story, Captured</div>
+        <div class="subheadline" style="font-size: 1.4rem; max-width: 340px;" data-i18n="s4.subheadline">
+          Everything you need to track your small business journey in one beautiful app.
+          <br/>
+          Save your learnings and insights for future reference for you and your employees.
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 20px; z-index: 1;">
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">📔</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;" data-i18n="s4.dailyEntries">Daily Entries</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;" data-i18n="s4.dailyEntriesDesc">Capture every day</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">😊</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;" data-i18n="s4.moodTracking">Mood Tracking</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;" data-i18n="s4.moodTrackingDesc">How's business?</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">💰</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;" data-i18n="s4.financials">Financials</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;" data-i18n="s4.financialsDesc">Revenue & expenses</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">📊</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;" data-i18n="s4.insights">Insights</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;" data-i18n="s4.insightsDesc">Trends & stats</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; gap: 24px; z-index: 1; margin-top: 20px;">
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: white;">🔒</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 4px;" data-i18n="s4.private">100% Private</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: white;">📱</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 4px;" data-i18n="s4.localStorage">Local Storage</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: white;">✨</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 4px;" data-i18n="s4.beautifulUI">Beautiful UI</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s4">4. Features</div>
+    </div>
+    
+  </div>
+  
+  <div class="instructions">
+    <h3 data-i18n="ui.guideTitle">📸 iPhone Screenshot Export Guide</h3>
+    <ol>
+      <li data-i18n="ui.guide1"><strong>Add your screenshots:</strong> Click on a placeholder or paste (Cmd+V) to add your app screenshots</li>
+      <li data-i18n="ui.guide2">Pick a language above to preview localized copy before exporting</li>
+      <li data-i18n="ui.guide3">Click <strong>Download All Screenshots</strong> for the selected language, or <strong>Download All Languages</strong> for all 20 PNGs (4 screenshots × 5 languages)</li>
+      <li data-i18n="ui.guide4">Screenshots are exported at <code>1242 × 2688px</code> (6.5" display)</li>
+      <li data-i18n="ui.guide5">No alpha channel/transparency (App Store compliant)</li>
+      <li data-i18n="ui.guide6">In App Store Connect, upload to the <strong>6.5" iPhone</strong> section — other sizes are auto-generated</li>
+    </ol>
+  </div>
+  
+  <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
+  <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
+  <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  
+  <canvas id="canvas"></canvas>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    const EXPORT_WIDTH = 1242;
+    const EXPORT_HEIGHT = 2688;
+    const SCALE = 4;
+    const BG_FILL = '#B85E45';
+    const DOWNLOAD_PREFIX = 'SBDiary-Screenshot-';
+    const SCREENSHOT_COUNT = 4;
+    const LANG_CODES = ['de', 'fr', 'it', 'pt', 'es'];
+    let currentLang = 'de';
+
+    const COPY = {
+      de: {
+        ui: {
+          subtitle: 'App-Store-Screenshots für SB Diary erstellen',
+          downloadAll: 'Alle Screenshots herunterladen',
+          downloadAllLangs: 'Alle Sprachen herunterladen',
+          placeholderText: 'Klicken zum Hochladen oder<br>Screenshot hier einfügen',
+          placeholderHint: 'Empfohlen: 1242 × 2688 px',
+          guideTitle: '📸 iPhone-Screenshot-Export-Anleitung',
+          guide1: '<strong>Screenshots hinzufügen:</strong> Auf Platzhalter klicken oder einfügen (Cmd+V)',
+          guide2: 'Wähle oben eine Sprache, um die lokalisierte Vorschau zu sehen',
+          guide3: 'Klicke auf <strong>Alle Screenshots herunterladen</strong> für die gewählte Sprache oder <strong>Alle Sprachen herunterladen</strong> für alle 20 PNGs (4 Screenshots × 5 Sprachen)',
+          guide4: 'Export in <code>1242 × 2688 px</code> (6,5"-Display)',
+          guide5: 'Kein Alphakanal/Transparenz (App-Store-konform)',
+          guide6: 'In App Store Connect im Bereich <strong>6,5" iPhone</strong> hochladen — andere Größen werden automatisch erzeugt',
+        },
+        labels: { s1: '1. Übersicht', s2: '2. Neuer Eintrag', s3: '3. Einblicke', s4: '4. Funktionen' },
+        s1: { headline: 'Verfolge deine<br>Geschäftsreise', subheadline: 'Tägliche Einträge für Erfolge & Erkenntnisse' },
+        s2: { headline: 'Deinen Tag in<br>Sekunden erfassen', subheadline: 'Stimmung, Kategorien, Notizen & Finanzen' },
+        s3: { headline: 'Leistungsstarke<br>Geschäftseinblicke', subheadline: 'Trends, Stimmungen & Finanzen visualisieren' },
+        s4: {
+          headline: 'Deine Geschäftsgeschichte,<br>festgehalten',
+          subheadline: 'Alles, was du brauchst, um deine kleine Unternehmensreise in einer schönen App zu verfolgen.<br/>Speichere deine Erkenntnisse für dich und deine Mitarbeiter.',
+          dailyEntries: 'Tägliche Einträge', dailyEntriesDesc: 'Jeden Tag festhalten',
+          moodTracking: 'Stimmungstracking', moodTrackingDesc: 'Wie läuft\'s im Business?',
+          financials: 'Finanzen', financialsDesc: 'Umsatz & Ausgaben',
+          insights: 'Einblicke', insightsDesc: 'Trends & Statistiken',
+          private: '100 % privat', localStorage: 'Lokale Speicherung', beautifulUI: 'Schönes Design',
+        },
+      },
+      fr: {
+        ui: {
+          subtitle: 'Générer de belles captures d\'écran pour SB Diary',
+          downloadAll: 'Télécharger toutes les captures',
+          downloadAllLangs: 'Télécharger toutes les langues',
+          placeholderText: 'Cliquez pour téléverser ou<br>collez votre capture ici',
+          placeholderHint: 'Recommandé : 1242 × 2688 px',
+          guideTitle: '📸 Guide d\'export iPhone',
+          guide1: '<strong>Ajoutez vos captures :</strong> Cliquez sur un emplacement ou collez (Cmd+V)',
+          guide2: 'Choisissez une langue ci-dessus pour prévisualiser le texte localisé',
+          guide3: 'Cliquez sur <strong>Télécharger toutes les captures</strong> pour la langue sélectionnée, ou <strong>Télécharger toutes les langues</strong> pour les 20 PNG (4 captures × 5 langues)',
+          guide4: 'Export en <code>1242 × 2688 px</code> (écran 6,5")',
+          guide5: 'Pas de canal alpha/transparence (conforme App Store)',
+          guide6: 'Dans App Store Connect, téléversez dans la section <strong>iPhone 6,5"</strong> — les autres tailles sont générées automatiquement',
+        },
+        labels: { s1: '1. Fil d\'accueil', s2: '2. Nouvelle entrée', s3: '3. Analyses', s4: '4. Fonctions' },
+        s1: { headline: 'Suivez votre<br>parcours d\'entreprise', subheadline: 'Entrées quotidiennes pour capturer victoires & apprentissages' },
+        s2: { headline: 'Consignez votre journée<br>en quelques secondes', subheadline: 'Humeur, catégories, notes & finances' },
+        s3: { headline: 'Analyses d\'entreprise<br>puissantes', subheadline: 'Visualisez tendances, humeurs & finances' },
+        s4: {
+          headline: 'Votre histoire d\'entreprise,<br>capturée',
+          subheadline: 'Tout ce qu\'il faut pour suivre le parcours de votre petite entreprise dans une belle app.<br/>Conservez vos apprentissages pour vous et vos employés.',
+          dailyEntries: 'Entrées quotidiennes', dailyEntriesDesc: 'Capturez chaque jour',
+          moodTracking: 'Suivi d\'humeur', moodTrackingDesc: 'Comment va l\'entreprise ?',
+          financials: 'Finances', financialsDesc: 'Revenus & dépenses',
+          insights: 'Analyses', insightsDesc: 'Tendances & statistiques',
+          private: '100 % privé', localStorage: 'Stockage local', beautifulUI: 'Interface élégante',
+        },
+      },
+      it: {
+        ui: {
+          subtitle: 'Genera splendide schermate App Store per SB Diary',
+          downloadAll: 'Scarica tutte le schermate',
+          downloadAllLangs: 'Scarica tutte le lingue',
+          placeholderText: 'Clicca per caricare o<br>incolla la schermata qui',
+          placeholderHint: 'Consigliato: 1242 × 2688 px',
+          guideTitle: '📸 Guida all\'export iPhone',
+          guide1: '<strong>Aggiungi le schermate:</strong> Clicca su un segnaposto o incolla (Cmd+V)',
+          guide2: 'Scegli una lingua sopra per vedere l\'anteprima localizzata',
+          guide3: 'Clicca <strong>Scarica tutte le schermate</strong> per la lingua selezionata, o <strong>Scarica tutte le lingue</strong> per tutti i 20 PNG (4 schermate × 5 lingue)',
+          guide4: 'Export a <code>1242 × 2688 px</code> (display 6,5")',
+          guide5: 'Nessun canale alpha/trasparenza (conforme App Store)',
+          guide6: 'In App Store Connect, carica nella sezione <strong>iPhone 6,5"</strong> — le altre dimensioni vengono generate automaticamente',
+        },
+        labels: { s1: '1. Feed principale', s2: '2. Nuova voce', s3: '3. Approfondimenti', s4: '4. Funzioni' },
+        s1: { headline: 'Segui il tuo<br>percorso aziendale', subheadline: 'Voci giornaliere per catturare successi e apprendimenti' },
+        s2: { headline: 'Registra la giornata<br>in pochi secondi', subheadline: 'Umore, categorie, note e finanze' },
+        s3: { headline: 'Approfondimenti<br>aziendali potenti', subheadline: 'Visualizza trend, stati d\'animo e finanze' },
+        s4: {
+          headline: 'La tua storia aziendale,<br>conservata',
+          subheadline: 'Tutto ciò che serve per seguire il percorso della tua piccola attività in un\'app splendida.<br/>Salva apprendimenti e insight per te e i tuoi dipendenti.',
+          dailyEntries: 'Voci giornaliere', dailyEntriesDesc: 'Cattura ogni giorno',
+          moodTracking: 'Monitoraggio umore', moodTrackingDesc: 'Come va il business?',
+          financials: 'Finanze', financialsDesc: 'Ricavi e spese',
+          insights: 'Approfondimenti', insightsDesc: 'Trend e statistiche',
+          private: '100% privato', localStorage: 'Archiviazione locale', beautifulUI: 'Interfaccia elegante',
+        },
+      },
+      pt: {
+        ui: {
+          subtitle: 'Gerar belas capturas de tela para SB Diary',
+          downloadAll: 'Baixar todas as capturas',
+          downloadAllLangs: 'Baixar todos os idiomas',
+          placeholderText: 'Clique para enviar ou<br>cole sua captura aqui',
+          placeholderHint: 'Recomendado: 1242 × 2688 px',
+          guideTitle: '📸 Guia de exportação iPhone',
+          guide1: '<strong>Adicione suas capturas:</strong> Clique em um espaço reservado ou cole (Cmd+V)',
+          guide2: 'Escolha um idioma acima para visualizar o texto localizado',
+          guide3: 'Clique em <strong>Baixar todas as capturas</strong> para o idioma selecionado, ou <strong>Baixar todos os idiomas</strong> para os 20 PNGs (4 capturas × 5 idiomas)',
+          guide4: 'Exportação em <code>1242 × 2688 px</code> (tela de 6,5")',
+          guide5: 'Sem canal alpha/transparência (compatível com App Store)',
+          guide6: 'No App Store Connect, envie na seção <strong>iPhone 6,5"</strong> — outros tamanhos são gerados automaticamente',
+        },
+        labels: { s1: '1. Feed inicial', s2: '2. Nova entrada', s3: '3. Insights', s4: '4. Recursos' },
+        s1: { headline: 'Acompanhe sua<br>jornada empresarial', subheadline: 'Entradas diárias para capturar vitórias e aprendizados' },
+        s2: { headline: 'Registre seu dia<br>em segundos', subheadline: 'Humor, categorias, notas e finanças' },
+        s3: { headline: 'Insights empresariais<br>poderosos', subheadline: 'Visualize tendências, humores e finanças' },
+        s4: {
+          headline: 'Sua história empresarial,<br>registrada',
+          subheadline: 'Tudo o que você precisa para acompanhar a jornada do seu pequeno negócio em um app bonito.<br/>Salve aprendizados e insights para você e seus funcionários.',
+          dailyEntries: 'Entradas diárias', dailyEntriesDesc: 'Capture cada dia',
+          moodTracking: 'Rastreamento de humor', moodTrackingDesc: 'Como vai o negócio?',
+          financials: 'Finanças', financialsDesc: 'Receita e despesas',
+          insights: 'Insights', insightsDesc: 'Tendências e estatísticas',
+          private: '100% privado', localStorage: 'Armazenamento local', beautifulUI: 'Interface elegante',
+        },
+      },
+      es: {
+        ui: {
+          subtitle: 'Genera bonitas capturas de App Store para SB Diary',
+          downloadAll: 'Descargar todas las capturas',
+          downloadAllLangs: 'Descargar todos los idiomas',
+          placeholderText: 'Haz clic para subir o<br>pega tu captura aquí',
+          placeholderHint: 'Recomendado: 1242 × 2688 px',
+          guideTitle: '📸 Guía de exportación iPhone',
+          guide1: '<strong>Añade tus capturas:</strong> Haz clic en un marcador o pega (Cmd+V)',
+          guide2: 'Elige un idioma arriba para previsualizar el texto localizado',
+          guide3: 'Haz clic en <strong>Descargar todas las capturas</strong> para el idioma seleccionado, o <strong>Descargar todos los idiomas</strong> para los 20 PNG (4 capturas × 5 idiomas)',
+          guide4: 'Exportación a <code>1242 × 2688 px</code> (pantalla de 6,5")',
+          guide5: 'Sin canal alpha/transparencia (compatible con App Store)',
+          guide6: 'En App Store Connect, sube en la sección <strong>iPhone 6,5"</strong> — otros tamaños se generan automáticamente',
+        },
+        labels: { s1: '1. Inicio', s2: '2. Nueva entrada', s3: '3. Análisis', s4: '4. Funciones' },
+        s1: { headline: 'Sigue tu<br>camino empresarial', subheadline: 'Entradas diarias para capturar logros y aprendizajes' },
+        s2: { headline: 'Registra tu día<br>en segundos', subheadline: 'Estado de ánimo, categorías, notas y finanzas' },
+        s3: { headline: 'Análisis empresariales<br>poderosos', subheadline: 'Visualiza tendencias, estados de ánimo y finanzas' },
+        s4: {
+          headline: 'Tu historia empresarial,<br>registrada',
+          subheadline: 'Todo lo que necesitas para seguir el camino de tu pequeño negocio en una app hermosa.<br/>Guarda aprendizajes e insights para ti y tus empleados.',
+          dailyEntries: 'Entradas diarias', dailyEntriesDesc: 'Captura cada día',
+          moodTracking: 'Seguimiento de ánimo', moodTrackingDesc: '¿Cómo va el negocio?',
+          financials: 'Finanzas', financialsDesc: 'Ingresos y gastos',
+          insights: 'Análisis', insightsDesc: 'Tendencias y estadísticas',
+          private: '100% privado', localStorage: 'Almacenamiento local', beautifulUI: 'Interfaz elegante',
+        },
+      },
+    };
+
+    function t(lang, key) {
+      const parts = key.split('.');
+      let node = COPY[lang];
+      for (const part of parts) {
+        node = node?.[part];
+      }
+      return node ?? '';
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const value = t(lang, el.dataset.i18n);
+        if (value.includes('<br>') || value.includes('<strong>') || value.includes('<code>')) {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
+      });
+    }
+
+    document.querySelectorAll('input[name="lang"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        applyLanguage(radio.value);
+      });
+    });
+
+    function triggerUpload(num) {
+      document.getElementById(`fileInput${num}`).click();
+    }
+    
+    function handleFileSelect(event, num) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPlaceholderImage(num, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    
+    function setPlaceholderImage(num, src) {
+      const placeholder = document.getElementById(`placeholder${num}`);
+      placeholder.innerHTML = `<img src="${src}" alt="Screenshot ${num}">`;
+      placeholder.style.border = 'none';
+      placeholder.style.background = 'transparent';
+    }
+    
+    document.addEventListener('paste', function(e) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            let targetNum = 1;
+            for (let j = 1; j <= 3; j++) {
+              const placeholder = document.getElementById(`placeholder${j}`);
+              if (placeholder && !placeholder.querySelector('img')) {
+                targetNum = j;
+                break;
+              }
+            }
+            setPlaceholderImage(targetNum, event.target.result);
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+    
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+    
+    async function downloadCurrent(num, lang = currentLang) {
+      const savedLang = currentLang;
+      const radio = document.querySelector(`input[name="lang"][value="${lang}"]`);
+      if (lang !== currentLang && radio) {
+        radio.checked = true;
+        applyLanguage(lang);
+        await new Promise((r) => setTimeout(r, 150));
+      }
+
+      const element = document.getElementById(`screenshot${num}`);
+      
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: BG_FILL,
+          width: 414,
+          height: 896
+        });
+        
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+        
+        ctx.fillStyle = BG_FILL;
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        
+        downloadDataUrl(finalCanvas.toDataURL('image/png'), `${DOWNLOAD_PREFIX}${lang}-${num}.png`);
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
+      } finally {
+        if (savedLang !== lang) {
+          const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+          if (restore) {
+            restore.checked = true;
+            applyLanguage(savedLang);
+          }
+        }
+      }
+    }
+    
+    async function downloadAll() {
+      for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+        await downloadCurrent(i, currentLang);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+
+    async function downloadAllLanguages() {
+      const savedLang = currentLang;
+      for (const lang of LANG_CODES) {
+        for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+          await downloadCurrent(i, lang);
+          await new Promise((r) => setTimeout(r, 500));
+        }
+      }
+      const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+      if (restore) {
+        restore.checked = true;
+        applyLanguage(savedLang);
+      }
+    }
+
+    applyLanguage('de');
+  </script>
+</body>
+</html>

@@ -1,31 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory 4 Makers — Lightweight inventory for crafters & Etsy sellers</title>
-  <meta name="description" content="Replace spreadsheets with a fast iPhone and iPad workflow. Track products, variants, materials, low-stock alerts, CSV export, and share inventory with other iOS users via iCloud.">
+  <title>Custom Order Tracker – Gestion des commandes pour petites entreprises</title>
+  <meta name="description" content="Suivez et gérez vos commandes en toute simplicité. Une application de gestion des commandes magnifiquement conçue pour les petites entreprises.">
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-MPH3H835');</script>
-  <!-- End Google Tag Manager -->
+  <!-- End Google Tag Manager --> 
+
   <style>
     :root {
-      --primary: #3C6E84;
-      --primary-dark: #2A5565;
-      --primary-light: #4A8899;
-      --accent: #0D9488;
-      --bg: #F4FAF9;
+      --primary: #2563EB;
+      --primary-dark: #1D4ED8;
+      --primary-light: #3B82F6;
+      --accent: #6366F1;
+      --bg: #FAFBFF;
       --card: #FFFFFF;
       --text: #1E293B;
       --text-secondary: #475569;
       --text-tertiary: #94A3B8;
       --border: #E2E8F0;
-      --amber: #F59E0B;
-      --teal: #0D9488;
+      --orange: #F97316;
+      --blue: #3B82F6;
+      --green: #22C55E;
     }
 
     * {
@@ -46,13 +48,14 @@
       overflow-x: hidden;
     }
 
+    /* ========== NAV ========== */
     .nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(244,250,249,0.88);
+      background: rgba(250,251,255,0.8);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-bottom: 1px solid rgba(226,232,240,0.6);
@@ -81,6 +84,21 @@
       color: var(--text);
     }
 
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: -0.3px;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    }
+
     .logo-text {
       font-size: 19px;
       font-weight: 800;
@@ -105,7 +123,7 @@
 
     .nav-links a:hover {
       color: var(--text);
-      background: rgba(60,110,132,0.08);
+      background: rgba(37,99,235,0.06);
     }
 
     .nav-cta {
@@ -113,21 +131,20 @@
       color: white !important;
       font-weight: 600 !important;
       padding: 8px 20px !important;
-      box-shadow: 0 2px 8px rgba(60, 110, 132, 0.25);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
       transition: all 0.2s !important;
-      border-radius: 10px !important;
     }
 
     .nav-cta:hover {
       background: var(--primary-dark) !important;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(60, 110, 132, 0.35) !important;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
     }
 
     .nav-lang { display: flex; align-items: center; }
     .lang-select {
       appearance: none;
-      background: rgba(42,85,101,0.08) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+      background: rgba(37,99,235,0.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 32px 8px 12px;
@@ -140,6 +157,7 @@
     .lang-select:hover { border-color: var(--primary); color: var(--text); }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
+    /* ========== HERO ========== */
     .hero {
       padding: 140px 24px 80px;
       text-align: center;
@@ -155,7 +173,7 @@
       transform: translateX(-50%);
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, rgba(60,110,132,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -177,7 +195,7 @@
     .hero-badge-dot {
       width: 22px;
       height: 22px;
-      background: linear-gradient(135deg, var(--teal), #0F766E);
+      background: linear-gradient(135deg, var(--green), #16A34A);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -193,7 +211,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(40px, 5.5vw, 68px);
+      font-size: clamp(42px, 6vw, 72px);
       font-weight: 800;
       letter-spacing: -2px;
       line-height: 1.08;
@@ -211,7 +229,7 @@
     .hero-sub {
       font-size: clamp(17px, 2vw, 20px);
       color: var(--text-secondary);
-      max-width: 580px;
+      max-width: 560px;
       margin: 0 auto 40px;
       line-height: 1.6;
     }
@@ -235,14 +253,14 @@
       padding: 14px 28px;
       border-radius: 14px;
       text-decoration: none;
-      box-shadow: 0 4px 16px rgba(60, 110, 132, 0.3);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
       transition: all 0.25s;
     }
 
     .btn-primary:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(60, 110, 132, 0.35);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
     }
 
     .btn-primary svg {
@@ -272,8 +290,9 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
 
+    /* ========== HERO PREVIEW ========== */
     .hero-preview {
-      max-width: 920px;
+      max-width: 900px;
       margin: 64px auto 0;
       position: relative;
     }
@@ -306,97 +325,97 @@
     .dot-green { background: #28CA41; }
 
     .preview-content {
-      padding: 28px;
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 24px;
-      min-height: 380px;
-      align-items: start;
-    }
-
-    @media (max-width: 900px) {
-      .preview-content {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .mini-stat {
-      background: #F1F5F9;
-      border-radius: 14px;
-      padding: 14px 16px;
-      text-align: left;
-    }
-
-    .mini-stat .v {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.5px;
-    }
-
-    .mini-stat .l {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      margin-top: 4px;
-    }
-
-    .product-list {
+      padding: 32px;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      gap: 20px;
+      min-height: 380px;
     }
 
-    .plist-row {
+    .kanban-col {
+      flex: 1;
+      background: #F8FAFC;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .kanban-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: #FAFAFA;
-      border-radius: 12px;
-      border: 1px solid rgba(0,0,0,0.04);
+      gap: 8px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .plist-row .name {
-      font-weight: 600;
+    .kanban-header .count {
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(0,0,0,0.06);
+      color: var(--text-secondary);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .col-pending .kanban-header { color: var(--orange); }
+    .col-prepared .kanban-header { color: var(--blue); }
+    .col-delivered .kanban-header { color: var(--green); }
+
+    .kanban-card {
+      background: white;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .kanban-card-title {
       font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
       color: var(--text);
     }
 
-    .plist-row .meta {
+    .kanban-card-client {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+    .kanban-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kanban-card-date {
       font-size: 11px;
       color: var(--text-tertiary);
-      margin-top: 2px;
+      font-weight: 500;
     }
 
-    .plist-row .qty {
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--primary);
-    }
-
-    .plist-row.warn .qty {
-      color: var(--amber);
-    }
-
-    .plist-row .tag {
-      font-size: 10px;
+    .kanban-card-amount {
+      font-size: 12px;
       font-weight: 700;
-      color: #C2410C;
-      background: #FFEDD5;
+      color: var(--text);
+    }
+
+    .kanban-card-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
       padding: 2px 8px;
       border-radius: 6px;
-      margin-left: 8px;
+      margin-bottom: 8px;
     }
 
+    .tag-pending { background: #FFF7ED; color: #EA580C; }
+    .tag-prepared { background: #EFF6FF; color: #2563EB; }
+    .tag-delivered { background: #F0FDF4; color: #16A34A; }
+
+    /* ========== FEATURES ========== */
     .features {
       padding: 100px 24px;
       max-width: 1200px;
@@ -426,7 +445,7 @@
       text-align: center;
       font-size: 17px;
       color: var(--text-secondary);
-      max-width: 540px;
+      max-width: 520px;
       margin: 0 auto 56px;
       line-height: 1.6;
     }
@@ -448,7 +467,7 @@
     .feature-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-      border-color: rgba(60,110,132,0.2);
+      border-color: rgba(37,99,235,0.15);
     }
 
     .feature-icon {
@@ -462,13 +481,12 @@
       font-size: 24px;
     }
 
-    .fi-a { background: linear-gradient(135deg, #ECFEFF, #CCFBF1); }
-    .fi-b { background: linear-gradient(135deg, #F0FDFA, #BBF7D0); }
-    .fi-c { background: linear-gradient(135deg, #FFFBEB, #FDE68A); }
-    .fi-d { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
-    .fi-e { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); }
-    .fi-f { background: linear-gradient(135deg, #F8FAFC, #E2E8F0); }
-    .fi-g { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+    .fi-kanban { background: linear-gradient(135deg, #FFF7ED, #FFEDD5); }
+    .fi-calendar { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+    .fi-stats { background: linear-gradient(135deg, #F0FDF4, #DCFCE7); }
+    .fi-team { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); }
+    .fi-attach { background: linear-gradient(135deg, #FFF1F2, #FFE4E6); }
+    .fi-sync { background: linear-gradient(135deg, #F0F9FF, #E0F2FE); }
 
     .feature-card h3 {
       font-size: 18px;
@@ -483,6 +501,7 @@
       line-height: 1.6;
     }
 
+    /* ========== HOW IT WORKS ========== */
     .how-it-works {
       padding: 80px 24px 100px;
       background: white;
@@ -511,7 +530,7 @@
       right: calc(16.66% + 24px);
       height: 2px;
       background: linear-gradient(90deg, var(--primary), var(--accent));
-      opacity: 0.25;
+      opacity: 0.2;
     }
 
     .step {
@@ -531,7 +550,7 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
-      box-shadow: 0 4px 16px rgba(60,110,132,0.2);
+      box-shadow: 0 4px 16px rgba(37,99,235,0.2);
     }
 
     .step h3 {
@@ -549,6 +568,7 @@
       margin: 0 auto;
     }
 
+    /* ========== STATS BANNER ========== */
     .stats-banner {
       padding: 80px 24px;
       max-width: 1000px;
@@ -583,6 +603,7 @@
       font-weight: 500;
     }
 
+    /* ========== CTA ========== */
     .cta-section {
       padding: 80px 24px 100px;
     }
@@ -596,7 +617,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(60,110,132,0.25);
+      box-shadow: 0 20px 60px rgba(37,99,235,0.25);
     }
 
     .cta-card::before {
@@ -633,7 +654,7 @@
 
     .cta-card p {
       font-size: 18px;
-      color: rgba(255,255,255,0.88);
+      color: rgba(255,255,255,0.85);
       margin-bottom: 32px;
       position: relative;
       z-index: 1;
@@ -644,7 +665,7 @@
       align-items: center;
       gap: 10px;
       background: white;
-      color: var(--primary-dark);
+      color: var(--primary);
       font-size: 16px;
       font-weight: 700;
       padding: 16px 32px;
@@ -666,6 +687,7 @@
       height: 20px;
     }
 
+    /* ========== FOOTER ========== */
     .footer {
       border-top: 1px solid var(--border);
       padding: 40px 24px;
@@ -685,7 +707,6 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      flex-wrap: wrap;
     }
 
     .footer-copy {
@@ -709,6 +730,7 @@
       color: var(--primary);
     }
 
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 900px) {
       .features-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -720,6 +742,9 @@
       .steps::before { display: none; }
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+      .preview-content {
+        flex-direction: column;
       }
     }
 
@@ -748,6 +773,7 @@
       }
     }
 
+    /* ========== ANIMATIONS ========== */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
@@ -769,68 +795,85 @@
 </head>
 <body>
 
+  <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="logo">
-        <div class="logo-icon" style="background:none;box-shadow:none;padding:0;overflow:hidden;width:38px;height:38px;">
+        <div class="logo-icon" style="background:none;box-shadow:none;padding:0;overflow:hidden;">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="38" height="38">
             <defs>
-              <linearGradient id="nav-bg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#4A8899"/>
-                <stop offset="100%" stop-color="#2A5565"/>
+              <linearGradient id="sbicon-bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3B82F6"/>
+                <stop offset="100%" stop-color="#1D4ED8"/>
               </linearGradient>
-              <clipPath id="nav-clip"><rect width="1024" height="1024" rx="224" ry="224"/></clipPath>
+              <clipPath id="sbicon-clip">
+                <rect width="1024" height="1024" rx="224" ry="224"/>
+              </clipPath>
             </defs>
-            <g clip-path="url(#nav-clip)">
-              <rect width="1024" height="1024" fill="url(#nav-bg)"/>
-              <g fill-rule="nonzero">
-                <path d="M512 268 L788 428 L512 588 L236 428 Z" fill="#F8FCFD"/>
-                <path d="M236 428 L512 588 L512 820 L236 660 Z" fill="#E2EEF2"/>
-                <path d="M512 588 L788 428 L788 660 L512 820 Z" fill="#C5D9E0"/>
-              </g>
+            <g clip-path="url(#sbicon-clip)">
+              <rect width="1024" height="1024" fill="url(#sbicon-bg)"/>
+              <rect x="260" y="230" width="504" height="604" rx="40" fill="#fff"/>
+              <rect x="400" y="190" width="224" height="80" rx="40" fill="#6366F1"/>
+              <rect x="440" y="210" width="144" height="40" rx="20" fill="#3B82F6"/>
+              <rect x="330" y="370" width="44" height="44" rx="10" fill="#6366F1"/>
+              <polyline points="340,394 350,406 372,380" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="410" y="378" width="280" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+              <rect x="330" y="460" width="44" height="44" rx="10" fill="#6366F1"/>
+              <polyline points="340,484 350,496 372,470" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="410" y="468" width="240" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+              <rect x="330" y="550" width="44" height="44" rx="10" fill="none" stroke="#6366F1" stroke-width="6"/>
+              <rect x="410" y="558" width="300" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+              <rect x="330" y="640" width="44" height="44" rx="10" fill="none" stroke="#6366F1" stroke-width="6"/>
+              <rect x="410" y="648" width="220" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+              <rect x="330" y="730" width="44" height="44" rx="10" fill="none" stroke="#6366F1" stroke-width="6"/>
+              <rect x="410" y="738" width="260" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
             </g>
           </svg>
         </div>
-        <span class="logo-text">Inventory 4 Makers</span>
+        <span class="logo-text">Custom Order Tracker</span>
       </a>
       <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#how-it-works">How It Works</a>
+        <a href="#features">Fonctionnalités</a>
+        <a href="#how-it-works">Comment ça marche</a>
         <div class="nav-lang">
-          <label class="sr-only" for="lang-select">Language</label>
-          <select id="lang-select" class="lang-select" aria-label="Language" onchange="if(this.value)window.location.href=this.value">
-            <option value="index.html" selected>English</option>
+          <label class="sr-only" for="lang-select">Langue</label>
+          <select id="lang-select" class="lang-select" aria-label="Langue" onchange="if(this.value)window.location.href=this.value">
+            <option value="index.html">English</option>
             <option value="index-de.html">Deutsch</option>
-            <option value="index-fr.html">Français</option>
+            <option value="index-fr.html" selected>Français</option>
             <option value="index-it.html">Italiano</option>
             <option value="index-pt.html">Português</option>
             <option value="index-es.html">Español</option>
           </select>
         </div>
-        <a href="https://apps.apple.com/app/id6768944391" class="nav-cta" target="_blank" rel="noopener">Download</a>
+        <a href="https://apps.apple.com/app/id6758559928" class="nav-cta" style="border-radius:10px;">Télécharger</a>
       </div>
     </div>
   </nav>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-badge">
       <span class="hero-badge-dot">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </span>
-      For iPhone &amp; iPad
+      Disponible sur l'App Store
     </div>
-    <h1>Inventory that<br><span>keeps up with makers</span></h1>
+    <h1>Gérez vos commandes,<br><span>développez votre activité</span></h1>
     <p class="hero-sub">
-      A lightweight tracker for Etsy sellers, crafters, and small product businesses—products, size and color variants, optional materials, low-stock alerts, CSV export, and team sharing with other iOS users. Your data stays in your private iCloud.
+      Une application d'une simplicité remarquable pour suivre les commandes du début à la livraison.
+      Conçue pour les petites entreprises soucieuses de rester organisées.
+      <br/>Pas d'abonnement. Pas de publicité. Un seul paiement de $9.99.
     </p>
     <div class="hero-actions">
-      <a href="https://apps.apple.com/app/id6768944391" class="btn-primary" target="_blank" rel="noopener">
+      <a href="https://apps.apple.com/app/id6758559928" class="btn-primary">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on the App Store
+        Télécharger sur l'App Store
       </a>
-      <a href="#features" class="btn-secondary">Learn more</a>
+      <a href="#features" class="btn-secondary">En savoir plus</a>
     </div>
 
+    <!-- PREVIEW -->
     <div class="hero-preview">
       <div class="preview-window">
         <div class="preview-titlebar">
@@ -839,48 +882,90 @@
           <span class="dot dot-green"></span>
         </div>
         <div class="preview-content">
-          <div>
-            <div class="section-label" style="text-align:left;margin-bottom:8px;">Overview</div>
-            <div class="stat-grid">
-              <div class="mini-stat">
-                <div class="v">4</div>
-                <div class="l">Products</div>
+          <!-- Pending Column -->
+          <div class="kanban-col col-pending">
+            <div class="kanban-header">
+              <span>En attente</span>
+              <span class="count">3</span>
+            </div>
+            <div class="kanban-card">
+              <span class="kanban-card-tag tag-pending">Instagram</span>
+              <div class="kanban-card-title">Birthday Cake</div>
+              <div class="kanban-card-client">Maria Rodriguez</div>
+              <div class="kanban-card-footer">
+                <span class="kanban-card-date">Feb 18, 2:00 PM</span>
+                <span class="kanban-card-amount">$85.00</span>
               </div>
-              <div class="mini-stat">
-                <div class="v">18</div>
-                <div class="l">Variants</div>
+            </div>
+            <div class="kanban-card">
+              <span class="kanban-card-tag tag-pending">WhatsApp</span>
+              <div class="kanban-card-title">Wedding Cupcakes</div>
+              <div class="kanban-card-client">James Wilson</div>
+              <div class="kanban-card-footer">
+                <span class="kanban-card-date">Feb 20, 10:00 AM</span>
+                <span class="kanban-card-amount">$240.00</span>
               </div>
-              <div class="mini-stat">
-                <div class="v">216</div>
-                <div class="l">Stock</div>
-              </div>
-              <div class="mini-stat">
-                <div class="v">5</div>
-                <div class="l">Materials</div>
+            </div>
+            <div class="kanban-card">
+              <span class="kanban-card-tag tag-pending">Website</span>
+              <div class="kanban-card-title">Custom Cookies Box</div>
+              <div class="kanban-card-client">Ana Lopez</div>
+              <div class="kanban-card-footer">
+                <span class="kanban-card-date">Feb 21, 4:00 PM</span>
+                <span class="kanban-card-amount">$45.00</span>
               </div>
             </div>
           </div>
-          <div class="product-list">
-            <div class="plist-row">
-              <div>
-                <div class="name">Hand-poured Soy Candles</div>
-                <div class="meta">CNDL-SOY-240 · Candles · 3 variants</div>
-              </div>
-              <div class="qty">51</div>
+
+          <!-- Prepared Column -->
+          <div class="kanban-col col-prepared">
+            <div class="kanban-header">
+              <span>Préparé</span>
+              <span class="count">2</span>
             </div>
-            <div class="plist-row warn">
-              <div>
-                <div class="name">Speckled Stoneware Mug<span class="tag">Low stock</span></div>
-                <div class="meta">CER-MUG-441 · Ceramics</div>
+            <div class="kanban-card">
+              <span class="kanban-card-tag tag-prepared">Store</span>
+              <div class="kanban-card-title">Chocolate Truffles</div>
+              <div class="kanban-card-client">Sofia Chen</div>
+              <div class="kanban-card-footer">
+                <span class="kanban-card-date">Feb 16, 12:00 PM</span>
+                <span class="kanban-card-amount">$60.00</span>
               </div>
-              <div class="qty">57</div>
             </div>
-            <div class="plist-row">
-              <div>
-                <div class="name">Slim Card Wallet</div>
-                <div class="meta">LTH-WALT-019 · Leather</div>
+            <div class="kanban-card">
+              <span class="kanban-card-tag tag-prepared">Instagram</span>
+              <div class="kanban-card-title">Macarons Set</div>
+              <div class="kanban-card-client">Emily Park</div>
+              <div class="kanban-card-footer">
+                <span class="kanban-card-date">Feb 17, 3:00 PM</span>
+                <span class="kanban-card-amount">$55.00</span>
               </div>
-              <div class="qty">39</div>
+            </div>
+          </div>
+
+          <!-- Delivered Column -->
+          <div class="kanban-col col-delivered">
+            <div class="kanban-header">
+              <span>Livré</span>
+              <span class="count">2</span>
+            </div>
+            <div class="kanban-card">
+              <span class="kanban-card-tag tag-delivered">WhatsApp</span>
+              <div class="kanban-card-title">Anniversary Cake</div>
+              <div class="kanban-card-client">Robert Kim</div>
+              <div class="kanban-card-footer">
+                <span class="kanban-card-date">Feb 14, 5:00 PM</span>
+                <span class="kanban-card-amount">$120.00</span>
+              </div>
+            </div>
+            <div class="kanban-card">
+              <span class="kanban-card-tag tag-delivered">Store</span>
+              <div class="kanban-card-title">Pastry Platter</div>
+              <div class="kanban-card-client">Lisa Brown</div>
+              <div class="kanban-card-footer">
+                <span class="kanban-card-date">Feb 13, 11:00 AM</span>
+                <span class="kanban-card-amount">$95.00</span>
+              </div>
             </div>
           </div>
         </div>
@@ -888,148 +973,196 @@
     </div>
   </section>
 
+  <!-- FEATURES -->
   <section class="features" id="features">
-    <div class="section-label">Features</div>
-    <h2 class="section-title">Spreadsheets, minus the friction</h2>
-    <p class="section-sub">Built for how small shops actually work—fast entry, clear variants, optional materials, iCloud team sharing, and exports you can open anywhere.</p>
+    <div class="section-label">Fonctionnalités</div>
+    <h2 class="section-title">Tout ce qu'il faut pour<br>gérer vos commandes</h2>
+    <p class="section-sub">Du suivi à la livraison, Custom Order Tracker vous offre une boîte à outils complète conçue pour le fonctionnement réel des petites entreprises.</p>
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon fi-a"><span>📦</span></div>
-        <h3>Products &amp; SKUs</h3>
-        <p>Name, SKU, category, and notes so every line in your shop maps cleanly to stock.</p>
+        <div class="feature-icon fi-kanban">
+          <span>📋</span>
+        </div>
+        <h3>Tableau Kanban</h3>
+        <p>Visualisez votre flux de travail avec des colonnes par glisser-déposer : En attente, Préparé et Livré. Voyez toutes vos commandes d'un coup d'œil.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-b"><span>🎨</span></div>
-        <h3>Variant tracking</h3>
-        <p>Size, color, and material combinations with their own quantities—perfect for made-to-order listings.</p>
+        <div class="feature-icon fi-calendar">
+          <span>📅</span>
+        </div>
+        <h3>Vue calendrier</h3>
+        <p>Consultez vos commandes sur un calendrier mensuel. Anticipez et ne manquez plus jamais une date de livraison.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-c"><span>🔔</span></div>
-        <h3>Low-stock alerts</h3>
-        <p>Set thresholds per variant and material. Warning states stay visible across Inventory and Alerts.</p>
+        <div class="feature-icon fi-stats">
+          <span>📊</span>
+        </div>
+        <h3>Statistiques de revenus</h3>
+        <p>Suivez vos revenus, paiements et tendances de commandes par semaine, mois ou année. Sachez comment va votre activité.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-d"><span>📋</span></div>
-        <h3>Materials (optional)</h3>
-        <p>Track supplies with units and supplier—link your raw stock to what you actually reorder.</p>
+        <div class="feature-icon fi-team">
+          <span>👥</span>
+        </div>
+        <h3>Partage d'équipe</h3>
+        <p>Invitez des membres de l'équipe à collaborer sur les commandes en temps réel. Tout le monde reste synchronisé via iCloud.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-e"><span>📤</span></div>
-        <h3>CSV export</h3>
-        <p>Export products, variants, materials, or the full inventory for accounting or backup.</p>
+        <div class="feature-icon fi-attach">
+          <span>📎</span>
+        </div>
+        <h3>Pièces jointes</h3>
+        <p>Joignez des photos et des PDF à chaque commande. Conservez images de référence, factures et notes au même endroit.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-f"><span>☁️</span></div>
-        <h3>iCloud (private)</h3>
-        <p>Sync across your iPhone and iPad with CloudKit private database—no multi-tenant warehouse mode, just your workspace.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon fi-g"><span>👥</span></div>
-        <h3>Team sharing</h3>
-        <p>Invite other iOS users to view and edit your inventory through iCloud—ideal for partners, assistants, or co-makers on the same shop.</p>
+        <div class="feature-icon fi-sync">
+          <span>☁️</span>
+        </div>
+        <h3>Synchronisation iCloud</h3>
+        <p>Vos données se synchronisent parfaitement sur tous vos appareils Apple. Commencez sur l'iPhone, continuez sur l'iPad.</p>
       </div>
     </div>
   </section>
 
+  <!-- HOW IT WORKS -->
   <section class="how-it-works" id="how-it-works">
     <div class="how-inner">
-      <div class="section-label">How it works</div>
-      <h2 class="section-title">Up and running in seconds</h2>
-      <p class="section-sub">Three steps from empty list to useful inventory.</p>
+      <div class="section-label">Comment ça marche</div>
+      <h2 class="section-title">Organisé en quelques minutes</h2>
+      <p class="section-sub">Trois étapes simples pour reprendre le contrôle de vos commandes.</p>
 
       <div class="steps">
         <div class="step">
           <div class="step-number">1</div>
-          <h3>Add a product</h3>
-          <p>Create a product with SKU and category; optional notes for your future self.</p>
+          <h3>Créer une commande</h3>
+          <p>Ajoutez les coordonnées du client, la date de livraison, le montant et les pièces jointes. Indiquez la source de la commande.</p>
         </div>
         <div class="step">
           <div class="step-number">2</div>
-          <h3>Define variants</h3>
-          <p>Split stock by size, color, or material. Adjust counts as you make or sell.</p>
+          <h3>Suivre l'avancement</h3>
+          <p>Déplacez les commandes sur votre tableau kanban d'En attente à Préparé, puis Livré.</p>
         </div>
         <div class="step">
           <div class="step-number">3</div>
-          <h3>Export or expand</h3>
-          <p>Turn on materials when you need supplier-level tracking; pull a CSV whenever you need a spreadsheet.</p>
+          <h3>Développer votre activité</h3>
+          <p>Utilisez les vues calendrier et les statistiques de revenus pour repérer les tendances et prendre de meilleures décisions.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- STATS BANNER -->
   <section class="stats-banner">
     <div class="stats-grid">
       <div class="stat">
-        <div class="stat-value">15s</div>
-        <div class="stat-label">Target time to add a product</div>
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Privé et sécurisé</div>
       </div>
       <div class="stat">
         <div class="stat-value">0</div>
-        <div class="stat-label">Marketplace integrations</div>
+        <div class="stat-label">Traqueurs tiers</div>
       </div>
       <div class="stat">
-        <div class="stat-value">CSV</div>
-        <div class="stat-label">Portable exports</div>
+        <div class="stat-value">5+</div>
+        <div class="stat-label">Sources de commandes suivies</div>
       </div>
       <div class="stat">
-        <div class="stat-value">Private</div>
-        <div class="stat-label">Your iCloud container</div>
+        <div class="stat-value">&infin;</div>
+        <div class="stat-label">Appareils synchronisés</div>
       </div>
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="cta-section" id="download">
     <div class="cta-card">
-      <h2>Ship with confidence</h2>
-      <p>Inventory 4 Makers is designed for solo shops and tiny teams—no warehouse stack, no accounting module, just stock you can trust.</p>
-      <a href="https://apps.apple.com/app/id6768944391" class="btn-white" target="_blank" rel="noopener">
+      <h2>Prêt à organiser vos commandes ?</h2>
+      <p>Téléchargez Custom Order Tracker et gérez votre activité plus efficacement dès aujourd'hui.</p>
+      <a href="https://apps.apple.com/app/id6758559928" class="btn-white">
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on the App Store
+        Télécharger sur l'App Store
       </a>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-left">
-        <span class="footer-copy">&copy; 2026 Inventory 4 Makers.</span>
+        <a href="#" class="logo" style="pointer-events:none;">
+          <div class="logo-icon" style="width:28px;height:28px;background:none;box-shadow:none;padding:0;overflow:hidden;border-radius:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="28" height="28">
+              <defs>
+                <linearGradient id="sbicon-bg2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#3B82F6"/>
+                  <stop offset="100%" stop-color="#1D4ED8"/>
+                </linearGradient>
+                <clipPath id="sbicon-clip2">
+                  <rect width="1024" height="1024" rx="224" ry="224"/>
+                </clipPath>
+              </defs>
+              <g clip-path="url(#sbicon-clip2)">
+                <rect width="1024" height="1024" fill="url(#sbicon-bg2)"/>
+                <rect x="260" y="230" width="504" height="604" rx="40" fill="#fff"/>
+                <rect x="400" y="190" width="224" height="80" rx="40" fill="#6366F1"/>
+                <rect x="440" y="210" width="144" height="40" rx="20" fill="#3B82F6"/>
+                <rect x="330" y="370" width="44" height="44" rx="10" fill="#6366F1"/>
+                <polyline points="340,394 350,406 372,380" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="410" y="378" width="280" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+                <rect x="330" y="460" width="44" height="44" rx="10" fill="#6366F1"/>
+                <polyline points="340,484 350,496 372,470" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="410" y="468" width="240" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+                <rect x="330" y="550" width="44" height="44" rx="10" fill="none" stroke="#6366F1" stroke-width="6"/>
+                <rect x="410" y="558" width="300" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+                <rect x="330" y="640" width="44" height="44" rx="10" fill="none" stroke="#6366F1" stroke-width="6"/>
+                <rect x="410" y="648" width="220" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+                <rect x="330" y="730" width="44" height="44" rx="10" fill="none" stroke="#6366F1" stroke-width="6"/>
+                <rect x="410" y="738" width="260" height="16" rx="8" fill="#2563EB" opacity="0.2"/>
+              </g>
+            </svg>
+          </div>
+          <span class="logo-text" style="font-size:15px;">Custom Order Tracker</span>
+        </a>
+        <span class="footer-copy">&copy; 2026 Custom Order Tracker. Tous droits réservés.</span>
       </div>
       <div class="footer-links">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="mailto:amiune@gmail.com">Contact</a>
+        <a href="privacy-policy.html">Politique de confidentialité</a>
+        <a href="mailto:hernan.amiune@icloud.com">Contact</a>
       </div>
     </div>
   </footer>
 
   <script>
+    // Nav scroll shadow
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 10);
     });
   </script>
+ 
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPH3H835"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1873247050036910');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1873247050036910&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1873247050036910');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1873247050036910&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 
 </body>
 </html>

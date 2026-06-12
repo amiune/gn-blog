@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Field Service - App Store Screenshots Generator (DE · FR · IT · PT · ES)</title>
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #1D4ED8;
+      --accent: #3B82F6;
+      --bg-app: #F8FAFC;
+      --card: #FFFFFF;
+      --text: #1E293B;
+      --text-secondary: #64748B;
+      --text-tertiary: #94A3B8;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f0f12 0%, #1a1a22 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #60A5FA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: -18px auto 24px;
+      flex-wrap: wrap;
+    }
+
+    .lang-bar label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .lang-bar input { display: none; }
+
+    .lang-bar label:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.22);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(37, 99, 235, 0.5);
+    }
+    
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+    
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+    
+    /* App Store Screenshot Frame: 1284 x 2778 for 6.5" */
+    /* No border-radius - App Store screenshots must be rectangular with no transparency */
+    .screenshot {
+      width: 428px;
+      height: 926px;
+      background: linear-gradient(180deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .headline {
+      color: white;
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.25;
+      margin-bottom: 6px;
+      z-index: 1;
+    }
+    
+    .subheadline {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 14px;
+      z-index: 1;
+    }
+    
+    /* Screenshot Placeholder - matches 1206 × 2622 aspect ratio */
+    .screenshot-placeholder {
+      width: 300px;
+      height: 652px;
+      background: rgba(255,255,255,0.1);
+      border: 3px dashed rgba(255,255,255,0.4);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .screenshot-placeholder .placeholder-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .screenshot-placeholder .placeholder-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+    
+    .screenshot-placeholder .placeholder-hint {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 8px;
+    }
+    
+    /* For pasted images */
+    .screenshot-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 21px;
+    }
+    
+    /* Canvas for export */
+    canvas {
+      display: none;
+    }
+    
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .instructions h3 {
+      color: #60A5FA;
+      margin-bottom: 12px;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+    
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📱 App Store Screenshots</h1>
+    <p data-i18n="ui.subtitle">Generate beautiful screenshots for SB Field Service</p>
+  </div>
+
+  <div class="lang-bar" role="radiogroup" aria-label="Language">
+    <label>
+      <input type="radio" name="lang" value="de" checked>
+      Deutsch
+    </label>
+    <label>
+      <input type="radio" name="lang" value="fr">
+      Français
+    </label>
+    <label>
+      <input type="radio" name="lang" value="it">
+      Italiano
+    </label>
+    <label>
+      <input type="radio" name="lang" value="pt">
+      Português
+    </label>
+    <label>
+      <input type="radio" name="lang" value="es">
+      Español
+    </label>
+  </div>
+  
+  <div class="controls">
+    <button onclick="downloadAll()" data-i18n="ui.downloadAll">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadAllLanguages()" data-i18n="ui.downloadAllLangs">Download All Languages</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Screenshot 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Screenshot 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
+    <button class="secondary" onclick="downloadCurrent(5)">Screenshot 5</button>
+  </div>
+  
+  <div class="screenshots">
+    
+    <!-- Screenshot 1: Kanban Board -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline" data-i18n="s1.headline">Organize Jobs<br>Visually</div>
+        <div class="subheadline" data-i18n="s1.subheadline">Drag & drop Kanban board for easy tracking</div>
+        
+        <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s1">1. Kanban Board</div>
+    </div>
+    
+    <!-- Screenshot 2: Job Details -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline" data-i18n="s2.headline">Share Jobs<br>With Your Team</div>
+        <div class="subheadline" data-i18n="s2.subheadline">Collaborate in real time via iCloud sharing</div>
+        
+        <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s2">2. Job Details</div>
+    </div>
+    
+    <!-- Screenshot 3: Stats/Insights -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline" data-i18n="s3.headline">Track Revenue<br>& Performance</div>
+        <div class="subheadline" data-i18n="s3.subheadline">See job status, payments & trends at a glance</div>
+        
+        <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s3">3. Statistics</div>
+    </div>
+    
+    <!-- Screenshot 4: Feature Highlights -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4" style="justify-content: center; gap: 32px;">
+        <div class="headline" style="font-size: 2.8rem;" data-i18n="s4.headline">Field Service<br>Made Simple</div>
+        <div class="subheadline" style="font-size: 1.3rem; max-width: 360px;" data-i18n="s4.subheadline">
+          Everything you need to manage field service jobs for your small business.
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 20px; z-index: 1; width: 100%; max-width: 390px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px;">
+            <div style="font-size: 2.4rem;">☁️</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.25rem;" data-i18n="s4.icloud">iCloud Sync</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 1rem;" data-i18n="s4.icloudDesc">Access jobs on all your devices</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px;">
+            <div style="font-size: 2.4rem;">👥</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.25rem;" data-i18n="s4.team">Team Sharing</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 1rem;" data-i18n="s4.teamDesc">Collaborate with your team</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px;">
+            <div style="font-size: 2.4rem;">💰</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.25rem;" data-i18n="s4.noSub">No Subscription</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 1rem;" data-i18n="s4.noSubDesc">Pay once, use forever</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px;">
+            <div style="font-size: 2.4rem;">🔒</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.25rem;" data-i18n="s4.secure">Private & Secure</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 1rem;" data-i18n="s4.secureDesc">Your data stays on your devices</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s4">4. Features</div>
+    </div>
+    
+    <!-- Screenshot 5: One purchase, no tricks -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot5" style="justify-content: center; gap: 28px; padding-top: 48px;">
+        <div class="headline" style="font-size: 2.6rem;" data-i18n="s5.headline">One purchase.<br>No tricks.</div>
+        <div class="subheadline" style="font-size: 1.2rem; max-width: 360px; margin-bottom: 8px;" data-i18n="s5.subheadline">
+          Simple &amp; straightforward
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px; z-index: 1; width: 100%; max-width: 390px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">🚫</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s5.noSub">No subscription</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">📵</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s5.noAds">No Ads</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">🔄</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s5.freeUpdates">Free Updates</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(52,199,89,0.35); border: 2px solid rgba(255,255,255,0.25); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">⭐</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s5.support">Amazing Support</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s5">5. One purchase · No tricks</div>
+    </div>
+    
+  </div>
+  
+  <div class="instructions">
+    <h3 data-i18n="ui.guideTitle">📸 Screenshot Export Guide</h3>
+    <ol>
+      <li data-i18n="ui.guide1"><strong>Add your screenshots:</strong> Click on a placeholder or paste (Cmd+V) to add your app screenshots</li>
+      <li data-i18n="ui.guide2">Pick a language above to preview localized copy before exporting</li>
+      <li data-i18n="ui.guide3">Click <strong>Download All Screenshots</strong> for the selected language, or <strong>Download All Languages</strong> for all 25 PNGs (5 screenshots × 5 languages)</li>
+      <li data-i18n="ui.guide4">Filenames include the language code: e.g. <code>SBFieldService-Screenshot-de-1.png</code></li>
+      <li data-i18n="ui.guide5">Screenshots are exported at <code>1284 × 2778px</code> (6.5" display)</li>
+      <li data-i18n="ui.guide6">No alpha channel/transparency (App Store compliant)</li>
+      <li data-i18n="ui.guide7">In App Store Connect, upload to the <strong>6.5" iPhone</strong> section</li>
+      <li data-i18n="ui.guide8">App Store Connect will auto-generate other sizes from these</li>
+    </ol>
+  </div>
+  
+  <!-- Hidden file inputs -->
+  <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
+  <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
+  <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  
+  <canvas id="canvas"></canvas>
+  
+  <!-- html2canvas library for proper image capture -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    const EXPORT_WIDTH = 1284;
+    const EXPORT_HEIGHT = 2778;
+    const SCALE = 3;
+    const PREVIEW_WIDTH = 428;
+    const PREVIEW_HEIGHT = 926;
+    const BG_FILL = '#1D4ED8';
+    const DOWNLOAD_PREFIX = 'SBFieldService-Screenshot-';
+    const LANG_CODES = ['de', 'fr', 'it', 'pt', 'es'];
+    const SCREENSHOT_COUNT = 5;
+    let currentLang = 'de';
+
+    const COPY = {
+      de: {
+        ui: {
+          subtitle: 'Schöne Screenshots für SB Field Service erstellen',
+          downloadAll: 'Alle Screenshots herunterladen',
+          downloadAllLangs: 'Alle Sprachen herunterladen',
+          guideTitle: '📸 Screenshot-Export-Anleitung',
+          guide1: '<strong>Screenshots hinzufügen:</strong> Klicke auf einen Platzhalter oder füge ein (Cmd+V) ein, um App-Screenshots hinzuzufügen',
+          guide2: 'Wähle oben eine Sprache, um die lokalisierte Vorschau zu sehen',
+          guide3: 'Klicke auf <strong>Alle Screenshots herunterladen</strong> für die gewählte Sprache oder <strong>Alle Sprachen herunterladen</strong> für alle 25 PNGs (5 Screenshots × 5 Sprachen)',
+          guide4: 'Dateinamen enthalten den Sprachcode: z. B. <code>SBFieldService-Screenshot-de-1.png</code>',
+          guide5: 'Screenshots werden in <code>1284 × 2778px</code> exportiert (6,5" Display)',
+          guide6: 'Kein Alphakanal/Transparenz (App Store konform)',
+          guide7: 'In App Store Connect im Bereich <strong>6,5" iPhone</strong> hochladen',
+          guide8: 'App Store Connect generiert andere Größen automatisch',
+        },
+        labels: { s1: '1. Kanban-Board', s2: '2. Auftragsdetails', s3: '3. Statistiken', s4: '4. Funktionen', s5: '5. Einmal kaufen · Keine Tricks' },
+        placeholder: { text: 'Klicken zum Hochladen oder<br>Screenshot hier einfügen', hint: 'Empfohlen: 1170 × 2532px' },
+        s1: { headline: 'Aufträge visuell<br>organisieren', subheadline: 'Drag-&-Drop-Kanban-Board zur einfachen Nachverfolgung' },
+        s2: { headline: 'Aufträge mit<br>deinem Team teilen', subheadline: 'In Echtzeit per iCloud-Freigabe zusammenarbeiten' },
+        s3: { headline: 'Umsatz & Leistung<br>verfolgen', subheadline: 'Auftragsstatus, Zahlungen & Trends auf einen Blick' },
+        s4: {
+          headline: 'Field Service<br>leicht gemacht',
+          subheadline: 'Alles, was du brauchst, um Field-Service-Aufträge für dein kleines Unternehmen zu verwalten.',
+          icloud: 'iCloud-Sync', icloudDesc: 'Aufträge auf allen Geräten',
+          team: 'Team-Freigabe', teamDesc: 'Mit deinem Team zusammenarbeiten',
+          noSub: 'Kein Abo', noSubDesc: 'Einmal zahlen, für immer nutzen',
+          secure: 'Privat & sicher', secureDesc: 'Deine Daten bleiben auf deinen Geräten',
+        },
+        s5: {
+          headline: 'Einmal kaufen.<br>Keine Tricks.',
+          subheadline: 'Einfach & unkompliziert',
+          noSub: 'Kein Abo', noAds: 'Keine Werbung', freeUpdates: 'Kostenlose Updates', support: 'Großartiger Support',
+        },
+      },
+      fr: {
+        ui: {
+          subtitle: 'Générer de belles captures d\'écran pour SB Field Service',
+          downloadAll: 'Télécharger toutes les captures',
+          downloadAllLangs: 'Télécharger toutes les langues',
+          guideTitle: '📸 Guide d\'export des captures',
+          guide1: '<strong>Ajoutez vos captures :</strong> Cliquez sur un emplacement ou collez (Cmd+V) pour ajouter vos captures d\'app',
+          guide2: 'Choisissez une langue ci-dessus pour prévisualiser le texte localisé',
+          guide3: 'Cliquez sur <strong>Télécharger toutes les captures</strong> pour la langue sélectionnée, ou <strong>Télécharger toutes les langues</strong> pour les 25 PNG (5 captures × 5 langues)',
+          guide4: 'Les noms de fichier incluent le code langue : ex. <code>SBFieldService-Screenshot-fr-1.png</code>',
+          guide5: 'Les captures sont exportées en <code>1284 × 2778px</code> (écran 6,5")',
+          guide6: 'Pas de canal alpha/transparence (conforme App Store)',
+          guide7: 'Dans App Store Connect, téléversez dans la section <strong>iPhone 6,5"</strong>',
+          guide8: 'App Store Connect génère automatiquement les autres tailles',
+        },
+        labels: { s1: '1. Tableau Kanban', s2: '2. Détails du job', s3: '3. Statistiques', s4: '4. Fonctions', s5: '5. Un achat · Sans piège' },
+        placeholder: { text: 'Cliquez pour téléverser ou<br>collez votre capture ici', hint: 'Recommandé : 1170 × 2532px' },
+        s1: { headline: 'Organisez vos jobs<br>visuellement', subheadline: 'Tableau Kanban par glisser-déposer pour un suivi facile' },
+        s2: { headline: 'Partagez les jobs<br>avec votre équipe', subheadline: 'Collaborez en temps réel via le partage iCloud' },
+        s3: { headline: 'Suivez revenus<br>& performance', subheadline: 'Statut des jobs, paiements & tendances en un coup d\'œil' },
+        s4: {
+          headline: 'Service sur le terrain<br>simplifié',
+          subheadline: 'Tout ce qu\'il faut pour gérer les jobs de terrain de votre petite entreprise.',
+          icloud: 'Sync iCloud', icloudDesc: 'Accédez aux jobs sur tous vos appareils',
+          team: 'Partage d\'équipe', teamDesc: 'Collaborez avec votre équipe',
+          noSub: 'Sans abonnement', noSubDesc: 'Payez une fois, utilisez pour toujours',
+          secure: 'Privé & sécurisé', secureDesc: 'Vos données restent sur vos appareils',
+        },
+        s5: {
+          headline: 'Un achat.<br>Sans piège.',
+          subheadline: 'Simple & direct',
+          noSub: 'Sans abonnement', noAds: 'Sans publicité', freeUpdates: 'Mises à jour gratuites', support: 'Support exceptionnel',
+        },
+      },
+      it: {
+        ui: {
+          subtitle: 'Genera bellissimi screenshot per SB Field Service',
+          downloadAll: 'Scarica tutti gli screenshot',
+          downloadAllLangs: 'Scarica tutte le lingue',
+          guideTitle: '📸 Guida all\'export degli screenshot',
+          guide1: '<strong>Aggiungi gli screenshot:</strong> Clicca su un segnaposto o incolla (Cmd+V) per aggiungere gli screenshot dell\'app',
+          guide2: 'Scegli una lingua sopra per vedere l\'anteprima localizzata',
+          guide3: 'Clicca <strong>Scarica tutti gli screenshot</strong> per la lingua selezionata, o <strong>Scarica tutte le lingue</strong> per tutti i 25 PNG (5 screenshot × 5 lingue)',
+          guide4: 'I nomi file includono il codice lingua: es. <code>SBFieldService-Screenshot-it-1.png</code>',
+          guide5: 'Gli screenshot sono esportati a <code>1284 × 2778px</code> (display 6,5")',
+          guide6: 'Nessun canale alpha/trasparenza (conforme App Store)',
+          guide7: 'In App Store Connect, carica nella sezione <strong>iPhone 6,5"</strong>',
+          guide8: 'App Store Connect genera automaticamente le altre dimensioni',
+        },
+        labels: { s1: '1. Bacheca Kanban', s2: '2. Dettagli job', s3: '3. Statistiche', s4: '4. Funzioni', s5: '5. Un acquisto · Nessun trucco' },
+        placeholder: { text: 'Clicca per caricare o<br>incolla lo screenshot qui', hint: 'Consigliato: 1170 × 2532px' },
+        s1: { headline: 'Organizza i job<br>in modo visivo', subheadline: 'Bacheca Kanban drag & drop per un tracking facile' },
+        s2: { headline: 'Condividi i job<br>con il tuo team', subheadline: 'Collabora in tempo reale tramite condivisione iCloud' },
+        s3: { headline: 'Monitora ricavi<br>& performance', subheadline: 'Stato job, pagamenti & trend a colpo d\'occhio' },
+        s4: {
+          headline: 'Field Service<br>semplificato',
+          subheadline: 'Tutto ciò che serve per gestire i job sul campo della tua piccola attività.',
+          icloud: 'Sync iCloud', icloudDesc: 'Accedi ai job su tutti i dispositivi',
+          team: 'Condivisione team', teamDesc: 'Collabora con il tuo team',
+          noSub: 'Nessun abbonamento', noSubDesc: 'Paga una volta, usa per sempre',
+          secure: 'Privato & sicuro', secureDesc: 'I tuoi dati restano sui tuoi dispositivi',
+        },
+        s5: {
+          headline: 'Un acquisto.<br>Nessun trucco.',
+          subheadline: 'Semplice & diretto',
+          noSub: 'Nessun abbonamento', noAds: 'Nessuna pubblicità', freeUpdates: 'Aggiornamenti gratuiti', support: 'Supporto eccezionale',
+        },
+      },
+      pt: {
+        ui: {
+          subtitle: 'Gerar belas capturas de tela para SB Field Service',
+          downloadAll: 'Baixar todas as capturas',
+          downloadAllLangs: 'Baixar todos os idiomas',
+          guideTitle: '📸 Guia de exportação de capturas',
+          guide1: '<strong>Adicione suas capturas:</strong> Clique em um espaço reservado ou cole (Cmd+V) para adicionar capturas do app',
+          guide2: 'Escolha um idioma acima para visualizar o texto localizado',
+          guide3: 'Clique em <strong>Baixar todas as capturas</strong> para o idioma selecionado, ou <strong>Baixar todos os idiomas</strong> para os 25 PNGs (5 capturas × 5 idiomas)',
+          guide4: 'Os nomes dos arquivos incluem o código do idioma: ex. <code>SBFieldService-Screenshot-pt-1.png</code>',
+          guide5: 'As capturas são exportadas em <code>1284 × 2778px</code> (display 6,5")',
+          guide6: 'Sem canal alpha/transparência (compatível com App Store)',
+          guide7: 'No App Store Connect, envie para a seção <strong>iPhone 6,5"</strong>',
+          guide8: 'O App Store Connect gera automaticamente outros tamanhos',
+        },
+        labels: { s1: '1. Quadro Kanban', s2: '2. Detalhes do job', s3: '3. Estatísticas', s4: '4. Recursos', s5: '5. Uma compra · Sem truques' },
+        placeholder: { text: 'Clique para enviar ou<br>cole sua captura aqui', hint: 'Recomendado: 1170 × 2532px' },
+        s1: { headline: 'Organize jobs<br>visualmente', subheadline: 'Quadro Kanban de arrastar e soltar para acompanhamento fácil' },
+        s2: { headline: 'Compartilhe jobs<br>com sua equipe', subheadline: 'Colabore em tempo real via compartilhamento iCloud' },
+        s3: { headline: 'Acompanhe receita<br>& desempenho', subheadline: 'Status dos jobs, pagamentos & tendências de relance' },
+        s4: {
+          headline: 'Field Service<br>descomplicado',
+          subheadline: 'Tudo o que você precisa para gerenciar jobs de campo do seu pequeno negócio.',
+          icloud: 'Sync iCloud', icloudDesc: 'Acesse jobs em todos os dispositivos',
+          team: 'Compartilhamento em equipe', teamDesc: 'Colabore com sua equipe',
+          noSub: 'Sem assinatura', noSubDesc: 'Pague uma vez, use para sempre',
+          secure: 'Privado & seguro', secureDesc: 'Seus dados ficam nos seus dispositivos',
+        },
+        s5: {
+          headline: 'Uma compra.<br>Sem truques.',
+          subheadline: 'Simples & direto',
+          noSub: 'Sem assinatura', noAds: 'Sem anúncios', freeUpdates: 'Atualizações gratuitas', support: 'Suporte incrível',
+        },
+      },
+      es: {
+        ui: {
+          subtitle: 'Genera capturas bonitas para SB Field Service',
+          downloadAll: 'Descargar todas las capturas',
+          downloadAllLangs: 'Descargar todos los idiomas',
+          guideTitle: '📸 Guía de exportación de capturas',
+          guide1: '<strong>Añade tus capturas:</strong> Haz clic en un marcador o pega (Cmd+V) para añadir capturas de la app',
+          guide2: 'Elige un idioma arriba para previsualizar el texto localizado',
+          guide3: 'Haz clic en <strong>Descargar todas las capturas</strong> para el idioma seleccionado, o <strong>Descargar todos los idiomas</strong> para los 25 PNG (5 capturas × 5 idiomas)',
+          guide4: 'Los nombres de archivo incluyen el código de idioma: ej. <code>SBFieldService-Screenshot-es-1.png</code>',
+          guide5: 'Las capturas se exportan a <code>1284 × 2778px</code> (pantalla 6,5")',
+          guide6: 'Sin canal alpha/transparencia (compatible con App Store)',
+          guide7: 'En App Store Connect, sube a la sección <strong>iPhone 6,5"</strong>',
+          guide8: 'App Store Connect generará automáticamente otros tamaños',
+        },
+        labels: { s1: '1. Tablero Kanban', s2: '2. Detalles del trabajo', s3: '3. Estadísticas', s4: '4. Funciones', s5: '5. Una compra · Sin trucos' },
+        placeholder: { text: 'Haz clic para subir o<br>pega tu captura aquí', hint: 'Recomendado: 1170 × 2532px' },
+        s1: { headline: 'Organiza trabajos<br>visualmente', subheadline: 'Tablero Kanban de arrastrar y soltar para un seguimiento fácil' },
+        s2: { headline: 'Comparte trabajos<br>con tu equipo', subheadline: 'Colabora en tiempo real con iCloud' },
+        s3: { headline: 'Sigue ingresos<br>& rendimiento', subheadline: 'Estado de trabajos, pagos & tendencias de un vistazo' },
+        s4: {
+          headline: 'Field Service<br>simplificado',
+          subheadline: 'Todo lo que necesitas para gestionar trabajos de campo de tu pequeño negocio.',
+          icloud: 'Sync iCloud', icloudDesc: 'Accede a trabajos en todos tus dispositivos',
+          team: 'Compartir en equipo', teamDesc: 'Colabora con tu equipo',
+          noSub: 'Sin suscripción', noSubDesc: 'Paga una vez, úsalo para siempre',
+          secure: 'Privado & seguro', secureDesc: 'Tus datos permanecen en tus dispositivos',
+        },
+        s5: {
+          headline: 'Una compra.<br>Sin trucos.',
+          subheadline: 'Simple & directo',
+          noSub: 'Sin suscripción', noAds: 'Sin anuncios', freeUpdates: 'Actualizaciones gratis', support: 'Soporte increíble',
+        },
+      },
+    };
+
+    function t(lang, key) {
+      const parts = key.split('.');
+      let node = COPY[lang];
+      for (const part of parts) {
+        node = node?.[part];
+      }
+      return node ?? '';
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const value = t(lang, el.dataset.i18n);
+        if (value.includes('<br>') || value.includes('<strong>') || value.includes('<code>')) {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
+      });
+    }
+
+    document.querySelectorAll('input[name="lang"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        applyLanguage(radio.value);
+      });
+    });
+
+    function triggerUpload(num) {
+      document.getElementById(`fileInput${num}`).click();
+    }
+    
+    function handleFileSelect(event, num) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPlaceholderImage(num, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    
+    function setPlaceholderImage(num, src) {
+      const placeholder = document.getElementById(`placeholder${num}`);
+      placeholder.innerHTML = `<img src="${src}" alt="Screenshot ${num}">`;
+      placeholder.style.border = 'none';
+      placeholder.style.background = 'transparent';
+    }
+    
+    document.addEventListener('paste', function(e) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            let targetNum = 1;
+            for (let j = 1; j <= 3; j++) {
+              const placeholder = document.getElementById(`placeholder${j}`);
+              if (placeholder && !placeholder.querySelector('img')) {
+                targetNum = j;
+                break;
+              }
+            }
+            setPlaceholderImage(targetNum, event.target.result);
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+    
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+    
+    async function downloadCurrent(num, lang = currentLang) {
+      const savedLang = currentLang;
+      const radio = document.querySelector(`input[name="lang"][value="${lang}"]`);
+      if (lang !== currentLang && radio) {
+        radio.checked = true;
+        applyLanguage(lang);
+        await new Promise((r) => setTimeout(r, 150));
+      }
+
+      const element = document.getElementById(`screenshot${num}`);
+      
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: BG_FILL,
+          width: PREVIEW_WIDTH,
+          height: PREVIEW_HEIGHT
+        });
+        
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+        
+        ctx.fillStyle = BG_FILL;
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        
+        downloadDataUrl(finalCanvas.toDataURL('image/png'), `${DOWNLOAD_PREFIX}${lang}-${num}.png`);
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
+      } finally {
+        if (savedLang !== lang) {
+          const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+          if (restore) {
+            restore.checked = true;
+            applyLanguage(savedLang);
+          }
+        }
+      }
+    }
+    
+    async function downloadAll() {
+      for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+        await downloadCurrent(i, currentLang);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+
+    async function downloadAllLanguages() {
+      const savedLang = currentLang;
+      for (const lang of LANG_CODES) {
+        for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+          await downloadCurrent(i, lang);
+          await new Promise(r => setTimeout(r, 500));
+        }
+      }
+      const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+      if (restore) {
+        restore.checked = true;
+        applyLanguage(savedLang);
+      }
+    }
+
+    applyLanguage('de');
+  </script>
+</body>
+</html>

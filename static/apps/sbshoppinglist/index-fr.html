@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory 4 Makers — Lightweight inventory for crafters & Etsy sellers</title>
-  <meta name="description" content="Replace spreadsheets with a fast iPhone and iPad workflow. Track products, variants, materials, low-stock alerts, CSV export, and share inventory with other iOS users via iCloud.">
+  <title>Smart & Simple Shopping List (Gratuit) – Courses intelligentes</title>
+  <meta name="description" content="Une application de liste de courses gratuite et magnifiquement simple avec suggestions intelligentes, suivi des prix et historique d'archives. Restez organisé à chaque passage.">
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -14,18 +14,19 @@
   <!-- End Google Tag Manager -->
   <style>
     :root {
-      --primary: #3C6E84;
-      --primary-dark: #2A5565;
-      --primary-light: #4A8899;
-      --accent: #0D9488;
-      --bg: #F4FAF9;
+      --primary: #16A34A;
+      --primary-dark: #15803D;
+      --primary-light: #22C55E;
+      --accent: #059669;
+      --bg: #FAFDFB;
       --card: #FFFFFF;
       --text: #1E293B;
       --text-secondary: #475569;
       --text-tertiary: #94A3B8;
       --border: #E2E8F0;
-      --amber: #F59E0B;
-      --teal: #0D9488;
+      --orange: #F97316;
+      --blue: #3B82F6;
+      --green: #22C55E;
     }
 
     * {
@@ -46,13 +47,14 @@
       overflow-x: hidden;
     }
 
+    /* ========== NAV ========== */
     .nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(244,250,249,0.88);
+      background: rgba(250,253,251,0.8);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-bottom: 1px solid rgba(226,232,240,0.6);
@@ -81,6 +83,23 @@
       color: var(--text);
     }
 
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
     .logo-text {
       font-size: 19px;
       font-weight: 800;
@@ -105,7 +124,7 @@
 
     .nav-links a:hover {
       color: var(--text);
-      background: rgba(60,110,132,0.08);
+      background: rgba(22,163,74,0.06);
     }
 
     .nav-cta {
@@ -113,21 +132,20 @@
       color: white !important;
       font-weight: 600 !important;
       padding: 8px 20px !important;
-      box-shadow: 0 2px 8px rgba(60, 110, 132, 0.25);
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
       transition: all 0.2s !important;
-      border-radius: 10px !important;
     }
 
     .nav-cta:hover {
       background: var(--primary-dark) !important;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(60, 110, 132, 0.35) !important;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35) !important;
     }
 
     .nav-lang { display: flex; align-items: center; }
     .lang-select {
       appearance: none;
-      background: rgba(42,85,101,0.08) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+      background: rgba(22,163,74,0.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 32px 8px 12px;
@@ -140,6 +158,7 @@
     .lang-select:hover { border-color: var(--primary); color: var(--text); }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
+    /* ========== HERO ========== */
     .hero {
       padding: 140px 24px 80px;
       text-align: center;
@@ -155,7 +174,7 @@
       transform: translateX(-50%);
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, rgba(60,110,132,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(22,163,74,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -177,7 +196,7 @@
     .hero-badge-dot {
       width: 22px;
       height: 22px;
-      background: linear-gradient(135deg, var(--teal), #0F766E);
+      background: linear-gradient(135deg, var(--green), #16A34A);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -193,7 +212,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(40px, 5.5vw, 68px);
+      font-size: clamp(42px, 6vw, 72px);
       font-weight: 800;
       letter-spacing: -2px;
       line-height: 1.08;
@@ -211,7 +230,7 @@
     .hero-sub {
       font-size: clamp(17px, 2vw, 20px);
       color: var(--text-secondary);
-      max-width: 580px;
+      max-width: 560px;
       margin: 0 auto 40px;
       line-height: 1.6;
     }
@@ -235,14 +254,14 @@
       padding: 14px 28px;
       border-radius: 14px;
       text-decoration: none;
-      box-shadow: 0 4px 16px rgba(60, 110, 132, 0.3);
+      box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
       transition: all 0.25s;
     }
 
     .btn-primary:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(60, 110, 132, 0.35);
+      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.35);
     }
 
     .btn-primary svg {
@@ -272,131 +291,163 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
 
+    /* ========== HERO PREVIEW ========== */
     .hero-preview {
-      max-width: 920px;
+      max-width: 480px;
       margin: 64px auto 0;
       position: relative;
     }
 
-    .preview-window {
+    .preview-phone {
       background: white;
-      border-radius: 20px;
+      border-radius: 36px;
       border: 1px solid var(--border);
       box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
       overflow: hidden;
+      padding: 16px;
     }
 
-    .preview-titlebar {
-      display: flex;
-      align-items: center;
-      padding: 16px 20px;
-      background: #F8FAFC;
-      border-bottom: 1px solid var(--border);
-      gap: 8px;
+    .phone-notch {
+      width: 120px;
+      height: 28px;
+      background: var(--bg);
+      border-radius: 20px;
+      margin: 0 auto 16px;
     }
 
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .dot-red { background: #FF5F57; }
-    .dot-yellow { background: #FFBD2E; }
-    .dot-green { background: #28CA41; }
-
-    .preview-content {
-      padding: 28px;
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 24px;
-      min-height: 380px;
-      align-items: start;
-    }
-
-    @media (max-width: 900px) {
-      .preview-content {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .mini-stat {
-      background: #F1F5F9;
-      border-radius: 14px;
-      padding: 14px 16px;
-      text-align: left;
-    }
-
-    .mini-stat .v {
-      font-size: 22px;
+    .phone-header {
+      font-size: 28px;
       font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.5px;
-    }
-
-    .mini-stat .l {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      margin-top: 4px;
-    }
-
-    .product-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .plist-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: #FAFAFA;
-      border-radius: 12px;
-      border: 1px solid rgba(0,0,0,0.04);
-    }
-
-    .plist-row .name {
-      font-weight: 600;
-      font-size: 14px;
+      letter-spacing: -0.8px;
+      padding: 0 8px 16px;
       color: var(--text);
     }
 
-    .plist-row .meta {
-      font-size: 11px;
-      color: var(--text-tertiary);
-      margin-top: 2px;
+    .phone-list {
+      display: flex;
+      flex-direction: column;
     }
 
-    .plist-row .qty {
-      font-size: 17px;
-      font-weight: 800;
+    .phone-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 8px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .phone-item:last-child {
+      border-bottom: none;
+    }
+
+    .check-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid #CBD5E1;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .check-circle.checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .check-circle.checked svg {
+      width: 14px;
+      height: 14px;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .phone-item-name {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .phone-item-name.checked-text {
+      text-decoration: line-through;
+      color: var(--text-tertiary);
+    }
+
+    .phone-item-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+      background: rgba(0,0,0,0.03);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .phone-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 8px;
+      border-top: 1px solid rgba(22,163,74,0.15);
+      margin-top: 4px;
+    }
+
+    .phone-total-label {
+      font-size: 14px;
+      font-weight: 600;
       color: var(--primary);
     }
 
-    .plist-row.warn .qty {
-      color: var(--amber);
-    }
-
-    .plist-row .tag {
-      font-size: 10px;
+    .phone-total-value {
+      font-size: 14px;
       font-weight: 700;
-      color: #C2410C;
-      background: #FFEDD5;
-      padding: 2px 8px;
-      border-radius: 6px;
-      margin-left: 8px;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
     }
 
+    .phone-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--bg);
+      border-radius: 24px;
+      margin-top: 12px;
+    }
+
+    .phone-input-icon {
+      color: var(--text-tertiary);
+      font-size: 16px;
+    }
+
+    .phone-input-text {
+      font-size: 15px;
+      color: var(--text-tertiary);
+      flex: 1;
+    }
+
+    .phone-input-btn {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-input-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: white;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    /* ========== FEATURES ========== */
     .features {
       padding: 100px 24px;
       max-width: 1200px;
@@ -426,7 +477,7 @@
       text-align: center;
       font-size: 17px;
       color: var(--text-secondary);
-      max-width: 540px;
+      max-width: 520px;
       margin: 0 auto 56px;
       line-height: 1.6;
     }
@@ -448,7 +499,7 @@
     .feature-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-      border-color: rgba(60,110,132,0.2);
+      border-color: rgba(22,163,74,0.15);
     }
 
     .feature-icon {
@@ -462,13 +513,12 @@
       font-size: 24px;
     }
 
-    .fi-a { background: linear-gradient(135deg, #ECFEFF, #CCFBF1); }
-    .fi-b { background: linear-gradient(135deg, #F0FDFA, #BBF7D0); }
-    .fi-c { background: linear-gradient(135deg, #FFFBEB, #FDE68A); }
-    .fi-d { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
-    .fi-e { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); }
-    .fi-f { background: linear-gradient(135deg, #F8FAFC, #E2E8F0); }
-    .fi-g { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+    .fi-list { background: linear-gradient(135deg, #F0FDF4, #DCFCE7); }
+    .fi-suggest { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); }
+    .fi-price { background: linear-gradient(135deg, #FFF7ED, #FFEDD5); }
+    .fi-archive { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+    .fi-stats { background: linear-gradient(135deg, #FFF1F2, #FFE4E6); }
+    .fi-simple { background: linear-gradient(135deg, #F0F9FF, #E0F2FE); }
 
     .feature-card h3 {
       font-size: 18px;
@@ -483,6 +533,7 @@
       line-height: 1.6;
     }
 
+    /* ========== HOW IT WORKS ========== */
     .how-it-works {
       padding: 80px 24px 100px;
       background: white;
@@ -511,7 +562,7 @@
       right: calc(16.66% + 24px);
       height: 2px;
       background: linear-gradient(90deg, var(--primary), var(--accent));
-      opacity: 0.25;
+      opacity: 0.2;
     }
 
     .step {
@@ -531,7 +582,7 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
-      box-shadow: 0 4px 16px rgba(60,110,132,0.2);
+      box-shadow: 0 4px 16px rgba(22,163,74,0.2);
     }
 
     .step h3 {
@@ -549,6 +600,7 @@
       margin: 0 auto;
     }
 
+    /* ========== STATS BANNER ========== */
     .stats-banner {
       padding: 80px 24px;
       max-width: 1000px;
@@ -583,6 +635,7 @@
       font-weight: 500;
     }
 
+    /* ========== CTA ========== */
     .cta-section {
       padding: 80px 24px 100px;
     }
@@ -596,7 +649,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(60,110,132,0.25);
+      box-shadow: 0 20px 60px rgba(22,163,74,0.25);
     }
 
     .cta-card::before {
@@ -633,7 +686,7 @@
 
     .cta-card p {
       font-size: 18px;
-      color: rgba(255,255,255,0.88);
+      color: rgba(255,255,255,0.85);
       margin-bottom: 32px;
       position: relative;
       z-index: 1;
@@ -644,7 +697,7 @@
       align-items: center;
       gap: 10px;
       background: white;
-      color: var(--primary-dark);
+      color: var(--primary);
       font-size: 16px;
       font-weight: 700;
       padding: 16px 32px;
@@ -666,6 +719,7 @@
       height: 20px;
     }
 
+    /* ========== FOOTER ========== */
     .footer {
       border-top: 1px solid var(--border);
       padding: 40px 24px;
@@ -685,7 +739,6 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      flex-wrap: wrap;
     }
 
     .footer-copy {
@@ -709,6 +762,7 @@
       color: var(--primary);
     }
 
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 900px) {
       .features-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -736,9 +790,6 @@
       .hero {
         padding: 120px 20px 60px;
       }
-      .preview-content {
-        padding: 16px;
-      }
       .cta-card {
         padding: 48px 28px;
       }
@@ -748,6 +799,7 @@
       }
     }
 
+    /* ========== ANIMATIONS ========== */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
@@ -769,234 +821,231 @@
 </head>
 <body>
 
+  <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="logo">
-        <div class="logo-icon" style="background:none;box-shadow:none;padding:0;overflow:hidden;width:38px;height:38px;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="38" height="38">
-            <defs>
-              <linearGradient id="nav-bg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#4A8899"/>
-                <stop offset="100%" stop-color="#2A5565"/>
-              </linearGradient>
-              <clipPath id="nav-clip"><rect width="1024" height="1024" rx="224" ry="224"/></clipPath>
-            </defs>
-            <g clip-path="url(#nav-clip)">
-              <rect width="1024" height="1024" fill="url(#nav-bg)"/>
-              <g fill-rule="nonzero">
-                <path d="M512 268 L788 428 L512 588 L236 428 Z" fill="#F8FCFD"/>
-                <path d="M236 428 L512 588 L512 820 L236 660 Z" fill="#E2EEF2"/>
-                <path d="M512 588 L788 428 L788 660 L512 820 Z" fill="#C5D9E0"/>
-              </g>
-            </g>
-          </svg>
-        </div>
-        <span class="logo-text">Inventory 4 Makers</span>
+        <div class="logo-icon" aria-hidden="true"><img src="../sbcolabshoppinglist/icon.svg" alt=""></div>
+        <span class="logo-text">Smart & Simple Shopping List</span>
       </a>
       <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#how-it-works">How It Works</a>
+        <a href="#features">Fonctionnalités</a>
+        <a href="#how-it-works">Comment ça marche</a>
         <div class="nav-lang">
-          <label class="sr-only" for="lang-select">Language</label>
-          <select id="lang-select" class="lang-select" aria-label="Language" onchange="if(this.value)window.location.href=this.value">
-            <option value="index.html" selected>English</option>
+          <label class="sr-only" for="lang-select">Langue</label>
+          <select id="lang-select" class="lang-select" aria-label="Langue" onchange="if(this.value)window.location.href=this.value">
+            <option value="index.html">English</option>
             <option value="index-de.html">Deutsch</option>
-            <option value="index-fr.html">Français</option>
+            <option value="index-fr.html" selected>Français</option>
             <option value="index-it.html">Italiano</option>
             <option value="index-pt.html">Português</option>
             <option value="index-es.html">Español</option>
           </select>
         </div>
-        <a href="https://apps.apple.com/app/id6768944391" class="nav-cta" target="_blank" rel="noopener">Download</a>
+        <a href="https://apps.apple.com/app/id6760898886" class="nav-cta" style="border-radius:10px;">Télécharger gratuitement</a>
       </div>
     </div>
   </nav>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-badge">
       <span class="hero-badge-dot">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </span>
-      For iPhone &amp; iPad
+      Gratuit sur l'App Store
     </div>
-    <h1>Inventory that<br><span>keeps up with makers</span></h1>
+    <h1>Votre liste de courses gratuite,<br><span>bien faite</span></h1>
     <p class="hero-sub">
-      A lightweight tracker for Etsy sellers, crafters, and small product businesses—products, size and color variants, optional materials, low-stock alerts, CSV export, and team sharing with other iOS users. Your data stays in your private iCloud.
+      Une liste de courses magnifiquement simple avec suggestions intelligentes, suivi des prix et historique d'archives. N'oubliez plus jamais un article.
     </p>
     <div class="hero-actions">
-      <a href="https://apps.apple.com/app/id6768944391" class="btn-primary" target="_blank" rel="noopener">
+      <a href="https://apps.apple.com/app/id6760898886" class="btn-primary">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on the App Store
+        Télécharger sur l'App Store
       </a>
-      <a href="#features" class="btn-secondary">Learn more</a>
+      <a href="#features" class="btn-secondary">En savoir plus</a>
     </div>
 
+    <!-- PREVIEW -->
     <div class="hero-preview">
-      <div class="preview-window">
-        <div class="preview-titlebar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="preview-content">
-          <div>
-            <div class="section-label" style="text-align:left;margin-bottom:8px;">Overview</div>
-            <div class="stat-grid">
-              <div class="mini-stat">
-                <div class="v">4</div>
-                <div class="l">Products</div>
-              </div>
-              <div class="mini-stat">
-                <div class="v">18</div>
-                <div class="l">Variants</div>
-              </div>
-              <div class="mini-stat">
-                <div class="v">216</div>
-                <div class="l">Stock</div>
-              </div>
-              <div class="mini-stat">
-                <div class="v">5</div>
-                <div class="l">Materials</div>
-              </div>
-            </div>
+      <div class="preview-phone">
+        <div class="phone-notch"></div>
+        <div class="phone-header">Liste de courses</div>
+        <div class="phone-list">
+          <div class="phone-item">
+            <div class="check-circle"></div>
+            <span class="phone-item-name">Avocats</span>
           </div>
-          <div class="product-list">
-            <div class="plist-row">
-              <div>
-                <div class="name">Hand-poured Soy Candles</div>
-                <div class="meta">CNDL-SOY-240 · Candles · 3 variants</div>
-              </div>
-              <div class="qty">51</div>
+          <div class="phone-item">
+            <div class="check-circle"></div>
+            <span class="phone-item-name">Pain au levain</span>
+          </div>
+          <div class="phone-item">
+            <div class="check-circle"></div>
+            <span class="phone-item-name">Yaourt grec</span>
+          </div>
+          <div class="phone-item">
+            <div class="check-circle"></div>
+            <span class="phone-item-name">Huile d'olive</span>
+          </div>
+          <div class="phone-item">
+            <div class="check-circle checked">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
             </div>
-            <div class="plist-row warn">
-              <div>
-                <div class="name">Speckled Stoneware Mug<span class="tag">Low stock</span></div>
-                <div class="meta">CER-MUG-441 · Ceramics</div>
-              </div>
-              <div class="qty">57</div>
+            <span class="phone-item-name checked-text">Œufs</span>
+            <span class="phone-item-price">$4.99</span>
+          </div>
+          <div class="phone-item">
+            <div class="check-circle checked">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
             </div>
-            <div class="plist-row">
-              <div>
-                <div class="name">Slim Card Wallet</div>
-                <div class="meta">LTH-WALT-019 · Leather</div>
-              </div>
-              <div class="qty">39</div>
-            </div>
+            <span class="phone-item-name checked-text">Lait entier</span>
+            <span class="phone-item-price">$5.49</span>
+          </div>
+        </div>
+
+        <div class="phone-total">
+          <span class="phone-total-label">Total</span>
+          <span class="phone-total-value">$10.48</span>
+        </div>
+
+        <div class="phone-input">
+          <span class="phone-input-icon">🧺</span>
+          <span class="phone-input-text">Que devez-vous acheter ?</span>
+          <div class="phone-input-btn">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FEATURES -->
   <section class="features" id="features">
-    <div class="section-label">Features</div>
-    <h2 class="section-title">Spreadsheets, minus the friction</h2>
-    <p class="section-sub">Built for how small shops actually work—fast entry, clear variants, optional materials, iCloud team sharing, and exports you can open anywhere.</p>
+    <div class="section-label">Fonctionnalités</div>
+    <h2 class="section-title">Tout ce qu'il faut pour des courses plus intelligentes</h2>
+    <p class="section-sub">De la saisie rapide d'articles au suivi des prix et aux statistiques, Smart & Simple Shopping List rend chaque course sans effort.</p>
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon fi-a"><span>📦</span></div>
-        <h3>Products &amp; SKUs</h3>
-        <p>Name, SKU, category, and notes so every line in your shop maps cleanly to stock.</p>
+        <div class="feature-icon fi-list">
+          <span>🛒</span>
+        </div>
+        <h3>Ajout rapide d'articles</h3>
+        <p>Ajoutez des articles en quelques secondes d'un simple toucher. Cochez-les pendant vos courses et balayez pour supprimer. Clair et sans distraction.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-b"><span>🎨</span></div>
-        <h3>Variant tracking</h3>
-        <p>Size, color, and material combinations with their own quantities—perfect for made-to-order listings.</p>
+        <div class="feature-icon fi-suggest">
+          <span>🔮</span>
+        </div>
+        <h3>Suggestions intelligentes</h3>
+        <p>L'app apprend ce que vous achetez. Commencez à taper et obtenez des suggestions instantanées basées sur votre historique. Aucune configuration requise.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-c"><span>🔔</span></div>
-        <h3>Low-stock alerts</h3>
-        <p>Set thresholds per variant and material. Warning states stay visible across Inventory and Alerts.</p>
+        <div class="feature-icon fi-price">
+          <span>💲</span>
+        </div>
+        <h3>Suivi des prix</h3>
+        <p>Enregistrez les prix en cochant les articles. Voyez le total en cours de votre course et suivez l'évolution des prix au fil du temps.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-d"><span>📋</span></div>
-        <h3>Materials (optional)</h3>
-        <p>Track supplies with units and supplier—link your raw stock to what you actually reorder.</p>
+        <div class="feature-icon fi-archive">
+          <span>📅</span>
+        </div>
+        <h3>Archives calendrier</h3>
+        <p>Les listes archivées sont organisées sur un calendrier. Touchez une date pour voir exactement ce que vous avez acheté et combien vous avez dépensé.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-e"><span>📤</span></div>
-        <h3>CSV export</h3>
-        <p>Export products, variants, materials, or the full inventory for accounting or backup.</p>
+        <div class="feature-icon fi-stats">
+          <span>📊</span>
+        </div>
+        <h3>Statistiques de courses</h3>
+        <p>Découvrez vos articles les plus achetés, vos achats les plus chers et les plus grandes variations de prix sur toutes vos courses.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-f"><span>☁️</span></div>
-        <h3>iCloud (private)</h3>
-        <p>Sync across your iPhone and iPad with CloudKit private database—no multi-tenant warehouse mode, just your workspace.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon fi-g"><span>👥</span></div>
-        <h3>Team sharing</h3>
-        <p>Invite other iOS users to view and edit your inventory through iCloud—ideal for partners, assistants, or co-makers on the same shop.</p>
+        <div class="feature-icon fi-simple">
+          <span>✨</span>
+        </div>
+        <h3>Magnifiquement simple</h3>
+        <p>Pas de comptes, pas d'inscriptions, pas de superflu. Vos données restent sur votre appareil. Ouvrez simplement l'app et commencez votre liste.</p>
       </div>
     </div>
   </section>
 
+  <!-- HOW IT WORKS -->
   <section class="how-it-works" id="how-it-works">
     <div class="how-inner">
-      <div class="section-label">How it works</div>
-      <h2 class="section-title">Up and running in seconds</h2>
-      <p class="section-sub">Three steps from empty list to useful inventory.</p>
+      <div class="section-label">Comment ça marche</div>
+      <h2 class="section-title">Prêt en quelques secondes</h2>
+      <p class="section-sub">Trois étapes simples pour ne plus jamais oublier un article.</p>
 
       <div class="steps">
         <div class="step">
           <div class="step-number">1</div>
-          <h3>Add a product</h3>
-          <p>Create a product with SKU and category; optional notes for your future self.</p>
+          <h3>Ajoutez vos articles</h3>
+          <p>Tapez ce dont vous avez besoin ou choisissez parmi les suggestions intelligentes basées sur vos courses passées.</p>
         </div>
         <div class="step">
           <div class="step-number">2</div>
-          <h3>Define variants</h3>
-          <p>Split stock by size, color, or material. Adjust counts as you make or sell.</p>
+          <h3>Faites vos courses & cochez</h3>
+          <p>Cochez les articles au fur et à mesure. Enregistrez optionnellement les prix pour garder un total en cours de votre course.</p>
         </div>
         <div class="step">
           <div class="step-number">3</div>
-          <h3>Export or expand</h3>
-          <p>Turn on materials when you need supplier-level tracking; pull a CSV whenever you need a spreadsheet.</p>
+          <h3>Archivez & consultez</h3>
+          <p>Archivez votre liste une fois terminée. Parcourez vos courses passées sur le calendrier et suivez vos statistiques de dépenses.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- STATS BANNER -->
   <section class="stats-banner">
     <div class="stats-grid">
       <div class="stat">
-        <div class="stat-value">15s</div>
-        <div class="stat-label">Target time to add a product</div>
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Privé & hors ligne</div>
       </div>
       <div class="stat">
         <div class="stat-value">0</div>
-        <div class="stat-label">Marketplace integrations</div>
+        <div class="stat-label">Comptes requis</div>
       </div>
       <div class="stat">
-        <div class="stat-value">CSV</div>
-        <div class="stat-label">Portable exports</div>
+        <div class="stat-value">&infin;</div>
+        <div class="stat-label">Listes à archiver</div>
       </div>
       <div class="stat">
-        <div class="stat-value">Private</div>
-        <div class="stat-label">Your iCloud container</div>
+        <div class="stat-value">3</div>
+        <div class="stat-label">Catégories de statistiques</div>
       </div>
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="cta-section" id="download">
     <div class="cta-card">
-      <h2>Ship with confidence</h2>
-      <p>Inventory 4 Makers is designed for solo shops and tiny teams—no warehouse stack, no accounting module, just stock you can trust.</p>
-      <a href="https://apps.apple.com/app/id6768944391" class="btn-white" target="_blank" rel="noopener">
+      <h2>Prêt à simplifier vos courses ?</h2>
+      <p>Téléchargez Smart & Simple Shopping List et rendez chaque course un jeu d'enfant.</p>
+      <a href="https://apps.apple.com/app/id6760898886" class="btn-white">
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on the App Store
+        Télécharger sur l'App Store
       </a>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-left">
-        <span class="footer-copy">&copy; 2026 Inventory 4 Makers.</span>
+        <a href="#" class="logo" style="pointer-events:none;">
+          <div class="logo-icon" style="width:28px;height:28px;border-radius:8px;" aria-hidden="true"><img src="../sbcolabshoppinglist/icon.svg" alt=""></div>
+          <span class="logo-text" style="font-size:15px;">Smart & Simple Shopping List</span>
+        </a>
+        <span class="footer-copy">&copy; 2026 Smart & Simple Shopping List. Tous droits réservés.</span>
       </div>
       <div class="footer-links">
-        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="privacy-policy.html">Politique de confidentialité</a>
         <a href="mailto:amiune@gmail.com">Contact</a>
       </div>
     </div>
@@ -1012,24 +1061,6 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPH3H835"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-
-    <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1873247050036910');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1873247050036910&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
 
 </body>
 </html>

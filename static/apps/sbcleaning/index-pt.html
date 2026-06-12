@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Field Service Job Tracker — Field notebook for solo contractors</title>
-  <meta name="description" content="A lightweight field notebook for handymen, repair techs, and solo operators. Jobs, photos, materials, estimates, and payments in your private iCloud. No account. No subscription.">
+  <title>Clean Job Tracker — Gestor leve para empresas de limpeza no iPhone e iPad</title>
+  <meta name="description" content="Gerencie clientes, limpezas recorrentes, checklists, fotos antes/depois e pagamentos. Offline-first com sync iCloud. Sem assinaturas, sem anúncios, sem servidores.">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -15,19 +15,18 @@
   <!-- End Google Tag Manager -->
   <style>
     :root {
-      --primary: #2563EB;
-      --primary-dark: #1D4ED8;
-      --primary-light: #3B82F6;
-      --accent: #6366F1;
-      --bg: #FAFBFF;
+      --primary: #347AF9;
+      --primary-dark: #1E5FD6;
+      --primary-light: #4C8FFA;
+      --accent: #34C759;
+      --bg: #F2F6FC;
       --card: #FFFFFF;
       --text: #1E293B;
       --text-secondary: #475569;
       --text-tertiary: #94A3B8;
       --border: #E2E8F0;
-      --orange: #F97316;
-      --red: #DC2626;
-      --green: #22C55E;
+      --orange: #FF9500;
+      --green: #34C759;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,7 +44,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(250,251,255,0.88);
+      background: rgba(242,246,252,0.88);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-bottom: 1px solid rgba(226,232,240,0.6);
@@ -78,9 +77,13 @@
       justify-content: center;
       border-radius: 11px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 2px 8px rgba(52, 122, 249, 0.3);
     }
-    .logo-icon img { width: 100%; height: 100%; display: block; }
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
     .logo-text { font-size: 19px; font-weight: 800; letter-spacing: -0.5px; }
 
     .nav-links { display: flex; align-items: center; gap: 8px; }
@@ -93,25 +96,26 @@
       border-radius: 8px;
       transition: all 0.2s;
     }
-    .nav-links a:hover { color: var(--text); background: rgba(37,99,235,0.06); }
+    .nav-links a:hover { color: var(--text); background: rgba(52,122,249,0.08); }
+
     .nav-cta {
       background: var(--primary) !important;
       color: white !important;
       font-weight: 600 !important;
       padding: 8px 20px !important;
+      box-shadow: 0 2px 8px rgba(52, 122, 249, 0.25);
       border-radius: 10px !important;
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
     }
     .nav-cta:hover {
       background: var(--primary-dark) !important;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
+      box-shadow: 0 4px 12px rgba(52, 122, 249, 0.35) !important;
     }
 
     .nav-lang { display: flex; align-items: center; }
     .lang-select {
       appearance: none;
-      background: rgba(37,99,235,0.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+      background: rgba(52,122,249,0.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 32px 8px 12px;
@@ -138,7 +142,7 @@
       transform: translateX(-50%);
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(52,122,249,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -159,19 +163,13 @@
     .hero-badge-dot {
       width: 22px;
       height: 22px;
-      background: linear-gradient(135deg, var(--green), #16A34A);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .hero-badge-dot svg {
-      width: 12px;
-      height: 12px;
-      stroke: white;
-      stroke-width: 3;
-      fill: none;
-    }
+    .hero-badge-dot svg { width: 12px; height: 12px; stroke: white; stroke-width: 2.5; fill: none; }
 
     .hero h1 {
       font-size: clamp(40px, 5.5vw, 68px);
@@ -181,15 +179,16 @@
       margin-bottom: 20px;
     }
     .hero h1 span {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, var(--primary), #5AC8FA);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
     .hero-sub {
       font-size: clamp(17px, 2vw, 20px);
       color: var(--text-secondary);
-      max-width: 600px;
+      max-width: 620px;
       margin: 0 auto 40px;
       line-height: 1.6;
     }
@@ -213,13 +212,13 @@
       padding: 14px 28px;
       border-radius: 14px;
       text-decoration: none;
-      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 4px 16px rgba(52, 122, 249, 0.3);
       transition: all 0.25s;
     }
     .btn-primary:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 8px 24px rgba(52, 122, 249, 0.35);
     }
     .btn-primary svg { width: 20px; height: 20px; }
 
@@ -244,12 +243,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
 
-    .hero-preview {
-      max-width: 420px;
-      margin: 64px auto 0;
-      position: relative;
-    }
-
+    .hero-preview { max-width: 920px; margin: 64px auto 0; position: relative; }
     .preview-window {
       background: white;
       border-radius: 20px;
@@ -257,7 +251,6 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
       overflow: hidden;
     }
-
     .preview-titlebar {
       display: flex;
       align-items: center;
@@ -274,9 +267,9 @@
     .preview-tabs {
       display: flex;
       justify-content: space-around;
-      padding: 10px 8px 6px;
+      padding: 10px 8px 8px;
+      background: #FAFBFD;
       border-bottom: 1px solid var(--border);
-      background: #FAFBFF;
       font-size: 10px;
       font-weight: 600;
       color: var(--text-tertiary);
@@ -285,31 +278,15 @@
     .preview-tab.active { color: var(--primary); }
     .preview-tab svg { width: 20px; height: 20px; }
 
-    .preview-content { padding: 20px 24px 28px; text-align: left; }
+    .preview-content {
+      padding: 20px 24px 28px;
+      text-align: left;
+    }
     .preview-nav-title {
       font-size: 28px;
       font-weight: 700;
       letter-spacing: -0.5px;
-      margin-bottom: 12px;
-    }
-
-    .filter-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 14px;
-    }
-    .chip {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 5px 10px;
-      border-radius: 100px;
-      background: #F1F5F9;
-      color: var(--text-secondary);
-    }
-    .chip.active {
-      background: rgba(37,99,235,0.12);
-      color: var(--primary);
+      margin-bottom: 16px;
     }
 
     .stat-grid {
@@ -323,20 +300,14 @@
       padding: 12px 10px;
       text-align: center;
     }
-    .mini-stat.red { background: rgba(220,38,38,0.08); }
-    .mini-stat.blue { background: rgba(37,99,235,0.1); }
-    .mini-stat.orange { background: rgba(249,115,22,0.1); }
+    .mini-stat.blue { background: rgba(52,122,249,0.1); }
+    .mini-stat.green { background: rgba(52,199,89,0.1); }
+    .mini-stat.orange { background: rgba(255,149,0,0.1); }
     .mini-stat .v { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
-    .mini-stat.red .v { color: var(--red); }
     .mini-stat.blue .v { color: var(--primary); }
+    .mini-stat.green .v { color: var(--green); }
     .mini-stat.orange .v { color: var(--orange); }
-    .mini-stat .l {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
+    .mini-stat .l { font-size: 10px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; margin-top: 4px; }
 
     .job-list { display: flex; flex-direction: column; gap: 8px; }
     .job-row {
@@ -351,7 +322,7 @@
     .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .status-dot.orange { background: var(--orange); }
     .status-dot.blue { background: var(--primary); }
-    .status-dot.red { background: var(--red); }
+    .status-dot.green { background: var(--green); }
     .job-row .name { font-weight: 600; font-size: 14px; }
     .job-row .meta { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
     .job-row .right { margin-left: auto; text-align: right; }
@@ -363,12 +334,10 @@
       display: inline-block;
       margin-bottom: 4px;
     }
-    .badge-progress { background: rgba(249,115,22,0.15); color: #C2410C; }
-    .badge-scheduled { background: rgba(37,99,235,0.12); color: var(--primary-dark); }
-    .badge-overdue { background: rgba(220,38,38,0.12); color: var(--red); }
-    .badge-materials { background: rgba(99,102,241,0.12); color: #4338CA; }
+    .badge-progress { background: rgba(255,149,0,0.15); color: #C93400; }
+    .badge-scheduled { background: rgba(52,122,249,0.12); color: var(--primary-dark); }
+    .badge-done { background: rgba(52,199,89,0.15); color: #248A3D; }
     .job-row .pay { font-size: 12px; font-weight: 700; color: var(--text-secondary); }
-    .job-row .pay.due { color: var(--orange); }
 
     .features { padding: 100px 24px; max-width: 1200px; margin: 0 auto; }
     .section-label {
@@ -411,7 +380,7 @@
     .feature-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-      border-color: rgba(37,99,235,0.15);
+      border-color: rgba(52,122,249,0.2);
     }
     .feature-icon {
       width: 52px;
@@ -424,12 +393,12 @@
       font-size: 24px;
     }
     .fi-a { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
-    .fi-b { background: linear-gradient(135deg, #FFF7ED, #FFEDD5); }
-    .fi-c { background: linear-gradient(135deg, #F0FDF4, #DCFCE7); }
-    .fi-d { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); }
-    .fi-e { background: linear-gradient(135deg, #FFFBEB, #FDE68A); }
-    .fi-f { background: linear-gradient(135deg, #FFF1F2, #FFE4E6); }
-    .fi-g { background: linear-gradient(135deg, #F0F9FF, #E0F2FE); }
+    .fi-b { background: linear-gradient(135deg, #ECFDF5, #BBF7D0); }
+    .fi-c { background: linear-gradient(135deg, #FFFBEB, #FDE68A); }
+    .fi-d { background: linear-gradient(135deg, #F0F9FF, #BAE6FD); }
+    .fi-e { background: linear-gradient(135deg, #FFF7ED, #FFEDD5); }
+    .fi-f { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); }
+    .fi-g { background: linear-gradient(135deg, #F8FAFC, #E2E8F0); }
 
     .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.3px; }
     .feature-card p { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
@@ -455,15 +424,15 @@
       left: calc(16.66% + 24px);
       right: calc(16.66% + 24px);
       height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      opacity: 0.2;
+      background: linear-gradient(90deg, var(--primary), #5AC8FA);
+      opacity: 0.25;
     }
     .step { text-align: center; position: relative; }
     .step-number {
       width: 72px;
       height: 72px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, var(--primary), #5AC8FA);
       color: white;
       font-size: 28px;
       font-weight: 800;
@@ -471,7 +440,7 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
-      box-shadow: 0 4px 16px rgba(37,99,235,0.2);
+      box-shadow: 0 4px 16px rgba(52,122,249,0.2);
     }
     .step h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
     .step p { font-size: 15px; color: var(--text-secondary); line-height: 1.6; max-width: 280px; margin: 0 auto; }
@@ -483,7 +452,7 @@
       font-size: 40px;
       font-weight: 800;
       letter-spacing: -1.5px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, var(--primary), #5AC8FA);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -495,13 +464,13 @@
     .cta-card {
       max-width: 800px;
       margin: 0 auto;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, var(--primary), #1E5FD6);
       border-radius: 28px;
       padding: 64px 48px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(37,99,235,0.25);
+      box-shadow: 0 20px 60px rgba(52,122,249,0.25);
     }
     .cta-card::before {
       content: '';
@@ -557,7 +526,7 @@
       gap: 16px;
     }
     .footer-copy { font-size: 13px; color: var(--text-tertiary); }
-    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 24px; }
     .footer-links a {
       font-size: 13px;
       color: var(--text-tertiary);
@@ -599,23 +568,23 @@
     <div class="nav-inner">
       <a href="#" class="logo">
         <div class="logo-icon" aria-hidden="true"><img src="icon.svg" alt=""></div>
-        <span class="logo-text">Field Service Job Tracker</span>
+        <span class="logo-text">Clean Job Tracker</span>
       </a>
       <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#how-it-works">How It Works</a>
+        <a href="#features">Recursos</a>
+        <a href="#how-it-works">Como funciona</a>
         <div class="nav-lang">
-          <label class="sr-only" for="lang-select">Language</label>
-          <select id="lang-select" class="lang-select" aria-label="Language" onchange="if(this.value)window.location.href=this.value">
-            <option value="index.html" selected>English</option>
+          <label class="sr-only" for="lang-select">Idioma</label>
+          <select id="lang-select" class="lang-select" aria-label="Idioma" onchange="if(this.value)window.location.href=this.value">
+            <option value="index.html">English</option>
             <option value="index-de.html">Deutsch</option>
             <option value="index-fr.html">Français</option>
             <option value="index-it.html">Italiano</option>
-            <option value="index-pt.html">Português</option>
+            <option value="index-pt.html" selected>Português</option>
             <option value="index-es.html">Español</option>
           </select>
         </div>
-        <a href="https://apps.apple.com/app/id6761058858" class="nav-cta" target="_blank" rel="noopener">Download</a>
+        <a href="https://apps.apple.com/app/id6772100649" class="nav-cta" target="_blank" rel="noopener">Baixar</a>
       </div>
     </div>
   </nav>
@@ -623,20 +592,20 @@
   <section class="hero">
     <div class="hero-badge">
       <span class="hero-badge-dot">
-        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L6 21l2.3-7-6-4.6h7.6z" fill="white" stroke="none"/></svg>
       </span>
-      For iPhone · Offline-first · No subscription
+      Para iPhone e iPad · Sem anúncios · Sem assinatura
     </div>
-    <h1>Your field work,<br><span>in one notebook</span></h1>
+    <h1>Trabalhos de limpeza,<br><span>organizados em minutos</span></h1>
     <p class="hero-sub">
-      A lightweight field notebook for solo handymen, repair techs, and mobile operators—jobs, photos, materials, estimates, and payments in your private iCloud. No account. No SaaS.
+      Um gestor leve para profissionais de limpeza solo e pequenos negócios—clientes, agendas recorrentes, checklists, fotos antes/depois e pagamentos. Offline-first com seus dados no iCloud privado. Sem servidores.
     </p>
     <div class="hero-actions">
-      <a href="https://apps.apple.com/app/id6761058858" class="btn-primary" target="_blank" rel="noopener">
+      <a href="https://apps.apple.com/app/id6772100649" class="btn-primary" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on the App Store
+        Baixar na App Store
       </a>
-      <a href="#features" class="btn-secondary">Learn more</a>
+      <a href="#features" class="btn-secondary">Saiba mais</a>
     </div>
 
     <div class="hero-preview">
@@ -647,78 +616,75 @@
           <span class="dot dot-green"></span>
         </div>
         <div class="preview-tabs">
-          <div class="preview-tab">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 7h-3V6a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v1H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-            Jobs
-          </div>
           <div class="preview-tab active">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM2 13h2a1 1 0 0 0 0-2H2a1 1 0 0 0 0 2zm18 0h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM11 2v2a1 1 0 0 0 2 0V2a1 1 0 0 0-2 0zm0 18v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-2 0z"/></svg>
-            Today
+            Hoje
+          </div>
+          <div class="preview-tab">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 7h-3V6a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v1H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+            Trabalhos
+          </div>
+          <div class="preview-tab">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10z"/></svg>
+            Calendário
+          </div>
+          <div class="preview-tab">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            Clientes
           </div>
           <div class="preview-tab">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94a7.43 7.43 0 0 0 .05-.94 7.43 7.43 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.28 7.28 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.22-1.13.52-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.05.63-.05.94s.01.63.05.94L2.83 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.42 1.05.72 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54a7.28 7.28 0 0 0 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg>
-            Settings
+            Ajustes
           </div>
         </div>
         <div class="preview-content">
-          <div class="preview-nav-title">Today</div>
+          <div class="preview-nav-title">Hoje</div>
           <div class="stat-grid">
-            <div class="mini-stat red">
-              <div class="v">1</div>
-              <div class="l">Overdue</div>
-            </div>
             <div class="mini-stat blue">
-              <div class="v">2</div>
-              <div class="l">Today</div>
+              <div class="v">3</div>
+              <div class="l">Total</div>
+            </div>
+            <div class="mini-stat green">
+              <div class="v">1</div>
+              <div class="l">Concluídos</div>
             </div>
             <div class="mini-stat orange">
-              <div class="v">$385</div>
-              <div class="l">Balance due</div>
+              <div class="v">$455</div>
+              <div class="l">Ganhos</div>
             </div>
           </div>
           <div class="job-list">
             <div class="job-row">
-              <span class="status-dot red"></span>
-              <div>
-                <div class="name">Electrical panel upgrade</div>
-                <div class="meta">Sofia Chen · Due Feb 14</div>
-              </div>
-              <div class="right">
-                <span class="badge badge-overdue">Overdue</span>
-                <div class="pay due">$120 due</div>
-              </div>
-            </div>
-            <div class="job-row">
               <span class="status-dot orange"></span>
               <div>
-                <div class="name">Cabinet repair</div>
-                <div class="meta">Maria Rodriguez · 2:00 PM · 4 photos</div>
+                <div class="name">Jane Smith</div>
+                <div class="meta">9:00 AM · Limpeza profunda</div>
               </div>
               <div class="right">
-                <span class="badge badge-progress">In progress</span>
-                <div class="pay due">$185 due</div>
+                <span class="badge badge-progress">Em andamento</span>
+                <div class="pay">$150</div>
               </div>
             </div>
             <div class="job-row">
               <span class="status-dot blue"></span>
               <div>
-                <div class="name">AC tune-up</div>
-                <div class="meta">James Wilson · 10:00 AM</div>
+                <div class="name">Bob Johnson</div>
+                <div class="meta">2:00 PM</div>
               </div>
               <div class="right">
-                <span class="badge badge-scheduled">Scheduled</span>
-                <div class="pay">$85 est.</div>
+                <span class="badge badge-scheduled">Agendado</span>
+                <div class="pay">$120</div>
               </div>
             </div>
             <div class="job-row">
-              <span class="status-dot blue"></span>
+              <span class="status-dot green"></span>
               <div>
-                <div class="name">Generator inspection</div>
-                <div class="meta">Ana Lopez · Waiting on parts</div>
+                <div class="name">Maria Garcia</div>
+                <div class="meta">5:30 PM</div>
               </div>
               <div class="right">
-                <span class="badge badge-materials">Materials</span>
-                <div class="pay">$45 est.</div>
+                <span class="badge badge-done">Concluído</span>
+                <div class="pay" style="color:#248A3D;">$185 ✓</div>
               </div>
             </div>
           </div>
@@ -728,70 +694,70 @@
   </section>
 
   <section class="features" id="features">
-    <div class="section-label">Features</div>
-    <h2 class="section-title">Not a CRM.<br>A field notebook.</h2>
-    <p class="section-sub">Built for solo operators who work from Notes, Photos, and memory—jobs, timeline, estimates, and payments in one offline-first app.</p>
+    <div class="section-label">Recursos</div>
+    <h2 class="section-title">Feito para quem limpa em movimento</h2>
+    <p class="section-sub">Entrada rápida, poucos toques e tudo que você precisa para um dia de trabalhos—sem planilhas ou software pesado.</p>
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon fi-a"><span>⚡</span></div>
-        <h3>Fast job capture</h3>
-        <p>Create a job with a title only—customer, address, and due date can wait. Saved on device instantly, synced when iCloud is available.</p>
+        <div class="feature-icon fi-a"><span>☀️</span></div>
+        <h3>Painel de hoje</h3>
+        <p>Veja os trabalhos de hoje, estatísticas de conclusão e ganhos de relance antes de sair.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-b"><span>📷</span></div>
-        <h3>Photos &amp; timeline</h3>
-        <p>Before, after, receipt, and issue photos on every job. Your work history reads like a timeline—not buried attachments.</p>
+        <div class="feature-icon fi-b"><span>🔁</span></div>
+        <h3>Trabalhos recorrentes</h3>
+        <p>Semanal, quinzenal ou mensal—configure uma vez e gere as próximas visitas automaticamente.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-c"><span>🔧</span></div>
-        <h3>Materials list</h3>
-        <p>Track parts per job: quantity, estimated cost, purchased status, and store. See total material cost in the job summary.</p>
+        <div class="feature-icon fi-c"><span>✅</span></div>
+        <h3>Checklists</h3>
+        <p>Modelos reutilizáveis e checklists por trabalho para marcar enquanto limpa.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-d"><span>📝</span></div>
-        <h3>Simple estimates</h3>
-        <p>Line items with tax, discount, and deposit. Share a professional estimate PDF through the iOS Share Sheet—no customer portal.</p>
+        <div class="feature-icon fi-d"><span>📷</span></div>
+        <h3>Fotos antes e depois</h3>
+        <p>Anexe fotos a qualquer trabalho em dois toques—armazenadas com segurança no seu iCloud.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-e"><span>💵</span></div>
-        <h3>Payment tracking</h3>
-        <p>Record cash, card, transfer, or check payments. See estimate total, deposit, paid amount, and balance due—without payment processing.</p>
+        <h3>Pagamentos</h3>
+        <p>Acompanhe valor, depósitos e status pago/não pago para cada trabalho de limpeza.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon fi-f"><span>☀️</span></div>
-        <h3>Today view</h3>
-        <p>Overdue, today, upcoming, and unscheduled jobs at a glance. Answer “what should I do today?” before you leave the driveway.</p>
+        <div class="feature-icon fi-f"><span>📄</span></div>
+        <h3>Resumo PDF do trabalho</h3>
+        <p>Gere um relatório imprimível e compartilhe pela folha de compartilhamento integrada.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-g"><span>☁️</span></div>
-        <h3>Private iCloud sync</h3>
-        <p>Your data stays in your private CloudKit database—no team workspaces, no backend server, no subscription. Works offline.</p>
+        <h3>Sync iCloud privado</h3>
+        <p>Offline-first no dispositivo, sincronizado entre iPhone e iPad—sem anúncios, sem assinatura, sem servidores.</p>
       </div>
     </div>
   </section>
 
   <section class="how-it-works" id="how-it-works">
     <div class="how-inner">
-      <div class="section-label">How it works</div>
-      <h2 class="section-title">Capture first, organize later</h2>
-      <p class="section-sub">Three steps from a new job to a shared estimate—designed for standing in a driveway, not at a desk.</p>
+      <div class="section-label">Como funciona</div>
+      <h2 class="section-title">Pronto em menos de um minuto</h2>
+      <p class="section-sub">Três passos do novo cliente ao trabalho no calendário.</p>
 
       <div class="steps">
         <div class="step">
           <div class="step-number">1</div>
-          <h3>Create a job</h3>
-          <p>Tap New Job, enter a title, and you’re done. Add customer, address, or due date whenever you have them.</p>
+          <h3>Adicionar um cliente</h3>
+          <p>Nome, telefone, endereço e notas—tudo que você precisa antes de chegar.</p>
         </div>
         <div class="step">
           <div class="step-number">2</div>
-          <h3>Build the job</h3>
-          <p>Add photos, notes, materials, and a simple estimate. Everything lives on one timeline in the job detail view.</p>
+          <h3>Agendar um trabalho</h3>
+          <p>Escolha data, recorrência opcional, modelo de checklist e detalhes de pagamento.</p>
         </div>
         <div class="step">
           <div class="step-number">3</div>
-          <h3>Get paid &amp; share</h3>
-          <p>Log payments, mark the job paid, and share an estimate or job summary PDF via Messages, WhatsApp, or AirDrop.</p>
+          <h3>Executar a limpeza</h3>
+          <p>Inicie o trabalho, complete a checklist, adicione fotos, marque como pago e exporte PDF se precisar.</p>
         </div>
       </div>
     </div>
@@ -801,30 +767,30 @@
     <div class="stats-grid">
       <div class="stat">
         <div class="stat-value">&lt;30s</div>
-        <div class="stat-label">Create a new job</div>
+        <div class="stat-label">Criar um trabalho recorrente</div>
       </div>
       <div class="stat">
-        <div class="stat-value">$0</div>
-        <div class="stat-label">Subscriptions &amp; SaaS fees</div>
+        <div class="stat-value">2 taps</div>
+        <div class="stat-label">Adicionar fotos antes/depois</div>
       </div>
       <div class="stat">
         <div class="stat-value">PDF</div>
-        <div class="stat-label">Estimates &amp; job summaries</div>
+        <div class="stat-label">Resumos de trabalho imprimíveis</div>
       </div>
       <div class="stat">
-        <div class="stat-value">Private</div>
-        <div class="stat-label">Your iCloud database</div>
+        <div class="stat-value">$0</div>
+        <div class="stat-label">Assinaturas e anúncios</div>
       </div>
     </div>
   </section>
 
   <section class="cta-section" id="download">
     <div class="cta-card">
-      <h2>Replace Notes + Photos + spreadsheets</h2>
-      <p>Field Service Job Tracker is for solo contractors who need job memory—not dispatch, teams, or accounting integrations.</p>
-      <a href="https://apps.apple.com/app/id6761058858" class="btn-white" target="_blank" rel="noopener">
+      <h2>Gerencie seu negócio de limpeza no bolso</h2>
+      <p>Clean Job Tracker é feito para profissionais solo e pequenas equipes—mobile-first, pronto offline e sincronizado com seu iCloud privado.</p>
+      <a href="https://apps.apple.com/app/id6772100649" class="btn-white" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on the App Store
+        Baixar na App Store
       </a>
     </div>
   </section>
@@ -832,11 +798,11 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-left">
-        <span class="footer-copy">&copy; 2026 Field Service Job Tracker. All rights reserved.</span>
+        <span class="footer-copy">&copy; 2026 Clean Job Tracker.</span>
       </div>
       <div class="footer-links">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="mailto:amiune@gmail.com">Contact</a>
+        <a href="privacy-policy.html">Privacidade</a>
+        <a href="mailto:amiune@gmail.com">Contato</a>
       </div>
     </div>
   </footer>
@@ -851,9 +817,8 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPH3H835"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-
-    <!-- Meta Pixel Code -->
-<script>
+  <!-- Meta Pixel Code -->
+  <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -869,6 +834,5 @@
   src="https://www.facebook.com/tr?id=1873247050036910&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
-
 </body>
 </html>
