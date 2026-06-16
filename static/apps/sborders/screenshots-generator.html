@@ -236,6 +236,8 @@
     <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
     <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
     <button class="secondary" onclick="downloadCurrent(5)">Screenshot 5</button>
+    <button class="secondary" onclick="downloadCurrent(6)">Screenshot 6</button>
+    <button class="secondary" onclick="downloadCurrent(7)">Screenshot 7</button>
   </div>
   
   <div class="screenshots">
@@ -258,8 +260,8 @@
     <!-- Screenshot 2: Order Details -->
     <div class="screenshot-wrapper">
       <div class="screenshot" id="screenshot2">
-        <div class="headline">Share Orders<br>With Your Team</div>
-        <div class="subheadline">Collaborate in real time via iCloud sharing</div>
+        <div class="headline">Every Order Detail<br>At Your Fingertips</div>
+        <div class="subheadline">Status, payments, notes and delivery dates in one place</div>
         
         <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
           <div class="placeholder-icon">📸</div>
@@ -285,9 +287,39 @@
       <div class="screenshot-label">3. Statistics</div>
     </div>
     
-    <!-- Screenshot 4: Feature Highlights -->
+    <!-- Screenshot 4: Calendar -->
     <div class="screenshot-wrapper">
-      <div class="screenshot" id="screenshot4" style="justify-content: center; gap: 32px;">
+      <div class="screenshot" id="screenshot4">
+        <div class="headline">Plan Ahead<br>With Calendar</div>
+        <div class="subheadline">See all your orders on a monthly calendar view</div>
+        
+        <div class="screenshot-placeholder" id="placeholder4" onclick="triggerUpload(4)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">4. Calendar</div>
+    </div>
+    
+    <!-- Screenshot 5: Team Sharing -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot5">
+        <div class="headline">Share Orders<br>With Your Team</div>
+        <div class="subheadline">Collaborate in real time via iCloud sharing</div>
+        
+        <div class="screenshot-placeholder" id="placeholder5" onclick="triggerUpload(5)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">5. Team Sharing</div>
+    </div>
+    
+    <!-- Screenshot 6: Feature Highlights -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot6" style="justify-content: center; gap: 32px;">
         <div class="headline" style="font-size: 2.8rem;">Order Management<br>Made Simple</div>
         <div class="subheadline" style="font-size: 1.3rem; max-width: 360px;">
           Everything you need to manage orders for your small business.
@@ -324,12 +356,12 @@
           </div>
         </div>
       </div>
-      <div class="screenshot-label">4. Features</div>
+      <div class="screenshot-label">6. Features</div>
     </div>
     
-    <!-- Screenshot 5: One Purchase, No Tricks -->
+    <!-- Screenshot 7: One Purchase, No Tricks -->
     <div class="screenshot-wrapper">
-      <div class="screenshot" id="screenshot5" style="justify-content: center; gap: 32px;">
+      <div class="screenshot" id="screenshot7" style="justify-content: center; gap: 32px;">
         <div class="headline" style="font-size: 2.8rem;">One purchase.<br>No tricks.</div>
         <div class="subheadline" style="font-size: 1.3rem; max-width: 360px;">
           Simple &amp; straightforward
@@ -366,7 +398,7 @@
           </div>
         </div>
       </div>
-      <div class="screenshot-label">5. One Purchase</div>
+      <div class="screenshot-label">7. One Purchase</div>
     </div>
     
   </div>
@@ -375,7 +407,7 @@
     <h3>📸 Screenshot Export Guide</h3>
     <ol>
       <li><strong>Add your screenshots:</strong> Click on a placeholder or paste (Cmd+V) to add your app screenshots</li>
-      <li>Click <strong>Download All Screenshots</strong> to get all 4 images</li>
+      <li>Click <strong>Download All Screenshots</strong> to get all 7 images</li>
       <li>Screenshots are exported at <code>1284 × 2778px</code> (6.5" display)</li>
       <li>No alpha channel/transparency (App Store compliant)</li>
       <li>In App Store Connect, upload to the <strong>6.5" iPhone</strong> section</li>
@@ -387,6 +419,8 @@
   <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
   <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
   <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  <input type="file" id="fileInput4" accept="image/*" style="display:none" onchange="handleFileSelect(event, 4)">
+  <input type="file" id="fileInput5" accept="image/*" style="display:none" onchange="handleFileSelect(event, 5)">
   
   <canvas id="canvas"></canvas>
   
@@ -398,6 +432,7 @@
     const EXPORT_WIDTH = 1284;
     const EXPORT_HEIGHT = 2778;
     const SCALE = 3;
+    const SCREENSHOT_COUNT = 7;
     
     function triggerUpload(num) {
       document.getElementById(`fileInput${num}`).click();
@@ -431,7 +466,7 @@
           reader.onload = function(event) {
             // Find the first empty placeholder or use placeholder 1
             let targetNum = 1;
-            for (let j = 1; j <= 3; j++) {
+            for (let j = 1; j <= 5; j++) {
               const placeholder = document.getElementById(`placeholder${j}`);
               if (placeholder && !placeholder.querySelector('img')) {
                 targetNum = j;
@@ -453,33 +488,42 @@
       link.click();
     }
     
-    async function downloadCurrent(num) {
+    window.batchLoadImages = function(urls) {
+      if (Array.isArray(urls)) {
+        urls.forEach((src, i) => setPlaceholderImage(i + 1, src));
+        return;
+      }
+      for (const [slot, src] of Object.entries(urls)) {
+        setPlaceholderImage(Number(slot), src);
+      }
+    };
+
+    async function captureScreenshot(num) {
       const element = document.getElementById(`screenshot${num}`);
-      
+      const canvas = await html2canvas(element, {
+        scale: SCALE,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#1D4ED8',
+        width: 428,
+        height: 926
+      });
+      const finalCanvas = document.createElement('canvas');
+      finalCanvas.width = EXPORT_WIDTH;
+      finalCanvas.height = EXPORT_HEIGHT;
+      const ctx = finalCanvas.getContext('2d');
+      ctx.fillStyle = '#1D4ED8';
+      ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+      ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+      return finalCanvas.toDataURL('image/png');
+    }
+
+    window.exportScreenshot = captureScreenshot;
+
+    async function downloadCurrent(num) {
       try {
-        const canvas = await html2canvas(element, {
-          scale: SCALE,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: '#1D4ED8',
-          width: 428,
-          height: 926
-        });
-        
-        // Create final canvas at export size
-        const finalCanvas = document.createElement('canvas');
-        finalCanvas.width = EXPORT_WIDTH;
-        finalCanvas.height = EXPORT_HEIGHT;
-        const ctx = finalCanvas.getContext('2d');
-        
-        // Fill background (no alpha)
-        ctx.fillStyle = '#1D4ED8';
-        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
-        
-        // Draw captured content
-        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
-        
-        downloadDataUrl(finalCanvas.toDataURL('image/png'), `SBOrders-Screenshot-${num}.png`);
+        const dataUrl = await captureScreenshot(num);
+        downloadDataUrl(dataUrl, `SBOrders-Screenshot-${num}.png`);
       } catch (e) {
         console.error('Screenshot failed:', e);
         alert('Screenshot failed. Please try again.');
@@ -487,7 +531,7 @@
     }
     
     async function downloadAll() {
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
         await downloadCurrent(i);
         await new Promise(r => setTimeout(r, 500));
       }

@@ -955,6 +955,10 @@ a {
   gap: 4rem;
 }
 
+.contact-layout > * {
+  min-width: 0;
+}
+
 @media (min-width: 992px) {
   .contact-layout {
     grid-template-columns: 1fr 1fr;
@@ -1025,6 +1029,8 @@ a {
 .form-group input,
 .form-group select,
 .form-group textarea {
+  width: 100%;
+  max-width: 100%;
   padding: 0.875rem 1rem;
   font-size: 1rem;
   font-family: inherit;
@@ -1176,6 +1182,10 @@ a {
   
   .footer-location {
     text-align: center;
+  }
+
+  .contact-form-wrapper {
+    padding: 1.5rem;
   }
 }
 

@@ -286,6 +286,8 @@
     <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
     <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
     <button class="secondary" onclick="downloadCurrent(5)">Screenshot 5</button>
+    <button class="secondary" onclick="downloadCurrent(6)">Screenshot 6</button>
+    <button class="secondary" onclick="downloadCurrent(7)">Screenshot 7</button>
   </div>
   
   <div class="screenshots">
@@ -306,8 +308,8 @@
     
     <div class="screenshot-wrapper">
       <div class="screenshot" id="screenshot2">
-        <div class="headline" data-i18n="s2.headline">Share Orders<br>With Your Team</div>
-        <div class="subheadline" data-i18n="s2.subheadline">Collaborate in real time via iCloud sharing</div>
+        <div class="headline" data-i18n="s2.headline">Every Order Detail<br>At Your Fingertips</div>
+        <div class="subheadline" data-i18n="s2.subheadline">Status, payments, notes and delivery dates in one place</div>
         
         <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
           <div class="placeholder-icon">📸</div>
@@ -333,9 +335,37 @@
     </div>
     
     <div class="screenshot-wrapper">
-      <div class="screenshot" id="screenshot4" style="justify-content: center; gap: 24px;">
-        <div class="headline" style="font-size: 2.6rem;" data-i18n="s4.headline">Order Management<br>Made Simple</div>
-        <div class="subheadline" style="font-size: 1.15rem; max-width: 440px;" data-i18n="s4.subheadline">
+      <div class="screenshot" id="screenshot4">
+        <div class="headline" data-i18n="s4.headline">Plan Ahead<br>With Calendar</div>
+        <div class="subheadline" data-i18n="s4.subheadline">See all your orders on a monthly calendar view</div>
+        
+        <div class="screenshot-placeholder" id="placeholder4" onclick="triggerUpload(4)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="ui.placeholderText">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s4">4. Calendar</div>
+    </div>
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot5">
+        <div class="headline" data-i18n="s5.headline">Share Orders<br>With Your Team</div>
+        <div class="subheadline" data-i18n="s5.subheadline">Collaborate in real time via iCloud sharing</div>
+        
+        <div class="screenshot-placeholder" id="placeholder5" onclick="triggerUpload(5)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="ui.placeholderText">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s5">5. Team Sharing</div>
+    </div>
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot6" style="justify-content: center; gap: 24px;">
+        <div class="headline" style="font-size: 2.6rem;" data-i18n="s6.headline">Order Management<br>Made Simple</div>
+        <div class="subheadline" style="font-size: 1.15rem; max-width: 440px;" data-i18n="s6.subheadline">
           Everything you need to manage orders for your small business.
         </div>
         
@@ -343,40 +373,40 @@
           <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
             <div style="font-size: 2.2rem;">☁️</div>
             <div>
-              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s4.icloud">iCloud Sync</div>
-              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s4.icloudDesc">Access orders on all your devices</div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s6.icloud">iCloud Sync</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s6.icloudDesc">Access orders on all your devices</div>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
             <div style="font-size: 2.2rem;">👥</div>
             <div>
-              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s4.team">Team Sharing</div>
-              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s4.teamDesc">Collaborate with your team</div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s6.team">Team Sharing</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s6.teamDesc">Collaborate with your team</div>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
             <div style="font-size: 2.2rem;">💰</div>
             <div>
-              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s4.noSub">No Subscription</div>
-              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s4.noSubDesc">Pay once, use forever</div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s6.noSub">No Subscription</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s6.noSubDesc">Pay once, use forever</div>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
             <div style="font-size: 2.2rem;">🔒</div>
             <div>
-              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s4.private">Private & Secure</div>
-              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s4.privateDesc">Your data stays on your devices</div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s6.private">Private & Secure</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s6.privateDesc">Your data stays on your devices</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="screenshot-label" data-i18n="labels.s4">4. Features</div>
+      <div class="screenshot-label" data-i18n="labels.s6">6. Features</div>
     </div>
     
     <div class="screenshot-wrapper">
-      <div class="screenshot" id="screenshot5" style="justify-content: center; gap: 24px;">
-        <div class="headline" style="font-size: 2.6rem;" data-i18n="s5.headline">One purchase.<br>No tricks.</div>
-        <div class="subheadline" style="font-size: 1.15rem; max-width: 440px;" data-i18n="s5.subheadline">
+      <div class="screenshot" id="screenshot7" style="justify-content: center; gap: 24px;">
+        <div class="headline" style="font-size: 2.6rem;" data-i18n="s7.headline">One purchase.<br>No tricks.</div>
+        <div class="subheadline" style="font-size: 1.15rem; max-width: 440px;" data-i18n="s7.subheadline">
           Simple &amp; straightforward
         </div>
         
@@ -384,34 +414,34 @@
           <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
             <div style="font-size: 2.2rem;">💎</div>
             <div>
-              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.noSub">No Subscription</div>
-              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.noSubDesc">One-time purchase, yours forever</div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s7.noSub">No Subscription</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s7.noSubDesc">One-time purchase, yours forever</div>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
             <div style="font-size: 2.2rem;">🚫</div>
             <div>
-              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.noAds">No Ads</div>
-              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.noAdsDesc">Clean, distraction-free experience</div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s7.noAds">No Ads</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s7.noAdsDesc">Clean, distraction-free experience</div>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
             <div style="font-size: 2.2rem;">🔄</div>
             <div>
-              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.freeUpdates">Free Updates</div>
-              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.freeUpdatesDesc">All future features included</div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s7.freeUpdates">Free Updates</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s7.freeUpdatesDesc">All future features included</div>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
             <div style="font-size: 2.2rem;">💬</div>
             <div>
-              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.support">Amazing Support</div>
-              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.supportDesc">We're here to help, fast</div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s7.support">Amazing Support</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s7.supportDesc">We're here to help, fast</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="screenshot-label" data-i18n="labels.s5">5. One Purchase</div>
+      <div class="screenshot-label" data-i18n="labels.s7">7. One Purchase</div>
     </div>
     
   </div>
@@ -421,7 +451,7 @@
     <ol>
       <li data-i18n="ui.guide1"><strong>Add your screenshots:</strong> Click on a placeholder or paste (Cmd+V) to add your app screenshots</li>
       <li data-i18n="ui.guide2">Pick a language above to preview localized copy before exporting</li>
-      <li data-i18n="ui.guide3">Click <strong>Download All Screenshots</strong> for the selected language, or <strong>Download All Languages</strong> for all 25 PNGs (5 screenshots × 5 languages)</li>
+      <li data-i18n="ui.guide3">Click <strong>Download All Screenshots</strong> for the selected language, or <strong>Download All Languages</strong> for all localized PNGs (6 screenshots × 5 languages)</li>
       <li data-i18n="ui.guide4">Screenshots are exported at <code>2048 × 2732px</code> (13" iPad)</li>
       <li data-i18n="ui.guide5">No alpha channel/transparency (App Store compliant)</li>
       <li data-i18n="ui.guide6">In App Store Connect, upload to the <strong>12.9" iPad Pro</strong> section — other iPad sizes are auto-generated</li>
@@ -431,6 +461,8 @@
   <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
   <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
   <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  <input type="file" id="fileInput4" accept="image/*" style="display:none" onchange="handleFileSelect(event, 4)">
+  <input type="file" id="fileInput5" accept="image/*" style="display:none" onchange="handleFileSelect(event, 5)">
   
   <canvas id="canvas"></canvas>
   
@@ -443,6 +475,7 @@
     const BG_FILL = '#1D4ED8';
     const DOWNLOAD_PREFIX = 'SBOrders-iPad-Screenshot-';
     const LANG_CODES = ['de', 'fr', 'it', 'pt', 'es'];
+    const SCREENSHOT_COUNT = 7;
     let currentLang = 'de';
 
     const COPY = {
@@ -461,11 +494,13 @@
           guide5: 'Kein Alphakanal/Transparenz (App-Store-konform)',
           guide6: 'In App Store Connect im Bereich <strong>12,9" iPad Pro</strong> hochladen — andere iPad-Größen werden automatisch erzeugt',
         },
-        labels: { s1: '1. Kanban-Board', s2: '2. Bestelldetails', s3: '3. Statistiken', s4: '4. Funktionen', s5: '5. Ein Kauf' },
+        labels: { s1: '1. Kanban-Board', s2: '2. Bestelldetails', s3: '3. Statistiken', s4: '4. Kalender', s5: '5. Team-Freigabe', s6: '6. Funktionen', s7: '7. Ein Kauf' },
         s1: { headline: 'Bestellungen visuell<br>organisieren', subheadline: 'Kanban-Board per Drag & Drop für einfaches Tracking' },
-        s2: { headline: 'Bestellungen mit<br>deinem Team teilen', subheadline: 'In Echtzeit per iCloud-Freigabe zusammenarbeiten' },
+        s2: { headline: 'Alle Bestelldetails<br>auf einen Blick', subheadline: 'Status, Zahlungen, Notizen und Liefertermine an einem Ort' },
         s3: { headline: 'Umsatz & Leistung<br>verfolgen', subheadline: 'Bestellstatus, Zahlungen & Trends auf einen Blick' },
-        s4: {
+        s4: { headline: 'Mit dem Kalender<br>vorausplanen', subheadline: 'Alle Bestellungen in der Monatskalenderansicht' },
+        s5: { headline: 'Bestellungen mit<br>deinem Team teilen', subheadline: 'In Echtzeit per iCloud-Freigabe zusammenarbeiten' },
+        s6: {
           headline: 'Bestellverwaltung<br>leicht gemacht',
           subheadline: 'Alles, was du brauchst, um Bestellungen für dein kleines Unternehmen zu verwalten.',
           icloud: 'iCloud-Sync', icloudDesc: 'Bestellungen auf allen Geräten',
@@ -473,7 +508,7 @@
           noSub: 'Kein Abo', noSubDesc: 'Einmal zahlen, für immer nutzen',
           private: 'Privat & sicher', privateDesc: 'Deine Daten bleiben auf deinen Geräten',
         },
-        s5: {
+        s7: {
           headline: 'Ein Kauf.<br>Keine Tricks.',
           subheadline: 'Einfach & unkompliziert',
           noSub: 'Kein Abo', noSubDesc: 'Einmaliger Kauf, für immer deins',
@@ -497,11 +532,13 @@
           guide5: 'Pas de canal alpha/transparence (conforme App Store)',
           guide6: 'Dans App Store Connect, téléversez dans la section <strong>iPad Pro 12,9"</strong> — les autres tailles iPad sont générées automatiquement',
         },
-        labels: { s1: '1. Tableau Kanban', s2: '2. Détails commande', s3: '3. Statistiques', s4: '4. Fonctions', s5: '5. Un achat' },
+        labels: { s1: '1. Tableau Kanban', s2: '2. Détails commande', s3: '3. Statistiques', s4: '4. Calendrier', s5: '5. Partage d\'équipe', s6: '6. Fonctions', s7: '7. Un achat' },
         s1: { headline: 'Organisez vos commandes<br>visuellement', subheadline: 'Tableau Kanban par glisser-déposer pour un suivi facile' },
-        s2: { headline: 'Partagez les commandes<br>avec votre équipe', subheadline: 'Collaborez en temps réel via le partage iCloud' },
+        s2: { headline: 'Chaque détail de commande<br>à portée de main', subheadline: 'Statut, paiements, notes et dates de livraison au même endroit' },
         s3: { headline: 'Suivez revenus<br>& performance', subheadline: 'Statut, paiements et tendances en un coup d\'œil' },
-        s4: {
+        s4: { headline: 'Planifiez avec<br>le calendrier', subheadline: 'Toutes vos commandes sur un calendrier mensuel' },
+        s5: { headline: 'Partagez les commandes<br>avec votre équipe', subheadline: 'Collaborez en temps réel via le partage iCloud' },
+        s6: {
           headline: 'Gestion des commandes<br>simplifiée',
           subheadline: 'Tout ce qu\'il faut pour gérer les commandes de votre petite entreprise.',
           icloud: 'Sync iCloud', icloudDesc: 'Accédez aux commandes sur tous vos appareils',
@@ -509,7 +546,7 @@
           noSub: 'Sans abonnement', noSubDesc: 'Payez une fois, utilisez pour toujours',
           private: 'Privé & sécurisé', privateDesc: 'Vos données restent sur vos appareils',
         },
-        s5: {
+        s7: {
           headline: 'Un achat.<br>Sans piège.',
           subheadline: 'Simple & direct',
           noSub: 'Sans abonnement', noSubDesc: 'Achat unique, à vous pour toujours',
@@ -533,11 +570,13 @@
           guide5: 'Nessun canale alpha/trasparenza (conforme App Store)',
           guide6: 'In App Store Connect, carica nella sezione <strong>iPad Pro 12,9"</strong> — le altre dimensioni iPad vengono generate automaticamente',
         },
-        labels: { s1: '1. Bacheca Kanban', s2: '2. Dettagli ordine', s3: '3. Statistiche', s4: '4. Funzioni', s5: '5. Un acquisto' },
+        labels: { s1: '1. Bacheca Kanban', s2: '2. Dettagli ordine', s3: '3. Statistiche', s4: '4. Calendario', s5: '5. Condivisione team', s6: '6. Funzioni', s7: '7. Un acquisto' },
         s1: { headline: 'Organizza gli ordini<br>visivamente', subheadline: 'Bacheca Kanban drag & drop per un tracking facile' },
-        s2: { headline: 'Condividi gli ordini<br>con il tuo team', subheadline: 'Collabora in tempo reale tramite condivisione iCloud' },
+        s2: { headline: 'Ogni dettaglio ordine<br>a portata di mano', subheadline: 'Stato, pagamenti, note e date di consegna in un unico posto' },
         s3: { headline: 'Monitora ricavi<br>e performance', subheadline: 'Stato ordini, pagamenti e trend a colpo d\'occhio' },
-        s4: {
+        s4: { headline: 'Pianifica con<br>il calendario', subheadline: 'Tutti i tuoi ordini in una vista calendario mensile' },
+        s5: { headline: 'Condividi gli ordini<br>con il tuo team', subheadline: 'Collabora in tempo reale tramite condivisione iCloud' },
+        s6: {
           headline: 'Gestione ordini<br>semplificata',
           subheadline: 'Tutto ciò che serve per gestire gli ordini della tua piccola attività.',
           icloud: 'Sync iCloud', icloudDesc: 'Accedi agli ordini su tutti i dispositivi',
@@ -545,7 +584,7 @@
           noSub: 'Nessun abbonamento', noSubDesc: 'Paga una volta, usa per sempre',
           private: 'Privato e sicuro', privateDesc: 'I tuoi dati restano sui tuoi dispositivi',
         },
-        s5: {
+        s7: {
           headline: 'Un acquisto.<br>Nessun trucco.',
           subheadline: 'Semplice e diretto',
           noSub: 'Nessun abbonamento', noSubDesc: 'Acquisto una tantum, tuo per sempre',
@@ -569,11 +608,13 @@
           guide5: 'Sem canal alpha/transparência (compatível com App Store)',
           guide6: 'No App Store Connect, envie na seção <strong>iPad Pro 12,9"</strong> — outros tamanhos de iPad são gerados automaticamente',
         },
-        labels: { s1: '1. Quadro Kanban', s2: '2. Detalhes do pedido', s3: '3. Estatísticas', s4: '4. Recursos', s5: '5. Uma compra' },
+        labels: { s1: '1. Quadro Kanban', s2: '2. Detalhes do pedido', s3: '3. Estatísticas', s4: '4. Calendário', s5: '5. Compartilhamento em equipe', s6: '6. Recursos', s7: '7. Uma compra' },
         s1: { headline: 'Organize pedidos<br>visualmente', subheadline: 'Quadro Kanban com arrastar e soltar para acompanhamento fácil' },
-        s2: { headline: 'Compartilhe pedidos<br>com sua equipe', subheadline: 'Colabore em tempo real via compartilhamento iCloud' },
+        s2: { headline: 'Cada detalhe do pedido<br>na palma da mão', subheadline: 'Status, pagamentos, notas e datas de entrega em um só lugar' },
         s3: { headline: 'Acompanhe receita<br>e desempenho', subheadline: 'Status, pagamentos e tendências de relance' },
-        s4: {
+        s4: { headline: 'Planeje com<br>o calendário', subheadline: 'Todos os seus pedidos em uma visão de calendário mensal' },
+        s5: { headline: 'Compartilhe pedidos<br>com sua equipe', subheadline: 'Colabore em tempo real via compartilhamento iCloud' },
+        s6: {
           headline: 'Gestão de pedidos<br>descomplicada',
           subheadline: 'Tudo o que você precisa para gerenciar pedidos do seu pequeno negócio.',
           icloud: 'Sync iCloud', icloudDesc: 'Acesse pedidos em todos os dispositivos',
@@ -581,7 +622,7 @@
           noSub: 'Sem assinatura', noSubDesc: 'Pague uma vez, use para sempre',
           private: 'Privado e seguro', privateDesc: 'Seus dados ficam nos seus dispositivos',
         },
-        s5: {
+        s7: {
           headline: 'Uma compra.<br>Sem truques.',
           subheadline: 'Simples e direto',
           noSub: 'Sem assinatura', noSubDesc: 'Compra única, seu para sempre',
@@ -605,11 +646,13 @@
           guide5: 'Sin canal alpha/transparencia (compatible con App Store)',
           guide6: 'En App Store Connect, sube en la sección <strong>iPad Pro 12,9"</strong> — otros tamaños de iPad se generan automáticamente',
         },
-        labels: { s1: '1. Tablero Kanban', s2: '2. Detalles del pedido', s3: '3. Estadísticas', s4: '4. Funciones', s5: '5. Una compra' },
+        labels: { s1: '1. Tablero Kanban', s2: '2. Detalles del pedido', s3: '3. Estadísticas', s4: '4. Calendario', s5: '5. Compartir en equipo', s6: '6. Funciones', s7: '7. Una compra' },
         s1: { headline: 'Organiza pedidos<br>visualmente', subheadline: 'Tablero Kanban con arrastrar y soltar para un seguimiento fácil' },
-        s2: { headline: 'Comparte pedidos<br>con tu equipo', subheadline: 'Colabora en tiempo real con iCloud' },
+        s2: { headline: 'Cada detalle del pedido<br>al alcance de tu mano', subheadline: 'Estado, pagos, notas y fechas de entrega en un solo lugar' },
         s3: { headline: 'Sigue ingresos<br>y rendimiento', subheadline: 'Estado, pagos y tendencias de un vistazo' },
-        s4: {
+        s4: { headline: 'Planifica con<br>el calendario', subheadline: 'Todos tus pedidos en una vista de calendario mensual' },
+        s5: { headline: 'Comparte pedidos<br>con tu equipo', subheadline: 'Colabora en tiempo real con iCloud' },
+        s6: {
           headline: 'Gestión de pedidos<br>simplificada',
           subheadline: 'Todo lo que necesitas para gestionar pedidos de tu pequeño negocio.',
           icloud: 'Sync iCloud', icloudDesc: 'Accede a pedidos en todos tus dispositivos',
@@ -617,7 +660,7 @@
           noSub: 'Sin suscripción', noSubDesc: 'Paga una vez, úsalo para siempre',
           private: 'Privado y seguro', privateDesc: 'Tus datos permanecen en tus dispositivos',
         },
-        s5: {
+        s7: {
           headline: 'Una compra.<br>Sin trucos.',
           subheadline: 'Simple y directo',
           noSub: 'Sin suscripción', noSubDesc: 'Compra única, tuyo para siempre',
@@ -687,7 +730,7 @@
           const reader = new FileReader();
           reader.onload = function(event) {
             let targetNum = 1;
-            for (let j = 1; j <= 3; j++) {
+            for (let j = 1; j <= 5; j++) {
               const placeholder = document.getElementById(`placeholder${j}`);
               if (placeholder && !placeholder.querySelector('img')) {
                 targetNum = j;
@@ -709,53 +752,71 @@
       link.click();
     }
     
-    async function downloadCurrent(num, lang = currentLang) {
+    window.batchLoadImages = function(urls) {
+      if (Array.isArray(urls)) {
+        urls.forEach((src, i) => setPlaceholderImage(i + 1, src));
+        return;
+      }
+      for (const [slot, src] of Object.entries(urls)) {
+        setPlaceholderImage(Number(slot), src);
+      }
+    };
+
+    window.registerExtraLocales = function(extra, ipadUiPatch) {
+      Object.assign(COPY, extra);
+      for (const lang of Object.keys(extra)) {
+        if (!LANG_CODES.includes(lang)) LANG_CODES.push(lang);
+      }
+      if (ipadUiPatch) {
+        for (const [lang, patch] of Object.entries(ipadUiPatch)) {
+          if (COPY[lang]?.ui && patch.ui) Object.assign(COPY[lang].ui, patch.ui);
+        }
+      }
+    };
+
+    async function captureScreenshot(num, lang = currentLang) {
       const savedLang = currentLang;
-      const radio = document.querySelector(`input[name="lang"][value="${lang}"]`);
-      if (lang !== currentLang && radio) {
-        radio.checked = true;
+      if (lang !== currentLang) {
         applyLanguage(lang);
         await new Promise((r) => setTimeout(r, 150));
       }
 
       const element = document.getElementById(`screenshot${num}`);
-      
+      const canvas = await html2canvas(element, {
+        scale: SCALE,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: BG_FILL,
+        width: 512,
+        height: 683
+      });
+
+      const finalCanvas = document.createElement('canvas');
+      finalCanvas.width = EXPORT_WIDTH;
+      finalCanvas.height = EXPORT_HEIGHT;
+      const ctx = finalCanvas.getContext('2d');
+      ctx.fillStyle = BG_FILL;
+      ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+      ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+
+      if (savedLang !== lang) applyLanguage(savedLang);
+      return finalCanvas.toDataURL('image/png');
+    }
+
+    window.exportScreenshot = captureScreenshot;
+
+    async function downloadCurrent(num, lang = currentLang) {
       try {
-        const canvas = await html2canvas(element, {
-          scale: SCALE,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: BG_FILL,
-          width: 512,
-          height: 683
-        });
-        
-        const finalCanvas = document.createElement('canvas');
-        finalCanvas.width = EXPORT_WIDTH;
-        finalCanvas.height = EXPORT_HEIGHT;
-        const ctx = finalCanvas.getContext('2d');
-        
-        ctx.fillStyle = BG_FILL;
-        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
-        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
-        
-        downloadDataUrl(finalCanvas.toDataURL('image/png'), `${DOWNLOAD_PREFIX}${lang}-${num}.png`);
+        const dataUrl = await captureScreenshot(num, lang);
+        downloadDataUrl(dataUrl, `${DOWNLOAD_PREFIX}${lang}-${num}.png`);
       } catch (e) {
         console.error('Screenshot failed:', e);
         alert('Screenshot failed. Please try again.');
-      } finally {
-        if (savedLang !== lang) {
-          const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
-          if (restore) {
-            restore.checked = true;
-            applyLanguage(savedLang);
-          }
-        }
       }
     }
     
     async function downloadAll() {
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
         await downloadCurrent(i, currentLang);
         await new Promise(r => setTimeout(r, 500));
       }
@@ -764,7 +825,7 @@
     async function downloadAllLanguages() {
       const savedLang = currentLang;
       for (const lang of LANG_CODES) {
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
           await downloadCurrent(i, lang);
           await new Promise((r) => setTimeout(r, 500));
         }
