@@ -864,6 +864,110 @@
       height: 20px;
     }
 
+
+    /* ========== CONTACT ========== */
+    .contact-section {
+      padding: 80px 24px 100px;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info .section-label { text-align: left; }
+    .contact-info .section-title {
+      text-align: left;
+      font-size: clamp(28px, 4vw, 36px);
+      margin-bottom: 12px;
+    }
+    .contact-info .section-sub {
+      text-align: left;
+      margin: 0;
+      max-width: none;
+    }
+
+    .contact-form-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+    }
+
+    .contact-form .form-group { margin-bottom: 20px; }
+
+    .contact-form label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-form .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+      transition: all 0.25s;
+      font-family: inherit;
+    }
+
+    .contact-form .btn-submit:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+    }
+
+    @media (max-width: 768px) {
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
     /* ========== FOOTER ========== */
     .footer {
       border-top: 1px solid var(--border);
@@ -1078,6 +1182,7 @@
         <a href="#features">Funzioni</a>
         <a href="#how-it-works">Come funziona</a>
         <a href="#faq">FAQ</a>
+        <a href="#contact">Contatto</a>
         <div class="nav-lang">
           <label class="sr-only" for="lang-select">Lingua</label>
           <select id="lang-select" class="lang-select" aria-label="Lingua" onchange="if(this.value)window.location.href=this.value">
@@ -1438,6 +1543,38 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <div class="section-label">Contattaci</div>
+        <h2 class="section-title">Domande e suggerimenti</h2>
+        <p class="section-sub">Hai una domanda, un bug o un'idea? Inviaci un messaggio — leggiamo tutto.</p>
+      </div>
+      <div class="contact-form-card">
+        <form action="https://formspree.io/f/xwkglvnl" method="POST" class="contact-form">
+          <input type="hidden" name="_subject" value="SB Diary — Feedback" />
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" placeholder="Il tuo nome" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="tu@esempio.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Messaggio</label>
+            <textarea id="message" name="message" placeholder="Cosa vorresti dirci?" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            Invia messaggio
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
   </main>
 
   <!-- FOOTER -->
@@ -1477,7 +1614,8 @@
       </div>
       <div class="footer-links">
         <a href="privacy-policy.html">Informativa sulla privacy</a>
-        <a href="mailto:hernan.amiune@icloud.com">Contatto</a>
+        <a href="#contact">Contatto</a>
+        <a href="https://www.generativenetworks.com" target="_blank" rel="noopener noreferrer">Generative Networks</a>
       </div>
     </div>
   </footer>
