@@ -421,6 +421,15 @@ a {
   padding: var(--section-spacing) 0;
 }
 
+.section-apps-page {
+  padding-top: 8rem;
+}
+
+.section-header .philosophy-quote {
+  margin-top: 2rem;
+  max-width: 48rem;
+}
+
 .section-header {
   margin-bottom: 4rem;
 }
@@ -794,6 +803,11 @@ a {
   box-shadow: var(--card-shadow);
   border: none;
   margin: 0;
+}
+
+.philosophy-quote .section-label {
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .philosophy-quote p {
@@ -1434,15 +1448,7 @@ a {
 }
 
 /* ============================================
-   Apps Gallery CTA (Home Page)
-   ============================================ */
-.apps-gallery-cta {
-  text-align: center;
-  margin-top: 3rem;
-}
-
-/* ============================================
-   Apps Gallery Page
+   Custom Apps Page
    ============================================ */
 .apps-gallery-header {
   padding: 8rem 0 4rem;
