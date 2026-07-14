@@ -70,6 +70,17 @@ icon_image = "/apps/sborders/icon.svg"
 url = "/apps/sbfieldservice/"
 
 [[extra.apps]]
+title = "CNC Feeds"
+tagline = "Conservative feeds & speeds for hobby CNC"
+description = "A workshop assistant for hobby CNC routers and desktop machines—conservative starting feeds, speeds, and depth-of-cut settings, recipe library, test cut logging, and workspace sharing via iCloud."
+platform = "iOS"
+price = "Free. No ads. No subscription."
+icon_color = "linear-gradient(135deg, #3D7AA8 0%, #1E3D54 100%)"
+icon_letter = "CNC"
+icon_image = "/apps/cncfeeds/icon.svg"
+url = "/apps/cncfeeds/"
+
+[[extra.apps]]
 title = "SB Diary"
 tagline = "Small Business Daily Journal"
 description = "Track your business journey with daily entries, mood tracking, and financial insights. Your story, your data, your device."

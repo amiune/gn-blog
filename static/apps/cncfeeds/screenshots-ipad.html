@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNC Feeds — iPad App Store Screenshots Generator</title>
+  <style>
+    :root {
+      --primary: #2D5A7B;
+      --primary-dark: #1E3D54;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0c1218 0%, #141c24 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #60A5FA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(45, 90, 123, 0.45);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(45, 90, 123, 0.55);
+    }
+
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+
+    .screenshot {
+      width: 512px;
+      height: 683px;
+      background: linear-gradient(180deg, #2D5A7B 0%, #1E3D54 50%, #152a38 100%);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .headline {
+      color: white;
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.25;
+      margin-bottom: 4px;
+      z-index: 1;
+    }
+
+    .subheadline {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 10px;
+      z-index: 1;
+    }
+
+    .screenshot-placeholder {
+      width: 400px;
+      height: 534px;
+      background: rgba(255,255,255,0.1);
+      border: 3px dashed rgba(255,255,255,0.4);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .screenshot-placeholder .placeholder-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .screenshot-placeholder .placeholder-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      opacity: 0.6;
+    }
+
+    .screenshot-placeholder .placeholder-hint {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 8px;
+    }
+
+    .screenshot-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 13px;
+    }
+
+    canvas {
+      display: none;
+    }
+
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .instructions h3 {
+      color: #60A5FA;
+      margin-bottom: 12px;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📱 iPad App Store Screenshots</h1>
+    <p>CNC Feeds — 12.9&Prime;-class canvas (2048 × 2732)</p>
+  </div>
+
+  <div class="controls">
+    <button onclick="downloadAll()">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Screenshot 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Screenshot 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
+    <button class="secondary" onclick="downloadCurrent(5)">Screenshot 5</button>
+    <button class="secondary" onclick="downloadCurrent(6)">Screenshot 6</button>
+  </div>
+
+  <div class="screenshots">
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline">Your workshop<br>at a glance</div>
+        <div class="subheadline">Dashboard with recipes, test cuts & sync status</div>
+
+        <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">1. Dashboard</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline">Conservative<br>recommendations</div>
+        <div class="subheadline">RPM, feed rate, depth per pass & stepover</div>
+
+        <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">2. Recommendations</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline">Recipe<br>library</div>
+        <div class="subheadline">Supplies and low-stock warnings</div>
+
+        <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">3. Recipes</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4">
+        <div class="headline">Log test<br>cuts</div>
+        <div class="subheadline">Track outcomes, issue tags & photos</div>
+
+        <div class="screenshot-placeholder" id="placeholder4" onclick="triggerUpload(4)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">4. Test cuts</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot5" style="justify-content: center; gap: 20px;">
+        <div class="headline" style="font-size: 2.4rem;">Built for<br>hobby CNC</div>
+        <div class="subheadline" style="font-size: 1.1rem; max-width: 440px;">
+          Fast iPad workflow for hobby routers, desktop CNC, and maker shops.
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; z-index: 1; width: 100%; max-width: 470px;">
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 16px; padding: 16px;">
+            <div style="font-size: 2rem;">👥</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.05rem;">Workspace sharing</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem;">Share your whole shop setup via iCloud</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 16px; padding: 16px;">
+            <div style="font-size: 2rem;">☁️</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">iCloud sync</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Private CloudKit across your devices</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">📤</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">JSON & CSV export</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Recipes, test cuts & workspace exports</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔔</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">Test cut logging</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Machines and tool bits</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔒</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;">Your data</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">No marketplace integrations in v1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">5. Features</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot6" style="justify-content: center; gap: 22px; padding-top: 40px;">
+        <div class="headline" style="font-size: 2.3rem;">One purchase.<br>No tricks.</div>
+        <div class="subheadline" style="font-size: 1.1rem; max-width: 420px; margin-bottom: 6px;">
+          Simple &amp; straightforward
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; z-index: 1; width: 100%; max-width: 470px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 20px;">
+            <div style="font-size: 2.1rem; line-height: 1;">🚫</div>
+            <div style="color: white; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em;">No subscription</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 20px;">
+            <div style="font-size: 2.1rem; line-height: 1;">📵</div>
+            <div style="color: white; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em;">No Ads</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 20px;">
+            <div style="font-size: 2.1rem; line-height: 1;">🔄</div>
+            <div style="color: white; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em;">Free Updates</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(52,199,89,0.35); border: 2px solid rgba(255,255,255,0.25); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 20px;">
+            <div style="font-size: 2.1rem; line-height: 1;">⭐</div>
+            <div style="color: white; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em;">Amazing Support</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">6. No subscription · No ads</div>
+    </div>
+
+  </div>
+
+  <div class="instructions">
+    <h3>📸 iPad screenshot export guide</h3>
+    <ol>
+      <li><strong>Add captures:</strong> Click a placeholder or paste (Cmd+V)</li>
+      <li>Click <strong>Download All Screenshots</strong> for six PNGs (5–6 are marketing-only)</li>
+      <li>Exported size <code>2048 × 2732px</code></li>
+      <li>In App Store Connect, use <strong>12.9&Prime; iPad Pro</strong> (or equivalent) slot</li>
+    </ol>
+  </div>
+
+  <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
+  <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
+  <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  <input type="file" id="fileInput4" accept="image/*" style="display:none" onchange="handleFileSelect(event, 4)">
+
+  <canvas id="canvas"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    const EXPORT_WIDTH = 2048;
+    const EXPORT_HEIGHT = 2732;
+    const SCALE = 4;
+    const BG_FILL = '#1E3D54';
+
+    function triggerUpload(num) {
+      document.getElementById(`fileInput${num}`).click();
+    }
+
+    function handleFileSelect(event, num) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPlaceholderImage(num, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function setPlaceholderImage(num, src) {
+      const placeholder = document.getElementById(`placeholder${num}`);
+      placeholder.innerHTML = `<img src="${src}" alt="Screenshot ${num}">`;
+      placeholder.style.border = 'none';
+      placeholder.style.background = 'transparent';
+    }
+
+    document.addEventListener('paste', function(e) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            let targetNum = 1;
+            for (let j = 1; j <= 4; j++) {
+              const placeholder = document.getElementById(`placeholder${j}`);
+              if (placeholder && !placeholder.querySelector('img')) {
+                targetNum = j;
+                break;
+              }
+            }
+            setPlaceholderImage(targetNum, event.target.result);
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+
+    async function downloadCurrent(num) {
+      const element = document.getElementById(`screenshot${num}`);
+
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: BG_FILL,
+          width: 512,
+          height: 683
+        });
+
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+
+        ctx.fillStyle = BG_FILL;
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+
+        downloadDataUrl(finalCanvas.toDataURL('image/png'), `CNCFeeds-iPad-Screenshot-${num}.png`);
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
+      }
+    }
+
+    async function downloadAll() {
+      for (let i = 1; i <= 6; i++) {
+        await downloadCurrent(i);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+  </script>
+</body>
+</html>

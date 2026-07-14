@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNC Feeds — App Store Screenshots (DE · FR · IT · PT · ES)</title>
+  <style>
+    :root {
+      --primary: #2D5A7B;
+      --primary-dark: #1E3D54;
+      --accent: #2D7AE4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0c1218 0%, #141c24 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #60A5FA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: -18px auto 24px;
+      flex-wrap: wrap;
+    }
+
+    .lang-bar label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .lang-bar input { display: none; }
+
+    .lang-bar label:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(45, 90, 123, 0.28);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(45, 90, 123, 0.45);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(45, 90, 123, 0.55);
+    }
+
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+
+    .screenshot {
+      width: 428px;
+      height: 926px;
+      background: linear-gradient(180deg, #2D5A7B 0%, #1E3D54 50%, #152a38 100%);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .headline {
+      color: white;
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.25;
+      margin-bottom: 6px;
+      z-index: 1;
+    }
+
+    .subheadline {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 14px;
+      z-index: 1;
+    }
+
+    .screenshot-placeholder {
+      width: 300px;
+      height: 652px;
+      background: rgba(255,255,255,0.1);
+      border: 3px dashed rgba(255,255,255,0.4);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot-placeholder .placeholder-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .screenshot-placeholder .placeholder-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+
+    .screenshot-placeholder .placeholder-hint {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 8px;
+    }
+
+    .screenshot-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 21px;
+    }
+
+    canvas {
+      display: none;
+    }
+
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .instructions h3 {
+      color: #60A5FA;
+      margin-bottom: 12px;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📱 App Store Screenshots</h1>
+    <p data-i18n="ui.subtitle">CNC Feeds — iPhone 6.5&Prime; frame</p>
+  </div>
+
+  <div class="lang-bar" role="radiogroup" aria-label="Language">
+    <label>
+      <input type="radio" name="lang" value="de" checked>
+      Deutsch
+    </label>
+    <label>
+      <input type="radio" name="lang" value="fr">
+      Français
+    </label>
+    <label>
+      <input type="radio" name="lang" value="it">
+      Italiano
+    </label>
+    <label>
+      <input type="radio" name="lang" value="pt">
+      Português
+    </label>
+    <label>
+      <input type="radio" name="lang" value="es">
+      Español
+    </label>
+  </div>
+
+  <div class="controls">
+    <button onclick="downloadAll()" data-i18n="ui.downloadAll">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadAllLanguages()" data-i18n="ui.downloadAllLangs">Download All Languages</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Screenshot 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Screenshot 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
+    <button class="secondary" onclick="downloadCurrent(5)">Screenshot 5</button>
+    <button class="secondary" onclick="downloadCurrent(6)">Screenshot 6</button>
+  </div>
+
+  <div class="screenshots">
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline" data-i18n="s1.headline">Your workshop<br>at a glance</div>
+        <div class="subheadline" data-i18n="s1.subheadline">Dashboard with recipes, test cuts & sync status</div>
+
+        <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s1">1. Dashboard</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline" data-i18n="s2.headline">Conservative<br>recommendations</div>
+        <div class="subheadline" data-i18n="s2.subheadline">Machine-aware feeds, speeds & depth-of-cut</div>
+
+        <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s2">2. Recommendations</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline" data-i18n="s3.headline">Recipe<br>library</div>
+        <div class="subheadline" data-i18n="s3.subheadline">Save, search, filter & favorite cutting recipes</div>
+
+        <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s3">3. Recipes</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4">
+        <div class="headline" data-i18n="s4.headline">Log test<br>cuts</div>
+        <div class="subheadline" data-i18n="s4.subheadline">Track outcomes, issue tags & photos</div>
+
+        <div class="screenshot-placeholder" id="placeholder4" onclick="triggerUpload(4)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s4">4. Test cuts</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot5" style="justify-content: center; gap: 24px;">
+        <div class="headline" style="font-size: 2.6rem;" data-i18n="s5.headline">Built for<br>hobby CNC</div>
+        <div class="subheadline" style="font-size: 1.2rem; max-width: 360px;" data-i18n="s5.subheadline">
+          Conservative starting points for routers & desktop CNC — without the guesswork.
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; z-index: 1; width: 100%; max-width: 390px;">
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">👥</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.teamSharing">Workspace sharing</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.teamSharingDesc">Share your whole shop setup via iCloud</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">☁️</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.icloudSync">iCloud sync</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.icloudSyncDesc">Sync recipes across your devices</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">📤</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.csvExport">JSON & CSV export</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.csvExportDesc">Recipes, test cuts & workspace data</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔔</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.lowStockAlerts">Test cut logging</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.lowStockAlertsDesc">Outcomes, tags & adjustment notes</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔒</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.noMarketplace">No custom backend</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.noMarketplaceDesc">Your recipes, your CloudKit container</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s5">5. Features</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot6" style="justify-content: center; gap: 28px; padding-top: 48px;">
+        <div class="headline" style="font-size: 2.5rem;" data-i18n="s6.headline">One purchase.<br>No tricks.</div>
+        <div class="subheadline" style="font-size: 1.15rem; max-width: 360px; margin-bottom: 8px;" data-i18n="s6.subheadline">
+          Simple &amp; straightforward
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px; z-index: 1; width: 100%; max-width: 390px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">🚫</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s6.noSubscription">No subscription</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">📵</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s6.noAds">No Ads</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">🔄</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s6.freeUpdates">Free Updates</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(52,199,89,0.35); border: 2px solid rgba(255,255,255,0.25); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">⭐</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s6.amazingSupport">Amazing Support</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s6">6. No subscription · No ads</div>
+    </div>
+
+  </div>
+
+  <div class="instructions">
+    <h3 data-i18n="ui.guideTitle">📸 Screenshot export guide</h3>
+    <ol>
+      <li data-i18n="ui.guide1"><strong>Add captures:</strong> Click a placeholder or paste (Cmd+V) with the Simulator or device screenshot</li>
+      <li data-i18n="ui.guide2">Pick a language above to preview localized copy before exporting</li>
+      <li data-i18n="ui.guide3">Click <strong>Download All Screenshots</strong> for all six PNGs (5–6 are marketing-only)</li>
+      <li data-i18n="ui.guide4">Click <strong>Download All Languages</strong> for all 30 PNGs (6 screenshots × 5 languages)</li>
+      <li data-i18n="ui.guide5">Exports at <code>1284 × 2778px</code> (6.5&Prime; display)</li>
+      <li data-i18n="ui.guide6">No alpha channel (App Store compliant)</li>
+      <li data-i18n="ui.guide7">In App Store Connect, use the <strong>6.5&Prime; iPhone</strong> slot; other sizes can derive from these</li>
+      <li data-i18n="ui.guide8">Filenames include the language code: e.g. <code>CNCFeeds-Screenshot-de-1.png</code></li>
+    </ol>
+  </div>
+
+  <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
+  <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
+  <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  <input type="file" id="fileInput4" accept="image/*" style="display:none" onchange="handleFileSelect(event, 4)">
+
+  <canvas id="canvas"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    const EXPORT_WIDTH = 1284;
+    const EXPORT_HEIGHT = 2778;
+    const SCALE = 3;
+    const BG_FILL = '#1E3D54';
+    const DOWNLOAD_PREFIX = 'CNCFeeds-Screenshot-';
+    const SCREENSHOT_COUNT = 6;
+    const LANG_CODES = ['de', 'fr', 'it', 'pt', 'es'];
+    let currentLang = 'de';
+
+    const COPY = {
+      de: {
+        ui: {
+          subtitle: 'CNC Feeds — iPhone 6,5″-Rahmen',
+          downloadAll: 'Alle Screenshots herunterladen',
+          downloadAllLangs: 'Alle Sprachen herunterladen',
+          guideTitle: '📸 Screenshot-Export-Anleitung',
+          guide1: '<strong>Aufnahmen hinzufügen:</strong> Auf einen Platzhalter klicken oder einfügen (Cmd+V) mit Simulator- oder Geräte-Screenshot',
+          guide2: 'Wähle oben eine Sprache für die lokalisierte Vorschau',
+          guide3: 'Klicke auf <strong>Alle Screenshots herunterladen</strong> für alle sechs PNGs (5–6 nur Marketing)',
+          guide4: 'Klicke auf <strong>Alle Sprachen herunterladen</strong> für alle 30 PNGs (6 Screenshots × 5 Sprachen)',
+          guide5: 'Export in <code>1284 × 2778px</code> (6,5″-Display)',
+          guide6: 'Kein Alpha-Kanal (App Store-konform)',
+          guide7: 'In App Store Connect den <strong>6,5″ iPhone</strong>-Slot verwenden; andere Größen lassen sich daraus ableiten',
+          guide8: 'Dateinamen enthalten den Sprachcode: z. B. <code>CNCFeeds-Screenshot-de-1.png</code>',
+        },
+        labels: { s1: '1. Inventar', s2: '2. Produkte / Varianten', s3: '3. Materialien / Alarme', s4: '4. Team-Freigabe', s5: '5. Funktionen', s6: '6. Kein Abo · Keine Werbung' },
+        placeholder: { text: 'Klicken zum Hochladen oder<br>Screenshot hier einfügen', hint: 'Empfohlen: 1170 × 2532px' },
+        s1: { headline: 'Ihr Inventar<br>auf einen Blick', subheadline: 'Dashboard mit Bestandsübersicht und Produkten' },
+        s2: { headline: 'Konservative<br>Empfehlungen', subheadline: 'SKUs, Kategorien sowie Größen- &amp; Farbkombinationen' },
+        s3: { headline: 'Materialien &amp;<br>Alarme', subheadline: 'Zubehör, Schwellenwerte und Niedrigbestands-Warnungen' },
+        s4: { headline: 'Teilen Sie Ihr<br>Inventar', subheadline: 'Laden Sie Ihr Team ein, gemeinsam anzusehen und zu bearbeiten' },
+        s5: {
+          headline: 'Gemacht für<br>Macher',
+          subheadline: 'Schneller iPhone- &amp; iPad-Workflow — ohne Tabellenlabyrinth.',
+          teamSharing: 'Team-Freigabe',
+          teamSharingDesc: 'Gemeinsam am Inventar per iCloud',
+          icloudSync: 'iCloud-Sync',
+          icloudSyncDesc: 'Private Datenbank auf allen Geräten',
+          csvExport: 'CSV-Export',
+          csvExportDesc: 'Produkte, Varianten und vollständiges Inventar',
+          lowStockAlerts: 'Niedrigbestands-Alarme',
+          lowStockAlertsDesc: 'Pro Variante und pro Material',
+          noMarketplace: 'Kein Marktplatz-Zwang',
+          noMarketplaceDesc: 'Ihr Bestand, Ihr CloudKit-Container',
+        },
+        s6: {
+          headline: 'Ein Kauf.<br>Keine Tricks.',
+          subheadline: 'Einfach &amp; unkompliziert',
+          noSubscription: 'Kein Abo',
+          noAds: 'Keine Werbung',
+          freeUpdates: 'Kostenlose Updates',
+          amazingSupport: 'Top-Support',
+        },
+      },
+      fr: {
+        ui: {
+          subtitle: 'CNC Feeds — cadre iPhone 6,5″',
+          downloadAll: 'Télécharger toutes les captures',
+          downloadAllLangs: 'Télécharger toutes les langues',
+          guideTitle: '📸 Guide d\'export des captures',
+          guide1: '<strong>Ajouter des captures :</strong> Cliquez sur un emplacement ou collez (Cmd+V) depuis le simulateur ou l\'appareil',
+          guide2: 'Choisissez une langue ci-dessus pour prévisualiser le texte localisé',
+          guide3: 'Cliquez sur <strong>Télécharger toutes les captures</strong> pour les six PNG (5–6 sont marketing uniquement)',
+          guide4: 'Cliquez sur <strong>Télécharger toutes les langues</strong> pour les 30 PNG (6 captures × 5 langues)',
+          guide5: 'Export en <code>1284 × 2778px</code> (écran 6,5″)',
+          guide6: 'Pas de canal alpha (conforme App Store)',
+          guide7: 'Dans App Store Connect, utilisez l\'emplacement <strong>iPhone 6,5″</strong> ; les autres tailles peuvent en découler',
+          guide8: 'Les noms de fichier incluent le code langue : ex. <code>CNCFeeds-Screenshot-fr-1.png</code>',
+        },
+        labels: { s1: '1. Inventaire', s2: '2. Produits / Variantes', s3: '3. Matériaux / Alertes', s4: '4. Partage d\'équipe', s5: '5. Fonctions', s6: '6. Sans abonnement · Sans pub' },
+        placeholder: { text: 'Cliquez pour importer ou<br>collez votre capture ici', hint: 'Recommandé : 1170 × 2532px' },
+        s1: { headline: 'Votre inventaire<br>en un coup d\'œil', subheadline: 'Tableau de bord avec totaux de stock et produits' },
+        s2: { headline: 'Recommandations<br>conservatrices', subheadline: 'SKU, catégories et combinaisons taille &amp; couleur' },
+        s3: { headline: 'Matériaux &amp;<br>alertes', subheadline: 'Fournitures, seuils et alertes de stock bas' },
+        s4: { headline: 'Partagez votre<br>inventaire', subheadline: 'Invitez votre équipe à consulter et modifier ensemble' },
+        s5: {
+          headline: 'Conçu pour le<br>CNC amateur',
+          subheadline: 'Workflow rapide iPhone &amp; iPad — sans le labyrinthe des tableurs.',
+          teamSharing: 'Partage d\'équipe',
+          teamSharingDesc: 'Collaborez sur l\'inventaire via iCloud',
+          icloudSync: 'Sync iCloud',
+          icloudSyncDesc: 'Base privée sur tous vos appareils',
+          csvExport: 'Export CSV',
+          csvExportDesc: 'Produits, variantes et inventaire complet',
+          lowStockAlerts: 'Alertes stock bas',
+          lowStockAlertsDesc: 'Par variante et par matériau',
+          noMarketplace: 'Pas de lien marketplace',
+          noMarketplaceDesc: 'Votre stock, votre conteneur CloudKit',
+        },
+        s6: {
+          headline: 'Un achat.<br>Sans piège.',
+          subheadline: 'Simple &amp; direct',
+          noSubscription: 'Sans abonnement',
+          noAds: 'Sans pub',
+          freeUpdates: 'Mises à jour gratuites',
+          amazingSupport: 'Support remarquable',
+        },
+      },
+      it: {
+        ui: {
+          subtitle: 'CNC Feeds — cornice iPhone 6,5″',
+          downloadAll: 'Scarica tutti gli screenshot',
+          downloadAllLangs: 'Scarica tutte le lingue',
+          guideTitle: '📸 Guida all\'export screenshot',
+          guide1: '<strong>Aggiungi catture:</strong> Clicca su un segnaposto o incolla (Cmd+V) dal simulatore o dispositivo',
+          guide2: 'Scegli una lingua sopra per vedere l\'anteprima localizzata',
+          guide3: 'Clicca <strong>Scarica tutti gli screenshot</strong> per tutti e sei i PNG (5–6 solo marketing)',
+          guide4: 'Clicca <strong>Scarica tutte le lingue</strong> per tutti i 30 PNG (6 screenshot × 5 lingue)',
+          guide5: 'Export a <code>1284 × 2778px</code> (display 6,5″)',
+          guide6: 'Nessun canale alpha (conforme App Store)',
+          guide7: 'In App Store Connect, usa lo slot <strong>iPhone 6,5″</strong>; le altre dimensioni si derivano da questi',
+          guide8: 'I nomi file includono il codice lingua: es. <code>CNCFeeds-Screenshot-it-1.png</code>',
+        },
+        labels: { s1: '1. Inventario', s2: '2. Prodotti / Varianti', s3: '3. Materiali / Avvisi', s4: '4. Condivisione team', s5: '5. Funzioni', s6: '6. Nessun abbonamento · Niente ads' },
+        placeholder: { text: 'Clicca per caricare o<br>incolla lo screenshot qui', hint: 'Consigliato: 1170 × 2532px' },
+        s1: { headline: 'Il tuo inventario<br>a colpo d\'occhio', subheadline: 'Dashboard con totali di stock e prodotti' },
+        s2: { headline: 'Raccomandazioni<br>conservative', subheadline: 'SKU, categorie e combinazioni taglia &amp; colore' },
+        s3: { headline: 'Materiali &amp;<br>avvisi', subheadline: 'Forniture, soglie e avvisi di stock basso' },
+        s4: { headline: 'Condividi il tuo<br>inventario', subheadline: 'Invita il team a visualizzare e modificare insieme' },
+        s5: {
+          headline: 'Fatto per i<br>maker',
+          subheadline: 'Workflow veloce su iPhone e iPad — senza il labirinto dei fogli.',
+          teamSharing: 'Condivisione team',
+          teamSharingDesc: 'Collabora sull\'inventario via iCloud',
+          icloudSync: 'Sync iCloud',
+          icloudSyncDesc: 'Database privato su tutti i dispositivi',
+          csvExport: 'Export CSV',
+          csvExportDesc: 'Prodotti, varianti e inventario completo',
+          lowStockAlerts: 'Avvisi stock basso',
+          lowStockAlertsDesc: 'Per variante e per materiale',
+          noMarketplace: 'Nessun legame marketplace',
+          noMarketplaceDesc: 'Il tuo stock, il tuo container CloudKit',
+        },
+        s6: {
+          headline: 'Un acquisto.<br>Niente trucchi.',
+          subheadline: 'Semplice &amp; diretto',
+          noSubscription: 'Nessun abbonamento',
+          noAds: 'Niente pubblicità',
+          freeUpdates: 'Aggiornamenti gratuiti',
+          amazingSupport: 'Supporto eccezionale',
+        },
+      },
+      pt: {
+        ui: {
+          subtitle: 'CNC Feeds — moldura iPhone 6,5″',
+          downloadAll: 'Baixar todos os screenshots',
+          downloadAllLangs: 'Baixar todos os idiomas',
+          guideTitle: '📸 Guia de exportação de screenshots',
+          guide1: '<strong>Adicionar capturas:</strong> Clique em um espaço ou cole (Cmd+V) do simulador ou dispositivo',
+          guide2: 'Escolha um idioma acima para visualizar o texto localizado',
+          guide3: 'Clique em <strong>Baixar todos os screenshots</strong> para os seis PNGs (5–6 são só marketing)',
+          guide4: 'Clique em <strong>Baixar todos os idiomas</strong> para os 30 PNGs (6 screenshots × 5 idiomas)',
+          guide5: 'Exportação em <code>1284 × 2778px</code> (tela 6,5″)',
+          guide6: 'Sem canal alpha (compatível com App Store)',
+          guide7: 'No App Store Connect, use o slot <strong>iPhone 6,5″</strong>; outros tamanhos podem derivar destes',
+          guide8: 'Os nomes dos arquivos incluem o código do idioma: ex. <code>CNCFeeds-Screenshot-pt-1.png</code>',
+        },
+        labels: { s1: '1. Estoque', s2: '2. Produtos / Variantes', s3: '3. Materiais / Alertas', s4: '4. Compartilhamento em equipe', s5: '5. Recursos', s6: '6. Sem assinatura · Sem anúncios' },
+        placeholder: { text: 'Clique para enviar ou<br>cole seu screenshot aqui', hint: 'Recomendado: 1170 × 2532px' },
+        s1: { headline: 'Seu estoque<br>de relance', subheadline: 'Painel com totais de estoque e produtos' },
+        s2: { headline: 'Recomendações<br>conservadoras', subheadline: 'SKUs, categorias e combinações de tamanho &amp; cor' },
+        s3: { headline: 'Materiais &amp;<br>alertas', subheadline: 'Insumos, limites e avisos de estoque baixo' },
+        s4: { headline: 'Compartilhe seu<br>estoque', subheadline: 'Convide sua equipe para ver e editar juntos' },
+        s5: {
+          headline: 'Feito para<br>CNC hobby',
+          subheadline: 'Fluxo rápido no iPhone e iPad — sem o labirinto de planilhas.',
+          teamSharing: 'Compartilhamento em equipe',
+          teamSharingDesc: 'Colabore no estoque via iCloud',
+          icloudSync: 'Sync iCloud',
+          icloudSyncDesc: 'Banco de dados privado em todos os dispositivos',
+          csvExport: 'Exportação CSV',
+          csvExportDesc: 'Produtos, variantes e estoque completo',
+          lowStockAlerts: 'Alertas de estoque baixo',
+          lowStockAlertsDesc: 'Por variante e por material',
+          noMarketplace: 'Sem vínculo com marketplace',
+          noMarketplaceDesc: 'Seu estoque, seu container CloudKit',
+        },
+        s6: {
+          headline: 'Uma compra.<br>Sem truques.',
+          subheadline: 'Simples &amp; direto',
+          noSubscription: 'Sem assinatura',
+          noAds: 'Sem anúncios',
+          freeUpdates: 'Atualizações gratuitas',
+          amazingSupport: 'Suporte incrível',
+        },
+      },
+      es: {
+        ui: {
+          subtitle: 'CNC Feeds — marco iPhone 6,5″',
+          downloadAll: 'Descargar todas las capturas',
+          downloadAllLangs: 'Descargar todos los idiomas',
+          guideTitle: '📸 Guía de exportación de capturas',
+          guide1: '<strong>Añadir capturas:</strong> Haz clic en un marcador o pega (Cmd+V) desde el simulador o dispositivo',
+          guide2: 'Elige un idioma arriba para previsualizar el texto localizado',
+          guide3: 'Haz clic en <strong>Descargar todas las capturas</strong> para los seis PNG (5–6 son solo marketing)',
+          guide4: 'Haz clic en <strong>Descargar todos los idiomas</strong> para los 30 PNG (6 capturas × 5 idiomas)',
+          guide5: 'Exportación a <code>1284 × 2778px</code> (pantalla 6,5″)',
+          guide6: 'Sin canal alpha (compatible con App Store)',
+          guide7: 'En App Store Connect, usa el espacio <strong>iPhone 6,5″</strong>; otros tamaños pueden derivarse de estos',
+          guide8: 'Los nombres de archivo incluyen el código de idioma: ej. <code>CNCFeeds-Screenshot-es-1.png</code>',
+        },
+        labels: { s1: '1. Inventario', s2: '2. Productos / Variantes', s3: '3. Materiales / Alertas', s4: '4. Compartir en equipo', s5: '5. Funciones', s6: '6. Sin suscripción · Sin anuncios' },
+        placeholder: { text: 'Haz clic para subir o<br>pega tu captura aquí', hint: 'Recomendado: 1170 × 2532px' },
+        s1: { headline: 'Tu inventario<br>de un vistazo', subheadline: 'Panel con totales de stock y productos' },
+        s2: { headline: 'Recomendaciones<br>conservadoras', subheadline: 'SKUs, categorías y combinaciones de talla &amp; color' },
+        s3: { headline: 'Materiales &amp;<br>alertas', subheadline: 'Suministros, umbrales y avisos de stock bajo' },
+        s4: { headline: 'Comparte tu<br>inventario', subheadline: 'Invita a tu equipo a ver y editar juntos' },
+        s5: {
+          headline: 'Hecho para<br>CNC hobby',
+          subheadline: 'Flujo rápido en iPhone e iPad — sin el laberinto de hojas de cálculo.',
+          teamSharing: 'Compartir en equipo',
+          teamSharingDesc: 'Colabora en el inventario vía iCloud',
+          icloudSync: 'Sync iCloud',
+          icloudSyncDesc: 'Base de datos privada en todos tus dispositivos',
+          csvExport: 'Exportación CSV',
+          csvExportDesc: 'Productos, variantes e inventario completo',
+          lowStockAlerts: 'Alertas de stock bajo',
+          lowStockAlertsDesc: 'Por variante y por material',
+          noMarketplace: 'Sin atadura a marketplace',
+          noMarketplaceDesc: 'Tu stock, tu contenedor CloudKit',
+        },
+        s6: {
+          headline: 'Una compra.<br>Sin trucos.',
+          subheadline: 'Simple &amp; directo',
+          noSubscription: 'Sin suscripción',
+          noAds: 'Sin anuncios',
+          freeUpdates: 'Actualizaciones gratis',
+          amazingSupport: 'Soporte excepcional',
+        },
+      },
+    };
+
+    function t(lang, key) {
+      const parts = key.split('.');
+      let node = COPY[lang];
+      for (const part of parts) {
+        node = node?.[part];
+      }
+      return node ?? '';
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const value = t(lang, el.dataset.i18n);
+        if (value.includes('<br>') || value.includes('<strong>') || value.includes('<code>') || value.includes('&amp;')) {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
+      });
+    }
+
+    document.querySelectorAll('input[name="lang"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        applyLanguage(radio.value);
+      });
+    });
+
+    function triggerUpload(num) {
+      document.getElementById(`fileInput${num}`).click();
+    }
+
+    function handleFileSelect(event, num) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPlaceholderImage(num, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function setPlaceholderImage(num, src) {
+      const placeholder = document.getElementById(`placeholder${num}`);
+      placeholder.innerHTML = `<img src="${src}" alt="Screenshot ${num}">`;
+      placeholder.style.border = 'none';
+      placeholder.style.background = 'transparent';
+    }
+
+    document.addEventListener('paste', function(e) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            let targetNum = 1;
+            for (let j = 1; j <= 4; j++) {
+              const placeholder = document.getElementById(`placeholder${j}`);
+              if (placeholder && !placeholder.querySelector('img')) {
+                targetNum = j;
+                break;
+              }
+            }
+            setPlaceholderImage(targetNum, event.target.result);
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+
+    async function downloadCurrent(num, lang = currentLang) {
+      const savedLang = currentLang;
+      const radio = document.querySelector(`input[name="lang"][value="${lang}"]`);
+      if (lang !== currentLang && radio) {
+        radio.checked = true;
+        applyLanguage(lang);
+        await new Promise((r) => setTimeout(r, 150));
+      }
+
+      const element = document.getElementById(`screenshot${num}`);
+
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: BG_FILL,
+          width: 428,
+          height: 926
+        });
+
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+
+        ctx.fillStyle = BG_FILL;
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+
+        downloadDataUrl(
+          finalCanvas.toDataURL('image/png'),
+          `${DOWNLOAD_PREFIX}${lang}-${num}.png`
+        );
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
+      } finally {
+        if (savedLang !== lang) {
+          const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+          if (restore) {
+            restore.checked = true;
+            applyLanguage(savedLang);
+          }
+        }
+      }
+    }
+
+    async function downloadAll() {
+      for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+        await downloadCurrent(i, currentLang);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+
+    async function downloadAllLanguages() {
+      const savedLang = currentLang;
+      for (const lang of LANG_CODES) {
+        for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+          await downloadCurrent(i, lang);
+          await new Promise((r) => setTimeout(r, 500));
+        }
+      }
+      const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+      if (restore) {
+        restore.checked = true;
+        applyLanguage(savedLang);
+      }
+    }
+
+    applyLanguage('de');
+  </script>
+</body>
+</html>

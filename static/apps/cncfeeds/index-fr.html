@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNC Feeds — Avances et vitesses conservatrices pour CNC amateur</title>
+  <meta name="description" content="Un assistant d'atelier pour routeurs CNC amateur et machines de bureau. Paramètres de départ conservateurs, bibliothèque de recettes, journal de coupes test et partage d'espaces de travail via iCloud.">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MPH3H835');</script>
+  <!-- End Google Tag Manager -->
+  <style>
+    :root {
+      --primary: #2D5A7B;
+      --primary-dark: #1E3D54;
+      --primary-light: #3D7AA8;
+      --accent: #2D7AE4;
+      --bg: #F4F7FA;
+      --card: #FFFFFF;
+      --text: #1E293B;
+      --text-secondary: #475569;
+      --text-tertiary: #94A3B8;
+      --border: #E2E8F0;
+      --amber: #F59E0B;
+      --teal: #2D7AE4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(244,250,249,0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(226,232,240,0.6);
+      transition: box-shadow 0.3s;
+    }
+
+    .nav.scrolled {
+      box-shadow: 0 1px 16px rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-text {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(45,90,123,0.08);
+    }
+
+    .nav-cta {
+      background: var(--primary) !important;
+      color: white !important;
+      font-weight: 600 !important;
+      padding: 8px 20px !important;
+      box-shadow: 0 2px 8px rgba(45, 90, 123, 0.25);
+      transition: all 0.2s !important;
+      border-radius: 10px !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-dark) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(45, 90, 123, 0.35) !important;
+    }
+
+    .nav-lang { display: flex; align-items: center; }
+    .lang-select {
+      appearance: none;
+      background: rgba(42,85,101,0.08) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 32px 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .lang-select:hover { border-color: var(--primary); color: var(--text); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(45,90,123,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 18px 6px 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    .hero-badge-dot {
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, var(--teal), #1D5BB8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-badge-dot svg {
+      width: 12px;
+      height: 12px;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 5.5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(45, 90, 123, 0.3);
+      transition: all 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(45, 90, 123, 0.35);
+    }
+
+    .btn-primary svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .hero-preview {
+      max-width: 920px;
+      margin: 64px auto 0;
+      position: relative;
+    }
+
+    .preview-window {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    .preview-titlebar {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #FF5F57; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #28CA41; }
+
+    .preview-content {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      min-height: 380px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .preview-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-stat {
+      background: #F1F5F9;
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: left;
+    }
+
+    .mini-stat .v {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .mini-stat .l {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-top: 4px;
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .plist-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: #FAFAFA;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .plist-row .name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .plist-row .meta {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    .plist-row .qty {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .plist-row.warn .qty {
+      color: var(--amber);
+    }
+
+    .plist-row .tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: #C2410C;
+      background: #FFEDD5;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-left: 8px;
+    }
+
+    .features {
+      padding: 100px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .section-sub {
+      text-align: center;
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin: 0 auto 56px;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+      border-color: rgba(45,90,123,0.2);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .fi-a { background: linear-gradient(135deg, #ECFEFF, #CCFBF1); }
+    .fi-b { background: linear-gradient(135deg, #F0FDFA, #BBF7D0); }
+    .fi-c { background: linear-gradient(135deg, #FFFBEB, #FDE68A); }
+    .fi-d { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+    .fi-e { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); }
+    .fi-f { background: linear-gradient(135deg, #F8FAFC, #E2E8F0); }
+    .fi-g { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .how-it-works {
+      padding: 80px 24px 100px;
+      background: white;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .how-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-top: 56px;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.66% + 24px);
+      right: calc(16.66% + 24px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      opacity: 0.25;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      font-size: 28px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 16px rgba(45,90,123,0.2);
+    }
+
+    .step h3 {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .step p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .stats-banner {
+      padding: 80px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .stat-value {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    .cta-section {
+      padding: 80px 24px 100px;
+    }
+
+    .cta-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 28px;
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(45,90,123,0.25);
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .cta-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .cta-card h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-card p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      color: var(--primary-dark);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: all 0.25s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .btn-white svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+
+    /* ========== CONTACT ========== */
+    .contact-section {
+      padding: 80px 24px 100px;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info .section-label { text-align: left; }
+    .contact-info .section-title {
+      text-align: left;
+      font-size: clamp(28px, 4vw, 36px);
+      margin-bottom: 12px;
+    }
+    .contact-info .section-sub {
+      text-align: left;
+      margin: 0;
+      max-width: none;
+    }
+
+    .contact-form-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+    }
+
+    .contact-form .form-group { margin-bottom: 20px; }
+
+    .contact-form label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(45,90,123,0.12);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-form .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(45, 90, 123, 0.3);
+      transition: all 0.25s;
+      font-family: inherit;
+    }
+
+    .contact-form .btn-submit:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(45, 90, 123, 0.35);
+    }
+
+    @media (max-width: 768px) {
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    @media (max-width: 900px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .steps::before { display: none; }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+      .hero {
+        padding: 120px 20px 60px;
+      }
+      .preview-content {
+        padding: 16px;
+      }
+      .cta-card {
+        padding: 48px 28px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1, .hero-sub, .hero-actions, .hero-badge {
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    .hero-badge { animation-delay: 0s; }
+    .hero h1 { animation-delay: 0.1s; }
+    .hero-sub { animation-delay: 0.2s; }
+    .hero-actions { animation-delay: 0.3s; }
+
+    .hero-preview {
+      animation: fadeInUp 0.8s ease-out 0.4s backwards;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon" style="background:none;box-shadow:none;padding:0;overflow:hidden;width:38px;height:38px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="38" height="38">
+            <defs>
+              <linearGradient id="nav-bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3D7AA8"/>
+                <stop offset="100%" stop-color="#1E3D54"/>
+              </linearGradient>
+              <clipPath id="nav-clip"><rect width="1024" height="1024" rx="224" ry="224"/></clipPath>
+            </defs>
+            <g clip-path="url(#nav-clip)">
+              <rect width="1024" height="1024" fill="url(#nav-bg)"/>
+              <g stroke="#0F2433" stroke-width="8" stroke-linejoin="round" fill-rule="nonzero">
+                <rect x="462" y="200" width="100" height="220" rx="12" fill="#B8C5CE"/>
+                <path d="M412 420 L462 420 L512 780 L562 420 L612 420 L562 820 L462 820 Z" fill="#E8EDF2"/>
+                <path d="M472 460 L502 760" stroke="#94A8B8" stroke-width="14" stroke-linecap="round" fill="none"/>
+                <path d="M552 460 L522 760" stroke="#94A8B8" stroke-width="14" stroke-linecap="round" fill="none"/>
+                <path d="M462 820 L512 880 L562 820 Z" fill="#F4A261"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <span class="logo-text">CNC Feeds</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Fonctionnalités</a>
+        <a href="#how-it-works">Comment ça marche</a>
+        <a href="#contact">Contact</a>
+        <div class="nav-lang">
+          <label class="sr-only" for="lang-select">Language</label>
+          <select id="lang-select" class="lang-select" aria-label="Language" onchange="if(this.value)window.location.href=this.value">
+            <option value="index.html">English</option>
+            <option value="index-de.html">Deutsch</option>
+            <option value="index-fr.html" selected>Français</option>
+            <option value="index-it.html">Italiano</option>
+            <option value="index-pt.html">Português</option>
+            <option value="index-es.html">Español</option>
+          </select>
+        </div>
+        <a href="#download" class="nav-cta">Télécharger</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="hero-badge-dot">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </span>
+      Pour iPhone et iPad
+    </div>
+    <h1>Avances et vitesses<br><span>auxquelles vous pouvez faire confiance</span></h1>
+    <p class="hero-sub">
+      Un assistant d'atelier pour routeurs CNC amateur—paramètres de départ conservateurs, bibliothèque de recettes consultable, journal de coupes test avec photos et partage d'espaces via iCloud. Fonctionne hors ligne. Vos données restent dans votre iCloud privée.
+    </p>
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Bientôt sur l'App Store
+      </a>
+      <a href="#features" class="btn-secondary">En savoir plus</a>
+    </div>
+
+    <div class="hero-preview">
+      <div class="preview-window">
+        <div class="preview-titlebar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="preview-content">
+          <div>
+            <div class="section-label" style="text-align:left;margin-bottom:8px;">Atelier</div>
+            <div class="stat-grid">
+              <div class="mini-stat">
+                <div class="v">8</div>
+                <div class="l">Recettes</div>
+              </div>
+              <div class="mini-stat">
+                <div class="v">12</div>
+                <div class="l">Coupes test</div>
+              </div>
+              <div class="mini-stat">
+                <div class="v">2</div>
+                <div class="l">Machines</div>
+              </div>
+              <div class="mini-stat">
+                <div class="v">14</div>
+                <div class="l">Fraises</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-list">
+            <div class="plist-row">
+              <div>
+                <div class="name">Hardwood Pocket — 1/4&quot; Flat</div>
+                <div class="meta">Shapeoko · Birch plywood · Pocket</div>
+              </div>
+              <div class="qty">18k</div>
+            </div>
+            <div class="plist-row warn">
+              <div>
+                <div class="name">MDF Facing — 1/2&quot; Compression<span class="tag">Tested</span></div>
+                <div class="meta">LongMill · MDF · Facing</div>
+              </div>
+              <div class="qty">16k</div>
+            </div>
+            <div class="plist-row">
+              <div>
+                <div class="name">Acrylic Engrave — 60° V-bit</div>
+                <div class="meta">MPCNC · Acrylic · Engraving</div>
+              </div>
+              <div class="qty">20k</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Les approximations, sans fraises cassées</h2>
+    <p class="section-sub">Pour routeurs amateur et CNC de bureau—recommandations conservatrices, limites machine, recettes consultables et exports sauvegardables.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon fi-a"><span>⚙️</span></div>
+        <h3>Conservative recommendations</h3>
+        <p>Machine-aware feeds, speeds, plunge rate, depth per pass, and stepover—biased toward safety with a 70% safety factor.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-b"><span>📖</span></div>
+        <h3>Recipe library</h3>
+        <p>Save, search, filter, and favorite cutting recipes. Mark confidence as generated, tested, or favorite.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-c"><span>🧪</span></div>
+        <h3>Test cut logging</h3>
+        <p>Log outcomes with issue tags—chatter, burning, melting, rough finish—and attach photos to learn from every cut.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-d"><span>🔧</span></div>
+        <h3>Machine &amp; tool libraries</h3>
+        <p>Define machines with RPM limits, feed rates, and rigidity. Track endmills by diameter, flutes, and type.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-e"><span>🪵</span></div>
+        <h3>Material profiles</h3>
+        <p>Hardwood, plywood, MDF, acrylic, plastic, aluminum, foam—organized by category with thickness and notes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-f"><span>☁️</span></div>
+        <h3>iCloud sync</h3>
+        <p>Sync workspaces across iPhone and iPad with CloudKit. Works offline and uploads when iCloud is available.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-g"><span>👥</span></div>
+        <h3>Workspace sharing</h3>
+        <p>Share an entire workshop setup with a shop partner or maker space—recipes, machines, bits, and test cuts together.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how-it-works">
+    <div class="how-inner">
+      <div class="section-label">How it works</div>
+      <h2 class="section-title">De la configuration à la première coupe</h2>
+      <p class="section-sub">Trois étapes d'un espace vide à une recette fiable.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Configurer l'atelier</h3>
+          <p>Ajoutez votre machine avec limites RPM et avance, vos fraises et les matériaux que vous coupez le plus.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Obtenir une recommandation</h3>
+          <p>Choisissez machine, matériau, fraise et opération. Paramètres conservateurs plafonnés à votre machine.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Tester, noter, affiner</h3>
+          <p>Faites une coupe test, notez le résultat avec photos et tags, et construisez votre bibliothèque.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-banner">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-value">70%</div>
+        <div class="stat-label">Facteur de sécurité sur les calculs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Backends cloud personnalisés</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">JSON</div>
+        <div class="stat-label">+ exports CSV</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">Private</div>
+        <div class="stat-label">Your iCloud container</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="download">
+    <div class="cta-card">
+      <h2>Couper en confiance</h2>
+      <p>CNC Feeds est conçu pour les makers amateur—pas une suite pro, juste des points de départ conservateurs et une bibliothèque qui vous appartient.</p>
+      <a href="#contact" class="btn-white">
+        Être notifié au lancement
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <div class="section-label">Nous contacter</div>
+        <h2 class="section-title">Questions et suggestions</h2>
+        <p class="section-sub">Une question, un bug ou une idée ? Écrivez-nous — nous lisons chaque message.</p>
+      </div>
+      <div class="contact-form-card">
+        <form action="https://formspree.io/f/xwkglvnl" method="POST" class="contact-form">
+          <input type="hidden" name="_subject" value="CNC Feeds — Feedback" />
+          <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="What's on your mind?" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            Envoyer
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-copy">&copy; 2026 CNC Feeds.</span>
+      </div>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Politique de confidentialité</a>
+        <a href="#contact">Contact</a>
+        <a href="https://www.generativenetworks.com" target="_blank" rel="noopener noreferrer">Generative Networks</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPH3H835"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1873247050036910');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1873247050036910&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+</body>
+</html>
