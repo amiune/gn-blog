@@ -171,7 +171,7 @@
 
     .screenshot-placeholder {
       width: 300px;
-      height: 652px;
+      height: 649px;
       background: rgba(255,255,255,0.1);
       border: 3px dashed rgba(255,255,255,0.4);
       border-radius: 24px;
@@ -293,7 +293,7 @@
         <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
           <div class="placeholder-icon">📸</div>
           <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
-          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1284 × 2778px</div>
         </div>
       </div>
       <div class="screenshot-label" data-i18n="labels.s1">1. Dashboard</div>
@@ -307,7 +307,7 @@
         <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
           <div class="placeholder-icon">📸</div>
           <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
-          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1284 × 2778px</div>
         </div>
       </div>
       <div class="screenshot-label" data-i18n="labels.s2">2. Recommendations</div>
@@ -321,7 +321,7 @@
         <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
           <div class="placeholder-icon">📸</div>
           <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
-          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1284 × 2778px</div>
         </div>
       </div>
       <div class="screenshot-label" data-i18n="labels.s3">3. Recipes</div>
@@ -335,7 +335,7 @@
         <div class="screenshot-placeholder" id="placeholder4" onclick="triggerUpload(4)">
           <div class="placeholder-icon">📸</div>
           <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
-          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1170 × 2532px</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 1284 × 2778px</div>
         </div>
       </div>
       <div class="screenshot-label" data-i18n="labels.s4">4. Test cuts</div>
@@ -443,9 +443,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <script>
+    // App Store 6.5" iPhone — portrait 1284×2778 (also accepts 1242×2688)
     const EXPORT_WIDTH = 1284;
     const EXPORT_HEIGHT = 2778;
-    const SCALE = 3;
+    const PREVIEW_WIDTH = EXPORT_WIDTH / 3;
+    const PREVIEW_HEIGHT = EXPORT_HEIGHT / 3;
     const BG_FILL = '#1E3D54';
     const DOWNLOAD_PREFIX = 'CNCFeeds-Screenshot-';
     const SCREENSHOT_COUNT = 6;
@@ -469,7 +471,7 @@
           guide8: 'Dateinamen enthalten den Sprachcode: z. B. <code>CNCFeeds-Screenshot-de-1.png</code>',
         },
         labels: { s1: '1. Inventar', s2: '2. Produkte / Varianten', s3: '3. Materialien / Alarme', s4: '4. Team-Freigabe', s5: '5. Funktionen', s6: '6. Kein Abo · Keine Werbung' },
-        placeholder: { text: 'Klicken zum Hochladen oder<br>Screenshot hier einfügen', hint: 'Empfohlen: 1170 × 2532px' },
+        placeholder: { text: 'Klicken zum Hochladen oder<br>Screenshot hier einfügen', hint: 'Empfohlen: 1284 × 2778px' },
         s1: { headline: 'Ihr Inventar<br>auf einen Blick', subheadline: 'Dashboard mit Bestandsübersicht und Produkten' },
         s2: { headline: 'Konservative<br>Empfehlungen', subheadline: 'SKUs, Kategorien sowie Größen- &amp; Farbkombinationen' },
         s3: { headline: 'Materialien &amp;<br>Alarme', subheadline: 'Zubehör, Schwellenwerte und Niedrigbestands-Warnungen' },
@@ -513,7 +515,7 @@
           guide8: 'Les noms de fichier incluent le code langue : ex. <code>CNCFeeds-Screenshot-fr-1.png</code>',
         },
         labels: { s1: '1. Inventaire', s2: '2. Produits / Variantes', s3: '3. Matériaux / Alertes', s4: '4. Partage d\'équipe', s5: '5. Fonctions', s6: '6. Sans abonnement · Sans pub' },
-        placeholder: { text: 'Cliquez pour importer ou<br>collez votre capture ici', hint: 'Recommandé : 1170 × 2532px' },
+        placeholder: { text: 'Cliquez pour importer ou<br>collez votre capture ici', hint: 'Recommandé : 1284 × 2778px' },
         s1: { headline: 'Votre inventaire<br>en un coup d\'œil', subheadline: 'Tableau de bord avec totaux de stock et produits' },
         s2: { headline: 'Recommandations<br>conservatrices', subheadline: 'SKU, catégories et combinaisons taille &amp; couleur' },
         s3: { headline: 'Matériaux &amp;<br>alertes', subheadline: 'Fournitures, seuils et alertes de stock bas' },
@@ -557,7 +559,7 @@
           guide8: 'I nomi file includono il codice lingua: es. <code>CNCFeeds-Screenshot-it-1.png</code>',
         },
         labels: { s1: '1. Inventario', s2: '2. Prodotti / Varianti', s3: '3. Materiali / Avvisi', s4: '4. Condivisione team', s5: '5. Funzioni', s6: '6. Nessun abbonamento · Niente ads' },
-        placeholder: { text: 'Clicca per caricare o<br>incolla lo screenshot qui', hint: 'Consigliato: 1170 × 2532px' },
+        placeholder: { text: 'Clicca per caricare o<br>incolla lo screenshot qui', hint: 'Consigliato: 1284 × 2778px' },
         s1: { headline: 'Il tuo inventario<br>a colpo d\'occhio', subheadline: 'Dashboard con totali di stock e prodotti' },
         s2: { headline: 'Raccomandazioni<br>conservative', subheadline: 'SKU, categorie e combinazioni taglia &amp; colore' },
         s3: { headline: 'Materiali &amp;<br>avvisi', subheadline: 'Forniture, soglie e avvisi di stock basso' },
@@ -601,7 +603,7 @@
           guide8: 'Os nomes dos arquivos incluem o código do idioma: ex. <code>CNCFeeds-Screenshot-pt-1.png</code>',
         },
         labels: { s1: '1. Estoque', s2: '2. Produtos / Variantes', s3: '3. Materiais / Alertas', s4: '4. Compartilhamento em equipe', s5: '5. Recursos', s6: '6. Sem assinatura · Sem anúncios' },
-        placeholder: { text: 'Clique para enviar ou<br>cole seu screenshot aqui', hint: 'Recomendado: 1170 × 2532px' },
+        placeholder: { text: 'Clique para enviar ou<br>cole seu screenshot aqui', hint: 'Recomendado: 1284 × 2778px' },
         s1: { headline: 'Seu estoque<br>de relance', subheadline: 'Painel com totais de estoque e produtos' },
         s2: { headline: 'Recomendações<br>conservadoras', subheadline: 'SKUs, categorias e combinações de tamanho &amp; cor' },
         s3: { headline: 'Materiais &amp;<br>alertas', subheadline: 'Insumos, limites e avisos de estoque baixo' },
@@ -645,7 +647,7 @@
           guide8: 'Los nombres de archivo incluyen el código de idioma: ej. <code>CNCFeeds-Screenshot-es-1.png</code>',
         },
         labels: { s1: '1. Inventario', s2: '2. Productos / Variantes', s3: '3. Materiales / Alertas', s4: '4. Compartir en equipo', s5: '5. Funciones', s6: '6. Sin suscripción · Sin anuncios' },
-        placeholder: { text: 'Haz clic para subir o<br>pega tu captura aquí', hint: 'Recomendado: 1170 × 2532px' },
+        placeholder: { text: 'Haz clic para subir o<br>pega tu captura aquí', hint: 'Recomendado: 1284 × 2778px' },
         s1: { headline: 'Tu inventario<br>de un vistazo', subheadline: 'Panel con totales de stock y productos' },
         s2: { headline: 'Recomendaciones<br>conservadoras', subheadline: 'SKUs, categorías y combinaciones de talla &amp; color' },
         s3: { headline: 'Materiales &amp;<br>alertas', subheadline: 'Suministros, umbrales y avisos de stock bajo' },
@@ -756,7 +758,7 @@
       link.click();
     }
 
-    async function downloadCurrent(num, lang = currentLang) {
+    async function captureScreenshot(num, lang = currentLang) {
       const savedLang = currentLang;
       const radio = document.querySelector(`input[name="lang"][value="${lang}"]`);
       if (lang !== currentLang && radio) {
@@ -766,15 +768,18 @@
       }
 
       const element = document.getElementById(`screenshot${num}`);
+      const width = element.offsetWidth;
+      const height = element.offsetHeight;
+      const scale = EXPORT_WIDTH / width;
 
       try {
         const canvas = await html2canvas(element, {
-          scale: SCALE,
+          scale,
           useCORS: true,
           allowTaint: true,
           backgroundColor: BG_FILL,
-          width: 428,
-          height: 926
+          width,
+          height,
         });
 
         const finalCanvas = document.createElement('canvas');
@@ -784,16 +789,15 @@
 
         ctx.fillStyle = BG_FILL;
         ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
-
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
 
-        downloadDataUrl(
-          finalCanvas.toDataURL('image/png'),
-          `${DOWNLOAD_PREFIX}${lang}-${num}.png`
-        );
-      } catch (e) {
-        console.error('Screenshot failed:', e);
-        alert('Screenshot failed. Please try again.');
+        if (finalCanvas.width !== EXPORT_WIDTH || finalCanvas.height !== EXPORT_HEIGHT) {
+          throw new Error(`Export size ${finalCanvas.width}×${finalCanvas.height}, expected ${EXPORT_WIDTH}×${EXPORT_HEIGHT}`);
+        }
+
+        return finalCanvas.toDataURL('image/png');
       } finally {
         if (savedLang !== lang) {
           const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
@@ -802,6 +806,21 @@
             applyLanguage(savedLang);
           }
         }
+      }
+    }
+
+    window.exportScreenshot = async (num, lang = currentLang) => captureScreenshot(num, lang);
+
+    async function downloadCurrent(num, lang = currentLang) {
+      try {
+        const dataUrl = await captureScreenshot(num, lang);
+        downloadDataUrl(
+          dataUrl,
+          `${DOWNLOAD_PREFIX}${lang}-${num}.png`
+        );
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
       }
     }
 

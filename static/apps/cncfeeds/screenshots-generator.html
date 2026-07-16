@@ -141,7 +141,7 @@
 
     .screenshot-placeholder {
       width: 300px;
-      height: 652px;
+      height: 649px;
       background: rgba(255,255,255,0.1);
       border: 3px dashed rgba(255,255,255,0.4);
       border-radius: 24px;
@@ -239,7 +239,7 @@
         <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
           <div class="placeholder-icon">📸</div>
           <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
-          <div class="placeholder-hint">Recommended: 1170 × 2532px</div>
+          <div class="placeholder-hint">Recommended: 1284 × 2778px</div>
         </div>
       </div>
       <div class="screenshot-label">1. Dashboard</div>
@@ -253,7 +253,7 @@
         <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
           <div class="placeholder-icon">📸</div>
           <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
-          <div class="placeholder-hint">Recommended: 1170 × 2532px</div>
+          <div class="placeholder-hint">Recommended: 1284 × 2778px</div>
         </div>
       </div>
       <div class="screenshot-label">2. Recommendations</div>
@@ -267,7 +267,7 @@
         <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
           <div class="placeholder-icon">📸</div>
           <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
-          <div class="placeholder-hint">Recommended: 1170 × 2532px</div>
+          <div class="placeholder-hint">Recommended: 1284 × 2778px</div>
         </div>
       </div>
       <div class="screenshot-label">3. Recipes</div>
@@ -281,7 +281,7 @@
         <div class="screenshot-placeholder" id="placeholder4" onclick="triggerUpload(4)">
           <div class="placeholder-icon">📸</div>
           <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
-          <div class="placeholder-hint">Recommended: 1170 × 2532px</div>
+          <div class="placeholder-hint">Recommended: 1284 × 2778px</div>
         </div>
       </div>
       <div class="screenshot-label">4. Test cuts</div>
@@ -386,9 +386,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <script>
+    // App Store 6.5" iPhone — portrait 1284×2778 (also accepts 1242×2688)
     const EXPORT_WIDTH = 1284;
     const EXPORT_HEIGHT = 2778;
-    const SCALE = 3;
+    const PREVIEW_WIDTH = EXPORT_WIDTH / 3;
+    const PREVIEW_HEIGHT = EXPORT_HEIGHT / 3;
     const BG_FILL = '#1E3D54';
 
     function triggerUpload(num) {
@@ -443,30 +445,45 @@
       link.click();
     }
 
-    async function downloadCurrent(num) {
+    async function captureScreenshot(num) {
       const element = document.getElementById(`screenshot${num}`);
+      const width = element.offsetWidth;
+      const height = element.offsetHeight;
+      const scale = EXPORT_WIDTH / width;
 
+      const canvas = await html2canvas(element, {
+        scale,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: BG_FILL,
+        width,
+        height,
+      });
+
+      const finalCanvas = document.createElement('canvas');
+      finalCanvas.width = EXPORT_WIDTH;
+      finalCanvas.height = EXPORT_HEIGHT;
+      const ctx = finalCanvas.getContext('2d');
+
+      ctx.fillStyle = BG_FILL;
+      ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+
+      if (finalCanvas.width !== EXPORT_WIDTH || finalCanvas.height !== EXPORT_HEIGHT) {
+        throw new Error(`Export size ${finalCanvas.width}×${finalCanvas.height}, expected ${EXPORT_WIDTH}×${EXPORT_HEIGHT}`);
+      }
+
+      return finalCanvas.toDataURL('image/png');
+    }
+
+    window.exportScreenshot = captureScreenshot;
+
+    async function downloadCurrent(num) {
       try {
-        const canvas = await html2canvas(element, {
-          scale: SCALE,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: BG_FILL,
-          width: 428,
-          height: 926
-        });
-
-        const finalCanvas = document.createElement('canvas');
-        finalCanvas.width = EXPORT_WIDTH;
-        finalCanvas.height = EXPORT_HEIGHT;
-        const ctx = finalCanvas.getContext('2d');
-
-        ctx.fillStyle = BG_FILL;
-        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
-
-        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
-
-        downloadDataUrl(finalCanvas.toDataURL('image/png'), `CNCFeeds-Screenshot-${num}.png`);
+        const dataUrl = await captureScreenshot(num);
+        downloadDataUrl(dataUrl, `CNCFeeds-Screenshot-${num}.png`);
       } catch (e) {
         console.error('Screenshot failed:', e);
         alert('Screenshot failed. Please try again.');
