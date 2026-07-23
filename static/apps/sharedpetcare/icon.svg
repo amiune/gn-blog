@@ -1,0 +1,28 @@
+<svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="iosClip">
+      <rect width="1024" height="1024" rx="224" ry="224"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#iosClip)">
+    <!-- App accent -->
+    <rect width="1024" height="1024" fill="#E57E49"/>
+
+    <!-- Standard paw -->
+    <g fill="#FFFFFF">
+      <!-- Main pad -->
+      <ellipse cx="512" cy="640" rx="190" ry="168"/>
+      <!-- Toe pads -->
+      <ellipse cx="318" cy="420" rx="78" ry="98" transform="rotate(-22 318 420)"/>
+      <ellipse cx="430" cy="340" rx="74" ry="96" transform="rotate(-8 430 340)"/>
+      <ellipse cx="594" cy="340" rx="74" ry="96" transform="rotate(8 594 340)"/>
+      <ellipse cx="706" cy="420" rx="78" ry="98" transform="rotate(22 706 420)"/>
+    </g>
+
+    <!-- Check -->
+    <polyline points="420,640 485,700 620,560"
+              fill="none" stroke="#E57E49" stroke-width="48"
+              stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

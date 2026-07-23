@@ -81,6 +81,17 @@ icon_image = "/apps/cncfeeds/icon.svg"
 url = "/apps/cncfeeds/"
 
 [[extra.apps]]
+title = "Shared Pet Care"
+tagline = "Household pet care without the chaos"
+description = "A private, offline-first pet-care record shared through iCloud—feeding, walks, medication, health history, and one household invite. No accounts, ads, or developer server."
+platform = "iOS"
+price = "$24.99 — one-time purchase. Free local trial. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #E57E49 0%, #C45C26 100%)"
+icon_letter = "SP"
+icon_image = "/apps/sharedpetcare/icon.svg"
+url = "/apps/sharedpetcare/"
+
+[[extra.apps]]
 title = "SB Diary"
 tagline = "Small Business Daily Journal"
 description = "Track your business journey with daily entries, mood tracking, and financial insights. Your story, your data, your device."
