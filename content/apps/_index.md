@@ -92,6 +92,17 @@ icon_image = "/apps/sharedpetcare/icon.svg"
 url = "/apps/sharedpetcare/"
 
 [[extra.apps]]
+title = "VowPlan"
+tagline = "Private wedding planning without the noise"
+description = "A private, collaborative wedding workspace—tasks, budget, guests, vendors, and day-of timeline shared through iCloud. No vendor ads, lead resale, accounts, or subscriptions."
+platform = "iOS"
+price = "$24.99 — one-time purchase. Free local trial. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #B84A7A 0%, #8E2F5A 100%)"
+icon_letter = "VP"
+icon_image = "/apps/vowplan/icon.svg"
+url = "/apps/vowplan/"
+
+[[extra.apps]]
 title = "SB Diary"
 tagline = "Small Business Daily Journal"
 description = "Track your business journey with daily entries, mood tracking, and financial insights. Your story, your data, your device."
