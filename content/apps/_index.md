@@ -103,6 +103,17 @@ icon_image = "/apps/vowplan/icon.svg"
 url = "/apps/vowplan/"
 
 [[extra.apps]]
+title = "Reseller Stock"
+tagline = "Inventory & sales for online resellers"
+description = "Track stock, costs, and sales for your resale business—barcode scanning, estimated profit, fulfillment status, and private iCloud sharing with a sales partner. No ads, accounts, or developer server."
+platform = "iOS"
+price = "$19.99 — one-time purchase. Free local trial. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #1B477A 0%, #123155 100%)"
+icon_letter = "RS"
+icon_image = "/apps/resellerstock/icon.svg"
+url = "/apps/resellerstock/"
+
+[[extra.apps]]
 title = "SB Diary"
 tagline = "Small Business Daily Journal"
 description = "Track your business journey with daily entries, mood tracking, and financial insights. Your story, your data, your device."

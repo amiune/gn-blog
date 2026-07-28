@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reseller Stock — Privacy Policy</title>
+  <style>
+    :root {
+      --primary: #1B477A;
+      --primary-dark: #123155;
+      --bg: #F4F6F9;
+      --card: #FFFFFF;
+      --text: #142433;
+      --text-secondary: #4A5568;
+      --text-tertiary: #8492A6;
+      --border: #E2E8F0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      background: rgba(255,255,255,0.85);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary), #4B82B1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .header-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .header-link:hover {
+      background: rgba(27, 71, 122, 0.08);
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .page-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .effective-date {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .intro {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .section {
+      margin-bottom: 36px;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      margin-bottom: 14px;
+      padding-top: 8px;
+    }
+
+    .section p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+
+    .section ul {
+      padding-left: 24px;
+      margin-bottom: 12px;
+    }
+
+    .section li {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    .section li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(27, 71, 122, 0.06), rgba(75, 130, 177, 0.1));
+      border: 1px solid rgba(27, 71, 122, 0.15);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .highlight-box p {
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 40px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .contact-card h2 {
+      margin-bottom: 12px;
+    }
+
+    .contact-card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    @media (max-width: 640px) {
+      .page-title {
+        font-size: 28px;
+      }
+      .content {
+        padding: 32px 20px 60px;
+      }
+      .section h2 {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">RS</div>
+        <span class="logo-text">Reseller Stock</span>
+      </a>
+      <a href="index.html" class="header-link">Back to Home</a>
+    </div>
+  </header>
+
+  <main class="content">
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="effective-date">Effective date: July 27, 2026</p>
+
+    <p class="intro">
+      Reseller Stock (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;the app&rdquo;) is committed to protecting your privacy.
+      This policy explains what the iOS app stores and how it uses Apple&rsquo;s services. The app is not intended for children under 13.
+    </p>
+
+    <div class="section">
+      <h2>1. Information you store in the app</h2>
+      <p>The app only processes data you enter for your own resale business:</p>
+      <ul>
+        <li><strong>Workspace:</strong> business name, reporting currency, and optional default marketplace.</li>
+        <li><strong>Inventory:</strong> item names, SKUs, barcodes, categories, brands, condition, quantities, costs, target prices, locations, listing URLs, and notes.</li>
+        <li><strong>Sales:</strong> sale numbers, line items, revenue, fees, shipping amounts, marketplace references, buyer references, fulfillment status, carrier, and tracking numbers.</li>
+        <li><strong>Attachments:</strong> photos, receipts, invoices, shipping labels, and other files you explicitly attach (up to 20 MB each).</li>
+      </ul>
+      <p>We do not require a separate account beyond your Apple ID for iCloud. Do not store payment card numbers, marketplace passwords, or government identity documents in the app.</p>
+    </div>
+
+    <div class="section">
+      <h2>2. Where data is stored</h2>
+      <p>
+        Business data is saved on your device and, when you enable iCloud sharing, in <strong>your</strong> iCloud account using Apple&rsquo;s CloudKit.
+        Local-only workspaces stay on the device. Shared workspaces use Apple&rsquo;s CloudKit sharing when you invite a sales partner.
+      </p>
+      <div class="highlight-box">
+        <p>We do not run our own backend for your inventory or sales data. There are no ads or analytics SDKs in the app. Storage and sync are handled by Apple&rsquo;s iCloud infrastructure under your Apple ID.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>3. Photos, camera, and attachments</h2>
+      <p>
+        Camera access is requested only after you choose Take Photo, Scan Document, or Scan Barcode. Photo library access uses the system picker when possible.
+        Imported images are re-encoded to strip location and other metadata before storage. Attachments sync to invited partners when sharing is enabled.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>4. Sharing with a sales partner</h2>
+      <p>
+        When you share a workspace, the invited partner can view, add, edit, and delete all workspace records and attachments.
+        Sharing uses Apple&rsquo;s native CloudKit invitation flow. There is no public link and no read-only mode in version 1.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>5. Third-party services in the app</h2>
+      <p>
+        The app does not embed analytics SDKs, ads, or third-party trackers. Purchases use Apple StoreKit. Sync uses Apple iCloud (CloudKit) when you choose to share.
+        Barcodes are never sent to an external catalog or analytics service.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>6. Website (if you use our marketing pages)</h2>
+      <p>
+        If you visit our public website, it may use standard tools such as Google Tag Manager or similar for aggregated traffic insight.
+        That activity is separate from data inside the iOS app and is governed by the policies of those providers.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>7. Export</h2>
+      <p>
+        You can export inventory and sales as CSV, and with Full Access as a ZIP that includes attachments.
+        Exports are explicit user actions and may contain prices, buyer references, receipts, and other sensitive content.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>8. Retention and deletion</h2>
+      <p>
+        Data remains on your device and, if shared, in your iCloud while you use the app. You can delete records inside the app.
+        Owners can delete workspace data or stop sharing. Participants can leave a shared workspace. To remove all app data from iCloud, use your Apple ID / iCloud settings or delete the app and associated iCloud data as described by Apple.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>9. Changes</h2>
+      <p>
+        We may update this policy; the effective date at the top will change when we do. Please review this page occasionally.
+      </p>
+    </div>
+
+    <div class="section contact-card">
+      <h2>10. Contact</h2>
+      <p>
+        Questions about this policy or the app:
+      </p>
+      <p><a href="mailto:amiune@gmail.com">amiune@gmail.com</a></p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Reseller Stock. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
