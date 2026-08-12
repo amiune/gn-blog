@@ -230,7 +230,7 @@
       
       <div class="contact-form-wrapper">
         <form action="https://formspree.io/f/xwkglvnl" method="POST" class="contact-form">
-          <input type="hidden" name="source" value="main" />
+          <input type="hidden" name="source" id="contact-source" value="main" />
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Your name" required />
@@ -251,6 +251,12 @@
             </svg>
           </button>
         </form>
+        <script>
+          (function () {
+            var source = new URLSearchParams(window.location.search).get('source');
+            document.getElementById('contact-source').value = source || 'main';
+          })();
+        </script>
       </div>
     </div>
   </div>
