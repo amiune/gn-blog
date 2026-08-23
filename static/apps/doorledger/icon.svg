@@ -1,0 +1,28 @@
+<svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="iosClip">
+      <rect width="1024" height="1024" rx="224" ry="224"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#iosClip)">
+    <rect width="1024" height="1024" fill="#25746B"/>
+
+    <!-- Door -->
+    <rect x="312" y="168" width="400" height="688" rx="48" fill="#FFFFFF"/>
+
+    <!-- Upper panel -->
+    <rect x="360" y="232" width="304" height="220" rx="28" fill="#E8F4F2"/>
+
+    <!-- Lower panel (ledger lines) -->
+    <rect x="360" y="492" width="304" height="280" rx="28" fill="#E8F4F2"/>
+    <g fill="#25746B" opacity="0.85">
+      <rect x="400" y="548" width="224" height="22" rx="11"/>
+      <rect x="400" y="612" width="184" height="22" rx="11"/>
+      <rect x="400" y="676" width="204" height="22" rx="11"/>
+    </g>
+
+    <!-- Knob -->
+    <circle cx="652" cy="470" r="28" fill="#4D9C93"/>
+  </g>
+</svg>

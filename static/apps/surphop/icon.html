@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surphop — App Icon</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      background: #F5F2ED;
+      color: #12101C;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+    p { color: #5A5668; margin-bottom: 2rem; font-size: 0.95rem; }
+    .icon-wrap { margin-bottom: 2rem; filter: drop-shadow(0 8px 24px rgba(66,148,232,0.45)); }
+    .icon-wrap svg { display: block; width: 256px; height: 256px; }
+    .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+    button {
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    .btn-primary { background: #4294E8; color: #fff; }
+    .btn-secondary { background: #E4DDD4; color: #12101C; }
+    .swatches {
+      display: flex;
+      gap: 10px;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(18,16,28,0.12);
+    }
+  </style>
+</head>
+<body>
+  <h1>Surphop</h1>
+  <p>App icon — SurphopMark on sky (#5BA8F0 → #2E7AD4)</p>
+
+  <div class="icon-wrap">
+    <svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+      <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#5BA8F0"/>
+          <stop offset="100%" stop-color="#2E7AD4"/>
+        </linearGradient>
+        <clipPath id="iosClip">
+          <rect width="1024" height="1024" rx="224" ry="224"/>
+        </clipPath>
+      </defs>
+
+      <g clip-path="url(#iosClip)">
+        <rect width="1024" height="1024" fill="url(#bgGrad)"/>
+        <rect x="302" y="138" width="584" height="584" rx="184" ry="184"
+              fill="none" stroke="#FFFFFF" stroke-width="113"/>
+        <path d="M195 389 L195 799 L635 799"
+              fill="none" stroke="#FFFFFF" stroke-width="102"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path fill="#FFFFFF"
+              d="M540 352 C540 346 547 342 552 345 L678 422 C684 426 684 434 678 438 L552 515 C547 518 540 514 540 508 Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" onclick="downloadSVG()">Download SVG</button>
+    <button class="btn-secondary" onclick="downloadPNG(1024)">Download PNG 1024px</button>
+  </div>
+
+  <p style="margin-top: 2rem;">Without rounded corners</p>
+  <div class="actions">
+    <button class="btn-primary" onclick="downloadSVG(true)">Download SVG (Square)</button>
+    <button class="btn-secondary" onclick="downloadPNG(1024, true)">Download PNG 1024px (Square)</button>
+  </div>
+
+  <div class="swatches" title="Surphop palette">
+    <div class="swatch" style="background:#4294E8" title="Sky"></div>
+    <div class="swatch" style="background:#F0614F" title="Coral"></div>
+    <div class="swatch" style="background:#61C7AB" title="Mint"></div>
+    <div class="swatch" style="background:#FAB847" title="Sun"></div>
+    <div class="swatch" style="background:#F5F2ED" title="Paper"></div>
+    <div class="swatch" style="background:#12101C" title="Ink"></div>
+  </div>
+
+  <script>
+    function getSvgData(square) {
+      const svg = document.getElementById('app-icon').cloneNode(true);
+      if (square) {
+        const clipRect = svg.querySelector('#iosClip rect');
+        if (clipRect) {
+          clipRect.setAttribute('rx', '0');
+          clipRect.setAttribute('ry', '0');
+        }
+      }
+      return new XMLSerializer().serializeToString(svg);
+    }
+
+    function downloadSVG(square) {
+      const svgData = getSvgData(square);
+      const blob = new Blob([svgData], { type: 'image/svg+xml' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = square ? 'surphop-icon-square.svg' : 'surphop-icon.svg';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function downloadPNG(size, square) {
+      const svgData = getSvgData(square);
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0, size, size);
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = 'surphop-icon-' + size + (square ? '-square' : '') + '.png';
+        a.click();
+      };
+      img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+    }
+  </script>
+</body>
+</html>

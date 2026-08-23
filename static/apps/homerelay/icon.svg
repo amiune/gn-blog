@@ -1,0 +1,23 @@
+<svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="iosClip">
+      <rect width="1024" height="1024" rx="224" ry="224"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#iosClip)">
+    <!-- AccentColor from HomeRelay: rgb(0.153, 0.416, 0.584) -->
+    <rect width="1024" height="1024" fill="#276A95"/>
+
+    <!-- Lodge / house -->
+    <path fill="#FFFFFF"
+          d="M512 176 L900 496 L820 496 L820 844 C820 868 800 888 776 888 L248 888 C224 888 204 868 204 844 L204 496 L124 496 Z"/>
+    <!-- Chimney -->
+    <rect x="692" y="248" width="88" height="176" rx="18" fill="#FFFFFF"/>
+
+    <!-- Check in accent, cut through the house -->
+    <polyline points="356,620 470,732 680,480"
+              fill="none" stroke="#276A95" stroke-width="56"
+              stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

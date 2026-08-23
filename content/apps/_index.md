@@ -103,6 +103,17 @@ icon_image = "/apps/vowplan/icon.svg"
 url = "/apps/vowplan/"
 
 [[extra.apps]]
+title = "HomeRelay"
+tagline = "Home records the household can share"
+description = "A private, offline-first home record—maintenance, appliances, warranties, receipts, manuals, and inventory—shared through iCloud. No accounts, ads, or developer server."
+platform = "iOS"
+price = "$39.99 — one-time purchase. Free local trial. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #276A95 0%, #1B4A68 100%)"
+icon_letter = "HR"
+icon_image = "/apps/homerelay/icon.svg"
+url = "/apps/homerelay/"
+
+[[extra.apps]]
 title = "Reseller Stock"
 tagline = "Inventory & sales for online resellers"
 description = "Track stock, costs, and sales for your resale business—barcode scanning, estimated profit, fulfillment status, and private iCloud sharing with a sales partner. No ads, accounts, or developer server."
@@ -112,6 +123,39 @@ icon_color = "linear-gradient(135deg, #1B477A 0%, #123155 100%)"
 icon_letter = "RS"
 icon_image = "/apps/resellerstock/icon.svg"
 url = "/apps/resellerstock/"
+
+[[extra.apps]]
+title = "Shared Trip Planner"
+tagline = "Plan together, vote, go"
+description = "A private group trip planner—day-by-day itinerary, activity voting, reservations, packing lists, and expenses, shared through iCloud. No ads, accounts, or developer server."
+platform = "iOS"
+price = "$19.99 — one-time purchase. Free local trial. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #30B0C7 0%, #007AFF 100%)"
+icon_letter = "ST"
+icon_image = "/apps/sharedtripplanner/icon.svg"
+url = "/apps/sharedtripplanner/"
+
+[[extra.apps]]
+title = "DoorLedger"
+tagline = "Private rental records for 1–4 units"
+description = "An offline-first ledger for independent landlords—rent, deposits, expenses, maintenance, and year-end export. No bank login, tenant portal, or monthly fee. Optional private iCloud sharing with a spouse."
+platform = "iOS"
+price = "$59.99 — one-time purchase. Free local trial. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #25746B 0%, #1A524C 100%)"
+icon_letter = "DL"
+icon_image = "/apps/doorledger/icon.svg"
+url = "/apps/doorledger/"
+
+[[extra.apps]]
+title = "Surphop"
+tagline = "See the change"
+description = "A private journal for quiet learning progress. Record short videos on skill timelines, then invite a teacher or friend to reply with a video tip on the exact clip. Synced through your iCloud. No ads. No subscription."
+platform = "iOS"
+price = "Free to record. $9.99 lifetime sharing. No subscription. No ads."
+icon_color = "linear-gradient(135deg, #5BA8F0 0%, #2E7AD4 100%)"
+icon_letter = "SH"
+icon_image = "/apps/surphop/icon.svg"
+url = "/apps/surphop/"
 
 [[extra.apps]]
 title = "SB Diary"

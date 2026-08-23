@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shared Trip Planner — App Icon</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      background: #F0F8FA;
+      color: #0F2A32;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+    p { color: #3D5A63; margin-bottom: 2rem; font-size: 0.95rem; }
+    .icon-wrap { margin-bottom: 2rem; filter: drop-shadow(0 8px 24px rgba(20,138,156,0.4)); }
+    .icon-wrap svg { display: block; width: 256px; height: 256px; }
+    .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+    button {
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    .btn-primary { background: #148A9C; color: #fff; }
+    .btn-secondary { background: #D5E6EB; color: #0F2A32; }
+  </style>
+</head>
+<body>
+  <h1>Shared Trip Planner</h1>
+  <p>App icon — airplane on teal → blue gradient (#30B0C7 → #007AFF)</p>
+
+  <div class="icon-wrap">
+    <svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+      <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#30B0C7"/>
+          <stop offset="100%" stop-color="#007AFF"/>
+        </linearGradient>
+        <clipPath id="iosClip">
+          <rect width="1024" height="1024" rx="224" ry="224"/>
+        </clipPath>
+      </defs>
+
+      <g clip-path="url(#iosClip)">
+        <rect width="1024" height="1024" fill="url(#bgGrad)"/>
+        <circle cx="512" cy="512" r="328" fill="none" stroke="#FFFFFF" stroke-width="28" opacity="0.22"/>
+        <g transform="translate(512,512) rotate(-28) scale(30) translate(-12,-12)">
+          <path fill="#FFFFFF" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" onclick="downloadSVG()">Download SVG</button>
+    <button class="btn-secondary" onclick="downloadPNG(1024)">Download PNG 1024px</button>
+  </div>
+
+  <p style="margin-top: 2rem;">Without rounded corners</p>
+  <div class="actions">
+    <button class="btn-primary" onclick="downloadSVG(true)">Download SVG (Square)</button>
+    <button class="btn-secondary" onclick="downloadPNG(1024, true)">Download PNG 1024px (Square)</button>
+  </div>
+
+  <script>
+    function getSvgData(square) {
+      const svg = document.getElementById('app-icon').cloneNode(true);
+      if (square) {
+        const clipRect = svg.querySelector('#iosClip rect');
+        if (clipRect) {
+          clipRect.setAttribute('rx', '0');
+          clipRect.setAttribute('ry', '0');
+        }
+      }
+      return new XMLSerializer().serializeToString(svg);
+    }
+
+    function downloadSVG(square) {
+      const svgData = getSvgData(square);
+      const blob = new Blob([svgData], { type: 'image/svg+xml' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = square ? 'sharedtripplanner-icon-square.svg' : 'sharedtripplanner-icon.svg';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function downloadPNG(size, square) {
+      const svgData = getSvgData(square);
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0, size, size);
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = 'sharedtripplanner-icon-' + size + (square ? '-square' : '') + '.png';
+        a.click();
+      };
+      img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+    }
+  </script>
+</body>
+</html>
