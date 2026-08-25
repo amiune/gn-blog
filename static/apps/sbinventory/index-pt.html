@@ -870,6 +870,7 @@
       animation: fadeInUp 0.8s ease-out 0.4s backwards;
     }
   </style>
+  <link rel="stylesheet" href="/apps/screenshot-carousel.css">
 </head>
 <body>
 
@@ -936,59 +937,56 @@
       <a href="#features" class="btn-secondary">Saiba mais</a>
     </div>
 
-    <div class="hero-preview">
-      <div class="preview-window">
-        <div class="preview-titlebar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="preview-content">
-          <div>
-            <div class="section-label" style="text-align:left;margin-bottom:8px;">Visão geral</div>
-            <div class="stat-grid">
-              <div class="mini-stat">
-                <div class="v">4</div>
-                <div class="l">Produtos</div>
+    <div class="hero-preview screenshot-carousel">
+      <div class="shot-carousel" data-shot-carousel>
+        <button class="shot-nav shot-prev" type="button" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="shot-viewport">
+          <div class="shot-track">
+            <figure class="shot-slide is-active">
+              <div class="shot-marketing">
+                <img src="screenshots/SBInventory-Screenshot-1.png" alt="Inventory 4 Makers iPhone screenshot 1" fetchpriority="high">
               </div>
-              <div class="mini-stat">
-                <div class="v">18</div>
-                <div class="l">Variantes</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/SBInventory-Screenshot-2.png" alt="Inventory 4 Makers iPhone screenshot 2" loading="lazy">
               </div>
-              <div class="mini-stat">
-                <div class="v">216</div>
-                <div class="l">Estoque</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/SBInventory-Screenshot-3.png" alt="Inventory 4 Makers iPhone screenshot 3" loading="lazy">
               </div>
-              <div class="mini-stat">
-                <div class="v">5</div>
-                <div class="l">Materiais</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/SBInventory-Screenshot-4.png" alt="Inventory 4 Makers iPhone screenshot 4" loading="lazy">
               </div>
-            </div>
-          </div>
-          <div class="product-list">
-            <div class="plist-row">
-              <div>
-                <div class="name">Hand-poured Soy Candles</div>
-                <div class="meta">CNDL-SOY-240 · Velas · 3 variantes</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/SBInventory-Screenshot-5.png" alt="Inventory 4 Makers iPhone screenshot 5" loading="lazy">
               </div>
-              <div class="qty">51</div>
-            </div>
-            <div class="plist-row warn">
-              <div>
-                <div class="name">Speckled Stoneware Mug<span class="tag">Estoque baixo</span></div>
-                <div class="meta">CER-MUG-441 · Cerâmica</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/SBInventory-Screenshot-6.png" alt="Inventory 4 Makers iPhone screenshot 6" loading="lazy">
               </div>
-              <div class="qty">57</div>
-            </div>
-            <div class="plist-row">
-              <div>
-                <div class="name">Slim Card Wallet</div>
-                <div class="meta">LTH-WALT-019 · Couro</div>
-              </div>
-              <div class="qty">39</div>
-            </div>
+            </figure>
           </div>
         </div>
+        <button class="shot-nav shot-next" type="button" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="shot-dots" aria-label="Screenshot slides">
+        <button type="button" class="is-active" aria-current="true" aria-label="Show screenshot 1"></button>
+        <button type="button" aria-label="Show screenshot 2"></button>
+        <button type="button" aria-label="Show screenshot 3"></button>
+        <button type="button" aria-label="Show screenshot 4"></button>
+        <button type="button" aria-label="Show screenshot 5"></button>
+        <button type="button" aria-label="Show screenshot 6"></button>
       </div>
     </div>
   </section>
@@ -1171,5 +1169,6 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
 
+  <script src="/apps/screenshot-carousel.js" defer></script>
 </body>
 </html>

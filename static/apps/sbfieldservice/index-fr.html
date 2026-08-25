@@ -696,6 +696,7 @@
     .hero-actions { animation-delay: 0.3s; }
     .hero-preview { animation: fadeInUp 0.8s ease-out 0.4s backwards; }
   </style>
+  <link rel="stylesheet" href="/apps/screenshot-carousel.css">
 </head>
 <body>
 
@@ -744,90 +745,56 @@
       <a href="#features" class="btn-secondary">En savoir plus</a>
     </div>
 
-    <div class="hero-preview">
-      <div class="preview-window">
-        <div class="preview-titlebar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="preview-tabs">
-          <div class="preview-tab">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 7h-3V6a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v1H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-            Travaux
-          </div>
-          <div class="preview-tab active">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM2 13h2a1 1 0 0 0 0-2H2a1 1 0 0 0 0 2zm18 0h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM11 2v2a1 1 0 0 0 2 0V2a1 1 0 0 0-2 0zm0 18v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-2 0z"/></svg>
-            Aujourd'hui
-          </div>
-          <div class="preview-tab">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94a7.43 7.43 0 0 0 .05-.94 7.43 7.43 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.28 7.28 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.22-1.13.52-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.05.63-.05.94s.01.63.05.94L2.83 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.42 1.05.72 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54a7.28 7.28 0 0 0 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg>
-            Réglages
-          </div>
-        </div>
-        <div class="preview-content">
-          <div class="preview-nav-title">Aujourd'hui</div>
-          <div class="stat-grid">
-            <div class="mini-stat red">
-              <div class="v">1</div>
-              <div class="l">En retard</div>
-            </div>
-            <div class="mini-stat blue">
-              <div class="v">2</div>
-              <div class="l">Aujourd'hui</div>
-            </div>
-            <div class="mini-stat orange">
-              <div class="v">$385</div>
-              <div class="l">Solde dû</div>
-            </div>
-          </div>
-          <div class="job-list">
-            <div class="job-row">
-              <span class="status-dot red"></span>
-              <div>
-                <div class="name">Electrical panel upgrade</div>
-                <div class="meta">Sofia Chen · Due Feb 14</div>
+    <div class="hero-preview screenshot-carousel">
+      <div class="shot-carousel" data-shot-carousel>
+        <button class="shot-nav shot-prev" type="button" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="shot-viewport">
+          <div class="shot-track">
+            <figure class="shot-slide is-active">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-05-12%20at%2009.45.47.png" alt="Field Service Job Tracker iPhone screenshot 1" fetchpriority="high">
               </div>
-              <div class="right">
-                <span class="badge badge-overdue">En retard</span>
-                <div class="pay due">$120 due</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-05-12%20at%2009.45.53.png" alt="Field Service Job Tracker iPhone screenshot 2" loading="lazy">
               </div>
-            </div>
-            <div class="job-row">
-              <span class="status-dot orange"></span>
-              <div>
-                <div class="name">Cabinet repair</div>
-                <div class="meta">Maria Rodriguez · 2:00 PM · 4 photos</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-05-12%20at%2009.46.04.png" alt="Field Service Job Tracker iPhone screenshot 3" loading="lazy">
               </div>
-              <div class="right">
-                <span class="badge badge-progress">En cours</span>
-                <div class="pay due">$185 due</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-05-12%20at%2009.46.20.png" alt="Field Service Job Tracker iPhone screenshot 4" loading="lazy">
               </div>
-            </div>
-            <div class="job-row">
-              <span class="status-dot blue"></span>
-              <div>
-                <div class="name">AC tune-up</div>
-                <div class="meta">James Wilson · 10:00 AM</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-05-12%20at%2009.46.24.png" alt="Field Service Job Tracker iPhone screenshot 5" loading="lazy">
               </div>
-              <div class="right">
-                <span class="badge badge-scheduled">Planifié</span>
-                <div class="pay">$85 est.</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-05-12%20at%2009.46.30.png" alt="Field Service Job Tracker iPhone screenshot 6" loading="lazy">
               </div>
-            </div>
-            <div class="job-row">
-              <span class="status-dot blue"></span>
-              <div>
-                <div class="name">Generator inspection</div>
-                <div class="meta">Ana Lopez · Waiting on parts</div>
-              </div>
-              <div class="right">
-                <span class="badge badge-materials">Matériaux</span>
-                <div class="pay">$45 est.</div>
-              </div>
-            </div>
+            </figure>
           </div>
         </div>
+        <button class="shot-nav shot-next" type="button" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="shot-dots" aria-label="Screenshot slides">
+        <button type="button" class="is-active" aria-current="true" aria-label="Show screenshot 1"></button>
+        <button type="button" aria-label="Show screenshot 2"></button>
+        <button type="button" aria-label="Show screenshot 3"></button>
+        <button type="button" aria-label="Show screenshot 4"></button>
+        <button type="button" aria-label="Show screenshot 5"></button>
+        <button type="button" aria-label="Show screenshot 6"></button>
       </div>
     </div>
   </section>
@@ -1010,5 +977,6 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
 
+  <script src="/apps/screenshot-carousel.js" defer></script>
 </body>
 </html>

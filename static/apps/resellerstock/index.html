@@ -846,6 +846,7 @@
       animation: fadeInUp 0.8s ease-out 0.4s backwards;
     }
   </style>
+  <link rel="stylesheet" href="/apps/screenshot-carousel.css">
 </head>
 <body>
 
@@ -901,59 +902,44 @@
       <a href="#features" class="btn-secondary">Learn more</a>
     </div>
 
-    <div class="hero-preview">
-      <div class="preview-window">
-        <div class="preview-titlebar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="preview-content">
-          <div>
-            <div class="section-label" style="text-align:left;margin-bottom:8px;">Overview</div>
-            <div class="stat-grid">
-              <div class="mini-stat">
-                <div class="v">148</div>
-                <div class="l">Units in stock</div>
+    <div class="hero-preview screenshot-carousel">
+      <div class="shot-carousel" data-shot-carousel>
+        <button class="shot-nav shot-prev" type="button" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="shot-viewport">
+          <div class="shot-track">
+            <figure class="shot-slide is-active">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-07-28%20at%2010.25.06.png" alt="Reseller Stock iPhone screenshot 1" fetchpriority="high">
               </div>
-              <div class="mini-stat">
-                <div class="v">$4.2k</div>
-                <div class="l">Est. stock value</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-07-28%20at%2010.25.11.png" alt="Reseller Stock iPhone screenshot 2" loading="lazy">
               </div>
-              <div class="mini-stat">
-                <div class="v">$1.8k</div>
-                <div class="l">Month revenue</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-07-28%20at%2010.25.14.png" alt="Reseller Stock iPhone screenshot 3" loading="lazy">
               </div>
-              <div class="mini-stat">
-                <div class="v">$612</div>
-                <div class="l">Est. profit</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-07-28%20at%2010.25.52.png" alt="Reseller Stock iPhone screenshot 4" loading="lazy">
               </div>
-            </div>
-          </div>
-          <div class="product-list">
-            <div class="plist-row">
-              <div>
-                <div class="name">Aurora Runners<span class="tag">In stock</span></div>
-                <div class="meta">Shoes · SKU SHO-001 · Cost $42</div>
-              </div>
-              <div class="qty">6</div>
-            </div>
-            <div class="plist-row warn">
-              <div>
-                <div class="name">Cobalt Wireless Earbuds</div>
-                <div class="meta">Electronics · Low stock</div>
-              </div>
-              <div class="qty">1</div>
-            </div>
-            <div class="plist-row">
-              <div>
-                <div class="name">Everline Wool Coat</div>
-                <div class="meta">Clothing · Target $145</div>
-              </div>
-              <div class="qty">3</div>
-            </div>
+            </figure>
           </div>
         </div>
+        <button class="shot-nav shot-next" type="button" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="shot-dots" aria-label="Screenshot slides">
+        <button type="button" class="is-active" aria-current="true" aria-label="Show screenshot 1"></button>
+        <button type="button" aria-label="Show screenshot 2"></button>
+        <button type="button" aria-label="Show screenshot 3"></button>
+        <button type="button" aria-label="Show screenshot 4"></button>
       </div>
     </div>
   </section>
@@ -1133,5 +1119,6 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
 
+  <script src="/apps/screenshot-carousel.js" defer></script>
 </body>
 </html>

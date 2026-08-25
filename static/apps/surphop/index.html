@@ -905,6 +905,7 @@
       animation: fadeInUp 0.8s ease-out 0.4s backwards;
     }
   </style>
+  <link rel="stylesheet" href="/apps/screenshot-carousel.css">
 </head>
 <body>
 
@@ -958,75 +959,56 @@
       <a href="#features" class="btn-secondary">Learn more</a>
     </div>
 
-    <div class="hero-preview">
-      <div class="preview-window">
-        <div class="preview-titlebar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="preview-content">
-          <div>
-            <div class="preview-kicker">Surphop</div>
-            <div class="preview-title">Track your learning progress.</div>
-            <div class="timeline-grid">
-              <div class="tl-card sky">
-                <div class="icon-row">♪ <span>☁</span></div>
-                <div>
-                  <div class="name">Fingerstyle guitar</div>
-                  <div class="meta">Updated 2 days ago</div>
-                </div>
+    <div class="hero-preview screenshot-carousel">
+      <div class="shot-carousel" data-shot-carousel>
+        <button class="shot-nav shot-prev" type="button" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="shot-viewport">
+          <div class="shot-track">
+            <figure class="shot-slide is-active">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-08-25%20at%2015.26.10.png" alt="Surphop iPhone screenshot 1" fetchpriority="high">
               </div>
-              <div class="tl-card coral">
-                <div class="icon-row">☕ <span>☁</span></div>
-                <div>
-                  <div class="name">Latte art</div>
-                  <div class="meta">Shared · 5 hours ago</div>
-                </div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-08-25%20at%2015.26.14.png" alt="Surphop iPhone screenshot 2" loading="lazy">
               </div>
-              <div class="tl-card mint">
-                <div class="icon-row">🖌</div>
-                <div>
-                  <div class="name">Watercolor studies</div>
-                  <div class="meta">Shared with me</div>
-                </div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-08-25%20at%2015.26.20.png" alt="Surphop iPhone screenshot 3" loading="lazy">
               </div>
-              <div class="tl-card sun">
-                <div class="icon-row">+</div>
-                <div>
-                  <div class="name">New timeline</div>
-                  <div class="meta">One skill at a time</div>
-                </div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-08-25%20at%2015.26.37.png" alt="Surphop iPhone screenshot 4" loading="lazy">
               </div>
-            </div>
-          </div>
-          <div class="clip-list">
-            <div class="clip-row">
-              <div class="clip-thumb sky"><span class="play"></span></div>
-              <div>
-                <div class="name">Rest stroke, keep the thumb loose</div>
-                <div class="meta">Fingerstyle guitar · 2 video tips</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-08-25%20at%2015.26.41.png" alt="Surphop iPhone screenshot 5" loading="lazy">
               </div>
-              <div class="dur">0:42</div>
-            </div>
-            <div class="clip-row">
-              <div class="clip-thumb coral"><span class="play"></span></div>
-              <div>
-                <div class="name">Heart in the crema</div>
-                <div class="meta">Latte art · Teacher replied</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-08-25%20at%2015.27.04.png" alt="Surphop iPhone screenshot 6" loading="lazy">
               </div>
-              <div class="dur">0:38</div>
-            </div>
-            <div class="clip-row">
-              <div class="clip-thumb mint"><span class="play"></span></div>
-              <div>
-                <div class="name">Wet-into-wet sky wash</div>
-                <div class="meta">Watercolor · Progress check-in</div>
-              </div>
-              <div class="dur">1:12</div>
-            </div>
+            </figure>
           </div>
         </div>
+        <button class="shot-nav shot-next" type="button" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="shot-dots" aria-label="Screenshot slides">
+        <button type="button" class="is-active" aria-current="true" aria-label="Show screenshot 1"></button>
+        <button type="button" aria-label="Show screenshot 2"></button>
+        <button type="button" aria-label="Show screenshot 3"></button>
+        <button type="button" aria-label="Show screenshot 4"></button>
+        <button type="button" aria-label="Show screenshot 5"></button>
+        <button type="button" aria-label="Show screenshot 6"></button>
       </div>
     </div>
   </section>
@@ -1201,5 +1183,6 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
 
+  <script src="/apps/screenshot-carousel.js" defer></script>
 </body>
 </html>

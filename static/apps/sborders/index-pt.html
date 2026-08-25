@@ -896,6 +896,7 @@
       animation: fadeInUp 0.8s ease-out 0.4s backwards;
     }
   </style>
+  <link rel="stylesheet" href="/apps/screenshot-carousel.css">
 </head>
 <body>
 
@@ -982,101 +983,50 @@
     </div>
 
     <!-- PREVIEW -->
-    <div class="hero-preview">
-      <div class="preview-window">
-        <div class="preview-titlebar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="preview-content">
-          <!-- Pending Column -->
-          <div class="kanban-col col-pending">
-            <div class="kanban-header">
-              <span>Pendente</span>
-              <span class="count">3</span>
-            </div>
-            <div class="kanban-card">
-              <span class="kanban-card-tag tag-pending">Instagram</span>
-              <div class="kanban-card-title">Birthday Cake</div>
-              <div class="kanban-card-client">Maria Rodriguez</div>
-              <div class="kanban-card-footer">
-                <span class="kanban-card-date">Feb 18, 2:00 PM</span>
-                <span class="kanban-card-amount">$85.00</span>
+    <div class="hero-preview screenshot-carousel">
+      <div class="shot-carousel" data-shot-carousel>
+        <button class="shot-nav shot-prev" type="button" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="shot-viewport">
+          <div class="shot-track">
+            <figure class="shot-slide is-active">
+              <div class="shot-phone">
+                <img src="screenshots/pt/iphone-kanban.png" alt="Custom Order Tracker iPhone screenshot 1" fetchpriority="high">
               </div>
-            </div>
-            <div class="kanban-card">
-              <span class="kanban-card-tag tag-pending">WhatsApp</span>
-              <div class="kanban-card-title">Wedding Cupcakes</div>
-              <div class="kanban-card-client">James Wilson</div>
-              <div class="kanban-card-footer">
-                <span class="kanban-card-date">Feb 20, 10:00 AM</span>
-                <span class="kanban-card-amount">$240.00</span>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/pt/iphone-order-detail.png" alt="Custom Order Tracker iPhone screenshot 2" loading="lazy">
               </div>
-            </div>
-            <div class="kanban-card">
-              <span class="kanban-card-tag tag-pending">Website</span>
-              <div class="kanban-card-title">Custom Cookies Box</div>
-              <div class="kanban-card-client">Ana Lopez</div>
-              <div class="kanban-card-footer">
-                <span class="kanban-card-date">Feb 21, 4:00 PM</span>
-                <span class="kanban-card-amount">$45.00</span>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/pt/iphone-calendar.png" alt="Custom Order Tracker iPhone screenshot 3" loading="lazy">
               </div>
-            </div>
-          </div>
-
-          <!-- Prepared Column -->
-          <div class="kanban-col col-prepared">
-            <div class="kanban-header">
-              <span>Preparado</span>
-              <span class="count">2</span>
-            </div>
-            <div class="kanban-card">
-              <span class="kanban-card-tag tag-prepared">Store</span>
-              <div class="kanban-card-title">Chocolate Truffles</div>
-              <div class="kanban-card-client">Sofia Chen</div>
-              <div class="kanban-card-footer">
-                <span class="kanban-card-date">Feb 16, 12:00 PM</span>
-                <span class="kanban-card-amount">$60.00</span>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/pt/iphone-stats.png" alt="Custom Order Tracker iPhone screenshot 4" loading="lazy">
               </div>
-            </div>
-            <div class="kanban-card">
-              <span class="kanban-card-tag tag-prepared">Instagram</span>
-              <div class="kanban-card-title">Macarons Set</div>
-              <div class="kanban-card-client">Emily Park</div>
-              <div class="kanban-card-footer">
-                <span class="kanban-card-date">Feb 17, 3:00 PM</span>
-                <span class="kanban-card-amount">$55.00</span>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/pt/iphone-team-share.png" alt="Custom Order Tracker iPhone screenshot 5" loading="lazy">
               </div>
-            </div>
-          </div>
-
-          <!-- Delivered Column -->
-          <div class="kanban-col col-delivered">
-            <div class="kanban-header">
-              <span>Entregue</span>
-              <span class="count">2</span>
-            </div>
-            <div class="kanban-card">
-              <span class="kanban-card-tag tag-delivered">WhatsApp</span>
-              <div class="kanban-card-title">Anniversary Cake</div>
-              <div class="kanban-card-client">Robert Kim</div>
-              <div class="kanban-card-footer">
-                <span class="kanban-card-date">Feb 14, 5:00 PM</span>
-                <span class="kanban-card-amount">$120.00</span>
-              </div>
-            </div>
-            <div class="kanban-card">
-              <span class="kanban-card-tag tag-delivered">Store</span>
-              <div class="kanban-card-title">Pastry Platter</div>
-              <div class="kanban-card-client">Lisa Brown</div>
-              <div class="kanban-card-footer">
-                <span class="kanban-card-date">Feb 13, 11:00 AM</span>
-                <span class="kanban-card-amount">$95.00</span>
-              </div>
-            </div>
+            </figure>
           </div>
         </div>
+        <button class="shot-nav shot-next" type="button" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="shot-dots" aria-label="Screenshot slides">
+        <button type="button" class="is-active" aria-current="true" aria-label="Show screenshot 1"></button>
+        <button type="button" aria-label="Show screenshot 2"></button>
+        <button type="button" aria-label="Show screenshot 3"></button>
+        <button type="button" aria-label="Show screenshot 4"></button>
+        <button type="button" aria-label="Show screenshot 5"></button>
       </div>
     </div>
   </section>
@@ -1306,5 +1256,6 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
 
+  <script src="/apps/screenshot-carousel.js" defer></script>
 </body>
 </html>

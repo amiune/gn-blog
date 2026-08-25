@@ -665,6 +665,7 @@
     .hero-actions { animation-delay: 0.3s; }
     .hero-preview { animation: fadeInUp 0.8s ease-out 0.4s backwards; }
   </style>
+  <link rel="stylesheet" href="/apps/screenshot-carousel.css">
 </head>
 <body>
 
@@ -713,87 +714,56 @@
       <a href="#features" class="btn-secondary">Learn more</a>
     </div>
 
-    <div class="hero-preview">
-      <div class="preview-window">
-        <div class="preview-titlebar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="preview-tabs">
-          <div class="preview-tab active">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM2 13h2a1 1 0 0 0 0-2H2a1 1 0 0 0 0 2zm18 0h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM11 2v2a1 1 0 0 0 2 0V2a1 1 0 0 0-2 0zm0 18v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-2 0z"/></svg>
-            Today
-          </div>
-          <div class="preview-tab">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 7h-3V6a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v1H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-            Jobs
-          </div>
-          <div class="preview-tab">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10z"/></svg>
-            Calendar
-          </div>
-          <div class="preview-tab">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-            Clients
-          </div>
-          <div class="preview-tab">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94a7.43 7.43 0 0 0 .05-.94 7.43 7.43 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.28 7.28 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.22-1.13.52-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.05.63-.05.94s.01.63.05.94L2.83 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.42 1.05.72 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54a7.28 7.28 0 0 0 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg>
-            Settings
-          </div>
-        </div>
-        <div class="preview-content">
-          <div class="preview-nav-title">Today</div>
-          <div class="stat-grid">
-            <div class="mini-stat blue">
-              <div class="v">3</div>
-              <div class="l">Total</div>
-            </div>
-            <div class="mini-stat green">
-              <div class="v">1</div>
-              <div class="l">Done</div>
-            </div>
-            <div class="mini-stat orange">
-              <div class="v">$455</div>
-              <div class="l">Earnings</div>
-            </div>
-          </div>
-          <div class="job-list">
-            <div class="job-row">
-              <span class="status-dot orange"></span>
-              <div>
-                <div class="name">Jane Smith</div>
-                <div class="meta">9:00 AM · Deep clean</div>
+    <div class="hero-preview screenshot-carousel">
+      <div class="shot-carousel" data-shot-carousel>
+        <button class="shot-nav shot-prev" type="button" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="shot-viewport">
+          <div class="shot-track">
+            <figure class="shot-slide is-active">
+              <div class="shot-marketing">
+                <img src="screenshots/CleanJobTracker-iPhone-Screenshot-1.png" alt="Clean Job Tracker iPhone screenshot 1" fetchpriority="high">
               </div>
-              <div class="right">
-                <span class="badge badge-progress">In Progress</span>
-                <div class="pay">$150</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/CleanJobTracker-iPhone-Screenshot-2.png" alt="Clean Job Tracker iPhone screenshot 2" loading="lazy">
               </div>
-            </div>
-            <div class="job-row">
-              <span class="status-dot blue"></span>
-              <div>
-                <div class="name">Bob Johnson</div>
-                <div class="meta">2:00 PM</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/CleanJobTracker-iPhone-Screenshot-3.png" alt="Clean Job Tracker iPhone screenshot 3" loading="lazy">
               </div>
-              <div class="right">
-                <span class="badge badge-scheduled">Scheduled</span>
-                <div class="pay">$120</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/CleanJobTracker-iPhone-Screenshot-4.png" alt="Clean Job Tracker iPhone screenshot 4" loading="lazy">
               </div>
-            </div>
-            <div class="job-row">
-              <span class="status-dot green"></span>
-              <div>
-                <div class="name">Maria Garcia</div>
-                <div class="meta">5:30 PM</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/CleanJobTracker-iPhone-Screenshot-5.png" alt="Clean Job Tracker iPhone screenshot 5" loading="lazy">
               </div>
-              <div class="right">
-                <span class="badge badge-done">Completed</span>
-                <div class="pay" style="color:#248A3D;">$185 ✓</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-marketing">
+                <img src="screenshots/CleanJobTracker-iPhone-Screenshot-6.png" alt="Clean Job Tracker iPhone screenshot 6" loading="lazy">
               </div>
-            </div>
+            </figure>
           </div>
         </div>
+        <button class="shot-nav shot-next" type="button" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="shot-dots" aria-label="Screenshot slides">
+        <button type="button" class="is-active" aria-current="true" aria-label="Show screenshot 1"></button>
+        <button type="button" aria-label="Show screenshot 2"></button>
+        <button type="button" aria-label="Show screenshot 3"></button>
+        <button type="button" aria-label="Show screenshot 4"></button>
+        <button type="button" aria-label="Show screenshot 5"></button>
+        <button type="button" aria-label="Show screenshot 6"></button>
       </div>
     </div>
   </section>
@@ -974,5 +944,6 @@
   src="https://www.facebook.com/tr?id=1873247050036910&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
+  <script src="/apps/screenshot-carousel.js" defer></script>
 </body>
 </html>

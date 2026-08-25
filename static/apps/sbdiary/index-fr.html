@@ -1143,6 +1143,7 @@
       animation: fadeInUp 0.8s ease-out 0.4s backwards;
     }
   </style>
+  <link rel="stylesheet" href="/apps/screenshot-carousel.css">
 </head>
 <body>
 
@@ -1222,61 +1223,44 @@
     </div>
 
     <!-- PREVIEW -->
-    <div class="hero-preview">
-      <div class="preview-window">
-        <div class="preview-titlebar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="preview-content">
-          <div class="preview-entry">
-            <div class="preview-entry-header">
-              <span class="preview-entry-date">Lun. 16 fév. 2026</span>
-              <span class="preview-entry-mood">😊</span>
-            </div>
-            <div class="preview-entry-title">Super journée au marché !</div>
-            <div class="preview-entry-text">
-              La nouvelle gamme de pâtisseries était épuisée à midi. Les retours clients étaient incroyables — trois personnes ont demandé des commandes en gros. Je dois examiner les options d'emballage cette semaine.
-            </div>
-            <div class="preview-entry-tags">
-              <span class="preview-tag">Ventes</span>
-              <span class="preview-tag preview-tag-accent">Produit</span>
-              <span class="preview-tag">Marketing</span>
-            </div>
-            <div class="preview-entry-finance">
-              <div class="preview-fin-item">
-                <div class="preview-fin-label">Revenus</div>
-                <div class="preview-fin-value positive">+$1,240</div>
+    <div class="hero-preview screenshot-carousel">
+      <div class="shot-carousel" data-shot-carousel>
+        <button class="shot-nav shot-prev" type="button" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="shot-viewport">
+          <div class="shot-track">
+            <figure class="shot-slide is-active">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-03-07%20at%2018.35.10.png" alt="SB Diary iPhone screenshot 1" fetchpriority="high">
               </div>
-              <div class="preview-fin-item">
-                <div class="preview-fin-label">Dépenses</div>
-                <div class="preview-fin-value negative">-$380</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-03-07%20at%2018.35.16.png" alt="SB Diary iPhone screenshot 2" loading="lazy">
               </div>
-              <div class="preview-fin-item">
-                <div class="preview-fin-label">Net</div>
-                <div class="preview-fin-value positive">+$860</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-03-07%20at%2018.35.19.png" alt="SB Diary iPhone screenshot 3" loading="lazy">
               </div>
-            </div>
-          </div>
-          <div class="preview-sidebar">
-            <div class="preview-mini-card">
-              <div class="emoji">🔥</div>
-              <div class="label">Série</div>
-              <div class="value gradient">14 jours</div>
-            </div>
-            <div class="preview-mini-card">
-              <div class="emoji">📈</div>
-              <div class="label">Cette semaine</div>
-              <div class="value gradient">$4,320</div>
-            </div>
-            <div class="preview-mini-card">
-              <div class="emoji">😊</div>
-              <div class="label">Humeur moy.</div>
-              <div class="value gradient">4.2/5</div>
-            </div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-03-07%20at%2018.35.27.png" alt="SB Diary iPhone screenshot 4" loading="lazy">
+              </div>
+            </figure>
           </div>
         </div>
+        <button class="shot-nav shot-next" type="button" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="shot-dots" aria-label="Screenshot slides">
+        <button type="button" class="is-active" aria-current="true" aria-label="Show screenshot 1"></button>
+        <button type="button" aria-label="Show screenshot 2"></button>
+        <button type="button" aria-label="Show screenshot 3"></button>
+        <button type="button" aria-label="Show screenshot 4"></button>
       </div>
     </div>
   </section>
@@ -1650,5 +1634,6 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
+  <script src="/apps/screenshot-carousel.js" defer></script>
 </body>
 </html>

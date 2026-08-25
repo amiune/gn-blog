@@ -870,6 +870,7 @@
       animation: fadeInUp 0.8s ease-out 0.4s backwards;
     }
   </style>
+  <link rel="stylesheet" href="/apps/screenshot-carousel.css">
 </head>
 <body>
 
@@ -938,59 +939,44 @@
       <a href="#features" class="btn-secondary">Mehr erfahren</a>
     </div>
 
-    <div class="hero-preview">
-      <div class="preview-window">
-        <div class="preview-titlebar">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="preview-content">
-          <div>
-            <div class="section-label" style="text-align:left;margin-bottom:8px;">Werkstatt</div>
-            <div class="stat-grid">
-              <div class="mini-stat">
-                <div class="v">8</div>
-                <div class="l">Rezepte</div>
+    <div class="hero-preview screenshot-carousel">
+      <div class="shot-carousel" data-shot-carousel>
+        <button class="shot-nav shot-prev" type="button" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="shot-viewport">
+          <div class="shot-track">
+            <figure class="shot-slide is-active">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-07-14%20at%2009.27.02.png" alt="CNC Feeds iPhone screenshot 1" fetchpriority="high">
               </div>
-              <div class="mini-stat">
-                <div class="v">12</div>
-                <div class="l">Test-Schnitte</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-07-14%20at%2009.27.41.png" alt="CNC Feeds iPhone screenshot 2" loading="lazy">
               </div>
-              <div class="mini-stat">
-                <div class="v">2</div>
-                <div class="l">Maschinen</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-07-14%20at%2009.28.04.png" alt="CNC Feeds iPhone screenshot 3" loading="lazy">
               </div>
-              <div class="mini-stat">
-                <div class="v">14</div>
-                <div class="l">Fräser</div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-07-14%20at%2009.28.18.png" alt="CNC Feeds iPhone screenshot 4" loading="lazy">
               </div>
-            </div>
-          </div>
-          <div class="product-list">
-            <div class="plist-row">
-              <div>
-                <div class="name">Hardwood Pocket — 1/4&quot; Flat</div>
-                <div class="meta">Shapeoko · Birch plywood · Pocket</div>
-              </div>
-              <div class="qty">18k</div>
-            </div>
-            <div class="plist-row warn">
-              <div>
-                <div class="name">MDF Facing — 1/2&quot; Compression<span class="tag">Tested</span></div>
-                <div class="meta">LongMill · MDF · Facing</div>
-              </div>
-              <div class="qty">16k</div>
-            </div>
-            <div class="plist-row">
-              <div>
-                <div class="name">Acrylic Engrave — 60° V-bit</div>
-                <div class="meta">MPCNC · Acrylic · Engraving</div>
-              </div>
-              <div class="qty">20k</div>
-            </div>
+            </figure>
           </div>
         </div>
+        <button class="shot-nav shot-next" type="button" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="shot-dots" aria-label="Screenshot slides">
+        <button type="button" class="is-active" aria-current="true" aria-label="Show screenshot 1"></button>
+        <button type="button" aria-label="Show screenshot 2"></button>
+        <button type="button" aria-label="Show screenshot 3"></button>
+        <button type="button" aria-label="Show screenshot 4"></button>
       </div>
     </div>
   </section>
@@ -1173,5 +1159,6 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
 
+  <script src="/apps/screenshot-carousel.js" defer></script>
 </body>
 </html>

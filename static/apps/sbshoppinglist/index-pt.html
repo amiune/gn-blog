@@ -922,6 +922,7 @@
       animation: fadeInUp 0.8s ease-out 0.4s backwards;
     }
   </style>
+  <link rel="stylesheet" href="/apps/screenshot-carousel.css">
 </head>
 <body>
 
@@ -973,55 +974,44 @@
     </div>
 
     <!-- PREVIEW -->
-    <div class="hero-preview">
-      <div class="preview-phone">
-        <div class="phone-notch"></div>
-        <div class="phone-header">Lista de compras</div>
-        <div class="phone-list">
-          <div class="phone-item">
-            <div class="check-circle"></div>
-            <span class="phone-item-name">Abacates</span>
-          </div>
-          <div class="phone-item">
-            <div class="check-circle"></div>
-            <span class="phone-item-name">Pão de massa madre</span>
-          </div>
-          <div class="phone-item">
-            <div class="check-circle"></div>
-            <span class="phone-item-name">Iogurte grego</span>
-          </div>
-          <div class="phone-item">
-            <div class="check-circle"></div>
-            <span class="phone-item-name">Azeite</span>
-          </div>
-          <div class="phone-item">
-            <div class="check-circle checked">
-              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </div>
-            <span class="phone-item-name checked-text">Ovos</span>
-            <span class="phone-item-price">$4.99</span>
-          </div>
-          <div class="phone-item">
-            <div class="check-circle checked">
-              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </div>
-            <span class="phone-item-name checked-text">Leite integral</span>
-            <span class="phone-item-price">$5.49</span>
+    <div class="hero-preview screenshot-carousel">
+      <div class="shot-carousel" data-shot-carousel>
+        <button class="shot-nav shot-prev" type="button" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="shot-viewport">
+          <div class="shot-track">
+            <figure class="shot-slide is-active">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-03-23%20at%2009.23.45.png" alt="Smart & Simple Shopping List iPhone screenshot 1" fetchpriority="high">
+              </div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-03-23%20at%2009.24.09.png" alt="Smart & Simple Shopping List iPhone screenshot 2" loading="lazy">
+              </div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-03-23%20at%2009.24.18.png" alt="Smart & Simple Shopping List iPhone screenshot 3" loading="lazy">
+              </div>
+            </figure>
+            <figure class="shot-slide">
+              <div class="shot-phone">
+                <img src="screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20-%202026-03-23%20at%2009.25.04.png" alt="Smart & Simple Shopping List iPhone screenshot 4" loading="lazy">
+              </div>
+            </figure>
           </div>
         </div>
-
-        <div class="phone-total">
-          <span class="phone-total-label">Total</span>
-          <span class="phone-total-value">$10.48</span>
-        </div>
-
-        <div class="phone-input">
-          <span class="phone-input-icon">🧺</span>
-          <span class="phone-input-text">O que precisa comprar?</span>
-          <div class="phone-input-btn">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </div>
-        </div>
+        <button class="shot-nav shot-next" type="button" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="shot-dots" aria-label="Screenshot slides">
+        <button type="button" class="is-active" aria-current="true" aria-label="Show screenshot 1"></button>
+        <button type="button" aria-label="Show screenshot 2"></button>
+        <button type="button" aria-label="Show screenshot 3"></button>
+        <button type="button" aria-label="Show screenshot 4"></button>
       </div>
     </div>
   </section>
@@ -1202,5 +1192,6 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
+  <script src="/apps/screenshot-carousel.js" defer></script>
 </body>
 </html>
