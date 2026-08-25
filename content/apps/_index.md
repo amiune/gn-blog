@@ -148,7 +148,7 @@ url = "/apps/doorledger/"
 
 [[extra.apps]]
 title = "Surphop"
-tagline = "See the change"
+tagline = "Track your learning progress"
 description = "A private journal for quiet learning progress. Record short videos on skill timelines, then invite a teacher or friend to reply with a video tip on the exact clip. Synced through your iCloud. No ads. No subscription."
 platform = "iOS"
 price = "Free to record. $9.99 lifetime sharing. No subscription. No ads."
