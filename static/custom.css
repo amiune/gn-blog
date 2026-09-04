@@ -815,6 +815,11 @@ body.nav-menu-open {
   background: var(--bg-alt);
 }
 
+.section-research-page {
+  padding-top: 8rem;
+  min-height: calc(100vh - 250px);
+}
+
 .research-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1642,7 +1647,7 @@ body.nav-menu-open {
 }
 
 /* ============================================
-   Custom Apps Page
+   Apps Page
    ============================================ */
 .apps-gallery-header {
   padding: 8rem 0 4rem;

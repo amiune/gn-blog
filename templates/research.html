@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Research — Generative Networks{% endblock title %}
+
+{% block content %}
+<!-- Research Section -->
+<section id="research" class="section-research section-research-page">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Research</span>
+      <h2>Experiments in the <em>future of AI</em></h2>
+      <p class="section-desc">Open-source proof-of-concept projects. Not products yet, just ideas we're testing.</p>
+    </div>
+
+    <div class="research-grid">
+      {% for project in section.extra.projects %}
+      <article class="research-card">
+        <span class="research-tag">{{ project.tag }}</span>
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description }}</p>
+        <div class="research-links">
+          {% if project.read_more_url %}
+          <a href="{{ project.read_more_url }}" class="card-link">
+            Read more
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          {% endif %}
+          {% if project.github_url %}
+          <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="research-repo">GitHub</a>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    {% if section.content %}
+    <div class="research-content">
+      {{ section.content | safe }}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

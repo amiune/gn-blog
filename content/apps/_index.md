@@ -1,5 +1,5 @@
 +++
-title = "Custom Apps"
+title = "Apps"
 template = "apps.html"
 
 [extra]
