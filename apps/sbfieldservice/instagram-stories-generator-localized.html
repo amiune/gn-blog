@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Service Job Tracker — Instagram Stories (DE · FR · IT · PT · ES)</title>
+  <meta name="description" content="Generate promotional Instagram Stories for Field Service Job Tracker — field notebook for solo contractors.">
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #1D4ED8;
+      --accent: #3B82F6;
+      --orange: #F97316;
+      --blue: #3B82F6;
+      --green: #22C55E;
+      --story-preview-w: 360px;
+      --story-preview-h: 640px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f0f12 0%, #1a1a22 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #60A5FA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: -18px auto 24px;
+      flex-wrap: wrap;
+    }
+
+    .lang-bar label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .lang-bar input { display: none; }
+
+    .lang-bar label:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.22);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(37, 99, 235, 0.5);
+    }
+    
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+    
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+    
+    .story {
+      width: var(--story-preview-w, 360px);
+      height: var(--story-preview-h, 640px);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story.gradient-blue {
+      background: linear-gradient(180deg, #2563EB 0%, #1D4ED8 50%, #1E40AF 100%);
+    }
+
+    .story.gradient-dark {
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .story.gradient-vibrant {
+      background: linear-gradient(160deg, #1E40AF 0%, #3B82F6 40%, #2563EB 100%);
+    }
+
+    .story.gradient-warm {
+      background: linear-gradient(180deg, #1a1020 0%, #2d1b3e 40%, #1a1020 100%);
+    }
+    
+    .story::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .story-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .story-top-spacer {
+      height: 60px;
+      flex-shrink: 0;
+    }
+
+    .story-headline {
+      color: white;
+      font-size: 1.9rem;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 6px;
+      padding: 0 20px;
+    }
+    
+    .story-subheadline {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 16px;
+      padding: 0 20px;
+    }
+
+    .story-cta {
+      margin-top: auto;
+      margin-bottom: 40px;
+      background: white;
+      color: var(--primary-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 40px;
+      border-radius: 30px;
+      text-align: center;
+      letter-spacing: 0.02em;
+      pointer-events: none;
+    }
+
+    .story-app-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: auto;
+      margin-bottom: 36px;
+      z-index: 1;
+    }
+
+    .story-app-badge .app-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      overflow: hidden;
+    }
+
+    .story-app-badge .app-icon img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-app-badge .app-info {
+      text-align: left;
+    }
+
+    .story-app-badge .app-name {
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .story-app-badge .app-tagline {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.75rem;
+    }
+
+    .deco-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      pointer-events: none;
+    }
+
+    .swipe-up {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: auto;
+      margin-bottom: 24px;
+      z-index: 1;
+    }
+
+    .swipe-up .chevron {
+      width: 24px;
+      height: 24px;
+      border-left: 3px solid rgba(255,255,255,0.8);
+      border-top: 3px solid rgba(255,255,255,0.8);
+      transform: rotate(45deg);
+    }
+
+    .swipe-up .swipe-text {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .pain-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+    }
+
+    .pain-row .pain-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    .pain-row .pain-text {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .hook-headline {
+      color: white;
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.15;
+      padding: 0 20px;
+      z-index: 1;
+    }
+
+    .hook-target {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      text-align: center;
+      padding: 0 24px;
+      line-height: 1.4;
+      z-index: 1;
+    }
+
+    .keep-watching {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      margin-bottom: 32px;
+      z-index: 1;
+    }
+
+    .keep-watching span {
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .keep-watching .arrows {
+      display: flex;
+      gap: 2px;
+    }
+
+    .keep-watching .arrow {
+      width: 12px;
+      height: 12px;
+      border-right: 3px solid white;
+      border-bottom: 3px solid white;
+      transform: rotate(-45deg);
+      opacity: 0.5;
+    }
+
+    .keep-watching .arrow:nth-child(2) { opacity: 0.7; }
+    .keep-watching .arrow:nth-child(3) { opacity: 1; }
+
+    .feature-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 16px 20px;
+      width: 100%;
+    }
+
+    .feature-pill .pill-emoji {
+      font-size: 1.8rem;
+    }
+
+    .feature-pill .pill-content {
+      flex: 1;
+    }
+
+    .feature-pill .pill-title {
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .feature-pill .pill-desc {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.8rem;
+    }
+
+    .app-mockup {
+      width: 290px;
+      background: #F8FAFC;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      z-index: 1;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #1E293B;
+    }
+
+    .mockup-statusbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 16px;
+      background: white;
+      font-size: 8px;
+      font-weight: 600;
+      color: #1E293B;
+    }
+
+    .mockup-statusbar .time { font-size: 9px; font-weight: 700; }
+
+    .mockup-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: white;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .mockup-nav-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1E293B;
+    }
+
+    .mockup-nav-icon {
+      width: 18px;
+      height: 18px;
+      background: #EFF6FF;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+    }
+
+    .mini-kanban {
+      display: flex;
+      gap: 6px;
+      padding: 10px 8px;
+      overflow: hidden;
+    }
+
+    .mini-col {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mini-col-header {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 6px;
+      font-size: 7px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .mini-col-header .mini-count {
+      font-size: 7px;
+      font-weight: 700;
+      background: rgba(0,0,0,0.06);
+      color: #64748B;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .mini-col.col-pending .mini-col-header { color: var(--orange); }
+    .mini-col.col-prepared .mini-col-header { color: var(--blue); }
+    .mini-col.col-delivered .mini-col-header { color: var(--green); }
+
+    .mini-card {
+      background: white;
+      border-radius: 8px;
+      padding: 7px 8px;
+      margin-bottom: 5px;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .mini-card-tag {
+      display: inline-block;
+      font-size: 6px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-bottom: 3px;
+    }
+
+    .mini-tag-pending { background: #FFF7ED; color: #EA580C; }
+    .mini-tag-prepared { background: #EFF6FF; color: #2563EB; }
+    .mini-tag-delivered { background: #F0FDF4; color: #16A34A; }
+
+    .mini-card-title {
+      font-size: 8px;
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 1px;
+    }
+
+    .mini-card-client {
+      font-size: 7px;
+      color: #94A3B8;
+      margin-bottom: 3px;
+    }
+
+    .mini-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mini-card-date {
+      font-size: 6px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+
+    .mini-card-amount {
+      font-size: 7px;
+      font-weight: 700;
+      color: #1E293B;
+    }
+
+    .mini-detail {
+      padding: 10px 12px;
+    }
+
+    .mini-detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .mini-detail-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1E293B;
+    }
+
+    .mini-detail-status {
+      font-size: 7px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #FFF7ED;
+      color: #EA580C;
+    }
+
+    .mini-detail-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .mini-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .mini-detail-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .mini-detail-label {
+      font-size: 7px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+
+    .mini-detail-value {
+      font-size: 9px;
+      color: #1E293B;
+      font-weight: 600;
+    }
+
+    .mini-stats {
+      padding: 10px 12px;
+    }
+
+    .mini-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .mini-stat-card {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #E2E8F0;
+    }
+
+    .mini-stat-label {
+      font-size: 7px;
+      color: #94A3B8;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .mini-stat-value {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .mini-stat-value.blue { color: var(--primary); }
+    .mini-stat-value.green { color: var(--green); }
+    .mini-stat-value.orange { color: var(--orange); }
+
+    .mini-stat-change {
+      font-size: 6px;
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    .mini-chart {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #E2E8F0;
+    }
+
+    .mini-chart-title {
+      font-size: 8px;
+      font-weight: 700;
+      color: #1E293B;
+      margin-bottom: 8px;
+    }
+
+    .mini-chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 50px;
+    }
+
+    .mini-chart-bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      min-height: 4px;
+    }
+
+    .mini-chart-labels {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .mini-chart-label {
+      flex: 1;
+      text-align: center;
+      font-size: 5.5px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+
+    .mockup-tabbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 6px 0 8px;
+      background: white;
+      border-top: 1px solid #E2E8F0;
+    }
+
+    .mockup-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 6px;
+      font-weight: 500;
+      color: #94A3B8;
+    }
+
+    .mockup-tab.active {
+      color: var(--primary);
+    }
+
+    .mockup-tab-icon {
+      font-size: 11px;
+    }
+
+    canvas {
+      display: none;
+    }
+    
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .instructions h3 {
+      color: #60A5FA;
+      margin-bottom: 12px;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+    
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📸 Instagram Stories</h1>
+    <p data-i18n="ui.subtitle">Generate promotional stories for Field Service Job Tracker</p>
+  </div>
+
+  <div class="lang-bar" role="radiogroup" aria-label="Language">
+    <label>
+      <input type="radio" name="lang" value="de" checked>
+      Deutsch
+    </label>
+    <label>
+      <input type="radio" name="lang" value="fr">
+      Français
+    </label>
+    <label>
+      <input type="radio" name="lang" value="it">
+      Italiano
+    </label>
+    <label>
+      <input type="radio" name="lang" value="pt">
+      Português
+    </label>
+    <label>
+      <input type="radio" name="lang" value="es">
+      Español
+    </label>
+  </div>
+  
+  <div class="controls">
+    <button onclick="downloadAll()" data-i18n="ui.downloadAll">Download All Stories</button>
+    <button class="secondary" onclick="downloadAllLanguages()" data-i18n="ui.downloadAllLangs">Download All Languages</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Story 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Story 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Story 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Story 4</button>
+    <button class="secondary" onclick="downloadCurrent(5)">Story 5</button>
+  </div>
+  
+  <div class="screenshots">
+    
+    <!-- Story 1: Hook / Problem statement -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-vibrant" id="story1">
+        <div class="deco-circle" style="width: 350px; height: 350px; top: -120px; left: -120px;"></div>
+        <div class="deco-circle" style="width: 250px; height: 250px; bottom: -80px; right: -80px; background: rgba(239,68,68,0.08);"></div>
+        <div class="story-content" style="justify-content: center; padding: 80px 24px; gap: 24px;">
+          
+          <div class="hook-headline" data-i18n="story1.hookHeadline">Field work<br>scattered everywhere?</div>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px; width: 100%; z-index: 1;">
+            <div class="pain-row">
+              <div class="pain-icon">🤯</div>
+              <div class="pain-text" data-i18n="story1.pain1">Job details in Notes<br>& text threads</div>
+            </div>
+            <div class="pain-row">
+              <div class="pain-icon">🤯</div>
+              <div class="pain-text" data-i18n="story1.pain2">Photos buried<br>in your camera roll</div>
+            </div>
+            <div class="pain-row">
+              <div class="pain-icon">🤯</div>
+              <div class="pain-text" data-i18n="story1.pain3">Estimates & payments<br>on scraps of paper</div>
+            </div>
+          </div>
+          
+          <div class="hook-target" data-i18n="story1.hookTarget">For handymen, repair techs<br>& solo contractors</div>
+          
+          <div class="keep-watching">
+            <span data-i18n="story1.keepWatching">Keep watching</span>
+            <div class="arrows">
+              <div class="arrow"></div>
+              <div class="arrow"></div>
+              <div class="arrow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.story1">1. Hook</div>
+    </div>
+    
+    <!-- Story 2: Hero with Kanban mockup -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-blue" id="story2">
+        <div class="deco-circle" style="width: 300px; height: 300px; top: -80px; right: -100px;"></div>
+        <div class="deco-circle" style="width: 200px; height: 200px; bottom: 60px; left: -60px;"></div>
+        <div class="story-content">
+          <div class="story-top-spacer"></div>
+          <div class="story-headline" data-i18n="story2.headline">Your field work,<br>in one notebook</div>
+          <div class="story-subheadline" data-i18n="story2.subheadline">Jobs, photos, materials, estimates & payments — offline-first</div>
+          
+          <div class="app-mockup">
+            <div class="mockup-statusbar">
+              <span class="time">9:41</span>
+              <span>⚡ 📶</span>
+            </div>
+            <div class="mockup-nav">
+              <div class="mockup-nav-icon">📋</div>
+              <div class="mockup-nav-title" data-i18n="mock.myJobs">My Jobs</div>
+              <div class="mockup-nav-icon">＋</div>
+            </div>
+            <div class="mini-kanban">
+              <div class="mini-col col-pending">
+                <div class="mini-col-header">
+                  <span data-i18n="mock.scheduled">Scheduled</span>
+                  <span class="mini-count">3</span>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-pending" data-i18n="mock.tagToday">Today</span>
+                  <div class="mini-card-title">AC tune-up</div>
+                  <div class="mini-card-client">James Wilson</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 18</span>
+                    <span class="mini-card-amount">$85</span>
+                  </div>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-pending" data-i18n="mock.tagUpcoming">Upcoming</span>
+                  <div class="mini-card-title">Generator insp.</div>
+                  <div class="mini-card-client">Ana Lopez</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 20</span>
+                    <span class="mini-card-amount">$45</span>
+                  </div>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-pending" data-i18n="mock.tagParts">Parts</span>
+                  <div class="mini-card-title">Panel upgrade</div>
+                  <div class="mini-card-client">Sofia Chen</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 21</span>
+                    <span class="mini-card-amount">$120</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-col col-prepared">
+                <div class="mini-col-header">
+                  <span data-i18n="mock.inProgress">In Prog.</span>
+                  <span class="mini-count">2</span>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-prepared" data-i18n="mock.tag4Photos">4 photos</span>
+                  <div class="mini-card-title">Cabinet repair</div>
+                  <div class="mini-card-client">Maria Rodriguez</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date" data-i18n="mock.cardToday">Today</span>
+                    <span class="mini-card-amount">$185</span>
+                  </div>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-prepared" data-i18n="mock.tagEstimate">Estimate</span>
+                  <div class="mini-card-title">Leak repair</div>
+                  <div class="mini-card-client">Robert Kim</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 17</span>
+                    <span class="mini-card-amount">$95</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-col col-delivered">
+                <div class="mini-col-header">
+                  <span data-i18n="mock.done">Done</span>
+                  <span class="mini-count">2</span>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-delivered" data-i18n="mock.tagPaid">Paid</span>
+                  <div class="mini-card-title">Seasonal maint.</div>
+                  <div class="mini-card-client">Lisa Brown</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 14</span>
+                    <span class="mini-card-amount">$120</span>
+                  </div>
+                </div>
+                <div class="mini-card">
+                  <span class="mini-card-tag mini-tag-delivered" data-i18n="mock.tagPaid">Paid</span>
+                  <div class="mini-card-title">Thermostat</div>
+                  <div class="mini-card-client">Emily Park</div>
+                  <div class="mini-card-footer">
+                    <span class="mini-card-date">Feb 13</span>
+                    <span class="mini-card-amount">$55</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-tabbar">
+              <div class="mockup-tab active">
+                <div class="mockup-tab-icon">📋</div>
+                <span data-i18n="mock.jobs">Jobs</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">☀️</div>
+                <span data-i18n="mock.today">Today</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">⚙️</div>
+                <span data-i18n="mock.settings">Settings</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="swipe-up">
+            <div class="chevron"></div>
+            <div class="swipe-text" data-i18n="ui.downloadAppStore">Download on the App Store</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.story2">2. Hero</div>
+    </div>
+    
+    <!-- Story 3: Job detail mockup -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-vibrant" id="story3">
+        <div class="deco-circle" style="width: 250px; height: 250px; top: -60px; left: -80px;"></div>
+        <div class="story-content">
+          <div class="story-top-spacer"></div>
+          <div class="story-headline" data-i18n="story3.headline">Every Job,<br>Fully Documented</div>
+          <div class="story-subheadline" data-i18n="story3.subheadline">Photos, materials, estimates & payments on one timeline</div>
+          
+          <div class="app-mockup">
+            <div class="mockup-statusbar">
+              <span class="time">9:41</span>
+              <span>⚡ 📶</span>
+            </div>
+            <div class="mockup-nav">
+              <div style="font-size: 10px; color: var(--primary); font-weight: 600;" data-i18n="mock.back">← Back</div>
+              <div class="mockup-nav-title" data-i18n="mock.jobDetails">Job Details</div>
+              <div style="font-size: 10px; color: var(--primary); font-weight: 600;" data-i18n="mock.share">Share</div>
+            </div>
+            <div class="mini-detail">
+              <div class="mini-detail-header">
+                <div class="mini-detail-title">Cabinet repair</div>
+                <div class="mini-detail-status" data-i18n="mock.inProgressFull">In progress</div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #EFF6FF;">👤</div>
+                <div>
+                  <div class="mini-detail-label" data-i18n="mock.customer">Customer</div>
+                  <div class="mini-detail-value">Maria Rodriguez</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #FFF7ED;">📷</div>
+                <div>
+                  <div class="mini-detail-label" data-i18n="mock.photos">Photos</div>
+                  <div class="mini-detail-value" data-i18n="mock.photosValue">4 before & after</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #F0FDF4;">📅</div>
+                <div>
+                  <div class="mini-detail-label" data-i18n="mock.due">Due</div>
+                  <div class="mini-detail-value" data-i18n="mock.dueValue">Today, 2:00 PM</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #FAF5FF;">🔧</div>
+                <div>
+                  <div class="mini-detail-label" data-i18n="mock.materials">Materials</div>
+                  <div class="mini-detail-value" data-i18n="mock.materialsValue">3 items · $42 est.</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #EFF6FF;">💳</div>
+                <div>
+                  <div class="mini-detail-label" data-i18n="mock.payment">Payment</div>
+                  <div class="mini-detail-value" style="color: var(--orange);" data-i18n="mock.paymentDue">$185 due</div>
+                </div>
+              </div>
+              <div class="mini-detail-row">
+                <div class="mini-detail-icon" style="background: #F0F9FF;">📝</div>
+                <div>
+                  <div class="mini-detail-label" data-i18n="mock.notes">Notes</div>
+                  <div class="mini-detail-value">Replace hinges & touch-up paint</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 10px;">
+                <div style="flex: 1; background: var(--primary); color: white; font-size: 8px; font-weight: 700; text-align: center; padding: 8px; border-radius: 8px;" data-i18n="mock.shareEstimate">Share estimate</div>
+                <div style="flex: 1; background: #F1F5F9; color: #64748B; font-size: 8px; font-weight: 700; text-align: center; padding: 8px; border-radius: 8px;" data-i18n="mock.logPayment">Log payment</div>
+              </div>
+            </div>
+            <div class="mockup-tabbar">
+              <div class="mockup-tab active">
+                <div class="mockup-tab-icon">📋</div>
+                <span data-i18n="mock.jobs">Jobs</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">☀️</div>
+                <span data-i18n="mock.today">Today</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">⚙️</div>
+                <span data-i18n="mock.settings">Settings</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="swipe-up">
+            <div class="chevron"></div>
+            <div class="swipe-text" data-i18n="ui.downloadAppStore">Download on the App Store</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.story3">3. Detail</div>
+    </div>
+    
+    <!-- Story 4: Features list -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-dark" id="story4">
+        <div class="deco-circle" style="width: 400px; height: 400px; top: -150px; right: -150px; background: rgba(37,99,235,0.15);"></div>
+        <div class="deco-circle" style="width: 200px; height: 200px; bottom: -50px; left: -50px; background: rgba(59,130,246,0.1);"></div>
+        <div class="story-content" style="justify-content: center; padding: 40px 24px; gap: 20px;">
+          <div class="story-headline" style="font-size: 2rem;" data-i18n="story4.headline">Why Field Service<br>Job Tracker?</div>
+          
+          <div style="display: flex; flex-direction: column; gap: 14px; width: 100%; z-index: 1;">
+            <div class="feature-pill">
+              <div class="pill-emoji">⚡</div>
+              <div class="pill-content">
+                <div class="pill-title" data-i18n="story4.fastCapture">Fast job capture</div>
+                <div class="pill-desc" data-i18n="story4.fastCaptureDesc">Title only — add details later</div>
+              </div>
+            </div>
+            <div class="feature-pill">
+              <div class="pill-emoji">📷</div>
+              <div class="pill-content">
+                <div class="pill-title" data-i18n="story4.photos">Photos & timeline</div>
+                <div class="pill-desc" data-i18n="story4.photosDesc">Before, after & receipt on every job</div>
+              </div>
+            </div>
+            <div class="feature-pill">
+              <div class="pill-emoji">🔧</div>
+              <div class="pill-content">
+                <div class="pill-title" data-i18n="story4.materials">Materials tracking</div>
+                <div class="pill-desc" data-i18n="story4.materialsDesc">Parts, cost & purchase status</div>
+              </div>
+            </div>
+            <div class="feature-pill">
+              <div class="pill-emoji">📝</div>
+              <div class="pill-content">
+                <div class="pill-title" data-i18n="story4.estimates">Estimates & PDFs</div>
+                <div class="pill-desc" data-i18n="story4.estimatesDesc">Share via Messages or AirDrop</div>
+              </div>
+            </div>
+            <div class="feature-pill">
+              <div class="pill-emoji">💰</div>
+              <div class="pill-content">
+                <div class="pill-title" data-i18n="story4.noSub">No subscription</div>
+                <div class="pill-desc" data-i18n="story4.noSubDesc">Private iCloud — no account needed</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="swipe-up" style="margin-top: 20px;">
+            <div class="chevron"></div>
+            <div class="swipe-text" data-i18n="ui.downloadAppStore">Download on the App Store</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.story4">4. Features</div>
+    </div>
+    
+    <!-- Story 5: CTA / closing with Stats mockup -->
+    <div class="screenshot-wrapper">
+      <div class="story gradient-blue" id="story5">
+        <div class="deco-circle" style="width: 350px; height: 350px; bottom: -100px; right: -100px;"></div>
+        <div class="story-content">
+          <div class="story-top-spacer"></div>
+          
+          <div class="app-mockup" style="margin-bottom: 16px;">
+            <div class="mockup-statusbar">
+              <span class="time">9:41</span>
+              <span>⚡ 📶</span>
+            </div>
+            <div class="mockup-nav">
+              <div class="mockup-nav-icon">☀️</div>
+              <div class="mockup-nav-title" data-i18n="mock.today">Today</div>
+              <div style="font-size: 8px; color: var(--primary); font-weight: 600;">Feb 18</div>
+            </div>
+            <div class="mini-stats">
+              <div class="mini-stats-grid">
+                <div class="mini-stat-card">
+                  <div class="mini-stat-label" data-i18n="mock.overdue">Overdue</div>
+                  <div class="mini-stat-value orange">1</div>
+                  <div class="mini-stat-change">Panel upgrade</div>
+                </div>
+                <div class="mini-stat-card">
+                  <div class="mini-stat-label" data-i18n="mock.today">Today</div>
+                  <div class="mini-stat-value blue">2</div>
+                  <div class="mini-stat-change" data-i18n="mock.jobsScheduled">Jobs scheduled</div>
+                </div>
+                <div class="mini-stat-card">
+                  <div class="mini-stat-label" data-i18n="mock.balanceDue">Balance due</div>
+                  <div class="mini-stat-value orange">$385</div>
+                  <div class="mini-stat-change" data-i18n="mock.acrossActiveJobs">Across active jobs</div>
+                </div>
+                <div class="mini-stat-card">
+                  <div class="mini-stat-label" data-i18n="mock.upcoming">Upcoming</div>
+                  <div class="mini-stat-value green">3</div>
+                  <div style="font-size: 6px; font-weight: 600; color: #94A3B8;" data-i18n="mock.thisWeek">This week</div>
+                </div>
+              </div>
+              <div class="mini-chart">
+                <div class="mini-chart-title" data-i18n="mock.todaysJobs">Today's jobs</div>
+                <div class="mini-chart-bars">
+                  <div class="mini-chart-bar" style="height: 100%; background: #FCA5A5;"></div>
+                  <div class="mini-chart-bar" style="height: 85%; background: #FDBA74;"></div>
+                  <div class="mini-chart-bar" style="height: 70%; background: #93C5FD;"></div>
+                  <div class="mini-chart-bar" style="height: 55%; background: #BFDBFE;"></div>
+                </div>
+                <div class="mini-chart-labels">
+                  <div class="mini-chart-label">Panel</div>
+                  <div class="mini-chart-label">Cabinet</div>
+                  <div class="mini-chart-label">AC</div>
+                  <div class="mini-chart-label">Gen.</div>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-tabbar">
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">📋</div>
+                <span data-i18n="mock.jobs">Jobs</span>
+              </div>
+              <div class="mockup-tab active">
+                <div class="mockup-tab-icon">☀️</div>
+                <span data-i18n="mock.today">Today</span>
+              </div>
+              <div class="mockup-tab">
+                <div class="mockup-tab-icon">⚙️</div>
+                <span data-i18n="mock.settings">Settings</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="story-headline" style="font-size: 1.7rem;" data-i18n="story5.headline">Not a CRM.<br>A field notebook.</div>
+          <div class="story-subheadline" style="padding: 0 30px;" data-i18n="story5.subheadline">Answer "what should I do today?" before you leave the driveway — no account, no SaaS.</div>
+          
+          <div class="story-app-badge">
+            <div class="app-icon"><img src="icon.svg" alt=""></div>
+            <div class="app-info">
+              <div class="app-name" data-i18n="story5.appName">Field Service Job Tracker</div>
+              <div class="app-tagline" data-i18n="story5.appTagline">Available on the App Store</div>
+            </div>
+          </div>
+          
+          <div class="swipe-up" style="margin-top: 0;">
+            <div class="chevron"></div>
+            <div class="swipe-text" data-i18n="story5.getItNow">Get it now</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.story5">5. CTA</div>
+    </div>
+    
+  </div>
+  
+  <div class="instructions">
+    <h3 data-i18n="ui.guideTitle">📸 Instagram Export Guide</h3>
+    <ol>
+      <li data-i18n="ui.guide1">Full 9:16 layout — one PNG per slide at 1080×1920 for Stories and Reels</li>
+      <li data-i18n="ui.guide2">Pick a language above to preview localized copy before exporting</li>
+      <li data-i18n="ui.guide3">Click <strong>Download All Stories</strong> for the selected language, or <strong>Download All Languages</strong> for all 25 PNGs (5 slides × 5 languages)</li>
+      <li data-i18n="ui.guide4">Filenames include the language code: e.g. <code>SBFieldService-IGStory-de-Stories-9x16-1.png</code></li>
+    </ol>
+  </div>
+  
+  <canvas id="canvas"></canvas>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    const EXPORT = { exportW: 1080, exportH: 1920, previewW: 360, previewH: 640, suffix: 'Stories-9x16' };
+    const BG_FILL = '#1D4ED8';
+    const DOWNLOAD_PREFIX = 'SBFieldService-IGStory-';
+    const LANG_CODES = ['de', 'fr', 'it', 'pt', 'es'];
+    let currentLang = 'de';
+
+    const COPY = {
+      de: {
+        ui: {
+          subtitle: 'Werbe-Stories für Field Service Job Tracker erstellen',
+          downloadAll: 'Alle Stories herunterladen',
+          downloadAllLangs: 'Alle Sprachen herunterladen',
+          downloadAppStore: 'Im App Store laden',
+          guideTitle: '📸 Instagram-Export-Anleitung',
+          guide1: 'Volles 9:16-Layout — ein PNG pro Folie in 1080×1920 für Stories und Reels',
+          guide2: 'Wähle oben eine Sprache, um die lokalisierte Vorschau zu sehen',
+          guide3: 'Klicke auf <strong>Alle Stories herunterladen</strong> für die gewählte Sprache oder <strong>Alle Sprachen herunterladen</strong> für alle 25 PNGs (5 Folien × 5 Sprachen)',
+          guide4: 'Dateinamen enthalten den Sprachcode: z. B. <code>SBFieldService-IGStory-de-Stories-9x16-1.png</code>',
+        },
+        labels: { story1: '1. Hook', story2: '2. Hero', story3: '3. Detail', story4: '4. Funktionen', story5: '5. CTA' },
+        story1: {
+          hookHeadline: 'Außendienst<br>überall verstreut?',
+          pain1: 'Auftragsdetails in Notizen<br>& SMS-Threads',
+          pain2: 'Fotos vergraben<br>in der Galerie',
+          pain3: 'Kostenvoranschläge & Zahlungen<br>auf Zetteln',
+          hookTarget: 'Für Handwerker, Servicetechniker<br>& Solo-Auftragnehmer',
+          keepWatching: 'Weiter schauen',
+        },
+        story2: {
+          headline: 'Dein Außendienst,<br>in einem Notizbuch',
+          subheadline: 'Aufträge, Fotos, Material, Kostenvoranschläge & Zahlungen — offline-first',
+        },
+        story3: {
+          headline: 'Jeder Auftrag,<br>vollständig dokumentiert',
+          subheadline: 'Fotos, Material, Kostenvoranschläge & Zahlungen auf einer Timeline',
+        },
+        story4: {
+          headline: 'Warum Field Service<br>Job Tracker?',
+          fastCapture: 'Schnelle Auftragserfassung',
+          fastCaptureDesc: 'Nur Titel — Details später ergänzen',
+          photos: 'Fotos & Timeline',
+          photosDesc: 'Vorher, nachher & Beleg bei jedem Auftrag',
+          materials: 'Materialverfolgung',
+          materialsDesc: 'Teile, Kosten & Einkaufsstatus',
+          estimates: 'Kostenvoranschläge & PDFs',
+          estimatesDesc: 'Teilen per Nachrichten oder AirDrop',
+          noSub: 'Kein Abo',
+          noSubDesc: 'Privates iCloud — kein Konto nötig',
+        },
+        story5: {
+          headline: 'Kein CRM.<br>Ein Feldnotizbuch.',
+          subheadline: 'Beantworte „Was mache ich heute?" bevor du losfährst — kein Konto, kein SaaS.',
+          appName: 'Field Service Job Tracker',
+          appTagline: 'Im App Store erhältlich',
+          getItNow: 'Jetzt holen',
+        },
+        mock: {
+          myJobs: 'Meine Aufträge',
+          scheduled: 'Geplant',
+          inProgress: 'In Arb.',
+          inProgressFull: 'In Arbeit',
+          done: 'Erledigt',
+          tagToday: 'Heute',
+          tagUpcoming: 'Demnächst',
+          tagParts: 'Teile',
+          tag4Photos: '4 Fotos',
+          tagEstimate: 'KVA',
+          tagPaid: 'Bezahlt',
+          cardToday: 'Heute',
+          jobs: 'Aufträge',
+          today: 'Heute',
+          settings: 'Einstellungen',
+          back: '← Zurück',
+          jobDetails: 'Auftragsdetails',
+          share: 'Teilen',
+          customer: 'Kunde',
+          photos: 'Fotos',
+          photosValue: '4 Vorher & Nachher',
+          due: 'Fällig',
+          dueValue: 'Heute, 14:00',
+          materials: 'Material',
+          materialsValue: '3 Artikel · $42 gesch.',
+          payment: 'Zahlung',
+          paymentDue: '$185 offen',
+          notes: 'Notizen',
+          shareEstimate: 'KVA teilen',
+          logPayment: 'Zahlung erfassen',
+          overdue: 'Überfällig',
+          balanceDue: 'Offener Betrag',
+          upcoming: 'Anstehend',
+          jobsScheduled: 'Aufträge geplant',
+          acrossActiveJobs: 'Bei aktiven Aufträgen',
+          thisWeek: 'Diese Woche',
+          todaysJobs: 'Heutige Aufträge',
+        },
+      },
+      fr: {
+        ui: {
+          subtitle: 'Générer des stories promotionnelles pour Field Service Job Tracker',
+          downloadAll: 'Télécharger toutes les stories',
+          downloadAllLangs: 'Télécharger toutes les langues',
+          downloadAppStore: 'Télécharger sur l\'App Store',
+          guideTitle: '📸 Guide d\'export Instagram',
+          guide1: 'Format 9:16 complet — un PNG par diapositive en 1080×1920 pour Stories et Reels',
+          guide2: 'Choisissez une langue ci-dessus pour prévisualiser le texte localisé',
+          guide3: 'Cliquez sur <strong>Télécharger toutes les stories</strong> pour la langue sélectionnée, ou <strong>Télécharger toutes les langues</strong> pour les 25 PNG (5 diapositives × 5 langues)',
+          guide4: 'Les noms de fichier incluent le code langue : ex. <code>SBFieldService-IGStory-fr-Stories-9x16-1.png</code>',
+        },
+        labels: { story1: '1. Accroche', story2: '2. Hero', story3: '3. Détail', story4: '4. Fonctions', story5: '5. CTA' },
+        story1: {
+          hookHeadline: 'Travaux sur le terrain<br>éparpillés partout ?',
+          pain1: 'Détails des jobs dans Notes<br>& fils de messages',
+          pain2: 'Photos enfouies<br>dans la pellicule',
+          pain3: 'Devis & paiements<br>sur des bouts de papier',
+          hookTarget: 'Pour bricoleurs, techniciens<br>& indépendants solo',
+          keepWatching: 'Continuez à regarder',
+        },
+        story2: {
+          headline: 'Vos travaux sur le terrain,<br>dans un seul carnet',
+          subheadline: 'Jobs, photos, matériel, devis & paiements — offline-first',
+        },
+        story3: {
+          headline: 'Chaque job,<br>entièrement documenté',
+          subheadline: 'Photos, matériel, devis & paiements sur une timeline',
+        },
+        story4: {
+          headline: 'Pourquoi Field Service<br>Job Tracker ?',
+          fastCapture: 'Saisie rapide des jobs',
+          fastCaptureDesc: 'Titre seulement — détails plus tard',
+          photos: 'Photos & timeline',
+          photosDesc: 'Avant, après & reçu sur chaque job',
+          materials: 'Suivi du matériel',
+          materialsDesc: 'Pièces, coût & statut d\'achat',
+          estimates: 'Devis & PDF',
+          estimatesDesc: 'Partager via Messages ou AirDrop',
+          noSub: 'Sans abonnement',
+          noSubDesc: 'iCloud privé — aucun compte requis',
+        },
+        story5: {
+          headline: 'Pas un CRM.<br>Un carnet de terrain.',
+          subheadline: 'Répondez à « que faire aujourd\'hui ? » avant de partir — sans compte, sans SaaS.',
+          appName: 'Field Service Job Tracker',
+          appTagline: 'Disponible sur l\'App Store',
+          getItNow: 'Obtenir maintenant',
+        },
+        mock: {
+          myJobs: 'Mes jobs',
+          scheduled: 'Planifié',
+          inProgress: 'En cours',
+          inProgressFull: 'En cours',
+          done: 'Terminé',
+          tagToday: 'Aujourd\'hui',
+          tagUpcoming: 'À venir',
+          tagParts: 'Pièces',
+          tag4Photos: '4 photos',
+          tagEstimate: 'Devis',
+          tagPaid: 'Payé',
+          cardToday: 'Aujourd\'hui',
+          jobs: 'Jobs',
+          today: 'Aujourd\'hui',
+          settings: 'Réglages',
+          back: '← Retour',
+          jobDetails: 'Détails du job',
+          share: 'Partager',
+          customer: 'Client',
+          photos: 'Photos',
+          photosValue: '4 avant & après',
+          due: 'Échéance',
+          dueValue: 'Aujourd\'hui, 14h00',
+          materials: 'Matériel',
+          materialsValue: '3 articles · $42 est.',
+          payment: 'Paiement',
+          paymentDue: '$185 dû',
+          notes: 'Notes',
+          shareEstimate: 'Partager le devis',
+          logPayment: 'Enregistrer paiement',
+          overdue: 'En retard',
+          balanceDue: 'Solde dû',
+          upcoming: 'À venir',
+          jobsScheduled: 'Jobs planifiés',
+          acrossActiveJobs: 'Sur les jobs actifs',
+          thisWeek: 'Cette semaine',
+          todaysJobs: 'Jobs du jour',
+        },
+      },
+      it: {
+        ui: {
+          subtitle: 'Genera stories promozionali per Field Service Job Tracker',
+          downloadAll: 'Scarica tutte le stories',
+          downloadAllLangs: 'Scarica tutte le lingue',
+          downloadAppStore: 'Scarica dall\'App Store',
+          guideTitle: '📸 Guida all\'export Instagram',
+          guide1: 'Layout 9:16 completo — un PNG per slide a 1080×1920 per Stories e Reels',
+          guide2: 'Scegli una lingua sopra per vedere l\'anteprima localizzata',
+          guide3: 'Clicca <strong>Scarica tutte le stories</strong> per la lingua selezionata, o <strong>Scarica tutte le lingue</strong> per tutti i 25 PNG (5 slide × 5 lingue)',
+          guide4: 'I nomi file includono il codice lingua: es. <code>SBFieldService-IGStory-it-Stories-9x16-1.png</code>',
+        },
+        labels: { story1: '1. Hook', story2: '2. Hero', story3: '3. Dettaglio', story4: '4. Funzioni', story5: '5. CTA' },
+        story1: {
+          hookHeadline: 'Lavori sul campo<br>sparsi ovunque?',
+          pain1: 'Dettagli nei Note<br>& thread di messaggi',
+          pain2: 'Foto sepolte<br>nel rullino',
+          pain3: 'Preventivi & pagamenti<br>su fogli di carta',
+          hookTarget: 'Per tuttofare, tecnici<br>& liberi professionisti',
+          keepWatching: 'Continua a guardare',
+        },
+        story2: {
+          headline: 'I tuoi lavori sul campo,<br>in un unico taccuino',
+          subheadline: 'Job, foto, materiali, preventivi & pagamenti — offline-first',
+        },
+        story3: {
+          headline: 'Ogni job,<br>completamente documentato',
+          subheadline: 'Foto, materiali, preventivi & pagamenti su una timeline',
+        },
+        story4: {
+          headline: 'Perché Field Service<br>Job Tracker?',
+          fastCapture: 'Cattura rapida dei job',
+          fastCaptureDesc: 'Solo titolo — dettagli dopo',
+          photos: 'Foto & timeline',
+          photosDesc: 'Prima, dopo & ricevuta su ogni job',
+          materials: 'Tracciamento materiali',
+          materialsDesc: 'Parti, costo & stato acquisto',
+          estimates: 'Preventivi & PDF',
+          estimatesDesc: 'Condividi via Messaggi o AirDrop',
+          noSub: 'Nessun abbonamento',
+          noSubDesc: 'iCloud privato — nessun account',
+        },
+        story5: {
+          headline: 'Non un CRM.<br>Un taccuino da campo.',
+          subheadline: 'Rispondi a « cosa faccio oggi? » prima di partire — nessun account, nessun SaaS.',
+          appName: 'Field Service Job Tracker',
+          appTagline: 'Disponibile sull\'App Store',
+          getItNow: 'Scaricalo ora',
+        },
+        mock: {
+          myJobs: 'I miei job',
+          scheduled: 'Programmato',
+          inProgress: 'In corso',
+          inProgressFull: 'In corso',
+          done: 'Completato',
+          tagToday: 'Oggi',
+          tagUpcoming: 'In arrivo',
+          tagParts: 'Parti',
+          tag4Photos: '4 foto',
+          tagEstimate: 'Preventivo',
+          tagPaid: 'Pagato',
+          cardToday: 'Oggi',
+          jobs: 'Job',
+          today: 'Oggi',
+          settings: 'Impostazioni',
+          back: '← Indietro',
+          jobDetails: 'Dettagli job',
+          share: 'Condividi',
+          customer: 'Cliente',
+          photos: 'Foto',
+          photosValue: '4 prima & dopo',
+          due: 'Scadenza',
+          dueValue: 'Oggi, 14:00',
+          materials: 'Materiali',
+          materialsValue: '3 articoli · $42 st.',
+          payment: 'Pagamento',
+          paymentDue: '$185 dovuto',
+          notes: 'Note',
+          shareEstimate: 'Condividi preventivo',
+          logPayment: 'Registra pagamento',
+          overdue: 'In ritardo',
+          balanceDue: 'Saldo dovuto',
+          upcoming: 'In arrivo',
+          jobsScheduled: 'Job programmati',
+          acrossActiveJobs: 'Sui job attivi',
+          thisWeek: 'Questa settimana',
+          todaysJobs: 'Job di oggi',
+        },
+      },
+      pt: {
+        ui: {
+          subtitle: 'Gerar stories promocionais para Field Service Job Tracker',
+          downloadAll: 'Baixar todas as stories',
+          downloadAllLangs: 'Baixar todos os idiomas',
+          downloadAppStore: 'Baixar na App Store',
+          guideTitle: '📸 Guia de exportação Instagram',
+          guide1: 'Layout 9:16 completo — um PNG por slide em 1080×1920 para Stories e Reels',
+          guide2: 'Escolha um idioma acima para visualizar o texto localizado',
+          guide3: 'Clique em <strong>Baixar todas as stories</strong> para o idioma selecionado, ou <strong>Baixar todos os idiomas</strong> para os 25 PNGs (5 slides × 5 idiomas)',
+          guide4: 'Os nomes dos arquivos incluem o código do idioma: ex. <code>SBFieldService-IGStory-pt-Stories-9x16-1.png</code>',
+        },
+        labels: { story1: '1. Gancho', story2: '2. Hero', story3: '3. Detalhe', story4: '4. Recursos', story5: '5. CTA' },
+        story1: {
+          hookHeadline: 'Trabalho de campo<br>espalhado por todo lado?',
+          pain1: 'Detalhes dos jobs em Notas<br>& conversas de texto',
+          pain2: 'Fotos enterradas<br>no rolo da câmera',
+          pain3: 'Orçamentos & pagamentos<br>em pedaços de papel',
+          hookTarget: 'Para faz-tudo, técnicos<br>& empreiteiros solo',
+          keepWatching: 'Continue assistindo',
+        },
+        story2: {
+          headline: 'Seu trabalho de campo,<br>num caderno só',
+          subheadline: 'Jobs, fotos, materiais, orçamentos & pagamentos — offline-first',
+        },
+        story3: {
+          headline: 'Cada job,<br>totalmente documentado',
+          subheadline: 'Fotos, materiais, orçamentos & pagamentos numa timeline',
+        },
+        story4: {
+          headline: 'Por que Field Service<br>Job Tracker?',
+          fastCapture: 'Captura rápida de jobs',
+          fastCaptureDesc: 'Só o título — detalhes depois',
+          photos: 'Fotos & timeline',
+          photosDesc: 'Antes, depois & recibo em cada job',
+          materials: 'Controle de materiais',
+          materialsDesc: 'Peças, custo & status de compra',
+          estimates: 'Orçamentos & PDFs',
+          estimatesDesc: 'Compartilhe via Mensagens ou AirDrop',
+          noSub: 'Sem assinatura',
+          noSubDesc: 'iCloud privado — sem conta',
+        },
+        story5: {
+          headline: 'Não é um CRM.<br>Um caderno de campo.',
+          subheadline: 'Responda "o que faço hoje?" antes de sair — sem conta, sem SaaS.',
+          appName: 'Field Service Job Tracker',
+          appTagline: 'Disponível na App Store',
+          getItNow: 'Baixe agora',
+        },
+        mock: {
+          myJobs: 'Meus jobs',
+          scheduled: 'Agendado',
+          inProgress: 'Em and.',
+          inProgressFull: 'Em andamento',
+          done: 'Concluído',
+          tagToday: 'Hoje',
+          tagUpcoming: 'Próximo',
+          tagParts: 'Peças',
+          tag4Photos: '4 fotos',
+          tagEstimate: 'Orçamento',
+          tagPaid: 'Pago',
+          cardToday: 'Hoje',
+          jobs: 'Jobs',
+          today: 'Hoje',
+          settings: 'Ajustes',
+          back: '← Voltar',
+          jobDetails: 'Detalhes do job',
+          share: 'Compartilhar',
+          customer: 'Cliente',
+          photos: 'Fotos',
+          photosValue: '4 antes & depois',
+          due: 'Prazo',
+          dueValue: 'Hoje, 14:00',
+          materials: 'Materiais',
+          materialsValue: '3 itens · $42 est.',
+          payment: 'Pagamento',
+          paymentDue: '$185 devido',
+          notes: 'Notas',
+          shareEstimate: 'Compartilhar orçamento',
+          logPayment: 'Registrar pagamento',
+          overdue: 'Atrasado',
+          balanceDue: 'Saldo devido',
+          upcoming: 'Próximos',
+          jobsScheduled: 'Jobs agendados',
+          acrossActiveJobs: 'Em jobs ativos',
+          thisWeek: 'Esta semana',
+          todaysJobs: 'Jobs de hoje',
+        },
+      },
+      es: {
+        ui: {
+          subtitle: 'Genera stories promocionales para Field Service Job Tracker',
+          downloadAll: 'Descargar todas las stories',
+          downloadAllLangs: 'Descargar todos los idiomas',
+          downloadAppStore: 'Descargar en App Store',
+          guideTitle: '📸 Guía de exportación Instagram',
+          guide1: 'Diseño 9:16 completo — un PNG por diapositiva a 1080×1920 para Stories y Reels',
+          guide2: 'Elige un idioma arriba para previsualizar el texto localizado',
+          guide3: 'Haz clic en <strong>Descargar todas las stories</strong> para el idioma seleccionado, o <strong>Descargar todos los idiomas</strong> para los 25 PNG (5 diapositivas × 5 idiomas)',
+          guide4: 'Los nombres de archivo incluyen el código de idioma: ej. <code>SBFieldService-IGStory-es-Stories-9x16-1.png</code>',
+        },
+        labels: { story1: '1. Gancho', story2: '2. Hero', story3: '3. Detalle', story4: '4. Funciones', story5: '5. CTA' },
+        story1: {
+          hookHeadline: '¿Trabajo de campo<br>disperso por todas partes?',
+          pain1: 'Detalles del trabajo en Notas<br>& hilos de mensajes',
+          pain2: 'Fotos enterradas<br>en el carrete',
+          pain3: 'Presupuestos & pagos<br>en trozos de papel',
+          hookTarget: 'Para manitas, técnicos<br>& contratistas en solitario',
+          keepWatching: 'Sigue mirando',
+        },
+        story2: {
+          headline: 'Tu trabajo de campo,<br>en un cuaderno',
+          subheadline: 'Trabajos, fotos, materiales, presupuestos & pagos — offline-first',
+        },
+        story3: {
+          headline: 'Cada trabajo,<br>totalmente documentado',
+          subheadline: 'Fotos, materiales, presupuestos & pagos en una timeline',
+        },
+        story4: {
+          headline: '¿Por qué Field Service<br>Job Tracker?',
+          fastCapture: 'Captura rápida de trabajos',
+          fastCaptureDesc: 'Solo título — detalles después',
+          photos: 'Fotos & timeline',
+          photosDesc: 'Antes, después & recibo en cada trabajo',
+          materials: 'Seguimiento de materiales',
+          materialsDesc: 'Piezas, coste & estado de compra',
+          estimates: 'Presupuestos & PDFs',
+          estimatesDesc: 'Comparte vía Mensajes o AirDrop',
+          noSub: 'Sin suscripción',
+          noSubDesc: 'iCloud privado — sin cuenta',
+        },
+        story5: {
+          headline: 'No es un CRM.<br>Un cuaderno de campo.',
+          subheadline: 'Responde «¿qué hago hoy?» antes de salir — sin cuenta, sin SaaS.',
+          appName: 'Field Service Job Tracker',
+          appTagline: 'Disponible en App Store',
+          getItNow: 'Consíguelo ahora',
+        },
+        mock: {
+          myJobs: 'Mis trabajos',
+          scheduled: 'Programado',
+          inProgress: 'En curso',
+          inProgressFull: 'En curso',
+          done: 'Hecho',
+          tagToday: 'Hoy',
+          tagUpcoming: 'Próximo',
+          tagParts: 'Piezas',
+          tag4Photos: '4 fotos',
+          tagEstimate: 'Presupuesto',
+          tagPaid: 'Pagado',
+          cardToday: 'Hoy',
+          jobs: 'Trabajos',
+          today: 'Hoy',
+          settings: 'Ajustes',
+          back: '← Atrás',
+          jobDetails: 'Detalles del trabajo',
+          share: 'Compartir',
+          customer: 'Cliente',
+          photos: 'Fotos',
+          photosValue: '4 antes & después',
+          due: 'Vencimiento',
+          dueValue: 'Hoy, 14:00',
+          materials: 'Materiales',
+          materialsValue: '3 artículos · $42 est.',
+          payment: 'Pago',
+          paymentDue: '$185 pendiente',
+          notes: 'Notas',
+          shareEstimate: 'Compartir presupuesto',
+          logPayment: 'Registrar pago',
+          overdue: 'Atrasado',
+          balanceDue: 'Saldo pendiente',
+          upcoming: 'Próximos',
+          jobsScheduled: 'Trabajos programados',
+          acrossActiveJobs: 'En trabajos activos',
+          thisWeek: 'Esta semana',
+          todaysJobs: 'Trabajos de hoy',
+        },
+      },
+    };
+
+    function t(lang, key) {
+      const parts = key.split('.');
+      let node = COPY[lang];
+      for (const part of parts) {
+        node = node?.[part];
+      }
+      return node ?? '';
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const value = t(lang, el.dataset.i18n);
+        if (value.includes('<br>') || value.includes('<strong>') || value.includes('<code>')) {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
+      });
+    }
+
+    document.querySelectorAll('input[name="lang"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        applyLanguage(radio.value);
+      });
+    });
+
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+
+    async function downloadCurrent(num, lang = currentLang) {
+      const savedLang = currentLang;
+      const radio = document.querySelector(`input[name="lang"][value="${lang}"]`);
+      if (lang !== currentLang && radio) {
+        radio.checked = true;
+        applyLanguage(lang);
+        await new Promise((r) => setTimeout(r, 150));
+      }
+
+      const element = document.getElementById(`story${num}`);
+      const scale = EXPORT.exportW / EXPORT.previewW;
+
+      document.body.classList.add('is-exporting');
+      try {
+        const canvas = await html2canvas(element, {
+          scale: scale,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: null,
+          width: EXPORT.previewW,
+          height: EXPORT.previewH,
+        });
+
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT.exportW;
+        finalCanvas.height = EXPORT.exportH;
+        const ctx = finalCanvas.getContext('2d');
+
+        ctx.fillStyle = BG_FILL;
+        ctx.fillRect(0, 0, EXPORT.exportW, EXPORT.exportH);
+        ctx.drawImage(canvas, 0, 0, EXPORT.exportW, EXPORT.exportH);
+
+        downloadDataUrl(
+          finalCanvas.toDataURL('image/png'),
+          `${DOWNLOAD_PREFIX}${lang}-${EXPORT.suffix}-${num}.png`
+        );
+      } catch (e) {
+        console.error('Export failed:', e);
+        alert('Export failed. Please try again.');
+      } finally {
+        document.body.classList.remove('is-exporting');
+        if (savedLang !== lang) {
+          const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+          if (restore) {
+            restore.checked = true;
+            applyLanguage(savedLang);
+          }
+        }
+      }
+    }
+
+    async function downloadAll() {
+      for (let i = 1; i <= 5; i++) {
+        await downloadCurrent(i, currentLang);
+        await new Promise((r) => setTimeout(r, 500));
+      }
+    }
+
+    async function downloadAllLanguages() {
+      const savedLang = currentLang;
+      for (const lang of LANG_CODES) {
+        for (let i = 1; i <= 5; i++) {
+          await downloadCurrent(i, lang);
+          await new Promise((r) => setTimeout(r, 500));
+        }
+      }
+      const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+      if (restore) {
+        restore.checked = true;
+        applyLanguage(savedLang);
+      }
+    }
+
+    applyLanguage('de');
+  </script>
+</body>
+</html>

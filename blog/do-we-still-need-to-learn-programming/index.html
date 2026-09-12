@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Do We Still Need to Learn Programming? Probably Yes — Generative Networks</title>
+    <meta name="description" content="Generative Networks - Custom iOS apps, AI education, and consulting. Putting AI at the service of people." />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/custom.css" />
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-MPH3H835');</script>
+    <!-- End Google Tag Manager -->
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo">
+          <span class="logo-icon">GN</span>
+        </a>
+        <div class="nav-links">
+          <a href="/apps/">Apps</a>
+          <a href="/research/">Research</a>
+          <a href="/#about">About</a>
+          <a href="/#contact">Contact</a>
+          <a href="/blog/">Blog</a>
+        </div>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+          <button class="nav-menu-toggle" id="nav-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-menu">
+            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
+        <a href="/apps/">Apps</a>
+        <a href="/research/">Research</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a href="/blog/">Blog</a>
+      </div>
+    </nav>
+
+    
+<!-- Article Header -->
+<header class="article-header">
+  <div class="container">
+    <a href="/blog/" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to articles
+    </a>
+    <h1>Do We Still Need to Learn Programming? Probably Yes</h1>
+    
+    <div class="article-meta">
+      <time datetime="2026-06-11">June 11, 2026</time>
+    </div>
+    
+  </div>
+</header>
+
+<!-- Article Content -->
+<main class="article-content">
+  <div class="container">
+    <div class="article-body">
+      <h2 id="tl-dr">tl;dr</h2>
+<p>Natural language, pseudocode, and code are not competing tools. They are different languages for different levels of precision.</p>
+<p>In the age of AI-assisted programming, learning to program is not only about writing every line of code by hand. It is about knowing when an idea needs to become more precise, how to control that translation, and how to distinguish between decisions made by a human and decisions filled in by an AI system.</p>
+<span id="continue-reading"></span><h2 id="a-quote-from-richard-feynman">A quote from Richard Feynman</h2>
+<p>To understand why programming does not simply disappear with AI, it helps to start with a more general distinction: the difference between clarity and precision.</p>
+<p>Richard Feynman once explained this idea while talking about mathematics:</p>
+<blockquote>
+<p>The real problem in speech is not precise language. The problem is clear language. The desire is to have the idea clearly communicated to the other person. It is only necessary to be precise when there is some doubt as to the meaning of a phrase, and then the precision should be put in the place where the doubt exists.</p>
+<p>It is really quite impossible to say anything with absolute precision, unless that thing is so abstracted from the real world as to not represent any real thing. Pure mathematics is just such an abstraction from the real world, and pure mathematics does have a special precise language for dealing with its own special and technical subjects.</p>
+<p>But this precise language is not precise in any sense if you deal with real objects of the world, and it is only pedantic and quite confusing to use it unless there are some special subtleties which have to be carefully distinguished.</p>
+</blockquote>
+<p>The interesting part is that Feynman is not criticizing mathematics. He is criticizing the idea that more formalism always means more understanding.</p>
+<p>His point is simple:</p>
+<ul>
+<li>clarity matters more than precision;</li>
+<li>precision should be introduced only where there is a real ambiguity;</li>
+<li>pure mathematics can be perfectly precise because it deals with abstractions defined by mathematics itself;</li>
+<li>when we speak about the real world, there are always approximations, assumptions, and imperfect definitions.</li>
+</ul>
+<p>Although Feynman was talking about mathematics, the distinction is useful for thinking about programming too. Not because programming is the same as pure mathematics, but because programming also introduces formal precision where natural language is too ambiguous.</p>
+<p>The central idea of this article is this:</p>
+<blockquote>
+<p>Learning to program still matters because the hard problem is not only producing code. The hard problem is controlling the translation between an ambiguous human intention and a formal system that executes instructions without common sense.</p>
+</blockquote>
+<h2 id="the-language-of-people-and-the-language-of-computers">The language of people and the language of computers</h2>
+<p>Programming is a way of communicating a procedure. It is a way of telling a machine what we want it to do.</p>
+<p>A CPU, or Central Processing Unit, does not understand English, Spanish, Python, or C++ in the way a person does. At the lowest level, it executes very simple instructions: reading numbers, comparing them, adding them, copying data from one place in memory to another, and jumping from one instruction to another.</p>
+<p>Programming languages are a much more human-friendly layer for describing procedures that will later be interpreted or compiled into instructions the machine can execute.</p>
+<p>In natural language, a sentence like:</p>
+<blockquote>
+<p>Sort this deck of cards.</p>
+</blockquote>
+<p>leaves many things open to interpretation.</p>
+<p>It assumes that the person receiving the instruction knows what a card is, what sorting means, which ordering criterion to use, which cards are higher than others, whether suits matter, and how much time or effort is acceptable.</p>
+<p>In programming, those decisions must be defined somewhere in the system.</p>
+<p>We do not always write every detail by hand, because we use programming languages, libraries, frameworks, and abstractions that already encapsulate many decisions. But someone, at some level, had to define those decisions precisely.</p>
+<p>Natural language and programming languages are not better or worse versions of the same thing. They are different tools. Asking whether AI means we no longer need to learn programming is a bit like asking whether, because we know how to use a magnifying glass, we no longer need to understand what a microscope is for.</p>
+<h2 id="how-software-is-created-in-a-software-company">How software is created in a software company</h2>
+<p>In a software company, almost everything starts with natural language.</p>
+<p>A client explains what they want:</p>
+<blockquote>
+<p>I need an app to manage orders.</p>
+</blockquote>
+<p>Or:</p>
+<blockquote>
+<p>I need a website to sell products.</p>
+</blockquote>
+<p>Or:</p>
+<blockquote>
+<p>I need a system to manage appointments.</p>
+</blockquote>
+<p>That first description is rarely precise. Not because the client is expressing themselves poorly, but because they are trying to compress a large amount of domain knowledge into a few sentences.</p>
+<p>That knowledge may include habits, exceptions, business rules, preferences, edge cases, previous problems, and implicit decisions.</p>
+<p>That is why intermediate layers exist.</p>
+<p>A product manager, business analyst, or functional analyst talks to the client, asks questions, detects ambiguities, and transforms the initial request into clearer requirements.</p>
+<p>Then a tech lead, architect, or programmer translates those requirements into increasingly specific technical decisions, until eventually there is code.</p>
+<p>Each layer may discover problems or propose changes. But no layer should silently override a decision made at a higher level.</p>
+<p>If a programmer finds a contradiction, they should raise it. If a product manager reformulates a requirement, that reformulation should remain traceable to the original client request.</p>
+<h3 id="three-ways-to-translate-an-idea-into-code">Three ways to translate an idea into code</h3>
+<p>The following diagram compares three workflows: traditional software development, direct LLM-based code generation, and a proposed workflow with an explicit intermediate layer.</p>
+<div class="flow-grid">
+  <div class="flow-card">
+    <h4>Traditional process</h4>
+    <div class="flow-node human">Client</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node human">Analyst / PM</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node human">Tech lead</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node human">Programmer</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node mixed">Code</div>
+  </div>
+  <div class="flow-card">
+    <h4>LLM without methodology</h4>
+    <div class="flow-node human">User</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node human">Prompt</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node ai">LLM</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node ai">Code</div>
+  </div>
+  <div class="flow-card">
+    <h4>Black Box Approach</h4>
+    <div class="flow-node human">User</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node human">Natural language</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node mixed">Pseudocode + boxes</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node ai">LLM guided by skills</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node mixed">Traceable code</div>
+  </div>
+</div>
+<h2 id="what-happens-when-a-person-uses-an-llm-to-generate-code">What happens when a person uses an LLM to generate code?</h2>
+<p>When a person interacts directly with an LLM to generate code, the intermediate layer does not fully disappear. It becomes implicit.</p>
+<p>The model interprets the prompt, fills in missing details, prioritizes instructions, and makes implementation decisions. But many of those decisions are not recorded anywhere stable.</p>
+<p>That is why many AI coding tools have something like a <em>Plan Mode</em>. The idea is to ask the model to think before implementing.</p>
+<p>The problem is that the plan is often temporary. It may remain trapped in a conversation, disconnected from the final code, or ignored by the user.</p>
+<p>When the user is a programmer, they often spend a lot of time writing specs, requirements documents, architecture notes, and context files to guide the LLM. But that creates another problem: dozens of scattered files, each with different levels of authority, priority, and freshness.</p>
+<p>Even when specs are carefully written, the problem does not disappear.</p>
+<p>The LLM may encounter contradictions, fill in gaps, or make decisions that do not exactly match the requirements. Sometimes this happens because natural language is ambiguous. Sometimes it happens because of the order in which the model reads files. Sometimes it happens because instructions conflict. And sometimes it happens because LLMs are probabilistic systems.</p>
+<p>The problem is not that the LLM makes decisions.</p>
+<p>The problem is not knowing which decisions it made, why it made them, or whether they contradict something a human had already decided.</p>
+<h2 id="pseudocode-as-an-intermediate-layer">Pseudocode as an intermediate layer</h2>
+<p>Pseudocode can play the role that, in traditional software development, is often distributed across conversations between clients, managers, architects, and programmers.</p>
+<p>It is not pure natural language, because it has structure.</p>
+<p>But it is not executable code either, because it still allows us to speak in terms of intention, modules, and responsibilities.</p>
+<p>This intermediate layer is especially useful with LLMs because it separates two moments that are often collapsed too quickly:</p>
+<ol>
+<li>deciding what the system should do;</li>
+<li>deciding how to implement it.</li>
+</ol>
+<p>For example:</p>
+<pre data-lang="text" class="language-text "><code class="language-text" data-lang="text">IF user selects a subscription plan
+  CALL create_checkout_session
+
+IF payment succeeds
+  CALL activate_subscription
+  CALL send_confirmation_email
+ELSE
+  CALL show_payment_error
+</code></pre>
+<p>This pseudocode does not yet decide whether we will use Stripe, Paddle, Mercado Pago, a custom API, or a specific library.</p>
+<p>But it does define a structure:</p>
+<ul>
+<li>there is a plan;</li>
+<li>there is a checkout session;</li>
+<li>there is a subscription activation step;</li>
+<li>there is a payment success path;</li>
+<li>there is an error path.</li>
+</ul>
+<p>That is already much more precise than a vague request like:</p>
+<blockquote>
+<p>Add payments to the app.</p>
+</blockquote>
+<p>But it is still not as rigid as final implementation code.</p>
+<h2 id="the-proposal-the-black-box-approach">The proposal: the Black Box Approach</h2>
+<p>The proposed methodology is simple:</p>
+<blockquote>
+<p>Treat each part of the system as a refinable black box, with clear boundaries, intermediate pseudocode, and explicit provenance.</p>
+</blockquote>
+<p>Each app project gets a <code>blackboxes/</code> folder containing:</p>
+<ul>
+<li>YAML boxes;</li>
+<li>shared data structures;</li>
+<li>a skill file the LLM must follow when explicitly invoked;</li>
+<li>a provenance log;</li>
+<li>optionally, a visualizer that shows the box tree.</li>
+</ul>
+<p>The goal is not to replace code.</p>
+<p>The goal is to make the translation from human intention to code visible, editable, and auditable.</p>
+<h2 id="what-it-tries-to-solve">What it tries to solve</h2>
+<h3 id="1-human-decisions-vs-ai-decisions">1. Human decisions vs AI decisions</h3>
+<p>Every box and every data field tracks provenance:</p>
+<ul>
+<li><code>human_defined</code></li>
+<li><code>ai_defined</code></li>
+<li><code>mixed</code></li>
+</ul>
+<p>Once a human confirms something, the AI cannot silently downgrade it back into a guess.</p>
+<p>For example, if the LLM decides to use Stripe, that decision can initially be marked as <code>ai_defined</code>.</p>
+<p>If a human confirms that decision, it becomes human-approved. From then on, the model should not replace Stripe with another provider unless it explicitly raises that change.</p>
+<h3 id="2-pseudocode-as-a-middle-layer">2. Pseudocode as a middle layer</h3>
+<p>Boxes use hybrid pseudocode:</p>
+<pre data-lang="text" class="language-text "><code class="language-text" data-lang="text">CALL create_checkout_session
+IF payment succeeds
+WHILE there are pending invoices
+</code></pre>
+<p>This provides enough structure to decompose a system, but not so much structure that we drown in implementation details before we are ready.</p>
+<h3 id="3-modular-boundaries">3. Modular boundaries</h3>
+<p>The system is refined one black box at a time.</p>
+<p>Ancestors are read-only context. Only the selected subtree can change.</p>
+<p>This matters because a request like:</p>
+<blockquote>
+<p>Fix the payment flow.</p>
+</blockquote>
+<p>should not allow the LLM to rewrite the authentication layer, the database schema, and the notification system unless those changes are explicitly connected and approved.</p>
+<h3 id="4-a-human-readable-view">4. A human-readable view</h3>
+<p>A visualizer can show the box tree in a much simpler way than dozens of scattered spec files.</p>
+<p>The point is not merely documentation. The point is to preserve decision boundaries.</p>
+<h2 id="a-minimal-example">A minimal example</h2>
+<p>Here is a simplified example of a black box for a payment flow:</p>
+<pre data-lang="yaml" class="language-yaml "><code class="language-yaml" data-lang="yaml">box: payment_flow
+goal: allow the user to pay for a subscription
+provenance: human_defined
+
+inputs:
+  - selected_plan
+  - user_id
+
+pseudocode:
+  - IF user selects plan
+  - CALL create_checkout_session
+  - IF payment succeeds
+  - CALL activate_subscription
+  - ELSE show_error_message
+
+decisions:
+  payment_provider:
+    value: Stripe
+    provenance: ai_defined
+    status: needs_human_confirmation
+
+constraints:
+  - Do not modify auth_flow without human approval
+  - Do not store sensitive card data
+</code></pre>
+<p>The interesting part is not the YAML itself.</p>
+<p>The interesting part is that every decision has a place. The system knows what has been specified by a human, what has been inferred by the AI, and what still needs confirmation.</p>
+<p>The intermediate layer is not bureaucracy. It is a way to prevent AI from turning ambiguity into invisible decisions.</p>
+<h2 id="so-what-does-it-mean-to-learn-programming-now">So what does it mean to learn programming now?</h2>
+<p>Maybe learning programming no longer means memorizing syntax or writing every function from scratch.</p>
+<p>Maybe it means learning how to think in levels of precision.</p>
+<p>It means knowing when natural language is enough, when pseudocode is needed, when executable code is needed, and when a decision must be recorded because it will affect the whole system.</p>
+<p>Learning programming also teaches:</p>
+<ul>
+<li>how to decompose problems;</li>
+<li>how to identify edge cases;</li>
+<li>how to model data;</li>
+<li>how to read generated code critically;</li>
+<li>how to debug;</li>
+<li>how to evaluate trade-offs;</li>
+<li>how to reason about constraints like memory, latency, security, concurrency, permissions, and cost.</li>
+</ul>
+<p>AI can dramatically accelerate code generation.</p>
+<p>But the more code AI generates, the more important it becomes to read it, question it, and connect it back to the human decisions it is supposed to implement.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The question "Do we still need to learn programming?" may be poorly framed.</p>
+<p>If programming means memorizing syntax and manually writing every line of code, then we will probably need to do less of that over time.</p>
+<p>But if programming means understanding how an ambiguous intention becomes a formal system that makes decisions and executes actions, then the answer is clearly yes.</p>
+<p>AI can write code.</p>
+<p>But someone still has to control the translation.</p>
+<p>And to control a translation, you need to understand at least part of both languages.</p>
+<hr />
+<p><em>The Black Box Approach described in this article is a proof-of-concept experiment. <a href="https://github.com/amiune/theblackboxapproach">github.com/amiune/theblackboxapproach</a></em></p>
+<style>
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.flow-card {
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--card-background, #ffffff);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.flow-card h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.flow-node {
+  border-radius: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.92rem;
+  border: 1px solid;
+}
+
+.flow-node.human {
+  background: #dbeafe;
+  border-color: #2563eb;
+  color: #1e3a8a;
+}
+
+.flow-node.ai {
+  background: #ede9fe;
+  border-color: #7c3aed;
+  color: #4c1d95;
+}
+
+.flow-node.mixed {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #78350f;
+}
+
+.flow-arrow {
+  text-align: center;
+  color: #94a3b8;
+  font-weight: 800;
+  line-height: 1.8;
+}
+
+@media (max-width: 900px) {
+  .flow-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+    </div>
+  </div>
+</main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span class="footer-logo">GN</span>
+            <p>Generative Networks<br><em>of people</em></p>
+          </div>
+          <nav class="footer-nav">
+            <a href="/apps/">Apps</a>
+            <a href="/research/">Research</a>
+            <a href="/#about">About</a>
+            <a href="/#contact">Contact</a>
+            <a href="/blog/">Blog</a>
+          </nav>
+          <div class="footer-location">
+            <p>Madrid, Spain</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Generative Networks. Putting AI at the service of people.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Simple theme toggle
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      
+      // Check for saved preference or system preference
+      const savedTheme = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme) {
+        html.setAttribute('data-theme', savedTheme);
+      } else if (systemDark) {
+        html.setAttribute('data-theme', 'dark');
+      }
+      
+      toggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+
+      // Mobile nav menu
+      const nav = document.getElementById('nav');
+      const menuToggle = document.getElementById('nav-menu-toggle');
+      const mobileMenu = document.getElementById('nav-mobile-menu');
+
+      function setMobileMenuOpen(isOpen) {
+        nav.classList.toggle('nav-open', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen);
+        menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        mobileMenu.setAttribute('aria-hidden', !isOpen);
+        document.body.classList.toggle('nav-menu-open', isOpen);
+      }
+
+      menuToggle.addEventListener('click', () => {
+        setMobileMenuOpen(!nav.classList.contains('nav-open'));
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setMobileMenuOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+          setMobileMenuOpen(false);
+        }
+      });
+
+      window.matchMedia('(min-width: 769px)').addEventListener('change', (e) => {
+        if (e.matches) setMobileMenuOpen(false);
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    </script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPH3H835"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  </body>
+</html>

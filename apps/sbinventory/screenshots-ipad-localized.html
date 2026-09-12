@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Inventory for Makers — iPad App Store Screenshots (DE · FR · IT · PT · ES)</title>
+  <style>
+    :root {
+      --primary: #3C6E84;
+      --primary-dark: #2A5565;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f1618 0%, #1a2428 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #5EEAD4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: -18px auto 24px;
+      flex-wrap: wrap;
+    }
+
+    .lang-bar label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .lang-bar input { display: none; }
+
+    .lang-bar label:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(60, 110, 132, 0.28);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(60, 110, 132, 0.45);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(60, 110, 132, 0.55);
+    }
+
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+
+    .screenshot {
+      width: 512px;
+      height: 683px;
+      background: linear-gradient(180deg, #3C6E84 0%, #2A5565 50%, #1e3d48 100%);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .headline {
+      color: white;
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.25;
+      margin-bottom: 4px;
+      z-index: 1;
+    }
+
+    .subheadline {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 10px;
+      z-index: 1;
+    }
+
+    .screenshot-placeholder {
+      width: 400px;
+      height: 534px;
+      background: rgba(255,255,255,0.1);
+      border: 3px dashed rgba(255,255,255,0.4);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .screenshot-placeholder .placeholder-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .screenshot-placeholder .placeholder-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      opacity: 0.6;
+    }
+
+    .screenshot-placeholder .placeholder-hint {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 8px;
+    }
+
+    .screenshot-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 13px;
+    }
+
+    canvas {
+      display: none;
+    }
+
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .instructions h3 {
+      color: #5EEAD4;
+      margin-bottom: 12px;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📱 iPad App Store Screenshots</h1>
+    <p data-i18n="ui.subtitle">SB Inventory for Makers — 12.9&Prime;-class canvas (2048 × 2732)</p>
+  </div>
+
+  <div class="lang-bar" role="radiogroup" aria-label="Language">
+    <label>
+      <input type="radio" name="lang" value="de" checked>
+      Deutsch
+    </label>
+    <label>
+      <input type="radio" name="lang" value="fr">
+      Français
+    </label>
+    <label>
+      <input type="radio" name="lang" value="it">
+      Italiano
+    </label>
+    <label>
+      <input type="radio" name="lang" value="pt">
+      Português
+    </label>
+    <label>
+      <input type="radio" name="lang" value="es">
+      Español
+    </label>
+  </div>
+
+  <div class="controls">
+    <button onclick="downloadAll()" data-i18n="ui.downloadAll">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadAllLanguages()" data-i18n="ui.downloadAllLangs">Download All Languages</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Screenshot 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Screenshot 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
+    <button class="secondary" onclick="downloadCurrent(5)">Screenshot 5</button>
+    <button class="secondary" onclick="downloadCurrent(6)">Screenshot 6</button>
+  </div>
+
+  <div class="screenshots">
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline" data-i18n="s1.headline">Your inventory<br>at a glance</div>
+        <div class="subheadline" data-i18n="s1.subheadline">Dashboard with stock totals and products</div>
+
+        <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s1">1. Inventory</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline" data-i18n="s2.headline">Products &amp;<br>variants</div>
+        <div class="subheadline" data-i18n="s2.subheadline">SKUs, categories, size &amp; color combinations</div>
+
+        <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s2">2. Products / Variants</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline" data-i18n="s3.headline">Materials &amp;<br>alerts</div>
+        <div class="subheadline" data-i18n="s3.subheadline">Supplies and low-stock warnings</div>
+
+        <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s3">3. Materials / Alerts</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4">
+        <div class="headline" data-i18n="s4.headline">Share your<br>inventory</div>
+        <div class="subheadline" data-i18n="s4.subheadline">Invite your team to view and edit together</div>
+
+        <div class="screenshot-placeholder" id="placeholder4" onclick="triggerUpload(4)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="placeholder.text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="placeholder.hint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s4">4. Team sharing</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot5" style="justify-content: center; gap: 20px;">
+        <div class="headline" style="font-size: 2.4rem;" data-i18n="s5.headline">Made for<br>makers</div>
+        <div class="subheadline" style="font-size: 1.1rem; max-width: 440px;" data-i18n="s5.subheadline">
+          Fast iPad workflow for Etsy sellers, crafters, and custom product shops.
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; z-index: 1; width: 100%; max-width: 470px;">
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 16px; padding: 16px;">
+            <div style="font-size: 2rem;">👥</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.05rem;" data-i18n="s5.teamSharing">Team sharing</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem;" data-i18n="s5.teamSharingDesc">Collaborate on inventory via iCloud</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 16px; padding: 16px;">
+            <div style="font-size: 2rem;">☁️</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.icloudSync">iCloud sync</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.icloudSyncDesc">Private CloudKit across your devices</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">📤</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.csvExport">CSV export</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.csvExportDesc">Full inventory and line-item exports</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔔</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.lowStockAlerts">Low-stock alerts</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.lowStockAlertsDesc">Variants and materials</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔒</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.yourData">Your data</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.yourDataDesc">No marketplace integrations in v1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s5">5. Features</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot6" style="justify-content: center; gap: 22px; padding-top: 40px;">
+        <div class="headline" style="font-size: 2.3rem;" data-i18n="s6.headline">One purchase.<br>No tricks.</div>
+        <div class="subheadline" style="font-size: 1.1rem; max-width: 420px; margin-bottom: 6px;" data-i18n="s6.subheadline">
+          Simple &amp; straightforward
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; z-index: 1; width: 100%; max-width: 470px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 20px;">
+            <div style="font-size: 2.1rem; line-height: 1;">🚫</div>
+            <div style="color: white; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em;" data-i18n="s6.noSubscription">No subscription</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 20px;">
+            <div style="font-size: 2.1rem; line-height: 1;">📵</div>
+            <div style="color: white; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em;" data-i18n="s6.noAds">No Ads</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 20px;">
+            <div style="font-size: 2.1rem; line-height: 1;">🔄</div>
+            <div style="color: white; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em;" data-i18n="s6.freeUpdates">Free Updates</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(52,199,89,0.35); border: 2px solid rgba(255,255,255,0.25); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 20px;">
+            <div style="font-size: 2.1rem; line-height: 1;">⭐</div>
+            <div style="color: white; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em;" data-i18n="s6.amazingSupport">Amazing Support</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s6">6. No subscription · No ads</div>
+    </div>
+
+  </div>
+
+  <div class="instructions">
+    <h3 data-i18n="ui.guideTitle">📸 iPad screenshot export guide</h3>
+    <ol>
+      <li data-i18n="ui.guide1"><strong>Add captures:</strong> Click a placeholder or paste (Cmd+V)</li>
+      <li data-i18n="ui.guide2">Pick a language above to preview localized copy before exporting</li>
+      <li data-i18n="ui.guide3">Click <strong>Download All Screenshots</strong> for six PNGs (5–6 are marketing-only)</li>
+      <li data-i18n="ui.guide4">Click <strong>Download All Languages</strong> for all 30 PNGs (6 screenshots × 5 languages)</li>
+      <li data-i18n="ui.guide5">Exported size <code>2048 × 2732px</code></li>
+      <li data-i18n="ui.guide6">In App Store Connect, use <strong>12.9&Prime; iPad Pro</strong> (or equivalent) slot</li>
+      <li data-i18n="ui.guide7">Filenames include the language code: e.g. <code>SBInventory-iPad-Screenshot-de-1.png</code></li>
+    </ol>
+  </div>
+
+  <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
+  <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
+  <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  <input type="file" id="fileInput4" accept="image/*" style="display:none" onchange="handleFileSelect(event, 4)">
+
+  <canvas id="canvas"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    const EXPORT_WIDTH = 2048;
+    const EXPORT_HEIGHT = 2732;
+    const SCALE = 4;
+    const BG_FILL = '#2A5565';
+    const DOWNLOAD_PREFIX = 'SBInventory-iPad-Screenshot-';
+    const SCREENSHOT_COUNT = 6;
+    const LANG_CODES = ['de', 'fr', 'it', 'pt', 'es'];
+    let currentLang = 'de';
+
+    const COPY = {
+      de: {
+        ui: {
+          subtitle: 'SB Inventory for Makers — 12,9″-Leinwand (2048 × 2732)',
+          downloadAll: 'Alle Screenshots herunterladen',
+          downloadAllLangs: 'Alle Sprachen herunterladen',
+          guideTitle: '📸 iPad-Screenshot-Export-Anleitung',
+          guide1: '<strong>Aufnahmen hinzufügen:</strong> Auf einen Platzhalter klicken oder einfügen (Cmd+V)',
+          guide2: 'Wähle oben eine Sprache für die lokalisierte Vorschau',
+          guide3: 'Klicke auf <strong>Alle Screenshots herunterladen</strong> für sechs PNGs (5–6 nur Marketing)',
+          guide4: 'Klicke auf <strong>Alle Sprachen herunterladen</strong> für alle 30 PNGs (6 Screenshots × 5 Sprachen)',
+          guide5: 'Exportierte Größe <code>2048 × 2732px</code>',
+          guide6: 'In App Store Connect den <strong>12,9″ iPad Pro</strong>-Slot (oder gleichwertig) verwenden',
+          guide7: 'Dateinamen enthalten den Sprachcode: z. B. <code>SBInventory-iPad-Screenshot-de-1.png</code>',
+        },
+        labels: { s1: '1. Inventar', s2: '2. Produkte / Varianten', s3: '3. Materialien / Alarme', s4: '4. Team-Freigabe', s5: '5. Funktionen', s6: '6. Kein Abo · Keine Werbung' },
+        placeholder: { text: 'Klicken zum Hochladen oder<br>Screenshot hier einfügen', hint: 'Empfohlen: 2048 × 2732px' },
+        s1: { headline: 'Ihr Inventar<br>auf einen Blick', subheadline: 'Dashboard mit Bestandsübersicht und Produkten' },
+        s2: { headline: 'Produkte &amp;<br>Varianten', subheadline: 'SKUs, Kategorien, Größen- &amp; Farbkombinationen' },
+        s3: { headline: 'Materialien &amp;<br>Alarme', subheadline: 'Zubehör und Niedrigbestands-Warnungen' },
+        s4: { headline: 'Teilen Sie Ihr<br>Inventar', subheadline: 'Laden Sie Ihr Team ein, gemeinsam anzusehen und zu bearbeiten' },
+        s5: {
+          headline: 'Gemacht für<br>Macher',
+          subheadline: 'Schneller iPad-Workflow für Etsy-Verkäufer, Handwerker und individuelle Produktshops.',
+          teamSharing: 'Team-Freigabe',
+          teamSharingDesc: 'Gemeinsam am Inventar per iCloud',
+          icloudSync: 'iCloud-Sync',
+          icloudSyncDesc: 'Privates CloudKit auf allen Geräten',
+          csvExport: 'CSV-Export',
+          csvExportDesc: 'Vollständiges Inventar und Positions-Exporte',
+          lowStockAlerts: 'Niedrigbestands-Alarme',
+          lowStockAlertsDesc: 'Varianten und Materialien',
+          yourData: 'Ihre Daten',
+          yourDataDesc: 'Keine Marktplatz-Integrationen in v1',
+        },
+        s6: {
+          headline: 'Ein Kauf.<br>Keine Tricks.',
+          subheadline: 'Einfach &amp; unkompliziert',
+          noSubscription: 'Kein Abo',
+          noAds: 'Keine Werbung',
+          freeUpdates: 'Kostenlose Updates',
+          amazingSupport: 'Top-Support',
+        },
+      },
+      fr: {
+        ui: {
+          subtitle: 'SB Inventory for Makers — toile 12,9″ (2048 × 2732)',
+          downloadAll: 'Télécharger toutes les captures',
+          downloadAllLangs: 'Télécharger toutes les langues',
+          guideTitle: '📸 Guide d\'export des captures iPad',
+          guide1: '<strong>Ajouter des captures :</strong> Cliquez sur un emplacement ou collez (Cmd+V)',
+          guide2: 'Choisissez une langue ci-dessus pour prévisualiser le texte localisé',
+          guide3: 'Cliquez sur <strong>Télécharger toutes les captures</strong> pour six PNG (5–6 sont marketing uniquement)',
+          guide4: 'Cliquez sur <strong>Télécharger toutes les langues</strong> pour les 30 PNG (6 captures × 5 langues)',
+          guide5: 'Taille exportée <code>2048 × 2732px</code>',
+          guide6: 'Dans App Store Connect, utilisez l\'emplacement <strong>iPad Pro 12,9″</strong> (ou équivalent)',
+          guide7: 'Les noms de fichier incluent le code langue : ex. <code>SBInventory-iPad-Screenshot-fr-1.png</code>',
+        },
+        labels: { s1: '1. Inventaire', s2: '2. Produits / Variantes', s3: '3. Matériaux / Alertes', s4: '4. Partage d\'équipe', s5: '5. Fonctions', s6: '6. Sans abonnement · Sans pub' },
+        placeholder: { text: 'Cliquez pour importer ou<br>collez votre capture ici', hint: 'Recommandé : 2048 × 2732px' },
+        s1: { headline: 'Votre inventaire<br>en un coup d\'œil', subheadline: 'Tableau de bord avec totaux de stock et produits' },
+        s2: { headline: 'Produits &amp;<br>variantes', subheadline: 'SKU, catégories, combinaisons taille &amp; couleur' },
+        s3: { headline: 'Matériaux &amp;<br>alertes', subheadline: 'Fournitures et alertes de stock bas' },
+        s4: { headline: 'Partagez votre<br>inventaire', subheadline: 'Invitez votre équipe à consulter et modifier ensemble' },
+        s5: {
+          headline: 'Conçu pour les<br>makers',
+          subheadline: 'Workflow iPad rapide pour vendeurs Etsy, artisans et boutiques de produits sur mesure.',
+          teamSharing: 'Partage d\'équipe',
+          teamSharingDesc: 'Collaborez sur l\'inventaire via iCloud',
+          icloudSync: 'Sync iCloud',
+          icloudSyncDesc: 'CloudKit privé sur tous vos appareils',
+          csvExport: 'Export CSV',
+          csvExportDesc: 'Inventaire complet et exports ligne par ligne',
+          lowStockAlerts: 'Alertes stock bas',
+          lowStockAlertsDesc: 'Variantes et matériaux',
+          yourData: 'Vos données',
+          yourDataDesc: 'Pas d\'intégrations marketplace en v1',
+        },
+        s6: {
+          headline: 'Un achat.<br>Sans piège.',
+          subheadline: 'Simple &amp; direct',
+          noSubscription: 'Sans abonnement',
+          noAds: 'Sans pub',
+          freeUpdates: 'Mises à jour gratuites',
+          amazingSupport: 'Support remarquable',
+        },
+      },
+      it: {
+        ui: {
+          subtitle: 'SB Inventory for Makers — tela 12,9″ (2048 × 2732)',
+          downloadAll: 'Scarica tutti gli screenshot',
+          downloadAllLangs: 'Scarica tutte le lingue',
+          guideTitle: '📸 Guida all\'export screenshot iPad',
+          guide1: '<strong>Aggiungi catture:</strong> Clicca su un segnaposto o incolla (Cmd+V)',
+          guide2: 'Scegli una lingua sopra per vedere l\'anteprima localizzata',
+          guide3: 'Clicca <strong>Scarica tutti gli screenshot</strong> per sei PNG (5–6 solo marketing)',
+          guide4: 'Clicca <strong>Scarica tutte le lingue</strong> per tutti i 30 PNG (6 screenshot × 5 lingue)',
+          guide5: 'Dimensione esportata <code>2048 × 2732px</code>',
+          guide6: 'In App Store Connect, usa lo slot <strong>iPad Pro 12,9″</strong> (o equivalente)',
+          guide7: 'I nomi file includono il codice lingua: es. <code>SBInventory-iPad-Screenshot-it-1.png</code>',
+        },
+        labels: { s1: '1. Inventario', s2: '2. Prodotti / Varianti', s3: '3. Materiali / Avvisi', s4: '4. Condivisione team', s5: '5. Funzioni', s6: '6. Nessun abbonamento · Niente ads' },
+        placeholder: { text: 'Clicca per caricare o<br>incolla lo screenshot qui', hint: 'Consigliato: 2048 × 2732px' },
+        s1: { headline: 'Il tuo inventario<br>a colpo d\'occhio', subheadline: 'Dashboard con totali di stock e prodotti' },
+        s2: { headline: 'Prodotti &amp;<br>varianti', subheadline: 'SKU, categorie, combinazioni taglia &amp; colore' },
+        s3: { headline: 'Materiali &amp;<br>avvisi', subheadline: 'Forniture e avvisi di stock basso' },
+        s4: { headline: 'Condividi il tuo<br>inventario', subheadline: 'Invita il team a visualizzare e modificare insieme' },
+        s5: {
+          headline: 'Fatto per i<br>maker',
+          subheadline: 'Workflow iPad veloce per venditori Etsy, artigiani e negozi di prodotti personalizzati.',
+          teamSharing: 'Condivisione team',
+          teamSharingDesc: 'Collabora sull\'inventario via iCloud',
+          icloudSync: 'Sync iCloud',
+          icloudSyncDesc: 'CloudKit privato su tutti i dispositivi',
+          csvExport: 'Export CSV',
+          csvExportDesc: 'Inventario completo ed export per riga',
+          lowStockAlerts: 'Avvisi stock basso',
+          lowStockAlertsDesc: 'Varianti e materiali',
+          yourData: 'I tuoi dati',
+          yourDataDesc: 'Nessuna integrazione marketplace in v1',
+        },
+        s6: {
+          headline: 'Un acquisto.<br>Niente trucchi.',
+          subheadline: 'Semplice &amp; diretto',
+          noSubscription: 'Nessun abbonamento',
+          noAds: 'Niente pubblicità',
+          freeUpdates: 'Aggiornamenti gratuiti',
+          amazingSupport: 'Supporto eccezionale',
+        },
+      },
+      pt: {
+        ui: {
+          subtitle: 'SB Inventory for Makers — tela 12,9″ (2048 × 2732)',
+          downloadAll: 'Baixar todos os screenshots',
+          downloadAllLangs: 'Baixar todos os idiomas',
+          guideTitle: '📸 Guia de exportação de screenshots iPad',
+          guide1: '<strong>Adicionar capturas:</strong> Clique em um espaço ou cole (Cmd+V)',
+          guide2: 'Escolha um idioma acima para visualizar o texto localizado',
+          guide3: 'Clique em <strong>Baixar todos os screenshots</strong> para seis PNGs (5–6 são só marketing)',
+          guide4: 'Clique em <strong>Baixar todos os idiomas</strong> para os 30 PNGs (6 screenshots × 5 idiomas)',
+          guide5: 'Tamanho exportado <code>2048 × 2732px</code>',
+          guide6: 'No App Store Connect, use o slot <strong>iPad Pro 12,9″</strong> (ou equivalente)',
+          guide7: 'Os nomes dos arquivos incluem o código do idioma: ex. <code>SBInventory-iPad-Screenshot-pt-1.png</code>',
+        },
+        labels: { s1: '1. Estoque', s2: '2. Produtos / Variantes', s3: '3. Materiais / Alertas', s4: '4. Compartilhamento em equipe', s5: '5. Recursos', s6: '6. Sem assinatura · Sem anúncios' },
+        placeholder: { text: 'Clique para enviar ou<br>cole seu screenshot aqui', hint: 'Recomendado: 2048 × 2732px' },
+        s1: { headline: 'Seu estoque<br>de relance', subheadline: 'Painel com totais de estoque e produtos' },
+        s2: { headline: 'Produtos &amp;<br>variantes', subheadline: 'SKUs, categorias, combinações de tamanho &amp; cor' },
+        s3: { headline: 'Materiais &amp;<br>alertas', subheadline: 'Insumos e avisos de estoque baixo' },
+        s4: { headline: 'Compartilhe seu<br>estoque', subheadline: 'Convide sua equipe para ver e editar juntos' },
+        s5: {
+          headline: 'Feito para<br>makers',
+          subheadline: 'Fluxo rápido no iPad para vendedores Etsy, artesãos e lojas de produtos personalizados.',
+          teamSharing: 'Compartilhamento em equipe',
+          teamSharingDesc: 'Colabore no estoque via iCloud',
+          icloudSync: 'Sync iCloud',
+          icloudSyncDesc: 'CloudKit privado em todos os dispositivos',
+          csvExport: 'Exportação CSV',
+          csvExportDesc: 'Estoque completo e exportações por item',
+          lowStockAlerts: 'Alertas de estoque baixo',
+          lowStockAlertsDesc: 'Variantes e materiais',
+          yourData: 'Seus dados',
+          yourDataDesc: 'Sem integrações de marketplace na v1',
+        },
+        s6: {
+          headline: 'Uma compra.<br>Sem truques.',
+          subheadline: 'Simples &amp; direto',
+          noSubscription: 'Sem assinatura',
+          noAds: 'Sem anúncios',
+          freeUpdates: 'Atualizações gratuitas',
+          amazingSupport: 'Suporte incrível',
+        },
+      },
+      es: {
+        ui: {
+          subtitle: 'SB Inventory for Makers — lienzo 12,9″ (2048 × 2732)',
+          downloadAll: 'Descargar todas las capturas',
+          downloadAllLangs: 'Descargar todos los idiomas',
+          guideTitle: '📸 Guía de exportación de capturas iPad',
+          guide1: '<strong>Añadir capturas:</strong> Haz clic en un marcador o pega (Cmd+V)',
+          guide2: 'Elige un idioma arriba para previsualizar el texto localizado',
+          guide3: 'Haz clic en <strong>Descargar todas las capturas</strong> para seis PNG (5–6 son solo marketing)',
+          guide4: 'Haz clic en <strong>Descargar todos los idiomas</strong> para los 30 PNG (6 capturas × 5 idiomas)',
+          guide5: 'Tamaño exportado <code>2048 × 2732px</code>',
+          guide6: 'En App Store Connect, usa el espacio <strong>iPad Pro 12,9″</strong> (o equivalente)',
+          guide7: 'Los nombres de archivo incluyen el código de idioma: ej. <code>SBInventory-iPad-Screenshot-es-1.png</code>',
+        },
+        labels: { s1: '1. Inventario', s2: '2. Productos / Variantes', s3: '3. Materiales / Alertas', s4: '4. Compartir en equipo', s5: '5. Funciones', s6: '6. Sin suscripción · Sin anuncios' },
+        placeholder: { text: 'Haz clic para subir o<br>pega tu captura aquí', hint: 'Recomendado: 2048 × 2732px' },
+        s1: { headline: 'Tu inventario<br>de un vistazo', subheadline: 'Panel con totales de stock y productos' },
+        s2: { headline: 'Productos &amp;<br>variantes', subheadline: 'SKUs, categorías, combinaciones de talla &amp; color' },
+        s3: { headline: 'Materiales &amp;<br>alertas', subheadline: 'Suministros y avisos de stock bajo' },
+        s4: { headline: 'Comparte tu<br>inventario', subheadline: 'Invita a tu equipo a ver y editar juntos' },
+        s5: {
+          headline: 'Hecho para<br>makers',
+          subheadline: 'Flujo rápido en iPad para vendedores Etsy, artesanos y tiendas de productos personalizados.',
+          teamSharing: 'Compartir en equipo',
+          teamSharingDesc: 'Colabora en el inventario vía iCloud',
+          icloudSync: 'Sync iCloud',
+          icloudSyncDesc: 'CloudKit privado en todos tus dispositivos',
+          csvExport: 'Exportación CSV',
+          csvExportDesc: 'Inventario completo y exportaciones por línea',
+          lowStockAlerts: 'Alertas de stock bajo',
+          lowStockAlertsDesc: 'Variantes y materiales',
+          yourData: 'Tus datos',
+          yourDataDesc: 'Sin integraciones de marketplace en v1',
+        },
+        s6: {
+          headline: 'Una compra.<br>Sin trucos.',
+          subheadline: 'Simple &amp; directo',
+          noSubscription: 'Sin suscripción',
+          noAds: 'Sin anuncios',
+          freeUpdates: 'Actualizaciones gratis',
+          amazingSupport: 'Soporte excepcional',
+        },
+      },
+    };
+
+    function t(lang, key) {
+      const parts = key.split('.');
+      let node = COPY[lang];
+      for (const part of parts) {
+        node = node?.[part];
+      }
+      return node ?? '';
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const value = t(lang, el.dataset.i18n);
+        if (value.includes('<br>') || value.includes('<strong>') || value.includes('<code>') || value.includes('&amp;')) {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
+      });
+    }
+
+    document.querySelectorAll('input[name="lang"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        applyLanguage(radio.value);
+      });
+    });
+
+    function triggerUpload(num) {
+      document.getElementById(`fileInput${num}`).click();
+    }
+
+    function handleFileSelect(event, num) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPlaceholderImage(num, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function setPlaceholderImage(num, src) {
+      const placeholder = document.getElementById(`placeholder${num}`);
+      placeholder.innerHTML = `<img src="${src}" alt="Screenshot ${num}">`;
+      placeholder.style.border = 'none';
+      placeholder.style.background = 'transparent';
+    }
+
+    document.addEventListener('paste', function(e) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            let targetNum = 1;
+            for (let j = 1; j <= 4; j++) {
+              const placeholder = document.getElementById(`placeholder${j}`);
+              if (placeholder && !placeholder.querySelector('img')) {
+                targetNum = j;
+                break;
+              }
+            }
+            setPlaceholderImage(targetNum, event.target.result);
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+
+    async function downloadCurrent(num, lang = currentLang) {
+      const savedLang = currentLang;
+      const radio = document.querySelector(`input[name="lang"][value="${lang}"]`);
+      if (lang !== currentLang && radio) {
+        radio.checked = true;
+        applyLanguage(lang);
+        await new Promise((r) => setTimeout(r, 150));
+      }
+
+      const element = document.getElementById(`screenshot${num}`);
+
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: BG_FILL,
+          width: 512,
+          height: 683
+        });
+
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+
+        ctx.fillStyle = BG_FILL;
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+
+        downloadDataUrl(
+          finalCanvas.toDataURL('image/png'),
+          `${DOWNLOAD_PREFIX}${lang}-${num}.png`
+        );
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
+      } finally {
+        if (savedLang !== lang) {
+          const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+          if (restore) {
+            restore.checked = true;
+            applyLanguage(savedLang);
+          }
+        }
+      }
+    }
+
+    async function downloadAll() {
+      for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+        await downloadCurrent(i, currentLang);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+
+    async function downloadAllLanguages() {
+      const savedLang = currentLang;
+      for (const lang of LANG_CODES) {
+        for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+          await downloadCurrent(i, lang);
+          await new Promise((r) => setTimeout(r, 500));
+        }
+      }
+      const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+      if (restore) {
+        restore.checked = true;
+        applyLanguage(savedLang);
+      }
+    }
+
+    applyLanguage('de');
+  </script>
+</body>
+</html>

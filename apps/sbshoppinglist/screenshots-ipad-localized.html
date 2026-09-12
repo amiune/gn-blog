@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Shopping List - iPad App Store Screenshots (DE · FR · IT · PT · ES)</title>
+  <style>
+    :root {
+      --primary: #16A34A;
+      --primary-dark: #15803D;
+      --accent: #22C55E;
+      --bg-app: #F8FAFC;
+      --card: #FFFFFF;
+      --text: #1E293B;
+      --text-secondary: #64748B;
+      --text-tertiary: #94A3B8;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f0f12 0%, #1a1a22 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #4ADE80);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: -18px auto 24px;
+      flex-wrap: wrap;
+    }
+
+    .lang-bar label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .lang-bar input { display: none; }
+
+    .lang-bar label:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(22, 163, 74, 0.22);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(22, 163, 74, 0.5);
+    }
+    
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+    
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+    
+    .screenshot {
+      width: 512px;
+      height: 683px;
+      background: linear-gradient(180deg, #16A34A 0%, #15803D 50%, #166534 100%);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .headline {
+      color: white;
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.25;
+      margin-bottom: 4px;
+      z-index: 1;
+    }
+    
+    .subheadline {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 10px;
+      z-index: 1;
+    }
+    
+    .screenshot-placeholder {
+      width: 400px;
+      height: 534px;
+      background: rgba(255,255,255,0.1);
+      border: 3px dashed rgba(255,255,255,0.4);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .screenshot-placeholder .placeholder-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .screenshot-placeholder .placeholder-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      opacity: 0.6;
+    }
+    
+    .screenshot-placeholder .placeholder-hint {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 8px;
+    }
+    
+    .screenshot-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 13px;
+    }
+    
+    canvas {
+      display: none;
+    }
+    
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .instructions h3 {
+      color: #4ADE80;
+      margin-bottom: 12px;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+    
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📱 iPad App Store Screenshots</h1>
+    <p data-i18n="ui.subtitle">Generate beautiful iPad screenshots for SB Shopping List (13-inch display)</p>
+  </div>
+
+  <div class="lang-bar" role="radiogroup" aria-label="Language">
+    <label>
+      <input type="radio" name="lang" value="de" checked>
+      Deutsch
+    </label>
+    <label>
+      <input type="radio" name="lang" value="fr">
+      Français
+    </label>
+    <label>
+      <input type="radio" name="lang" value="it">
+      Italiano
+    </label>
+    <label>
+      <input type="radio" name="lang" value="pt">
+      Português
+    </label>
+    <label>
+      <input type="radio" name="lang" value="es">
+      Español
+    </label>
+  </div>
+  
+  <div class="controls">
+    <button onclick="downloadAll()" data-i18n="ui.downloadAll">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadAllLanguages()" data-i18n="ui.downloadAllLangs">Download All Languages</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Screenshot 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Screenshot 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
+    <button class="secondary" onclick="downloadCurrent(5)">Screenshot 5</button>
+  </div>
+  
+  <div class="screenshots">
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline" data-i18n="s1.headline">Your Shopping<br>List, Simplified</div>
+        <div class="subheadline" data-i18n="s1.subheadline">Add items, check off, track prices</div>
+        
+        <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="ui.placeholderText">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s1">1. Shopping List</div>
+    </div>
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline" data-i18n="s2.headline">Smart<br>Suggestions</div>
+        <div class="subheadline" data-i18n="s2.subheadline">The app learns what you buy</div>
+        
+        <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="ui.placeholderText">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s2">2. Smart Suggestions</div>
+    </div>
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline" data-i18n="s3.headline">Browse Past<br>Shopping Trips</div>
+        <div class="subheadline" data-i18n="s3.subheadline">Calendar archive of all your lists</div>
+        
+        <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="ui.placeholderText">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s3">3. Calendar Archive</div>
+    </div>
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4">
+        <div class="headline" data-i18n="s4.headline">Know Your<br>Spending</div>
+        <div class="subheadline" data-i18n="s4.subheadline">Most shopped, most expensive & price swings</div>
+        
+        <div class="screenshot-placeholder" id="placeholder4" onclick="triggerUpload(4)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="ui.placeholderText">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 2048 × 2732px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s4">4. Statistics</div>
+    </div>
+    
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot5" style="justify-content: center; gap: 24px;">
+        <div class="headline" style="font-size: 2.6rem;" data-i18n="s5.headline">Shopping Made<br>Effortless</div>
+        <div class="subheadline" style="font-size: 1.15rem; max-width: 440px;" data-i18n="s5.subheadline">
+          Everything you need for smarter grocery trips.
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; z-index: 1; width: 100%; max-width: 470px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔮</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.smart">Smart Suggestions</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.smartDesc">Learns from your shopping habits</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">💲</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.price">Price Tracking</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.priceDesc">Log prices & see your total</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">📊</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.stats">Shopping Statistics</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.statsDesc">Track your spending patterns</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔒</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.private">100% Private</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="s5.privateDesc">All data stays on your device</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="labels.s5">5. Features</div>
+    </div>
+    
+  </div>
+  
+  <div class="instructions">
+    <h3 data-i18n="ui.guideTitle">📸 iPad Screenshot Export Guide</h3>
+    <ol>
+      <li data-i18n="ui.guide1"><strong>Add your screenshots:</strong> Click on a placeholder or paste (Cmd+V) to add your app screenshots</li>
+      <li data-i18n="ui.guide2">Pick a language above to preview localized copy before exporting</li>
+      <li data-i18n="ui.guide3">Click <strong>Download All Screenshots</strong> for the selected language, or <strong>Download All Languages</strong> for all 25 PNGs (5 screenshots × 5 languages)</li>
+      <li data-i18n="ui.guide4">Screenshots are exported at <code>2048 × 2732px</code> (13" iPad)</li>
+      <li data-i18n="ui.guide5">No alpha channel/transparency (App Store compliant)</li>
+      <li data-i18n="ui.guide6">In App Store Connect, upload to the <strong>12.9" iPad Pro</strong> section — other iPad sizes are auto-generated</li>
+    </ol>
+  </div>
+  
+  <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
+  <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
+  <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  <input type="file" id="fileInput4" accept="image/*" style="display:none" onchange="handleFileSelect(event, 4)">
+  
+  <canvas id="canvas"></canvas>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    const EXPORT_WIDTH = 2048;
+    const EXPORT_HEIGHT = 2732;
+    const SCALE = 4;
+    const BG_FILL = '#15803D';
+    const DOWNLOAD_PREFIX = 'SBShoppingList-iPad-Screenshot-';
+    const SCREENSHOT_COUNT = 5;
+    const LANG_CODES = ['de', 'fr', 'it', 'pt', 'es'];
+    let currentLang = 'de';
+
+    const COPY = {
+      de: {
+        ui: {
+          subtitle: 'iPad-App-Store-Screenshots für SB Shopping List erstellen (13-Zoll-Display)',
+          downloadAll: 'Alle Screenshots herunterladen',
+          downloadAllLangs: 'Alle Sprachen herunterladen',
+          placeholderText: 'Klicken zum Hochladen oder<br>Screenshot hier einfügen',
+          placeholderHint: 'Empfohlen: 2048 × 2732 px',
+          guideTitle: '📸 iPad-Screenshot-Export-Anleitung',
+          guide1: '<strong>Screenshots hinzufügen:</strong> Auf Platzhalter klicken oder einfügen (Cmd+V)',
+          guide2: 'Wähle oben eine Sprache, um die lokalisierte Vorschau zu sehen',
+          guide3: 'Klicke auf <strong>Alle Screenshots herunterladen</strong> für die gewählte Sprache oder <strong>Alle Sprachen herunterladen</strong> für alle 25 PNGs (5 Screenshots × 5 Sprachen)',
+          guide4: 'Export in <code>2048 × 2732 px</code> (13" iPad)',
+          guide5: 'Kein Alphakanal/Transparenz (App-Store-konform)',
+          guide6: 'In App Store Connect im Bereich <strong>12,9" iPad Pro</strong> hochladen — andere iPad-Größen werden automatisch erzeugt',
+        },
+        labels: { s1: '1. Einkaufsliste', s2: '2. Intelligente Vorschläge', s3: '3. Kalender-Archiv', s4: '4. Statistiken', s5: '5. Funktionen' },
+        s1: { headline: 'Deine Einkaufsliste,<br>vereinfacht', subheadline: 'Artikel hinzufügen, abhaken, Preise erfassen' },
+        s2: { headline: 'Intelligente<br>Vorschläge', subheadline: 'Die App lernt, was du kaufst' },
+        s3: { headline: 'Vergangene Einkäufe<br>durchstöbern', subheadline: 'Kalenderarchiv aller deiner Listen' },
+        s4: { headline: 'Kenne deine<br>Ausgaben', subheadline: 'Meist gekauft, teuerste & Preisschwankungen' },
+        s5: {
+          headline: 'Einkaufen<br>leicht gemacht',
+          subheadline: 'Alles für smartere Einkaufstouren.',
+          smart: 'Intelligente Vorschläge', smartDesc: 'Lernt aus deinen Einkaufsgewohnheiten',
+          price: 'Preisverfolgung', priceDesc: 'Preise erfassen & Summe sehen',
+          stats: 'Einkaufsstatistiken', statsDesc: 'Ausgabenmuster verfolgen',
+          private: '100 % privat', privateDesc: 'Alle Daten bleiben auf deinem Gerät',
+        },
+      },
+      fr: {
+        ui: {
+          subtitle: 'Générer de belles captures iPad pour SB Shopping List (écran 13 pouces)',
+          downloadAll: 'Télécharger toutes les captures',
+          downloadAllLangs: 'Télécharger toutes les langues',
+          placeholderText: 'Cliquez pour téléverser ou<br>collez votre capture ici',
+          placeholderHint: 'Recommandé : 2048 × 2732 px',
+          guideTitle: '📸 Guide d\'export des captures iPad',
+          guide1: '<strong>Ajoutez vos captures :</strong> Cliquez sur un emplacement ou collez (Cmd+V)',
+          guide2: 'Choisissez une langue ci-dessus pour prévisualiser le texte localisé',
+          guide3: 'Cliquez sur <strong>Télécharger toutes les captures</strong> pour la langue sélectionnée, ou <strong>Télécharger toutes les langues</strong> pour les 25 PNG (5 captures × 5 langues)',
+          guide4: 'Export en <code>2048 × 2732 px</code> (iPad 13")',
+          guide5: 'Pas de canal alpha/transparence (conforme App Store)',
+          guide6: 'Dans App Store Connect, téléversez dans la section <strong>iPad Pro 12,9"</strong> — les autres tailles iPad sont générées automatiquement',
+        },
+        labels: { s1: '1. Liste de courses', s2: '2. Suggestions intelligentes', s3: '3. Archive calendrier', s4: '4. Statistiques', s5: '5. Fonctions' },
+        s1: { headline: 'Votre liste de courses,<br>simplifiée', subheadline: 'Ajoutez, cochez, suivez les prix' },
+        s2: { headline: 'Suggestions<br>intelligentes', subheadline: 'L\'app apprend ce que vous achetez' },
+        s3: { headline: 'Parcourez vos<br>courses passées', subheadline: 'Archive calendrier de toutes vos listes' },
+        s4: { headline: 'Connaissez vos<br>dépenses', subheadline: 'Plus achetés, plus chers & variations de prix' },
+        s5: {
+          headline: 'Faire les courses<br>sans effort',
+          subheadline: 'Tout pour des courses plus intelligentes.',
+          smart: 'Suggestions intelligentes', smartDesc: 'Apprend vos habitudes d\'achat',
+          price: 'Suivi des prix', priceDesc: 'Enregistrez les prix & voyez le total',
+          stats: 'Statistiques d\'achats', statsDesc: 'Suivez vos habitudes de dépenses',
+          private: '100 % privé', privateDesc: 'Toutes les données restent sur votre appareil',
+        },
+      },
+      it: {
+        ui: {
+          subtitle: 'Genera splendide schermate iPad per SB Shopping List (display 13 pollici)',
+          downloadAll: 'Scarica tutte le schermate',
+          downloadAllLangs: 'Scarica tutte le lingue',
+          placeholderText: 'Clicca per caricare o<br>incolla la schermata qui',
+          placeholderHint: 'Consigliato: 2048 × 2732 px',
+          guideTitle: '📸 Guida all\'export schermate iPad',
+          guide1: '<strong>Aggiungi le schermate:</strong> Clicca su un segnaposto o incolla (Cmd+V)',
+          guide2: 'Scegli una lingua sopra per vedere l\'anteprima localizzata',
+          guide3: 'Clicca <strong>Scarica tutte le schermate</strong> per la lingua selezionata, o <strong>Scarica tutte le lingue</strong> per tutti i 25 PNG (5 schermate × 5 lingue)',
+          guide4: 'Export a <code>2048 × 2732 px</code> (iPad 13")',
+          guide5: 'Nessun canale alpha/trasparenza (conforme App Store)',
+          guide6: 'In App Store Connect, carica nella sezione <strong>iPad Pro 12,9"</strong> — le altre dimensioni iPad vengono generate automaticamente',
+        },
+        labels: { s1: '1. Lista della spesa', s2: '2. Suggerimenti intelligenti', s3: '3. Archivio calendario', s4: '4. Statistiche', s5: '5. Funzioni' },
+        s1: { headline: 'La tua lista della spesa,<br>semplificata', subheadline: 'Aggiungi, spunta, traccia i prezzi' },
+        s2: { headline: 'Suggerimenti<br>intelligenti', subheadline: 'L\'app impara cosa compri' },
+        s3: { headline: 'Sfoglia le spese<br>passate', subheadline: 'Archivio calendario di tutte le tue liste' },
+        s4: { headline: 'Conosci le tue<br>spese', subheadline: 'Più acquistati, più costosi & variazioni di prezzo' },
+        s5: {
+          headline: 'Spesa<br>senza sforzo',
+          subheadline: 'Tutto per spesa più intelligente.',
+          smart: 'Suggerimenti intelligenti', smartDesc: 'Impara dalle tue abitudini di spesa',
+          price: 'Tracciamento prezzi', priceDesc: 'Registra prezzi & vedi il totale',
+          stats: 'Statistiche spesa', statsDesc: 'Monitora i tuoi modelli di spesa',
+          private: '100% privato', privateDesc: 'Tutti i dati restano sul tuo dispositivo',
+        },
+      },
+      pt: {
+        ui: {
+          subtitle: 'Gerar belas capturas de iPad para SB Shopping List (tela de 13 polegadas)',
+          downloadAll: 'Baixar todas as capturas',
+          downloadAllLangs: 'Baixar todos os idiomas',
+          placeholderText: 'Clique para enviar ou<br>cole sua captura aqui',
+          placeholderHint: 'Recomendado: 2048 × 2732 px',
+          guideTitle: '📸 Guia de exportação de capturas iPad',
+          guide1: '<strong>Adicione suas capturas:</strong> Clique em um espaço reservado ou cole (Cmd+V)',
+          guide2: 'Escolha um idioma acima para visualizar o texto localizado',
+          guide3: 'Clique em <strong>Baixar todas as capturas</strong> para o idioma selecionado, ou <strong>Baixar todos os idiomas</strong> para os 25 PNGs (5 capturas × 5 idiomas)',
+          guide4: 'Exportação em <code>2048 × 2732 px</code> (iPad 13")',
+          guide5: 'Sem canal alpha/transparência (compatível com App Store)',
+          guide6: 'No App Store Connect, envie na seção <strong>iPad Pro 12,9"</strong> — outros tamanhos de iPad são gerados automaticamente',
+        },
+        labels: { s1: '1. Lista de compras', s2: '2. Sugestões inteligentes', s3: '3. Arquivo calendário', s4: '4. Estatísticas', s5: '5. Recursos' },
+        s1: { headline: 'Sua lista de compras,<br>simplificada', subheadline: 'Adicione, marque, acompanhe preços' },
+        s2: { headline: 'Sugestões<br>inteligentes', subheadline: 'O app aprende o que você compra' },
+        s3: { headline: 'Revise compras<br>anteriores', subheadline: 'Arquivo calendário de todas as suas listas' },
+        s4: { headline: 'Conheça seus<br>gastos', subheadline: 'Mais comprados, mais caros & variações de preço' },
+        s5: {
+          headline: 'Compras<br>sem esforço',
+          subheadline: 'Tudo para compras mais inteligentes.',
+          smart: 'Sugestões inteligentes', smartDesc: 'Aprende seus hábitos de compra',
+          price: 'Rastreamento de preços', priceDesc: 'Registre preços & veja o total',
+          stats: 'Estatísticas de compras', statsDesc: 'Acompanhe seus padrões de gastos',
+          private: '100% privado', privateDesc: 'Todos os dados ficam no seu dispositivo',
+        },
+      },
+      es: {
+        ui: {
+          subtitle: 'Genera bonitas capturas de iPad para SB Shopping List (pantalla de 13 pulgadas)',
+          downloadAll: 'Descargar todas las capturas',
+          downloadAllLangs: 'Descargar todos los idiomas',
+          placeholderText: 'Haz clic para subir o<br>pega tu captura aquí',
+          placeholderHint: 'Recomendado: 2048 × 2732 px',
+          guideTitle: '📸 Guía de exportación de capturas iPad',
+          guide1: '<strong>Añade tus capturas:</strong> Haz clic en un marcador o pega (Cmd+V)',
+          guide2: 'Elige un idioma arriba para previsualizar el texto localizado',
+          guide3: 'Haz clic en <strong>Descargar todas las capturas</strong> para el idioma seleccionado, o <strong>Descargar todos los idiomas</strong> para los 25 PNG (5 capturas × 5 idiomas)',
+          guide4: 'Exportación a <code>2048 × 2732 px</code> (iPad 13")',
+          guide5: 'Sin canal alpha/transparencia (compatible con App Store)',
+          guide6: 'En App Store Connect, sube en la sección <strong>iPad Pro 12,9"</strong> — otros tamaños de iPad se generan automáticamente',
+        },
+        labels: { s1: '1. Lista de la compra', s2: '2. Sugerencias inteligentes', s3: '3. Archivo calendario', s4: '4. Estadísticas', s5: '5. Funciones' },
+        s1: { headline: 'Tu lista de la compra,<br>simplificada', subheadline: 'Añade, marca, registra precios' },
+        s2: { headline: 'Sugerencias<br>inteligentes', subheadline: 'La app aprende lo que compras' },
+        s3: { headline: 'Explora compras<br>anteriores', subheadline: 'Archivo de calendario de todas tus listas' },
+        s4: { headline: 'Conoce tus<br>gastos', subheadline: 'Más comprados, más caros & cambios de precio' },
+        s5: {
+          headline: 'Compras<br>sin esfuerzo',
+          subheadline: 'Todo para compras más inteligentes.',
+          smart: 'Sugerencias inteligentes', smartDesc: 'Aprende de tus hábitos de compra',
+          price: 'Seguimiento de precios', priceDesc: 'Registra precios & ve el total',
+          stats: 'Estadísticas de compras', statsDesc: 'Sigue tus patrones de gasto',
+          private: '100% privado', privateDesc: 'Todos los datos permanecen en tu dispositivo',
+        },
+      },
+    };
+
+    function t(lang, key) {
+      const parts = key.split('.');
+      let node = COPY[lang];
+      for (const part of parts) {
+        node = node?.[part];
+      }
+      return node ?? '';
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const value = t(lang, el.dataset.i18n);
+        if (value.includes('<br>') || value.includes('<strong>') || value.includes('<code>')) {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
+      });
+    }
+
+    document.querySelectorAll('input[name="lang"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        applyLanguage(radio.value);
+      });
+    });
+
+    function triggerUpload(num) {
+      document.getElementById(`fileInput${num}`).click();
+    }
+    
+    function handleFileSelect(event, num) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPlaceholderImage(num, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    
+    function setPlaceholderImage(num, src) {
+      const placeholder = document.getElementById(`placeholder${num}`);
+      placeholder.innerHTML = `<img src="${src}" alt="Screenshot ${num}">`;
+      placeholder.style.border = 'none';
+      placeholder.style.background = 'transparent';
+    }
+    
+    document.addEventListener('paste', function(e) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            let targetNum = 1;
+            for (let j = 1; j <= 4; j++) {
+              const placeholder = document.getElementById(`placeholder${j}`);
+              if (placeholder && !placeholder.querySelector('img')) {
+                targetNum = j;
+                break;
+              }
+            }
+            setPlaceholderImage(targetNum, event.target.result);
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+    
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+    
+    async function downloadCurrent(num, lang = currentLang) {
+      const savedLang = currentLang;
+      const radio = document.querySelector(`input[name="lang"][value="${lang}"]`);
+      if (lang !== currentLang && radio) {
+        radio.checked = true;
+        applyLanguage(lang);
+        await new Promise((r) => setTimeout(r, 150));
+      }
+
+      const element = document.getElementById(`screenshot${num}`);
+      
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: BG_FILL,
+          width: 512,
+          height: 683
+        });
+        
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+        
+        ctx.fillStyle = BG_FILL;
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        
+        downloadDataUrl(finalCanvas.toDataURL('image/png'), `${DOWNLOAD_PREFIX}${lang}-${num}.png`);
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
+      } finally {
+        if (savedLang !== lang) {
+          const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+          if (restore) {
+            restore.checked = true;
+            applyLanguage(savedLang);
+          }
+        }
+      }
+    }
+    
+    async function downloadAll() {
+      for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+        await downloadCurrent(i, currentLang);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+
+    async function downloadAllLanguages() {
+      const savedLang = currentLang;
+      for (const lang of LANG_CODES) {
+        for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+          await downloadCurrent(i, lang);
+          await new Promise((r) => setTimeout(r, 500));
+        }
+      }
+      const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+      if (restore) {
+        restore.checked = true;
+        applyLanguage(savedLang);
+      }
+    }
+
+    applyLanguage('de');
+  </script>
+</body>
+</html>

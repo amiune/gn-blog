@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MokuML: Local ML Predictions Without a Pipeline — Generative Networks</title>
+    <meta name="description" content="Generative Networks - Custom iOS apps, AI education, and consulting. Putting AI at the service of people." />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/custom.css" />
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-MPH3H835');</script>
+    <!-- End Google Tag Manager -->
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo">
+          <span class="logo-icon">GN</span>
+        </a>
+        <div class="nav-links">
+          <a href="/apps/">Apps</a>
+          <a href="/research/">Research</a>
+          <a href="/#about">About</a>
+          <a href="/#contact">Contact</a>
+          <a href="/blog/">Blog</a>
+        </div>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+          <button class="nav-menu-toggle" id="nav-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-menu">
+            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
+        <a href="/apps/">Apps</a>
+        <a href="/research/">Research</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a href="/blog/">Blog</a>
+      </div>
+    </nav>
+
+    
+<!-- Article Header -->
+<header class="article-header">
+  <div class="container">
+    <a href="/blog/" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to articles
+    </a>
+    <h1>MokuML: Local ML Predictions Without a Pipeline</h1>
+    
+    <div class="article-meta">
+      <time datetime="2026-06-09">June 09, 2026</time>
+    </div>
+    
+  </div>
+</header>
+
+<!-- Article Content -->
+<main class="article-content">
+  <div class="container">
+    <div class="article-body">
+      <h1 id="mokuml-local-ml-predictions-without-a-pipeline">MokuML: Local ML Predictions Without a Pipeline</h1>
+<p><em>Proof-of-concept research. <a href="https://github.com/amiune/MokuML">github.com/amiune/MokuML</a></em></p>
+<p>What if a small business could connect Postgres, describe a prediction in plain English, and get results on their Mac without a data science team, cloud ML stack, or Kumo-style subscription?</p>
+<p>That's what we're exploring with <strong>MokuML</strong>. Think lightweight <a href="https://kumo.ai">Kumo.ai</a>: connect a database, ask for predictions, get answers. But everything runs locally.</p>
+<span id="continue-reading"></span><h2 id="the-idea">The idea</h2>
+<ol>
+<li>Connect to your Postgres database.</li>
+<li>Describe what you want to predict ("which customers will churn?", "which invoices will be paid late?").</li>
+<li>A <strong>local LLM</strong> reads your schema (table names, columns, keys) and writes a safe <code>SELECT</code> query. It never sees your actual rows.</li>
+<li>The query runs on your machine in a read-only transaction.</li>
+<li><strong>TabPFN-3</strong> trains and predicts on that table, also locally.</li>
+</ol>
+<p>No feature engineering pipeline. No model tuning UI. No sending customer data to an API.</p>
+<h2 id="privacy-is-the-product-rule">Privacy is the product rule</h2>
+<p>The LLM gets schema metadata and your prompt. No cell values, no previews, no passwords. SQL is validated with an AST parser before execution. Mutations, DDL, and multi-statement tricks get rejected.</p>
+<p>Optional remote LLM mode exists, but the same boundary applies: schema only.</p>
+<h2 id="stack">Stack</h2>
+<ul>
+<li><strong>SwiftUI</strong> macOS app</li>
+<li><strong>Python worker</strong> on <code>127.0.0.1</code> for DB access, SQL validation, TabPFN inference</li>
+<li><strong>Ollama</strong> (or OpenAI-compatible API) for text-to-SQL</li>
+<li>Local run history in <code>~/Library/Application Support/MokuML/runs/</code></li>
+</ul>
+<h2 id="honest-limitations">Honest limitations</h2>
+<p>It can't predict the future from thin air. You need historical labels or a derivable target in the schema. TabPFN has row/feature limits. And check the TabPFN license before commercial use.</p>
+<p>Still early, but the direction feels right: local LLMs + tabular foundation models could make useful ML cheap and private for small businesses.</p>
+<p><strong>Repo:</strong> <a href="https://github.com/amiune/MokuML">github.com/amiune/MokuML</a></p>
+
+    </div>
+  </div>
+</main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span class="footer-logo">GN</span>
+            <p>Generative Networks<br><em>of people</em></p>
+          </div>
+          <nav class="footer-nav">
+            <a href="/apps/">Apps</a>
+            <a href="/research/">Research</a>
+            <a href="/#about">About</a>
+            <a href="/#contact">Contact</a>
+            <a href="/blog/">Blog</a>
+          </nav>
+          <div class="footer-location">
+            <p>Madrid, Spain</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Generative Networks. Putting AI at the service of people.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Simple theme toggle
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      
+      // Check for saved preference or system preference
+      const savedTheme = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme) {
+        html.setAttribute('data-theme', savedTheme);
+      } else if (systemDark) {
+        html.setAttribute('data-theme', 'dark');
+      }
+      
+      toggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+
+      // Mobile nav menu
+      const nav = document.getElementById('nav');
+      const menuToggle = document.getElementById('nav-menu-toggle');
+      const mobileMenu = document.getElementById('nav-mobile-menu');
+
+      function setMobileMenuOpen(isOpen) {
+        nav.classList.toggle('nav-open', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen);
+        menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        mobileMenu.setAttribute('aria-hidden', !isOpen);
+        document.body.classList.toggle('nav-menu-open', isOpen);
+      }
+
+      menuToggle.addEventListener('click', () => {
+        setMobileMenuOpen(!nav.classList.contains('nav-open'));
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setMobileMenuOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+          setMobileMenuOpen(false);
+        }
+      });
+
+      window.matchMedia('(min-width: 769px)').addEventListener('change', (e) => {
+        if (e.matches) setMobileMenuOpen(false);
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    </script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPH3H835"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  </body>
+</html>
