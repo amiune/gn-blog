@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 
 {% block title %}Generative Networks | Putting AI at the service of People{% endblock title %}
+{% block description %}Custom iOS apps that stay on your devices. No subscriptions. Your data is not shared with big corporations.{% endblock description %}
 
 {% block content %}
 <!-- Hero -->
 <header class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="hero-badge">Tools for humans, by humans</div>
+    <div class="hero-badge">No subscriptions. Your data stays yours.</div>
     <h1 class="hero-title">
       <span class="title-main">Generative</span>
       <span class="title-main">Networks</span>
       <span class="title-accent">of people</span>
     </h1>
-    <p class="hero-slogan">Putting AI at the service of small businesses</p>
+    <p class="hero-slogan">AI tools for small businesses — without sharing your data with big corporations, and without another monthly fee.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn btn-primary">Get in Touch</a>
+      <a href="/apps/" class="btn btn-secondary">See our apps</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -24,25 +26,66 @@
   </div>
 </header>
 
+<!-- Why Our Apps -->
+<section class="section-values">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Why Our Apps</span>
+      <h2>Four promises we <em>keep</em></h2>
+    </div>
+    <div class="values-grid">
+      <article class="value-card">
+        <div class="value-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h3>Your data stays yours</h3>
+        <p>Big companies use your data and knowledge to later replace you and push you out of the market.</p>
+      </article>
+      <article class="value-card">
+        <div class="value-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <h3>Don’t steal money through subscriptions or dark patterns</h3>
+        <p>Big companies lock you in and charge outrageous subscriptions even when they have near-zero costs and even if you don’t use the product.</p>
+      </article>
+      <article class="value-card">
+        <div class="value-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </div>
+        <h3>No ads</h3>
+        <p>Big companies fill everything with annoying ads that are often scams.</p>
+      </article>
+      <article class="value-card">
+        <div class="value-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </div>
+        <h3>Amazing support</h3>
+        <p>When big companies have millions of users, they don’t care if you have problems. You’re disposable.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- Services Intro -->
 <section class="services-intro">
   <div class="container">
-    <div class="intro-grid">
-      <div class="intro-text">
-        <span class="section-label">What We Do</span>
-        <h2>We build tools that <em>empower</em>, not exploit</h2>
-        <p>We help small businesses to save money and time and increase productivity by building tools that are tailored to their needs. In a world of subscription fatigue and AI hype, we offer something different: technology that respects your intelligence, your wallet, and your time. AI is great but not magic: it takes time and money to do something good, and we know small businesses can't afford to spend months learning and testing. That's where we come in: we help you create your app for free, then we try to monetise on the App Store. We also build open source software for data analytics and business predictions that you can download and use for free, and pay only if you need advice or support using it. If you're an investor and like our vision, <a href="https://www.linkedin.com/in/marcelaamiune/" target="_blank" rel="noopener noreferrer">contact Marcela</a>.</p>
-      </div>
-      <div class="intro-stats">
-        <div class="stat">
-          <span class="stat-number">$0</span>
-          <span class="stat-label">Monthly fees</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">100%</span>
-          <span class="stat-label">Your data stays yours</span>
-        </div>
-      </div>
+    <div class="intro-text">
+      <span class="section-label">What We Do</span>
+      <h2>We build tools that <em>empower</em>, not exploit</h2>
+      <p>We help small businesses save money and time with tools tailored to their needs. AI is useful, not magic: it takes time and money to do something good, and small businesses can’t afford months of learning and testing.</p>
+      <p>That’s where we come in. We help you create your app for free, then we try to monetise on the App Store. We also build open source software for data analytics and business predictions that you can download and use for free, and pay only if you need advice or support.</p>
+      <p>If you’re an investor and like our vision, <a href="https://www.linkedin.com/in/marcelaamiune/" target="_blank" rel="noopener noreferrer">contact Marcela</a>.</p>
     </div>
 
     <div class="intro-reviews">
@@ -180,7 +223,7 @@
       <div class="contact-info">
         <span class="section-label">Let's Talk</span>
         <h2>Let's build something together</h2>
-        <p>Have an issue or suggestion for an app?Need a custom app? We can help you build it for free.</p>
+        <p>Have an issue or suggestion for an app? Need a custom app? We can help you build it for free.</p>
         
       </div>
       

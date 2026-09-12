@@ -396,6 +396,10 @@ body.nav-menu-open {
   color: var(--text-muted);
   margin-bottom: 2.5rem;
   font-weight: 400;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 .hero-actions {
@@ -433,6 +437,69 @@ body.nav-menu-open {
 }
 
 /* ============================================
+   Why Our Apps / Core values
+   ============================================ */
+.section-values {
+  padding: 0 0 var(--section-spacing);
+}
+
+.section-values .section-header {
+  margin-bottom: 3rem;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .values-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.value-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  padding: 2rem;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.value-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-4px);
+}
+
+.value-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.25rem;
+}
+
+.value-card h3 {
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+.value-card p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ============================================
    Services Intro
    ============================================ */
 .services-intro {
@@ -453,6 +520,10 @@ body.nav-menu-open {
   }
 }
 
+.intro-text {
+  max-width: 46rem;
+}
+
 .intro-text h2 {
   margin-bottom: 1rem;
 }
@@ -460,6 +531,10 @@ body.nav-menu-open {
 .intro-text p {
   font-size: 1.125rem;
   line-height: 1.8;
+}
+
+.intro-text p + p {
+  margin-top: 1rem;
 }
 
 .intro-stats {
@@ -1408,6 +1483,7 @@ body.nav-menu-open {
 @media (prefers-reduced-motion: no-preference) {
   .app-feature-card,
   .app-benefit-card,
+  .value-card,
   .course-preview,
   .philosophy-quote,
   .contact-form-wrapper {
