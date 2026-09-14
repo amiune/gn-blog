@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Diary - App Store Screenshots Generator</title>
+  <style>
+    :root {
+      --primary: #CC735A;
+      --primary-dark: #B85E45;
+      --accent: #407366;
+      --bg-app: #FAF8F5;
+      --card: #FFFFFF;
+      --text: #2C2C2C;
+      --text-secondary: #666666;
+      --text-tertiary: #999999;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f0f12 0%, #1a1a22 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), #E8C87A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(204, 115, 90, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(204, 115, 90, 0.5);
+    }
+    
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    
+    button.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: none;
+    }
+    
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .screenshot-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+    
+    /* App Store Screenshot Frame: 1242 x 2688 for 6.5" */
+    /* No border-radius - App Store screenshots must be rectangular with no transparency */
+    .screenshot {
+      width: 414px;
+      height: 896px;
+      background: linear-gradient(180deg, #CC735A 0%, #B85E45 50%, #9A4D3A 100%);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .headline {
+      color: white;
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      z-index: 1;
+    }
+    
+    .subheadline {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.3rem;
+      text-align: center;
+      margin-bottom: 24px;
+      z-index: 1;
+    }
+    
+    /* Screenshot Placeholder - matches 1242 × 2688 aspect ratio */
+    .screenshot-placeholder {
+      width: 327px;
+      height: 708px;
+      background: rgba(255,255,255,0.1);
+      border: 3px dashed rgba(255,255,255,0.4);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .screenshot-placeholder .placeholder-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .screenshot-placeholder .placeholder-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      opacity: 0.6;
+    }
+    
+    .screenshot-placeholder .placeholder-hint {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 8px;
+    }
+    
+    .screenshot-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 13px;
+    }
+    
+    /* Canvas for export */
+    canvas {
+      display: none;
+    }
+    
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .instructions h3 {
+      color: #E8C87A;
+      margin-bottom: 12px;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+    
+    .instructions code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📱 App Store Screenshots</h1>
+    <p>Generate beautiful screenshots for SB Diary</p>
+  </div>
+  
+  <div class="controls">
+    <button onclick="downloadAll()">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadCurrent(1)">Screenshot 1</button>
+    <button class="secondary" onclick="downloadCurrent(2)">Screenshot 2</button>
+    <button class="secondary" onclick="downloadCurrent(3)">Screenshot 3</button>
+    <button class="secondary" onclick="downloadCurrent(4)">Screenshot 4</button>
+  </div>
+  
+  <div class="screenshots">
+    
+    <!-- Screenshot 1: Home View -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline">Track Your<br>Business Journey</div>
+        <div class="subheadline">Daily entries to capture wins & learnings</div>
+        
+        <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 1242 × 2688px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">1. Home Feed</div>
+    </div>
+    
+    <!-- Screenshot 2: New Entry -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline">Log Your Day<br>in Seconds</div>
+        <div class="subheadline">Mood, categories, notes & finances</div>
+        
+        <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 1242 × 2688px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">2. New Entry</div>
+    </div>
+    
+    <!-- Screenshot 3: Stats/Insights -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline">Powerful<br>Business Insights</div>
+        <div class="subheadline">Visualize trends, moods & financials</div>
+        
+        <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Click to upload or<br>paste your screenshot here</div>
+          <div class="placeholder-hint">Recommended: 1242 × 2688px</div>
+        </div>
+      </div>
+      <div class="screenshot-label">3. Insights</div>
+    </div>
+    
+    <!-- Screenshot 4: Feature Highlights -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4" style="justify-content: center; gap: 30px;">
+        <div class="headline" style="font-size: 2.8rem;">Your Business<br>Story, Captured</div>
+        <div class="subheadline" style="font-size: 1.4rem; max-width: 340px;">
+          Everything you need to track your small business journey in one beautiful app.
+          <br/>
+          Save your learnings and insights for future reference for you and your employees.
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 20px; z-index: 1;">
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">📔</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;">Daily Entries</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;">Capture every day</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">😊</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;">Mood Tracking</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;">How's business?</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">💰</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;">Financials</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;">Revenue & expenses</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">📊</div>
+            <div style="color: white; font-weight: 600; font-size: 0.95rem;">Insights</div>
+            <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 4px;">Trends & stats</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; gap: 24px; z-index: 1; margin-top: 20px;">
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: white;">🔒</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 4px;">100% Private</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: white;">📱</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 4px;">Local Storage</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: white;">✨</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 4px;">Beautiful UI</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label">4. Features</div>
+    </div>
+    
+  </div>
+  
+  <div class="instructions">
+    <h3>📸 iPhone Screenshot Export Guide</h3>
+    <ol>
+      <li><strong>Add your screenshots:</strong> Click on a placeholder or paste (Cmd+V) to add your app screenshots</li>
+      <li>Click <strong>Download All Screenshots</strong> to get all 4 images</li>
+      <li>Screenshots are exported at <code>1242 × 2688px</code> (6.5" display)</li>
+      <li>No alpha channel/transparency (App Store compliant)</li>
+      <li>In App Store Connect, upload to the <strong>6.5" iPhone</strong> section</li>
+      <li>App Store Connect will auto-generate other sizes from these</li>
+    </ol>
+  </div>
+  
+  <!-- Hidden file inputs -->
+  <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
+  <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
+  <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  
+  <canvas id="canvas"></canvas>
+  
+  <!-- html2canvas library for proper image capture -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    const EXPORT_WIDTH = 1242;
+    const EXPORT_HEIGHT = 2688;
+    const SCALE = 4;
+    
+    function triggerUpload(num) {
+      document.getElementById(`fileInput${num}`).click();
+    }
+    
+    function handleFileSelect(event, num) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPlaceholderImage(num, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    
+    function setPlaceholderImage(num, src) {
+      const placeholder = document.getElementById(`placeholder${num}`);
+      placeholder.innerHTML = `<img src="${src}" alt="Screenshot ${num}">`;
+      placeholder.style.border = 'none';
+      placeholder.style.background = 'transparent';
+    }
+    
+    document.addEventListener('paste', function(e) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            let targetNum = 1;
+            for (let j = 1; j <= 3; j++) {
+              const placeholder = document.getElementById(`placeholder${j}`);
+              if (placeholder && !placeholder.querySelector('img')) {
+                targetNum = j;
+                break;
+              }
+            }
+            setPlaceholderImage(targetNum, event.target.result);
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+    
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+    
+    async function downloadCurrent(num) {
+      const element = document.getElementById(`screenshot${num}`);
+      
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#B85E45',
+          width: 414,
+          height: 896
+        });
+        
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+        
+        ctx.fillStyle = '#B85E45';
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        
+        downloadDataUrl(finalCanvas.toDataURL('image/png'), `SBDiary-Screenshot-${num}.png`);
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
+      }
+    }
+    
+    async function downloadAll() {
+      for (let i = 1; i <= 4; i++) {
+        await downloadCurrent(i);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "sborders",
+  "version": "1.0.0",
+  "main": "screenshots-extra-locales.js",
+  "scripts": {
+    "generate:appstore": "node generate-appstore-screenshots.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "puppeteer": "^25.1.0",
+    "sharp": "^0.35.1"
+  }
+}

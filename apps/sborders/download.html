@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to SB Orders on the App Store…</title>
+  <meta name="robots" content="noindex">
+
+  <!-- Global site tag (gtag.js) - Google Ads -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18018234527"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18018234527');
+  </script>
+
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #1D4ED8;
+      --bg: #FAFBFF;
+      --text: #1E293B;
+      --text-secondary: #64748B;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 2rem;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--primary) 0%, #6366F1 100%);
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.25);
+    }
+
+    .icon svg {
+      width: 48px;
+      height: 48px;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid #E2E8F0;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .manual-link {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      border: 1.5px solid var(--primary);
+      border-radius: 10px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .manual-link:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2"/>
+        <path d="M8 21h8"/><path d="M12 17v4"/>
+        <path d="M7 8h2m2 0h4"/>
+        <path d="M7 12h10"/>
+      </svg>
+    </div>
+    <h1>Opening the App Store…</h1>
+    <p class="subtitle">You're being redirected to SB Orders.</p>
+    <div class="spinner"></div>
+    <a class="manual-link" href="https://apps.apple.com/app/sb-orders/id6758559928">
+      Open manually &rarr;
+    </a>
+  </div>
+
+  <!-- Conversion event fires, then redirect after a short delay -->
+  <script>
+    var APP_STORE_URL = 'https://apps.apple.com/app/sb-orders/id6758559928';
+
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18018234527/VU9jCMvpuokcEJ_h4Y9D',
+      'value': 1.0,
+      'currency': 'EUR',
+      'event_callback': function() {
+        window.location.replace(APP_STORE_URL);
+      }
+    });
+
+    setTimeout(function() {
+      window.location.replace(APP_STORE_URL);
+    }, 3000);
+  </script>
+</body>
+</html>

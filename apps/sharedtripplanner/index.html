@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shared Trip Planner — Plan together, vote, go</title>
+  <meta name="description" content="A private group trip planner for iPhone and iPad. Itinerary, activity voting, reservations, packing lists, and expenses—shared through iCloud. No ads, accounts, or subscriptions.">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MPH3H835');</script>
+  <!-- End Google Tag Manager -->
+  <style>
+    :root {
+      --primary: #148A9C;
+      --primary-dark: #0C6574;
+      --primary-light: #30B0C7;
+      --accent: #007AFF;
+      --bg: #F0F8FA;
+      --card: #FFFFFF;
+      --text: #0F2A32;
+      --text-secondary: #4A5568;
+      --text-tertiary: #8492A6;
+      --border: #E2E8F0;
+      --amber: #E8A317;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(244,246,249,0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(226,232,240,0.6);
+      transition: box-shadow 0.3s;
+    }
+
+    .nav.scrolled {
+      box-shadow: 0 1px 16px rgba(20,36,51,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-text {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(20,138,156,0.08);
+    }
+
+    .nav-cta {
+      background: var(--primary) !important;
+      color: white !important;
+      font-weight: 600 !important;
+      padding: 8px 20px !important;
+      box-shadow: 0 2px 8px rgba(20, 138, 156, 0.25);
+      transition: all 0.2s !important;
+      border-radius: 10px !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-dark) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(20, 138, 156, 0.35) !important;
+    }
+
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(20,138,156,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 18px 6px 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    .hero-badge-dot {
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-badge-dot svg {
+      width: 12px;
+      height: 12px;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 5.5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(20, 138, 156, 0.3);
+      transition: all 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(20, 138, 156, 0.35);
+    }
+
+    .btn-primary svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .hero-preview {
+      max-width: 920px;
+      margin: 64px auto 0;
+      position: relative;
+    }
+
+    .preview-window {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(20,138,156,0.1), 0 1px 3px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    .preview-titlebar {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      background: #F3F9FA;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #FF5F57; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #28CA41; }
+
+    .preview-content {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      min-height: 380px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .preview-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-stat {
+      background: #E6F4F6;
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: left;
+    }
+
+    .mini-stat .v {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .mini-stat .l {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-top: 4px;
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .plist-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: #F7FBFC;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .plist-row .name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .plist-row .meta {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    .plist-row .qty {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .plist-row.warn .qty {
+      color: var(--amber);
+    }
+
+    .plist-row .tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: #C5E8EE;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-left: 8px;
+    }
+
+    .features {
+      padding: 100px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .section-sub {
+      text-align: center;
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin: 0 auto 56px;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(20,138,156,0.08);
+      border-color: rgba(20,138,156,0.2);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .fi-a { background: linear-gradient(135deg, #E6F4F6, #C5E8EE); }
+    .fi-b { background: linear-gradient(135deg, #E6F3FB, #C5E4F8); }
+    .fi-c { background: linear-gradient(135deg, #F0F7F4, #D8EDE4); }
+    .fi-d { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+    .fi-e { background: linear-gradient(135deg, #FBF6F0, #F5E8D4); }
+    .fi-f { background: linear-gradient(135deg, #F8FAFC, #E2E8F0); }
+    .fi-g { background: linear-gradient(135deg, #E6F4F6, #C5E4F8); }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .how-it-works {
+      padding: 80px 24px 100px;
+      background: white;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .how-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-top: 56px;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.66% + 24px);
+      right: calc(16.66% + 24px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      opacity: 0.25;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      font-size: 28px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 16px rgba(20,138,156,0.25);
+    }
+
+    .step h3 {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .step p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .stats-banner {
+      padding: 80px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .stat-value {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    .cta-section {
+      padding: 80px 24px 100px;
+    }
+
+    .cta-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 28px;
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(20,138,156,0.3);
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .cta-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 300px;
+      height: 300px;
+      background: rgba(75,130,177,0.2);
+      border-radius: 50%;
+    }
+
+    .cta-card h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-card p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      color: var(--primary-dark);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: all 0.25s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .contact-section {
+      padding: 80px 24px 100px;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info .section-label { text-align: left; }
+    .contact-info .section-title {
+      text-align: left;
+      font-size: clamp(28px, 4vw, 36px);
+      margin-bottom: 12px;
+    }
+    .contact-info .section-sub {
+      text-align: left;
+      margin: 0;
+      max-width: none;
+    }
+
+    .contact-form-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+    }
+
+    .contact-form .form-group { margin-bottom: 20px; }
+
+    .contact-form label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(20,138,156,0.12);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-form .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(20, 138, 156, 0.3);
+      transition: all 0.25s;
+      font-family: inherit;
+    }
+
+    .contact-form .btn-submit:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(20, 138, 156, 0.35);
+    }
+
+    @media (max-width: 768px) {
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    @media (max-width: 900px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .steps::before { display: none; }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+      .hero {
+        padding: 120px 20px 60px;
+      }
+      .preview-content {
+        padding: 16px;
+      }
+      .cta-card {
+        padding: 48px 28px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1, .hero-sub, .hero-actions, .hero-badge {
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    .hero-badge { animation-delay: 0s; }
+    .hero h1 { animation-delay: 0.1s; }
+    .hero-sub { animation-delay: 0.2s; }
+    .hero-actions { animation-delay: 0.3s; }
+
+    .hero-preview {
+      animation: fadeInUp 0.8s ease-out 0.4s backwards;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon" style="background:none;box-shadow:none;padding:0;overflow:hidden;width:38px;height:38px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="38" height="38">
+            <defs>
+              <clipPath id="nav-clip"><rect width="1024" height="1024" rx="224" ry="224"/></clipPath>
+            </defs>
+            <g clip-path="url(#nav-clip)">
+              <defs>
+                <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#30B0C7"/>
+                  <stop offset="100%" stop-color="#007AFF"/>
+                </linearGradient>
+              </defs>
+              <rect width="1024" height="1024" fill="url(#navGrad)"/>
+              <circle cx="512" cy="512" r="328" fill="none" stroke="#FFFFFF" stroke-width="28" opacity="0.22"/>
+              <g transform="translate(512,512) rotate(-28) scale(30) translate(-12,-12)">
+                <path fill="#FFFFFF" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <span class="logo-text">Shared Trip Planner</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#contact">Contact</a>
+        <a href="#download" class="nav-cta">Download</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="hero-badge-dot">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </span>
+      For iPhone &amp; iPad
+    </div>
+    <h1>Plan the trip together.<br><span>Vote, then go.</span></h1>
+    <p class="hero-sub">
+      Shared Trip Planner is a private workspace for travel companions—day-by-day itinerary, activity ideas you vote on, reservations, packing lists, and expenses. Synced through your iCloud. No ads. No subscription.
+    </p>
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Coming soon on the App Store
+      </a>
+      <a href="#features" class="btn-secondary">Learn more</a>
+    </div>
+
+    <div class="hero-preview">
+      <div class="preview-window">
+        <div class="preview-titlebar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="preview-content">
+          <div>
+            <div class="section-label" style="text-align:left;margin-bottom:8px;">Lisbon Friends Trip</div>
+            <div class="stat-grid">
+              <div class="mini-stat">
+                <div class="v">7</div>
+                <div class="l">Days</div>
+              </div>
+              <div class="mini-stat">
+                <div class="v">4</div>
+                <div class="l">Travelers</div>
+              </div>
+              <div class="mini-stat">
+                <div class="v">3</div>
+                <div class="l">Open votes</div>
+              </div>
+              <div class="mini-stat">
+                <div class="v">€148</div>
+                <div class="l">Shared expenses</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-list">
+            <div class="plist-row">
+              <div>
+                <div class="name">Fado dinner in Alfama<span class="tag">Leading</span></div>
+                <div class="meta">Dinner · Clube de Fado · 3 votes</div>
+              </div>
+              <div class="qty">3</div>
+            </div>
+            <div class="plist-row warn">
+              <div>
+                <div class="name">Sintra vs Oceanário</div>
+                <div class="meta">Thursday afternoon · Tied — organizer decides</div>
+              </div>
+              <div class="qty">2–2</div>
+            </div>
+            <div class="plist-row">
+              <div>
+                <div class="name">Ride Tram 28</div>
+                <div class="meta">Confirmed · Alfama · 9:00</div>
+              </div>
+              <div class="qty">✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything for the trip—nothing for the group chat</h2>
+    <p class="section-sub">Itinerary, ideas, votes, reservations, packing, and expenses in one private workspace you share with travel companions.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon fi-a"><span>📅</span></div>
+        <h3>Day-by-day itinerary</h3>
+        <p>Confirmed plans with times, places, notes, and maps handoff. The itinerary is the source of truth for calendar and PDF export.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-b"><span>✓</span></div>
+        <h3>Ideas &amp; voting</h3>
+        <p>Anyone can suggest an activity. Support the ideas you like. Ties stay ties until an organizer confirms a winner into the itinerary.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-c"><span>🎫</span></div>
+        <h3>Reservations</h3>
+        <p>Keep flights, lodging, restaurants, and tickets together—confirmation codes, dates, and attachments, without forwarding emails.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-d"><span>$</span></div>
+        <h3>Expenses that settle</h3>
+        <p>Log who paid, who participated, and how to split. See balances and a settlement summary. Export CSV when you need it.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-e"><span>☁</span></div>
+        <h3>Private iCloud share</h3>
+        <p>Each trip is independently shareable through a private CloudKit zone. No public links, no developer server, no accounts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-f"><span>🧳</span></div>
+        <h3>Packing &amp; lists</h3>
+        <p>Shared checklists with assignees and checked state—packing, groceries, or whatever the group needs to remember.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-g"><span>↗</span></div>
+        <h3>PDF, calendar &amp; CSV</h3>
+        <p>Export the confirmed itinerary as PDF or to Calendar. Optionally include the voting appendix. Expense CSV stays independent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how-it-works">
+    <div class="how-inner">
+      <div class="section-label">How it works</div>
+      <h2 class="section-title">From first idea to a shared itinerary</h2>
+      <p class="section-sub">Three steps from a quiet local trip to a group that actually agrees on dinner.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Create the trip</h3>
+          <p>Name, destination, dates, time zones, and currency. Start locally—iCloud is optional until you share.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Suggest and vote</h3>
+          <p>Companions propose activities for a day. Support the ones you want. An organizer confirms winners into the itinerary.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Invite the group</h3>
+          <p>Unlock Full Access to create shared trips. Accepting an invitation is always free—companions never need to buy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-banner">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-value">$19.99</div>
+        <div class="stat-label">One-time Full Access</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Developer servers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">PDF</div>
+        <div class="stat-label">+ CSV &amp; calendar</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">Private</div>
+        <div class="stat-label">Your iCloud data</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="download">
+    <div class="cta-card">
+      <h2>Your trip. Your group. Your iCloud.</h2>
+      <p>Free includes one local trip and 20 confirmed itinerary entries. Full Access unlocks unlimited owned trips, expenses, attachments, exports, and creating shared trips—with Family Sharing. No subscription. Accepting an invite is always free.</p>
+      <a href="#contact" class="btn-white">
+        Get notified at launch
+      </a>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-title">Questions &amp; suggestions</h2>
+        <p class="section-sub">Have a question, bug report, or feature idea? Send us a message — we read every one.</p>
+      </div>
+      <div class="contact-form-card">
+        <form action="https://formspree.io/f/xwkglvnl" method="POST" class="contact-form">
+          <input type="hidden" name="_subject" value="Shared Trip Planner — Feedback" />
+          <input type="hidden" name="source" value="app:sharedtripplanner" />
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="What's on your mind?" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            Send Message
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-copy">&copy; 2026 Shared Trip Planner.</span>
+      </div>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="#contact">Contact</a>
+        <a href="https://www.generativenetworks.com" target="_blank" rel="noopener noreferrer">Generative Networks</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPH3H835"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1873247050036910');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1873247050036910&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+</body>
+</html>

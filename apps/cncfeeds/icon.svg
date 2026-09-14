@@ -1,0 +1,36 @@
+<svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3D7AA8"/>
+      <stop offset="100%" stop-color="#1E3D54"/>
+    </linearGradient>
+    <clipPath id="iosClip">
+      <rect width="1024" height="1024" rx="224" ry="224"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#iosClip)">
+    <rect width="1024" height="1024" fill="url(#bg)"/>
+
+    <!-- Endmill / router bit -->
+    <g stroke="#0F2433" stroke-width="8" stroke-linejoin="round" fill-rule="nonzero">
+      <!-- Shank -->
+      <rect x="462" y="200" width="100" height="220" rx="12" fill="#B8C5CE"/>
+      <!-- Flute body -->
+      <path d="M412 420 L462 420 L512 780 L562 420 L612 420 L562 820 L462 820 Z" fill="#E8EDF2"/>
+      <!-- Flute grooves -->
+      <path d="M472 460 L502 760" stroke="#94A8B8" stroke-width="14" stroke-linecap="round" fill="none"/>
+      <path d="M552 460 L522 760" stroke="#94A8B8" stroke-width="14" stroke-linecap="round" fill="none"/>
+      <!-- Cutting tip -->
+      <path d="M462 820 L512 880 L562 820 Z" fill="#F4A261"/>
+    </g>
+
+    <!-- Speed arcs (feeds & speeds) -->
+    <g fill="none" stroke="#2D7AE4" stroke-width="10" stroke-linecap="round" opacity="0.85">
+      <path d="M220 512 A292 292 0 0 1 380 280"/>
+      <path d="M180 512 A332 332 0 0 1 400 220" opacity="0.55"/>
+      <path d="M804 512 A292 292 0 0 0 644 280"/>
+      <path d="M844 512 A332 332 0 0 0 624 220" opacity="0.55"/>
+    </g>
+  </g>
+</svg>

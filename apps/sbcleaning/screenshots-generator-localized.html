@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clean Job Tracker — App Store Screenshots (DE · FR · IT · PT · ES)</title>
+  <style>
+    :root {
+      --primary: #347AF9;
+      --primary-dark: #1E5FD6;
+      --accent: #5AC8FA;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f1419 0%, #1a2438 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .header p { color: rgba(255,255,255,0.6); }
+
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: -18px auto 24px;
+      flex-wrap: wrap;
+    }
+
+    .lang-bar label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .lang-bar input { display: none; }
+
+    .lang-bar label:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(52, 122, 249, 0.22);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(52, 122, 249, 0.45);
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(52, 122, 249, 0.55);
+    }
+    button.secondary {
+      background: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    button.secondary:hover { background: rgba(255,255,255,0.2); }
+
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .screenshot-label { color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+
+    .screenshot {
+      width: 428px;
+      height: 926px;
+      background: linear-gradient(180deg, #347AF9 0%, #1E5FD6 50%, #153d7a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .headline {
+      color: white;
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.25;
+      margin-bottom: 6px;
+      z-index: 1;
+    }
+
+    .subheadline {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 14px;
+      z-index: 1;
+    }
+
+    .screenshot-placeholder {
+      width: 300px;
+      height: 652px;
+      background: rgba(255,255,255,0.1);
+      border: 3px dashed rgba(255,255,255,0.4);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .screenshot-placeholder .placeholder-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .screenshot-placeholder .placeholder-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.6; }
+    .screenshot-placeholder .placeholder-hint { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 8px; }
+    .screenshot-placeholder img { width: 100%; height: 100%; object-fit: contain; border-radius: 21px; }
+
+    .instructions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 40px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .instructions h3 { color: var(--accent); margin-bottom: 12px; }
+    .instructions ol { padding-left: 20px; color: rgba(255,255,255,0.7); line-height: 1.8; }
+    .instructions code { background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+
+    canvas { display: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1 data-i18n="ui.headerTitle">App Store Screenshots</h1>
+    <p data-i18n="ui.headerSubtitle">Clean Job Tracker — iPhone 6.5&Prime; frame · demo data loads automatically in Simulator</p>
+  </div>
+
+  <div class="lang-bar" role="radiogroup" aria-label="Language">
+    <label><input type="radio" name="lang" value="de" checked> Deutsch</label>
+    <label><input type="radio" name="lang" value="fr"> Français</label>
+    <label><input type="radio" name="lang" value="it"> Italiano</label>
+    <label><input type="radio" name="lang" value="pt"> Português</label>
+    <label><input type="radio" name="lang" value="es"> Español</label>
+  </div>
+
+  <div class="controls">
+    <button onclick="downloadAll()" data-i18n="ui.downloadAll">Download All Screenshots</button>
+    <button class="secondary" onclick="downloadAllLanguages()" data-i18n="ui.downloadAllLangs">Download All Languages</button>
+    <button class="secondary" onclick="downloadCurrent(1)" data-i18n="ui.btn1">1 · Today</button>
+    <button class="secondary" onclick="downloadCurrent(2)" data-i18n="ui.btn2">2 · Calendar</button>
+    <button class="secondary" onclick="downloadCurrent(3)" data-i18n="ui.btn3">3 · Jobs</button>
+    <button class="secondary" onclick="downloadCurrent(4)" data-i18n="ui.btn4">4 · Clients</button>
+    <button class="secondary" onclick="downloadCurrent(5)" data-i18n="ui.btn5">5 · Features</button>
+    <button class="secondary" onclick="downloadCurrent(6)" data-i18n="ui.btn6">6 · Value</button>
+  </div>
+
+  <div class="screenshots">
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot1">
+        <div class="headline" data-i18n="s1.headline">Your day<br>at a glance</div>
+        <div class="subheadline" data-i18n="s1.subheadline">Today tab — jobs, stats &amp; earnings</div>
+        <div class="screenshot-placeholder" id="placeholder1" onclick="triggerUpload(1)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="s1.placeholder">Simulator screenshot:<br><strong>Today</strong> tab</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="s1.label">1. Today</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot2">
+        <div class="headline" data-i18n="s2.headline">Schedule every<br>clean</div>
+        <div class="subheadline" data-i18n="s2.subheadline">Calendar with recurring jobs</div>
+        <div class="screenshot-placeholder" id="placeholder2" onclick="triggerUpload(2)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="s2.placeholder">Simulator screenshot:<br><strong>Calendar</strong> tab</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="s2.label">2. Calendar</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot3">
+        <div class="headline" data-i18n="s3.headline">Track every<br>job</div>
+        <div class="subheadline" data-i18n="s3.subheadline">Status, checklist &amp; payments</div>
+        <div class="screenshot-placeholder" id="placeholder3" onclick="triggerUpload(3)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="s3.placeholder">Simulator screenshot:<br><strong>Jobs</strong> or job detail</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="s3.label">3. Jobs</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot4">
+        <div class="headline" data-i18n="s4.headline">Clients in<br>one place</div>
+        <div class="subheadline" data-i18n="s4.subheadline">Contact info, history &amp; revenue</div>
+        <div class="screenshot-placeholder" id="placeholder4" onclick="triggerUpload(4)">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text" data-i18n="s4.placeholder">Simulator screenshot:<br><strong>Clients</strong> tab</div>
+          <div class="placeholder-hint" data-i18n="ui.placeholderHint">Recommended: 1170 × 2532px</div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="s4.label">4. Clients</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot5" style="justify-content: center; gap: 24px;">
+        <div class="headline" style="font-size: 2.6rem;" data-i18n="s5.headline">Built for<br>solo cleaners</div>
+        <div class="subheadline" style="font-size: 1.2rem; max-width: 360px;" data-i18n="s5.subheadline">
+          Fast iPhone workflow — offline-first, private iCloud.
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; z-index: 1; width: 100%; max-width: 390px;">
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">🔁</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.feat1Title">Recurring jobs</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.feat1Desc">Weekly, biweekly &amp; monthly</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">✅</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.feat2Title">Checklists</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.feat2Desc">Templates &amp; per-job completion</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">📷</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.feat3Title">Before &amp; after photos</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.feat3Desc">Attach in two taps</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">📄</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.feat4Title">PDF export</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.feat4Desc">Printable job summaries</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 18px; padding: 18px;">
+            <div style="font-size: 2.2rem;">☁️</div>
+            <div>
+              <div style="color: white; font-weight: 700; font-size: 1.15rem;" data-i18n="s5.feat5Title">Private iCloud</div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;" data-i18n="s5.feat5Desc">No ads · No subscription · No servers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="s5.label">5. Features</div>
+    </div>
+
+    <div class="screenshot-wrapper">
+      <div class="screenshot" id="screenshot6" style="justify-content: center; gap: 28px; padding-top: 48px;">
+        <div class="headline" style="font-size: 2.5rem;" data-i18n="s6.headline">Simple &amp;<br>straightforward</div>
+        <div class="subheadline" style="font-size: 1.15rem; max-width: 360px; margin-bottom: 8px;" data-i18n="s6.subheadline">
+          One purchase. No tricks.
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px; z-index: 1; width: 100%; max-width: 390px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">🚫</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s6.noSub">No subscription</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">📵</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s6.noAds">No Ads</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">🔄</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s6.freeUpdates">Free Updates</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(52,199,89,0.35); border: 2px solid rgba(255,255,255,0.25); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 20px;">
+            <div style="font-size: 2.4rem; line-height: 1;">⭐</div>
+            <div style="color: white; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em;" data-i18n="s6.support">Amazing Support</div>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-label" data-i18n="s6.label">6. No subscription · No ads</div>
+    </div>
+
+  </div>
+
+  <div class="instructions">
+    <h3 data-i18n="ui.guideTitle">Screenshot export guide</h3>
+    <ol>
+      <li data-i18n="ui.guide1">Run <strong>Clean Job Tracker</strong> in the <strong>iOS Simulator</strong> — demo data is seeded automatically with dates relative to today.</li>
+      <li data-i18n="ui.guide2">Capture each tab (Today, Calendar, Jobs, Clients) with Cmd+S or paste (Cmd+V) into the placeholders.</li>
+      <li data-i18n="ui.guide3">Click <strong>Download All Screenshots</strong> for six PNGs at <code>1284 × 2778px</code> (6.5&Prime; display). Screenshots 5–6 are marketing-only (no app capture needed).</li>
+      <li data-i18n="ui.guide4">Upload to App Store Connect under the <strong>6.5&Prime; iPhone</strong> screenshot slot.</li>
+      <li data-i18n="ui.guide5">Filenames include the language code: e.g. <code>CleanJobTracker-iPhone-Screenshot-de-1.png</code></li>
+    </ol>
+  </div>
+
+  <input type="file" id="fileInput1" accept="image/*" style="display:none" onchange="handleFileSelect(event, 1)">
+  <input type="file" id="fileInput2" accept="image/*" style="display:none" onchange="handleFileSelect(event, 2)">
+  <input type="file" id="fileInput3" accept="image/*" style="display:none" onchange="handleFileSelect(event, 3)">
+  <input type="file" id="fileInput4" accept="image/*" style="display:none" onchange="handleFileSelect(event, 4)">
+
+  <canvas id="canvas"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    const EXPORT_WIDTH = 1284;
+    const EXPORT_HEIGHT = 2778;
+    const SCALE = 3;
+    const BG_FILL = '#1E5FD6';
+    const DOWNLOAD_PREFIX = 'CleanJobTracker-iPhone-Screenshot-';
+    const SCREENSHOT_COUNT = 6;
+    const LANG_CODES = ['de', 'fr', 'it', 'pt', 'es'];
+    let currentLang = 'de';
+
+    const COPY = {
+      de: {
+        ui: {
+          headerTitle: 'App Store Screenshots',
+          headerSubtitle: 'Clean Job Tracker — iPhone 6,5″ Rahmen · Demo-Daten laden automatisch im Simulator',
+          downloadAll: 'Alle Screenshots herunterladen',
+          downloadAllLangs: 'Alle Sprachen herunterladen',
+          btn1: '1 · Heute', btn2: '2 · Kalender', btn3: '3 · Aufträge', btn4: '4 · Kunden', btn5: '5 · Funktionen', btn6: '6 · Wert',
+          placeholderHint: 'Empfohlen: 1170 × 2532px',
+          guideTitle: 'Screenshot-Export-Anleitung',
+          guide1: 'Starte <strong>Clean Job Tracker</strong> im <strong>iOS Simulator</strong> — Demo-Daten werden automatisch mit datumsbezogenen Terminen geladen.',
+          guide2: 'Erfasse jeden Tab (Heute, Kalender, Aufträge, Kunden) mit Cmd+S oder füge per Cmd+V in die Platzhalter ein.',
+          guide3: 'Klicke auf <strong>Alle Screenshots herunterladen</strong> für sechs PNGs in <code>1284 × 2778px</code> (6,5″ Display). Screenshots 5–6 sind nur Marketing (kein App-Screenshot nötig).',
+          guide4: 'Lade sie in App Store Connect unter dem <strong>6,5″ iPhone</strong>-Screenshot-Slot hoch.',
+          guide5: 'Dateinamen enthalten den Sprachcode: z. B. <code>CleanJobTracker-iPhone-Screenshot-de-1.png</code>',
+        },
+        s1: {
+          headline: 'Dein Tag<br>auf einen Blick',
+          subheadline: 'Heute-Tab — Aufträge, Statistiken & Einnahmen',
+          placeholder: 'Simulator-Screenshot:<br><strong>Heute</strong>-Tab',
+          label: '1. Heute',
+        },
+        s2: {
+          headline: 'Jede Reinigung<br>planen',
+          subheadline: 'Kalender mit wiederkehrenden Aufträgen',
+          placeholder: 'Simulator-Screenshot:<br><strong>Kalender</strong>-Tab',
+          label: '2. Kalender',
+        },
+        s3: {
+          headline: 'Jeden Auftrag<br>verfolgen',
+          subheadline: 'Status, Checkliste & Zahlungen',
+          placeholder: 'Simulator-Screenshot:<br><strong>Aufträge</strong> oder Detailansicht',
+          label: '3. Aufträge',
+        },
+        s4: {
+          headline: 'Kunden an<br>einem Ort',
+          subheadline: 'Kontaktdaten, Verlauf & Umsatz',
+          placeholder: 'Simulator-Screenshot:<br><strong>Kunden</strong>-Tab',
+          label: '4. Kunden',
+        },
+        s5: {
+          headline: 'Für Solo-Reiniger<br>gemacht',
+          subheadline: 'Schneller iPhone-Workflow — offline-first, private iCloud.',
+          feat1Title: 'Wiederkehrende Aufträge', feat1Desc: 'Wöchentlich, zweiwöchentlich & monatlich',
+          feat2Title: 'Checklisten', feat2Desc: 'Vorlagen & Abschluss pro Auftrag',
+          feat3Title: 'Vorher- & Nachher-Fotos', feat3Desc: 'In zwei Taps anhängen',
+          feat4Title: 'PDF-Export', feat4Desc: 'Druckbare Auftragszusammenfassungen',
+          feat5Title: 'Private iCloud', feat5Desc: 'Keine Werbung · Kein Abo · Keine Server',
+          label: '5. Funktionen',
+        },
+        s6: {
+          headline: 'Einfach &<br>unkompliziert',
+          subheadline: 'Ein Kauf. Keine Tricks.',
+          noSub: 'Kein Abo', noAds: 'Keine Werbung', freeUpdates: 'Kostenlose Updates', support: 'Toller Support',
+          label: '6. Kein Abo · Keine Werbung',
+        },
+      },
+      fr: {
+        ui: {
+          headerTitle: 'Captures App Store',
+          headerSubtitle: 'Clean Job Tracker — cadre iPhone 6,5″ · les données démo se chargent automatiquement dans le Simulator',
+          downloadAll: 'Télécharger toutes les captures',
+          downloadAllLangs: 'Télécharger toutes les langues',
+          btn1: '1 · Aujourd\'hui', btn2: '2 · Calendrier', btn3: '3 · Missions', btn4: '4 · Clients', btn5: '5 · Fonctions', btn6: '6 · Valeur',
+          placeholderHint: 'Recommandé : 1170 × 2532px',
+          guideTitle: 'Guide d\'export des captures',
+          guide1: 'Lancez <strong>Clean Job Tracker</strong> dans le <strong>Simulator iOS</strong> — les données démo sont chargées automatiquement avec des dates relatives à aujourd\'hui.',
+          guide2: 'Capturez chaque onglet (Aujourd\'hui, Calendrier, Missions, Clients) avec Cmd+S ou collez (Cmd+V) dans les emplacements.',
+          guide3: 'Cliquez sur <strong>Télécharger toutes les captures</strong> pour six PNG à <code>1284 × 2778px</code> (écran 6,5″). Les captures 5–6 sont marketing uniquement (pas de capture d\'app nécessaire).',
+          guide4: 'Téléversez dans App Store Connect sous l\'emplacement <strong>iPhone 6,5″</strong>.',
+          guide5: 'Les noms de fichier incluent le code langue : ex. <code>CleanJobTracker-iPhone-Screenshot-fr-1.png</code>',
+        },
+        s1: {
+          headline: 'Votre journée<br>en un coup d\'œil',
+          subheadline: 'Onglet Aujourd\'hui — missions, stats & revenus',
+          placeholder: 'Capture Simulator :<br>onglet <strong>Aujourd\'hui</strong>',
+          label: '1. Aujourd\'hui',
+        },
+        s2: {
+          headline: 'Planifiez chaque<br>ménage',
+          subheadline: 'Calendrier avec missions récurrentes',
+          placeholder: 'Capture Simulator :<br>onglet <strong>Calendrier</strong>',
+          label: '2. Calendrier',
+        },
+        s3: {
+          headline: 'Suivez chaque<br>mission',
+          subheadline: 'Statut, checklist & paiements',
+          placeholder: 'Capture Simulator :<br><strong>Missions</strong> ou détail',
+          label: '3. Missions',
+        },
+        s4: {
+          headline: 'Clients au<br>même endroit',
+          subheadline: 'Coordonnées, historique & revenus',
+          placeholder: 'Capture Simulator :<br>onglet <strong>Clients</strong>',
+          label: '4. Clients',
+        },
+        s5: {
+          headline: 'Conçu pour les<br>femmes de ménage solo',
+          subheadline: 'Workflow iPhone rapide — offline-first, iCloud privé.',
+          feat1Title: 'Missions récurrentes', feat1Desc: 'Hebdomadaire, bihebdomadaire & mensuel',
+          feat2Title: 'Checklists', feat2Desc: 'Modèles & complétion par mission',
+          feat3Title: 'Photos avant & après', feat3Desc: 'Joignez en deux taps',
+          feat4Title: 'Export PDF', feat4Desc: 'Résumés de mission imprimables',
+          feat5Title: 'iCloud privé', feat5Desc: 'Pas de pub · Pas d\'abonnement · Pas de serveurs',
+          label: '5. Fonctions',
+        },
+        s6: {
+          headline: 'Simple &<br>direct',
+          subheadline: 'Un achat. Pas de pièges.',
+          noSub: 'Sans abonnement', noAds: 'Pas de pub', freeUpdates: 'Mises à jour gratuites', support: 'Support exceptionnel',
+          label: '6. Sans abonnement · Pas de pub',
+        },
+      },
+      it: {
+        ui: {
+          headerTitle: 'Screenshot App Store',
+          headerSubtitle: 'Clean Job Tracker — cornice iPhone 6,5″ · i dati demo si caricano automaticamente nel Simulator',
+          downloadAll: 'Scarica tutti gli screenshot',
+          downloadAllLangs: 'Scarica tutte le lingue',
+          btn1: '1 · Oggi', btn2: '2 · Calendario', btn3: '3 · Lavori', btn4: '4 · Clienti', btn5: '5 · Funzioni', btn6: '6 · Valore',
+          placeholderHint: 'Consigliato: 1170 × 2532px',
+          guideTitle: 'Guida all\'export screenshot',
+          guide1: 'Avvia <strong>Clean Job Tracker</strong> nel <strong>Simulator iOS</strong> — i dati demo vengono caricati automaticamente con date relative a oggi.',
+          guide2: 'Cattura ogni scheda (Oggi, Calendario, Lavori, Clienti) con Cmd+S o incolla (Cmd+V) nei segnaposto.',
+          guide3: 'Clicca <strong>Scarica tutti gli screenshot</strong> per sei PNG a <code>1284 × 2778px</code> (display 6,5″). Gli screenshot 5–6 sono solo marketing (nessuna cattura app necessaria).',
+          guide4: 'Carica su App Store Connect nello slot <strong>iPhone 6,5″</strong>.',
+          guide5: 'I nomi file includono il codice lingua: es. <code>CleanJobTracker-iPhone-Screenshot-it-1.png</code>',
+        },
+        s1: {
+          headline: 'La tua giornata<br>a colpo d\'occhio',
+          subheadline: 'Scheda Oggi — lavori, statistiche & guadagni',
+          placeholder: 'Screenshot Simulator:<br>scheda <strong>Oggi</strong>',
+          label: '1. Oggi',
+        },
+        s2: {
+          headline: 'Pianifica ogni<br>pulizia',
+          subheadline: 'Calendario con lavori ricorrenti',
+          placeholder: 'Screenshot Simulator:<br>scheda <strong>Calendario</strong>',
+          label: '2. Calendario',
+        },
+        s3: {
+          headline: 'Monitora ogni<br>lavoro',
+          subheadline: 'Stato, checklist & pagamenti',
+          placeholder: 'Screenshot Simulator:<br><strong>Lavori</strong> o dettaglio',
+          label: '3. Lavori',
+        },
+        s4: {
+          headline: 'Clienti in<br>un solo posto',
+          subheadline: 'Contatti, storico & ricavi',
+          placeholder: 'Screenshot Simulator:<br>scheda <strong>Clienti</strong>',
+          label: '4. Clienti',
+        },
+        s5: {
+          headline: 'Pensato per<br>addetti alle pulizie solo',
+          subheadline: 'Workflow iPhone veloce — offline-first, iCloud privato.',
+          feat1Title: 'Lavori ricorrenti', feat1Desc: 'Settimanale, bisettimanale & mensile',
+          feat2Title: 'Checklist', feat2Desc: 'Modelli & completamento per lavoro',
+          feat3Title: 'Foto prima e dopo', feat3Desc: 'Allega in due tap',
+          feat4Title: 'Export PDF', feat4Desc: 'Riepiloghi lavoro stampabili',
+          feat5Title: 'iCloud privato', feat5Desc: 'Niente ads · Nessun abbonamento · Nessun server',
+          label: '5. Funzioni',
+        },
+        s6: {
+          headline: 'Semplice &<br>diretto',
+          subheadline: 'Un acquisto. Nessun trucco.',
+          noSub: 'Nessun abbonamento', noAds: 'Niente ads', freeUpdates: 'Aggiornamenti gratuiti', support: 'Supporto eccezionale',
+          label: '6. Nessun abbonamento · Niente ads',
+        },
+      },
+      pt: {
+        ui: {
+          headerTitle: 'Screenshots da App Store',
+          headerSubtitle: 'Clean Job Tracker — moldura iPhone 6,5″ · dados demo carregam automaticamente no Simulator',
+          downloadAll: 'Baixar todos os screenshots',
+          downloadAllLangs: 'Baixar todos os idiomas',
+          btn1: '1 · Hoje', btn2: '2 · Calendário', btn3: '3 · Serviços', btn4: '4 · Clientes', btn5: '5 · Recursos', btn6: '6 · Valor',
+          placeholderHint: 'Recomendado: 1170 × 2532px',
+          guideTitle: 'Guia de exportação de screenshots',
+          guide1: 'Execute <strong>Clean Job Tracker</strong> no <strong>Simulator iOS</strong> — os dados demo são carregados automaticamente com datas relativas a hoje.',
+          guide2: 'Capture cada aba (Hoje, Calendário, Serviços, Clientes) com Cmd+S ou cole (Cmd+V) nos espaços reservados.',
+          guide3: 'Clique em <strong>Baixar todos os screenshots</strong> para seis PNGs em <code>1284 × 2778px</code> (display 6,5″). Screenshots 5–6 são apenas marketing (sem captura do app).',
+          guide4: 'Envie ao App Store Connect no slot <strong>iPhone 6,5″</strong>.',
+          guide5: 'Os nomes dos arquivos incluem o código do idioma: ex. <code>CleanJobTracker-iPhone-Screenshot-pt-1.png</code>',
+        },
+        s1: {
+          headline: 'Seu dia<br>num relance',
+          subheadline: 'Aba Hoje — serviços, estatísticas & ganhos',
+          placeholder: 'Screenshot do Simulator:<br>aba <strong>Hoje</strong>',
+          label: '1. Hoje',
+        },
+        s2: {
+          headline: 'Agende cada<br>limpeza',
+          subheadline: 'Calendário com serviços recorrentes',
+          placeholder: 'Screenshot do Simulator:<br>aba <strong>Calendário</strong>',
+          label: '2. Calendário',
+        },
+        s3: {
+          headline: 'Acompanhe cada<br>serviço',
+          subheadline: 'Status, checklist & pagamentos',
+          placeholder: 'Screenshot do Simulator:<br><strong>Serviços</strong> ou detalhe',
+          label: '3. Serviços',
+        },
+        s4: {
+          headline: 'Clientes em<br>um só lugar',
+          subheadline: 'Contatos, histórico & receita',
+          placeholder: 'Screenshot do Simulator:<br>aba <strong>Clientes</strong>',
+          label: '4. Clientes',
+        },
+        s5: {
+          headline: 'Feito para<br>diaristas solo',
+          subheadline: 'Fluxo rápido no iPhone — offline-first, iCloud privado.',
+          feat1Title: 'Serviços recorrentes', feat1Desc: 'Semanal, quinzenal & mensal',
+          feat2Title: 'Checklists', feat2Desc: 'Modelos & conclusão por serviço',
+          feat3Title: 'Fotos antes e depois', feat3Desc: 'Anexe em dois toques',
+          feat4Title: 'Exportar PDF', feat4Desc: 'Resumos de serviço imprimíveis',
+          feat5Title: 'iCloud privado', feat5Desc: 'Sem anúncios · Sem assinatura · Sem servidores',
+          label: '5. Recursos',
+        },
+        s6: {
+          headline: 'Simples &<br>direto',
+          subheadline: 'Uma compra. Sem truques.',
+          noSub: 'Sem assinatura', noAds: 'Sem anúncios', freeUpdates: 'Atualizações gratuitas', support: 'Suporte incrível',
+          label: '6. Sem assinatura · Sem anúncios',
+        },
+      },
+      es: {
+        ui: {
+          headerTitle: 'Capturas App Store',
+          headerSubtitle: 'Clean Job Tracker — marco iPhone 6,5″ · los datos demo se cargan automáticamente en el Simulator',
+          downloadAll: 'Descargar todas las capturas',
+          downloadAllLangs: 'Descargar todos los idiomas',
+          btn1: '1 · Hoy', btn2: '2 · Calendario', btn3: '3 · Trabajos', btn4: '4 · Clientes', btn5: '5 · Funciones', btn6: '6 · Valor',
+          placeholderHint: 'Recomendado: 1170 × 2532px',
+          guideTitle: 'Guía de exportación de capturas',
+          guide1: 'Ejecuta <strong>Clean Job Tracker</strong> en el <strong>Simulator iOS</strong> — los datos demo se cargan automáticamente con fechas relativas a hoy.',
+          guide2: 'Captura cada pestaña (Hoy, Calendario, Trabajos, Clientes) con Cmd+S o pega (Cmd+V) en los marcadores.',
+          guide3: 'Haz clic en <strong>Descargar todas las capturas</strong> para seis PNG a <code>1284 × 2778px</code> (pantalla 6,5″). Las capturas 5–6 son solo marketing (no hace falta captura de la app).',
+          guide4: 'Súbelas a App Store Connect en la ranura <strong>iPhone 6,5″</strong>.',
+          guide5: 'Los nombres de archivo incluyen el código de idioma: ej. <code>CleanJobTracker-iPhone-Screenshot-es-1.png</code>',
+        },
+        s1: {
+          headline: 'Tu día<br>de un vistazo',
+          subheadline: 'Pestaña Hoy — trabajos, estadísticas & ingresos',
+          placeholder: 'Captura del Simulator:<br>pestaña <strong>Hoy</strong>',
+          label: '1. Hoy',
+        },
+        s2: {
+          headline: 'Programa cada<br>limpieza',
+          subheadline: 'Calendario con trabajos recurrentes',
+          placeholder: 'Captura del Simulator:<br>pestaña <strong>Calendario</strong>',
+          label: '2. Calendario',
+        },
+        s3: {
+          headline: 'Controla cada<br>trabajo',
+          subheadline: 'Estado, checklist & pagos',
+          placeholder: 'Captura del Simulator:<br><strong>Trabajos</strong> o detalle',
+          label: '3. Trabajos',
+        },
+        s4: {
+          headline: 'Clientes en<br>un solo lugar',
+          subheadline: 'Contactos, historial & ingresos',
+          placeholder: 'Captura del Simulator:<br>pestaña <strong>Clientes</strong>',
+          label: '4. Clientes',
+        },
+        s5: {
+          headline: 'Hecho para<br>limpiadores solo',
+          subheadline: 'Flujo rápido en iPhone — offline-first, iCloud privado.',
+          feat1Title: 'Trabajos recurrentes', feat1Desc: 'Semanal, quincenal & mensual',
+          feat2Title: 'Checklists', feat2Desc: 'Plantillas & finalización por trabajo',
+          feat3Title: 'Fotos antes y después', feat3Desc: 'Adjunta en dos toques',
+          feat4Title: 'Exportar PDF', feat4Desc: 'Resúmenes de trabajo imprimibles',
+          feat5Title: 'iCloud privado', feat5Desc: 'Sin anuncios · Sin suscripción · Sin servidores',
+          label: '5. Funciones',
+        },
+        s6: {
+          headline: 'Simple &<br>directo',
+          subheadline: 'Una compra. Sin trucos.',
+          noSub: 'Sin suscripción', noAds: 'Sin anuncios', freeUpdates: 'Actualizaciones gratis', support: 'Soporte increíble',
+          label: '6. Sin suscripción · Sin anuncios',
+        },
+      },
+    };
+
+    function t(lang, key) {
+      const parts = key.split('.');
+      let node = COPY[lang];
+      for (const part of parts) node = node?.[part];
+      return node ?? '';
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const value = t(lang, el.dataset.i18n);
+        if (value.includes('<br>') || value.includes('<strong>') || value.includes('<code>') || value.includes('&amp;')) {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
+      });
+    }
+
+    document.querySelectorAll('input[name="lang"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        if (!radio.checked) return;
+        applyLanguage(radio.value);
+      });
+    });
+
+    function triggerUpload(num) {
+      document.getElementById(`fileInput${num}`).click();
+    }
+
+    function handleFileSelect(event, num) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          setPlaceholderImage(num, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function setPlaceholderImage(num, src) {
+      const placeholder = document.getElementById(`placeholder${num}`);
+      placeholder.innerHTML = `<img src="${src}" alt="Screenshot ${num}">`;
+      placeholder.style.border = 'none';
+      placeholder.style.background = 'transparent';
+    }
+
+    document.addEventListener('paste', function(e) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            let targetNum = 1;
+            for (let j = 1; j <= 4; j++) {
+              const placeholder = document.getElementById(`placeholder${j}`);
+              if (placeholder && !placeholder.querySelector('img')) {
+                targetNum = j;
+                break;
+              }
+            }
+            setPlaceholderImage(targetNum, event.target.result);
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+
+    function downloadDataUrl(dataUrl, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+    }
+
+    async function downloadCurrent(num, lang = currentLang) {
+      const savedLang = currentLang;
+      const radio = document.querySelector(`input[name="lang"][value="${lang}"]`);
+      if (lang !== currentLang && radio) {
+        radio.checked = true;
+        applyLanguage(lang);
+        await new Promise((r) => setTimeout(r, 150));
+      }
+
+      const element = document.getElementById(`screenshot${num}`);
+
+      try {
+        const canvas = await html2canvas(element, {
+          scale: SCALE,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: BG_FILL,
+          width: 428,
+          height: 926
+        });
+
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = EXPORT_WIDTH;
+        finalCanvas.height = EXPORT_HEIGHT;
+        const ctx = finalCanvas.getContext('2d');
+
+        ctx.fillStyle = BG_FILL;
+        ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+        ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+
+        downloadDataUrl(finalCanvas.toDataURL('image/png'), `${DOWNLOAD_PREFIX}${lang}-${num}.png`);
+      } catch (e) {
+        console.error('Screenshot failed:', e);
+        alert('Screenshot failed. Please try again.');
+      } finally {
+        if (savedLang !== lang) {
+          const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+          if (restore) {
+            restore.checked = true;
+            applyLanguage(savedLang);
+          }
+        }
+      }
+    }
+
+    async function downloadAll() {
+      for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+        await downloadCurrent(i, currentLang);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+
+    async function downloadAllLanguages() {
+      const savedLang = currentLang;
+      for (const lang of LANG_CODES) {
+        for (let i = 1; i <= SCREENSHOT_COUNT; i++) {
+          await downloadCurrent(i, lang);
+          await new Promise(r => setTimeout(r, 500));
+        }
+      }
+      const restore = document.querySelector(`input[name="lang"][value="${savedLang}"]`);
+      if (restore) {
+        restore.checked = true;
+        applyLanguage(savedLang);
+      }
+    }
+
+    applyLanguage('de');
+  </script>
+</body>
+</html>
