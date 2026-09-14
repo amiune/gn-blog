@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shared Wedding Planner — App Icon</title>
+  <title>Our Wedding Fiesta — App Icon</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -38,7 +38,7 @@
   </style>
 </head>
 <body>
-  <h1>Shared Wedding Planner</h1>
+  <h1>Our Wedding Fiesta</h1>
   <p>App icon — interlocking rings on accent #B84A7A</p>
 
   <div class="icon-wrap">
@@ -92,7 +92,7 @@
       const blob = new Blob([svgData], { type: 'image/svg+xml' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = square ? 'vowplan-icon-square.svg' : 'vowplan-icon.svg';
+      a.download = square ? 'ourweddingfiesta-icon-square.svg' : 'ourweddingfiesta-icon.svg';
       a.click();
       URL.revokeObjectURL(a.href);
     }
@@ -108,7 +108,7 @@
         ctx.drawImage(img, 0, 0, size, size);
         const a = document.createElement('a');
         a.href = canvas.toDataURL('image/png');
-        a.download = 'vowplan-icon-' + size + (square ? '-square' : '') + '.png';
+        a.download = 'ourweddingfiesta-icon-' + size + (square ? '-square' : '') + '.png';
         a.click();
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));

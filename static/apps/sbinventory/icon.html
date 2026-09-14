@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SB Inventory for Makers — App Icon</title>
+  <title>SB Inventory For Makers — App Icon</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -99,7 +99,7 @@
       const blob = new Blob([svgData], { type: 'image/svg+xml' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = square ? 'sbinventory-icon-square.svg' : 'sbinventory-icon.svg';
+      a.download = square ? 'inventoryformakers-icon-square.svg' : 'inventoryformakers-icon.svg';
       a.click();
       URL.revokeObjectURL(a.href);
     }
@@ -115,7 +115,7 @@
         ctx.drawImage(img, 0, 0, size, size);
         const a = document.createElement('a');
         a.href = canvas.toDataURL('image/png');
-        a.download = 'sbinventory-icon-' + size + (square ? '-square' : '') + '.png';
+        a.download = 'inventoryformakers-icon-' + size + (square ? '-square' : '') + '.png';
         a.click();
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));

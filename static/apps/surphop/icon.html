@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surphop — App Icon</title>
+  <title>Kaizeando — App Icon</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -51,8 +51,8 @@
   </style>
 </head>
 <body>
-  <h1>Surphop</h1>
-  <p>App icon — SurphopMark on sky (#5BA8F0 → #2E7AD4)</p>
+  <h1>Kaizeando</h1>
+  <p>App icon — KaizeandoMark on sky (#5BA8F0 → #2E7AD4)</p>
 
   <div class="icon-wrap">
     <svg id="app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
@@ -90,7 +90,7 @@
     <button class="btn-secondary" onclick="downloadPNG(1024, true)">Download PNG 1024px (Square)</button>
   </div>
 
-  <div class="swatches" title="Surphop palette">
+  <div class="swatches" title="Kaizeando palette">
     <div class="swatch" style="background:#4294E8" title="Sky"></div>
     <div class="swatch" style="background:#F0614F" title="Coral"></div>
     <div class="swatch" style="background:#61C7AB" title="Mint"></div>
@@ -117,7 +117,7 @@
       const blob = new Blob([svgData], { type: 'image/svg+xml' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = square ? 'surphop-icon-square.svg' : 'surphop-icon.svg';
+      a.download = square ? 'kaizeando-icon-square.svg' : 'kaizeando-icon.svg';
       a.click();
       URL.revokeObjectURL(a.href);
     }
@@ -133,7 +133,7 @@
         ctx.drawImage(img, 0, 0, size, size);
         const a = document.createElement('a');
         a.href = canvas.toDataURL('image/png');
-        a.download = 'surphop-icon-' + size + (square ? '-square' : '') + '.png';
+        a.download = 'kaizeando-icon-' + size + (square ? '-square' : '') + '.png';
         a.click();
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));

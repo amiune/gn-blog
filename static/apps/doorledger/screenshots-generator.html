@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DoorLedger — App Store Screenshots Generator (iPhone)</title>
+  <title>House Rent Folio — App Store Screenshots Generator (iPhone)</title>
   <style>
     :root {
       --primary: #25746B;
@@ -217,7 +217,7 @@
 <body>
   <div class="header">
     <h1>📱 App Store Screenshots</h1>
-    <p>DoorLedger — iPhone 6.5&Prime; frame · accent #25746B</p>
+    <p>House Rent Folio — iPhone 6.5&Prime; frame · accent #25746B</p>
   </div>
 
   <div class="controls">
@@ -481,7 +481,7 @@
     async function downloadCurrent(num) {
       try {
         const dataUrl = await captureScreenshot(num);
-        downloadDataUrl(dataUrl, `DoorLedger-Screenshot-${num}.png`);
+        downloadDataUrl(dataUrl, `House Rent Folio-Screenshot-${num}.png`);
       } catch (e) {
         console.error('Screenshot failed:', e);
         alert('Screenshot failed. Please try again.');

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shared Pet Care — App Icon</title>
+  <title>Our Mascota — App Icon</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -38,7 +38,7 @@
   </style>
 </head>
 <body>
-  <h1>Shared Pet Care</h1>
+  <h1>Our Mascota</h1>
   <p>App icon — paw + check on app accent</p>
 
   <div class="icon-wrap">
@@ -96,7 +96,7 @@
       const blob = new Blob([svgData], { type: 'image/svg+xml' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = square ? 'sharedpetcare-icon-square.svg' : 'sharedpetcare-icon.svg';
+      a.download = square ? 'ourmascota-icon-square.svg' : 'ourmascota-icon.svg';
       a.click();
       URL.revokeObjectURL(a.href);
     }
@@ -112,7 +112,7 @@
         ctx.drawImage(img, 0, 0, size, size);
         const a = document.createElement('a');
         a.href = canvas.toDataURL('image/png');
-        a.download = 'sharedpetcare-icon-' + size + (square ? '-square' : '') + '.png';
+        a.download = 'ourmascota-icon-' + size + (square ? '-square' : '') + '.png';
         a.click();
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));

@@ -10,10 +10,10 @@
   </defs>
 
   <g clip-path="url(#iosClip)">
-    <!-- Sky fill — SurphopMark background -->
+    <!-- Sky fill — KaizeandoMark background -->
     <rect width="1024" height="1024" fill="url(#bgGrad)"/>
 
-    <!-- Upper-right video frame (rounded rect stroke, offset like SurphopMark) -->
+    <!-- Upper-right video frame (rounded rect stroke, offset like KaizeandoMark) -->
     <rect x="302" y="138" width="584" height="584" rx="184" ry="184"
           fill="none" stroke="#FFFFFF" stroke-width="113"/>
 

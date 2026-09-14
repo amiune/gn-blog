@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HomeRelay — iPad App Store Screenshots Generator</title>
+  <title>House Maintenance Tracker — iPad App Store Screenshots Generator</title>
   <style>
     :root {
       --primary: #276A95;
@@ -216,7 +216,7 @@
 <body>
   <div class="header">
     <h1>📱 iPad App Store Screenshots</h1>
-    <p>HomeRelay — 12.9&Prime;-class canvas (2048 × 2732) · accent #276A95</p>
+    <p>House Maintenance Tracker — 12.9&Prime;-class canvas (2048 × 2732) · accent #276A95</p>
   </div>
 
   <div class="controls">
@@ -465,7 +465,7 @@
 
         ctx.drawImage(canvas, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
 
-        downloadDataUrl(finalCanvas.toDataURL('image/png'), `HomeRelay-iPad-Screenshot-${num}.png`);
+        downloadDataUrl(finalCanvas.toDataURL('image/png'), `House Maintenance Tracker-iPad-Screenshot-${num}.png`);
       } catch (e) {
         console.error('Screenshot failed:', e);
         alert('Screenshot failed. Please try again.');

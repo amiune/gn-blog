@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DoorLedger — App Icon</title>
+  <title>House Rent Folio — App Icon</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -38,7 +38,7 @@
   </style>
 </head>
 <body>
-  <h1>DoorLedger</h1>
+  <h1>House Rent Folio</h1>
   <p>App icon — door and ledger on accent #25746B</p>
 
   <div class="icon-wrap">
@@ -93,7 +93,7 @@
       const blob = new Blob([svgData], { type: 'image/svg+xml' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = square ? 'doorledger-icon-square.svg' : 'doorledger-icon.svg';
+      a.download = square ? 'houserentfolio-icon-square.svg' : 'houserentfolio-icon.svg';
       a.click();
       URL.revokeObjectURL(a.href);
     }
@@ -109,7 +109,7 @@
         ctx.drawImage(img, 0, 0, size, size);
         const a = document.createElement('a');
         a.href = canvas.toDataURL('image/png');
-        a.download = 'doorledger-icon-' + size + (square ? '-square' : '') + '.png';
+        a.download = 'houserentfolio-icon-' + size + (square ? '-square' : '') + '.png';
         a.click();
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));

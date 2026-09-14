@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HomeRelay — App Store Screenshots Generator (iPhone)</title>
+  <title>House Maintenance Tracker — App Store Screenshots Generator (iPhone)</title>
   <style>
     :root {
       --primary: #276A95;
@@ -215,7 +215,7 @@
 <body>
   <div class="header">
     <h1>📱 App Store Screenshots</h1>
-    <p>HomeRelay — iPhone 6.5&Prime; frame · accent #276A95</p>
+    <p>House Maintenance Tracker — iPhone 6.5&Prime; frame · accent #276A95</p>
   </div>
 
   <div class="controls">
@@ -479,7 +479,7 @@
     async function downloadCurrent(num) {
       try {
         const dataUrl = await captureScreenshot(num);
-        downloadDataUrl(dataUrl, `HomeRelay-Screenshot-${num}.png`);
+        downloadDataUrl(dataUrl, `House Maintenance Tracker-Screenshot-${num}.png`);
       } catch (e) {
         console.error('Screenshot failed:', e);
         alert('Screenshot failed. Please try again.');

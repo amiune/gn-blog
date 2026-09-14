@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surphop — App Store Screenshots Generator (iPhone)</title>
+  <title>Kaizeando — App Store Screenshots Generator (iPhone)</title>
   <style>
     :root {
       --primary: #4294E8;
@@ -217,7 +217,7 @@
 <body>
   <div class="header">
     <h1>📱 App Store Screenshots</h1>
-    <p>Surphop — iPhone 6.5&Prime; frame · sky #4294E8 → ink #12101C</p>
+    <p>Kaizeando — iPhone 6.5&Prime; frame · sky #4294E8 → ink #12101C</p>
   </div>
 
   <div class="controls">
@@ -481,7 +481,7 @@
     async function downloadCurrent(num) {
       try {
         const dataUrl = await captureScreenshot(num);
-        downloadDataUrl(dataUrl, `Surphop-Screenshot-${num}.png`);
+        downloadDataUrl(dataUrl, `Kaizeando-Screenshot-${num}.png`);
       } catch (e) {
         console.error('Screenshot failed:', e);
         alert('Screenshot failed. Please try again.');
